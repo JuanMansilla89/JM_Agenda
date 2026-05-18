@@ -1,0 +1,17 @@
+# Obsidian
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.trash/
+.DS_Store
+
+# Claude Code internals
+.claude/
+
+# Quarto generated outputs (keep .qmd sources, ignore compiled .docx/.pdf/.html)
+*.docx
+*.pdf
+_freeze/
+_site/
+_output/
+!_templates/custom-reference.docx

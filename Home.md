@@ -1,0 +1,81 @@
+# 🏠 Home — DataTwin Vault
+
+> **Bienvenido.** Hoy es `$= dv.date('today').toFormat('cccc, dd MMMM yyyy')`.
+
+---
+
+## 📅 Nota del día
+
+```dataview
+LIST
+FROM "10-Daily"
+WHERE file.name = dateformat(date(today), "yyyy-MM-dd")
+LIMIT 1
+```
+
+→ [[<% tp.date.now("YYYY-MM-DD") %>]] · [[40-Areas/ToDo-Central|📋 ToDo Central]] · [[20-Weekly/<% tp.date.now("YYYY-[W]WW") %>|🗓️ Weekly Review <% tp.date.now("YYYY-[W]WW") %>]]
+
+---
+
+## 🗂️ Proyectos activos — notas recientes
+
+```dataview
+TABLE file.mtime AS "Modificado", status AS "Estado"
+FROM "30-Projects"
+WHERE file.name != ".gitkeep"
+SORT file.mtime DESC
+LIMIT 5
+```
+
+---
+
+## 📊 Resumen tareas por proyecto
+
+```dataview
+TABLE length(filter(file.tasks, (t) => !t.completed)) AS "⬜ Abiertas",
+      length(filter(file.tasks, (t) => t.completed)) AS "✅ Cerradas"
+FROM "30-Projects"
+WHERE file.tasks
+SORT file.folder ASC
+```
+
+---
+
+## 🗃️ Kanban Boards
+
+| Proyecto | Board |
+|----------|-------|
+| DataTwin | ![[DataTwin-board]] |
+| GIS / Block Model | ![[GIS-BlockModel-board]] |
+| GPS Pipeline | ![[GPS-Pipeline-board]] |
+
+> *Para navegación rápida sin embed:* [[DataTwin-board]] · [[GIS-BlockModel-board]] · [[GPS-Pipeline-board]]
+
+---
+
+## 🧠 Ideas sin procesar
+
+```dataview
+TABLE fecha, categoria
+FROM "00-Inbox/RAW-Ideas"
+WHERE procesada = false AND tipo = "idea-raw"
+SORT fecha DESC
+LIMIT 5
+```
+
+[→ Ver todas](00-Inbox/RAW-Ideas/INDEX.md)
+
+---
+
+## 🔥 Tareas urgentes ahora
+
+```dataview
+TASK
+WHERE !completed AND (due = date(today) OR tags contains "#hoy" OR priority = "highest" OR priority = "high")
+SORT priority DESC, due ASC
+LIMIT 10
+```
+
+---
+
+*Vault: JM_Agenda · Quellaveco / DataTwin · Actualizado: `$= dv.date('today').toFormat('yyyy-MM-dd')`*

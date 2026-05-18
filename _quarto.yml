@@ -1,0 +1,44 @@
+project:
+  type: default
+  output-dir: _output
+
+# ---------------------------------------------------------------------------
+# Defaults aplicados a TODOS los .qmd del vault.
+# Para sobreescribir en un documento específico, repite la clave en su YAML.
+# ---------------------------------------------------------------------------
+
+format:
+  docx:
+    reference-doc: _templates/custom-reference.docx
+    toc: true
+    toc-depth: 3
+    toc-title: "Tabla de Contenidos"
+    number-sections: true
+    highlight-style: github
+    fig-width: 6.3
+    fig-height: 4
+    fig-cap-location: bottom
+    tbl-cap-location: top
+    fig-format: png
+    fig-dpi: 300
+    date-format: "DD [de] MMMM [de] YYYY"
+
+execute:
+  echo: false
+  warning: false
+  message: false
+  freeze: auto
+
+language:
+  es:
+    crossref-fig-title: "Figura"
+    crossref-tbl-title: "Tabla"
+    crossref-eq-title: "Ecuación"
+    section-title-abstract: "Resumen"
+    section-title-appendices: "Apéndices"
+    toc-title-document: "Tabla de Contenidos"
+    callout-tip-title: "Consejo"
+    callout-note-title: "Nota"
+    callout-warning-title: "Advertencia"
+    callout-important-title: "Importante"
+    callout-caution-title: "Precaución"

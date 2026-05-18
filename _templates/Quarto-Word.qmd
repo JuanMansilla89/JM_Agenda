@@ -1,0 +1,136 @@
+---
+title: "Título del Documento"
+subtitle: "Subtítulo opcional"
+author:
+  - name: "Juan Mansilla"
+    affiliation: "Astay Systems"
+date: today
+date-format: "DD [de] MMMM [de] YYYY"
+lang: es
+
+format:
+  docx:
+    toc: true
+    toc-depth: 3
+    toc-title: "Tabla de Contenidos"
+    number-sections: true
+    highlight-style: github
+    fig-width: 6
+    fig-height: 4
+    fig-cap-location: bottom
+    tbl-cap-location: top
+    # reference-doc: _templates/custom-reference.docx  # descomentar cuando tengas el .docx de estilos
+
+execute:
+  echo: false
+  warning: false
+  message: false
+  freeze: auto
+---
+
+## Resumen Ejecutivo
+
+> Descripción breve del documento: propósito, alcance y principales conclusiones.
+
+---
+
+## 1. Contexto y Objetivo
+
+Describir el contexto del documento y el objetivo que se persigue.
+
+### 1.1 Alcance
+
+- Qué incluye este documento
+- Qué NO incluye
+
+### 1.2 Audiencia
+
+A quién está dirigido este documento y qué se espera que haga con él.
+
+---
+
+## 2. Análisis
+
+### 2.1 Datos y fuentes
+
+Describir las fuentes de datos utilizadas.
+
+| Fuente | Descripción | Período | Responsable |
+|--------|-------------|---------|-------------|
+| Sistema A | Descripción | 2026-Q1 | Equipo X |
+| Sistema B | Descripción | 2026-Q1 | Equipo Y |
+
+: Fuentes de datos utilizadas {#tbl-fuentes}
+
+### 2.2 Resultados
+
+Texto de análisis y hallazgos principales.
+
+```sql
+-- Ejemplo: query de referencia
+SELECT
+    equipo_id,
+    COUNT(*) AS total_eventos,
+    AVG(latencia_ms) AS latencia_promedio
+FROM eventos_gps
+WHERE fecha >= '2026-01-01'
+GROUP BY equipo_id
+ORDER BY latencia_promedio DESC;
+```
+
+```python
+# Ejemplo: procesamiento de datos
+import pandas as pd
+
+df = pd.read_csv("datos.csv")
+resumen = df.groupby("proyecto")["valor"].agg(["mean", "std", "count"])
+print(resumen)
+```
+
+---
+
+## 3. Conclusiones y Recomendaciones
+
+### 3.1 Conclusiones
+
+1. Primera conclusión
+2. Segunda conclusión
+3. Tercera conclusión
+
+### 3.2 Recomendaciones
+
+| # | Recomendación | Prioridad | Responsable | Plazo |
+|---|---------------|-----------|-------------|-------|
+| 1 |               | Alta      |             |       |
+| 2 |               | Media     |             |       |
+
+: Plan de acción recomendado {#tbl-recomendaciones}
+
+---
+
+## 4. Riesgos y Consideraciones
+
+| Riesgo | Probabilidad | Impacto | Mitigación |
+|--------|-------------|---------|------------|
+|        | Alta        | Alto    |            |
+
+---
+
+## Referencias
+
+<!-- Usar formato Chicago, APA o el que aplique al contexto -->
+
+---
+
+## Apéndice {.appendix}
+
+### A. Glosario
+
+| Término | Definición |
+|---------|------------|
+| BIM | Building Information Modeling |
+| LOD | Level of Detail |
+
+### B. Datos adicionales
+
+Tablas, queries o información de soporte no incluida en el cuerpo principal.
