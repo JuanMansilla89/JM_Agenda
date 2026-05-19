@@ -46,6 +46,22 @@ Control y seguimiento del despliegue de los módulos finales en Las Bambas. Cons
 | Validación de ambiente cliente bloqueada | Media | Alto | Identificar responsable en cliente, escalar si > 48h |
 | Desviación silenciosa en entrega Q3/Q4 | Alta | Alto | Consolidar estado real hoy, no postergar |
 
+## 📎 Documentación
+
+```dataview
+TABLE file.mtime AS "Modificado", tipo AS "Tipo", fuente AS "Fuente"
+FROM "30-Projects/Las-Bambas/Documentacion"
+WHERE file.name != ".gitkeep"
+SORT file.mtime DESC
+```
+
+| Tipo | Carpeta | Template |
+|------|---------|----------|
+| 📋 Reunión | `Documentacion/Reuniones/` | `Doc-Reunion` |
+| 📧 Email / mensaje | `Documentacion/Comunicaciones/` | `Doc-Comunicacion` |
+| 🌐 Referencia | `Documentacion/Referencias/` | `Doc-Referencia` |
+| 📄 Entregable | `Documentacion/Entregables/` | `Quarto-Word.qmd` |
+
 ## ☁️ OneDrive
 
 [📁 Carpeta Las Bambas](PENDIENTE — pegar URL de OneDrive)

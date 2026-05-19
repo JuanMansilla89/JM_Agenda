@@ -76,6 +76,9 @@ Columns: **Backlog → En curso → En revisión → Bloqueado → Done**
 | `Project Note.md` | When starting a new project | `30-Projects/<ProjectName>/` |
 | `Quick Capture.md` | Fast capture anytime | `00-Inbox/` |
 | `Quarto-Word.qmd` | Technical reports, proposals, scope docs for Word export | `30-Projects/<ProjectName>/` |
+| `Doc-Reunion.md` | Meeting transcription / notes | `30-Projects/<ProjectName>/Documentacion/Reuniones/` |
+| `Doc-Comunicacion.md` | Email, WhatsApp, Teams message capture | `30-Projects/<ProjectName>/Documentacion/Comunicaciones/` |
+| `Doc-Referencia.md` | External document, standard, web reference | `30-Projects/<ProjectName>/Documentacion/Referencias/` |
 
 ---
 
@@ -124,6 +127,16 @@ When asked to write a technical report, proposal, or scope document:
 - Move files to `60-Archive/` preserving subfolder structure.
 - Update any internal links that pointed to the moved file.
 
+### When creating project documentation (meetings, emails, references):
+- Place files in `30-Projects/<ProjectName>/Documentacion/<subfolder>/`
+- Subfolders: `Reuniones/` | `Comunicaciones/` | `Referencias/` | `Entregables/`
+- Use naming conventions:
+  - Meeting: `YYYY-MM-DD-reunion-[tema].md` (template: `Doc-Reunion`)
+  - Email/message: `YYYY-MM-DD-[email|msg]-[remitente]-[tema].md` (template: `Doc-Comunicacion`)
+  - Reference: `[tema]-ref.md` (template: `Doc-Referencia`)
+  - Deliverable/proposal: `YYYY-MM-DD-[tipo]-[version].qmd` (template: `Quarto-Word.qmd`)
+- Every new project must have these 4 subfolders created with a `.gitkeep` file each.
+
 ---
 
 ## Dataview Query Conventions
@@ -162,4 +175,4 @@ and prompt user to decide fate of each one (tarea / proyecto / archivo / pendien
 
 ---
 
-*Last updated: 2026-05-18*
+*Last updated: 2026-05-18 — added documentation standard (Doc-Reunion, Doc-Comunicacion, Doc-Referencia)*

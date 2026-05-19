@@ -37,6 +37,22 @@ Validar el estado comercial y técnico del pipeline con Goldfield: confirmar si 
 | Riesgo de timing — ventana comercial se cierra sin acción | Alta | Alto | Revisar estado hoy, definir siguiente paso concreto |
 | Falta de respuesta de stakeholders | Media | Alto | Escalar si no hay respuesta en 48h |
 
+## 📎 Documentación
+
+```dataview
+TABLE file.mtime AS "Modificado", tipo AS "Tipo", fuente AS "Fuente"
+FROM "30-Projects/Goldfield/Documentacion"
+WHERE file.name != ".gitkeep"
+SORT file.mtime DESC
+```
+
+| Tipo | Carpeta | Template |
+|------|---------|----------|
+| 📋 Reunión | `Documentacion/Reuniones/` | `Doc-Reunion` |
+| 📧 Email / mensaje | `Documentacion/Comunicaciones/` | `Doc-Comunicacion` |
+| 🌐 Referencia | `Documentacion/Referencias/` | `Doc-Referencia` |
+| 📄 Entregable | `Documentacion/Entregables/` | `Quarto-Word.qmd` |
+
 ## ☁️ OneDrive
 
 [📁 Carpeta Goldfield](PENDIENTE — pegar URL de OneDrive)

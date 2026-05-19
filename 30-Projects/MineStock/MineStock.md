@@ -56,6 +56,22 @@ Revisar con Carlos y Alí:
 | MineStock sin dirección UX clara | Alta | Alto | Reunión Milagros hoy + backlog unificado |
 | Backlog historias sin priorización → scope creep | Media | Alto | Sesión con Carlos y Alí → MVP vs nice-to-have explícito |
 
+## 📎 Documentación
+
+```dataview
+TABLE file.mtime AS "Modificado", tipo AS "Tipo", fuente AS "Fuente"
+FROM "30-Projects/MineStock/Documentacion"
+WHERE file.name != ".gitkeep"
+SORT file.mtime DESC
+```
+
+| Tipo | Carpeta | Template |
+|------|---------|----------|
+| 📋 Reunión | `Documentacion/Reuniones/` | `Doc-Reunion` |
+| 📧 Email / mensaje | `Documentacion/Comunicaciones/` | `Doc-Comunicacion` |
+| 🌐 Referencia | `Documentacion/Referencias/` | `Doc-Referencia` |
+| 📄 Entregable | `Documentacion/Entregables/` | `Quarto-Word.qmd` |
+
 ## ☁️ OneDrive
 
 [📁 Carpeta MineStock](PENDIENTE — pegar URL de OneDrive)

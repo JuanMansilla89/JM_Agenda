@@ -50,6 +50,22 @@ PostgreSQL 9 puede romper compatibilidad, limitar features y afectar performance
 | Incompatibilidad PostgreSQL 9 con stack actual | Alta | Crítico | Validar hoy, documentar restricciones, recomendar upgrade |
 | Queries faltantes no detectadas hasta QA | Media | Alto | Checklist exhaustiva contra spec de módulos |
 
+## 📎 Documentación
+
+```dataview
+TABLE file.mtime AS "Modificado", tipo AS "Tipo", fuente AS "Fuente"
+FROM "30-Projects/Toquepala-Cuajone/Documentacion"
+WHERE file.name != ".gitkeep"
+SORT file.mtime DESC
+```
+
+| Tipo | Carpeta | Template |
+|------|---------|----------|
+| 📋 Reunión | `Documentacion/Reuniones/` | `Doc-Reunion` |
+| 📧 Email / mensaje | `Documentacion/Comunicaciones/` | `Doc-Comunicacion` |
+| 🌐 Referencia | `Documentacion/Referencias/` | `Doc-Referencia` |
+| 📄 Entregable | `Documentacion/Entregables/` | `Quarto-Word.qmd` |
+
 ## ☁️ OneDrive
 
 [📁 Carpeta Toquepala-Cuajone](PENDIENTE — pegar URL de OneDrive)

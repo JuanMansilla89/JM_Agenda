@@ -1,7 +1,13 @@
-# Obsidian
+# Obsidian — excluir archivos de sistema y código de plugins
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
+.obsidian/workspace-mobile-mac.json
 .obsidian/cache
+.obsidian/plugins/**/main.js
+.obsidian/plugins/**/styles.css
+.obsidian/plugins/**/patchedFiles.mjs
+.obsidian/plugins/obsidian-advanced-slides/
+.obsidian/plugins/obsidian-excalidraw-plugin/
 .trash/
 .DS_Store
 
@@ -15,3 +21,6 @@ _freeze/
 _site/
 _output/
 !_templates/custom-reference.docx
+
+/.quarto/
+**/*.quarto_ipynb

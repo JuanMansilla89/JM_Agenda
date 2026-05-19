@@ -53,6 +53,22 @@ Puede ser: vista GIS / vista operacional / vista frontend / disponibilidad-rende
 | Gantt desalineado con realidad operativa | Alta | Alto | Revisión manual + redefinir prioridades hoy |
 | "Vista" sin decisión = equipo paralizado | Media | Medio | Decidir hoy, documentar en esta nota |
 
+## 📎 Documentación
+
+```dataview
+TABLE file.mtime AS "Modificado", tipo AS "Tipo", fuente AS "Fuente"
+FROM "30-Projects/AA_Qvc/Documentacion"
+WHERE file.name != ".gitkeep"
+SORT file.mtime DESC
+```
+
+| Tipo | Carpeta | Template |
+|------|---------|----------|
+| 📋 Reunión | `Documentacion/Reuniones/` | `Doc-Reunion` |
+| 📧 Email / mensaje | `Documentacion/Comunicaciones/` | `Doc-Comunicacion` |
+| 🌐 Referencia | `Documentacion/Referencias/` | `Doc-Referencia` |
+| 📄 Entregable | `Documentacion/Entregables/` | `Quarto-Word.qmd` |
+
 ## ☁️ OneDrive
 
 [📁 Carpeta AA_Qvc](PENDIENTE — pegar URL de OneDrive)

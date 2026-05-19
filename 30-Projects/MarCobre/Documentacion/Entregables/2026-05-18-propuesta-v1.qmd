@@ -1,0 +1,568 @@
+---
+title: "Portal Visual BIM para Gestión de Activos Industriales"
+subtitle: "Propuesta Técnico-Económica — MINSUR Fundición y Refinería Pisco"
+author: "ASTAY Systems"
+date: "2026-05-18"
+format:
+  docx:
+    reference-doc: "../../../../_templates/custom-reference.docx"
+    toc: true
+    toc-depth: 2
+    number-sections: true
+lang: es
+---
+
+# Resumen Ejecutivo
+
+MINSUR se encuentra desarrollando una iniciativa estratégica orientada a la digitalización de sus plantas de Fundición y Refinería en Pisco. El objetivo es implementar una plataforma BIM que consolide la información técnica de planta, permita la navegación visual de activos y habilite el acceso documental contextualizado, estableciendo además una arquitectura preparada para la evolución futura hacia un Gemelo Digital Operacional.
+
+ASTAY propone abordar esta iniciativa en **dos etapas claramente diferenciadas**:
+
+- **Etapa 1 — Discovery / Assessment:** generación de todos los insumos técnicos, arquitectónicos y estratégicos necesarios para ejecutar posteriormente una implementación robusta y sostenible. No contempla desarrollo definitivo de modelos ni funcionalidades productivas. Incluye dos visitas técnicas a terreno en Pisco. Duración referencial: **6 semanas**.
+- **Etapa 2 — Materialización y Desarrollo de Plataforma** *(referencial)*: desarrollo de modelos BIM y/o componentes de Gemelo Digital, implementación progresiva de funcionalidades, integración con fuentes de datos corporativas, construcción de interfaces 3D y habilitación operacional de la plataforma. El alcance definitivo, cronograma, nivel de detalle y estrategia de implementación de esta etapa serán definidos sobre la base de los resultados obtenidos en la Etapa 1.
+
+La separación entre estas etapas responde a la existencia de variables técnicas que aún requieren validación antes de comprometer niveles específicos de desarrollo o detalle BIM. Comprometer un alcance de desarrollo sin esta validación previa expone al proyecto a retrabajos, sobrealcance y deuda tecnológica que se manifiesta en etapas avanzadas, cuando el costo de corrección es significativamente mayor. Esta aproximación —basada en la experiencia de ASTAY en proyectos similares— permite reducir incertidumbre técnica, establecer una visión clara de evolución de la plataforma y asegurar que la solución final sea escalable, mantenible y sostenible en el largo plazo, sin dependencias innecesarias de proveedores o arquitecturas externas.
+
+**Nivel BIM referencial:** LOD 300 para activos críticos, LOD 200 para activos secundarios. El nivel exacto por activo y disciplina será definido y comprometido durante la Etapa 1, luego de la revisión de fuentes y las visitas a terreno.
+
+**Tecnología de referencia:** Plataforma web basada en Unity WebGL, accesible desde navegador sin instalación adicional (Chrome, Edge — escritorio y tablet). La tecnología definitiva será confirmada en la Etapa 1 en función de las restricciones TI y la estrategia de despliegue de MINSUR.
+
+---
+
+# Antecedentes y Contexto
+
+## Necesidad identificada
+
+MINSUR opera dos plantas en Pisco — Fundición y Refinería — que concentran activos industriales críticos para la producción. La información técnica de planta se encuentra actualmente distribuida entre múltiples fuentes: planos 2D, datasheets, manuales, procedimientos, nubes de puntos parciales, modelos 3D preliminares y documentación en SharePoint.
+
+Esta fragmentación genera desafíos operacionales concretos:
+
+- Dificultad para localizar información por activo específico.
+- Baja trazabilidad entre el activo físico y su documentación técnica.
+- Dependencia del conocimiento tácito de personas clave.
+- Limitaciones para visualizar la planta de forma integrada.
+- Dificultad para soportar proyectos menores, revisión de interferencias o validaciones técnicas.
+- Ausencia de una base estructurada para la evolución hacia un Gemelo Digital.
+
+## Estado actual de la información
+
+Según la información relevada con el equipo de MINSUR:
+
+| Fuente | Estado |
+|--------|--------|
+| Planos 2D (DWG) | Parcialmente actualizados |
+| Modelos IFC / Navisworks | Parciales |
+| Maqueta digital preliminar | Existe, versión preliminar |
+| Nube de puntos | ~40% de planta capturado |
+| Catálogo maestro de activos | Existe |
+| Documentación SharePoint | Parcialmente organizada por áreas/proyectos |
+| Ingeniería histórica | Desactualizada, en revisión |
+| Información de proyectos recientes | Confiable y actualizada |
+
+## Visión estratégica del cliente
+
+MINSUR busca una plataforma evolutiva que permita:
+
+1. Representar digitalmente las plantas de Fundición y Refinería.
+2. Navegar la planta e identificar activos visualmente.
+3. Acceder a documentación técnica contextualizada por activo.
+4. Revisar interferencias y soportar validaciones técnicas.
+5. Sentar las bases para la integración futura con datos operacionales en tiempo real (DCS Yokogawa, PI Systems).
+
+---
+
+# Objetivo del Proyecto
+
+**Objetivo principal:** Implementar un Modelo BIM integrado de activos industriales de la Fundición y Refinería Pisco de MINSUR, consolidando información técnica y habilitando la evolución futura hacia un Gemelo Digital Operacional.
+
+**Problema a resolver en Fase 1:** Fragmentación de información y dependencia del conocimiento tácito. El cliente define el éxito de la primera fase como un *"modelo BIM confiable, integrado y adoptado por usuarios"*.
+
+**Usos principales del sistema:**
+
+- Gestión documental contextual por activo.
+- Soporte a ingeniería y validación técnica.
+- Planificación y soporte a mantenimiento.
+- Soporte a decisiones operativas.
+
+**Usuarios objetivo:** Áreas de operaciones, mantenimiento, proyectos e ingeniería (8–12 usuarios iniciales).
+
+---
+
+# Enfoque por Etapas
+
+La complejidad técnica y la variabilidad de las fuentes de información disponibles hacen necesario un enfoque en etapas que permita reducir riesgos de alcance y asegurar que la inversión en desarrollo esté correctamente dimensionada.
+
+## Etapa 1 — Discovery / Assessment *(objeto de esta propuesta)*
+
+Generar todos los insumos técnicos, arquitectónicos y estratégicos necesarios para ejecutar posteriormente una implementación robusta y sostenible. Esta etapa no contempla desarrollo definitivo de modelos BIM ni funcionalidades productivas de la plataforma; su resultado es la base técnica y la visión estratégica que habilitará una Etapa 2 correctamente dimensionada, con alcance controlado y riesgos técnicos reducidos.
+
+Al concluir la Etapa 1, MINSUR dispondrá de una visión clara sobre el estado real de sus activos digitales, la arquitectura tecnológica más adecuada para su ecosistema TI, las brechas a resolver, el roadmap evolutivo de la plataforma y la base para la aprobación interna del presupuesto de implementación.
+
+## Etapa 2 — Materialización y Desarrollo de Plataforma *(referencial)*
+
+Etapa de implementación que se iniciará una vez concluida y validada la Etapa 1. Estará orientada al desarrollo de modelos BIM y/o componentes de Gemelo Digital, implementación progresiva de funcionalidades, integración con fuentes de datos corporativas, construcción de interfaces 3D, despliegue de la arquitectura definida y habilitación operacional de la plataforma.
+
+El alcance definitivo, cronograma, nivel de detalle BIM y estrategia de implementación de esta etapa serán definidos sobre la base de los resultados obtenidos durante el Discovery / Assessment.
+
+## Hoja de Ruta de Largo Plazo (referencial)
+
+| Etapa | Nombre | Orientación |
+|-------|--------|------------|
+| **Etapa 1** | Discovery / Assessment | Insumos técnicos, arquitectura, brechas, roadmap, base para Etapa 2 |
+| **Etapa 2** | Materialización y Desarrollo | BIM/3D, plataforma web, integración de datos, despliegue operacional |
+| **Evolución futura** | Gemelo Digital Operacional | Integración OT (DCS, PI Systems), datos en tiempo real, KPIs, alarmas |
+| **Largo plazo** | Plataforma Inteligente | Analítica, mantenimiento predictivo, health monitoring, optimización |
+
+---
+
+# Estándar BIM — Niveles de Detalle
+
+## Matriz de niveles
+
+| Nivel | Nombre | Uso principal | Precisión | Información asociada |
+|-------|--------|---------------|-----------|---------------------|
+| LOD 100 | Visual Conceptual | Implantación general | Baja | Nombre, área, tipo básico |
+| LOD 200 | Operacional por Activo | Identificación y consulta documental | Media | Código, área, sistema, documentos |
+| **LOD 300** | **Técnico Coordinado** | **Revisión interferencias, ingeniería, planos** | **Media/alta** | **Metadata técnica completa** |
+| LOD 400 | As-Built de Ingeniería | Fabricación, montaje, mediciones precisas | Alta | Información técnica certificada |
+| LOD 500 | Gemelo Digital | Monitoreo, datos vivos, analítica | Variable + OT | Tags, sensores, KPIs, eventos |
+
+## Posicionamiento referencial
+
+**ASTAY opera hasta LOD 300 como nivel máximo.** La siguiente tabla presenta el esquema de referencia, sujeto a validación durante la Etapa 1 (assessment en campo y revisión de fuentes):
+
+| Tipo de activo | LOD referencial | Condición |
+|----------------|----------------|-----------|
+| Activos críticos de proceso (hornos, rueda de moldeo, cristalizadores, ollas de refinería) | **LOD 300** | Sujeto a disponibilidad de nube de puntos y planos de calidad suficiente |
+| Sistemas principales (piping, estructuras, eléctrico, instrumentación) | **LOD 300** | Sujeto a completitud de información por disciplina |
+| Activos secundarios y de apoyo | **LOD 200** | Suficiente para identificación, navegación y consulta documental |
+| Zonas sin información suficiente | **LOD 100–200** | A definir con MINSUR según brechas identificadas en campo |
+| Áreas administrativas / fuera de alcance Fase 1 | Excluido | A incluir en fases posteriores si el cliente lo decide |
+
+> **Nota importante:** El LOD final por activo y disciplina será definido en la Etapa 1, luego de la revisión de la información existente y las visitas técnicas a terreno. El compromiso de LOD específico forma parte de los entregables del Discovery/Assessment, no de esta propuesta inicial.
+
+> **Nota técnica:** LOD 300 implica geometría precisa con dimensiones reales, ubicación exacta, componentes principales externos del activo y metadata técnica ampliada (tag, código, área, sistema, criticidad). Es suficiente para generación de planos referenciales (1:100–1:50), mediciones centimétricas y revisión de interferencias. No corresponde a un modelo as-built de fabricación (LOD 400), que está fuera del alcance de ASTAY.
+
+---
+
+# Alcance Técnico Detallado
+
+## Etapa 1 — Discovery / Assessment
+
+### Objetivo
+
+Validar la calidad y disponibilidad de la información existente, revisar el nivel de madurez de los entregables actuales y definir una arquitectura tecnológica sostenible y alineada al ecosistema TI de MINSUR, antes de iniciar cualquier desarrollo definitivo.
+
+### Justificación técnica
+
+Actualmente existen variables que requieren validación técnica en campo antes de comprometer niveles específicos de desarrollo o detalle BIM:
+
+- Calidad y consistencia real de la información disponible (nube de puntos, planos, modelos).
+- Completitud y confiabilidad de los entregables existentes.
+- Disponibilidad efectiva de modelos y su usabilidad como insumo.
+- Estructura real de datos y catálogo de activos.
+- Restricciones de integración con la infraestructura TI corporativa de MINSUR.
+- Estrategia de despliegue viable (cloud Azure, híbrido u on-premise).
+- Requerimientos de gobernanza tecnológica y seguridad.
+
+Comprometer un LOD o un alcance de desarrollo sin esta validación previa expone al proyecto a retrabajos, sobrealcance y deuda tecnológica que se manifiesta en etapas avanzadas del desarrollo, cuando el costo de corrección es significativamente mayor.
+
+### Metodología
+
+La Etapa 1 combina trabajo remoto (workshops, análisis documental) con **dos visitas técnicas a terreno** en las instalaciones de MINSUR en Pisco.
+
+#### Visitas técnicas a campo
+
+| Visita | Momento | Objetivo |
+|--------|---------|----------|
+| Visita 1 | Semana 2–3 | Levantamiento y mapeo de instalaciones. Evaluación visual del estado de planta. Validación de consistencia de nubes de puntos y planos existentes contra condición real. Identificación de zonas sin información. |
+| Visita 2 | Semana 4–5 | Validación del nivel de detalle alcanzable. Revisión en terreno de activos críticos priorizados. Confirmación de accesibilidad física para modelamiento y levantamiento complementario. |
+
+Cada visita contempla jornadas de uno o dos días según la extensión y complejidad de las instalaciones. El especialista BIM de ASTAY participará en ambas visitas.
+
+#### Workshops técnicos
+
+| Workshop | Área | Objetivo |
+|----------|------|----------|
+| W1 | Negocio y alcance | Confirmar objetivos, usuarios, áreas prioritarias, criterios de éxito de la plataforma |
+| W2 | BIM y fuentes técnicas | Revisar nubes de puntos, modelos, planos y evaluar precisión alcanzable |
+| W3 | Activos y metadata | Definir catálogo, taxonomía, datos mínimos por activo, relación con SAP |
+| W4 | SharePoint y documentación | Revisar estructura documental, reglas de acceso, documentos por activo |
+| W5 | Arquitectura TI e interoperabilidad | Definir estrategia de despliegue (Azure / híbrido / on-premise), Entra ID, VPN, seguridad, gobernanza |
+| W6 | Diseño conceptual y cierre | Validar maquetas de interfaz, confirmar alcance, supuestos y propuesta Fase 2 |
+
+El Workshop 5 contempla participación directa del área TI de MINSUR, con foco en arquitectura de red, políticas de seguridad, estrategia de despliegue e integración con sistemas corporativos.
+
+### Workstreams de la Etapa 1
+
+**1. Assessment de calidad y madurez de datos**
+
+Evaluación sistemática de la calidad, disponibilidad y usabilidad de todas las fuentes de información existentes en MINSUR: nubes de puntos (cobertura, precisión, formatos), planos 2D (completitud, actualización por disciplina), modelos 3D existentes (IFC, Navisworks, maqueta preliminar), catálogo de activos y documentación técnica. Resultado: diagnóstico de madurez con identificación de brechas por área y disciplina.
+
+**2. Diagnóstico de arquitectura y capacidades tecnológicas actuales**
+
+Evaluación del estado actual de la infraestructura tecnológica de MINSUR relevante para el proyecto: plataformas existentes, sistemas corporativos (SharePoint, SAP, DCS Yokogawa, PI Systems), capacidades de integración disponibles, restricciones de red, políticas de seguridad y gobernanza de datos. Resultado: diagnóstico de arquitectura actual y mapa de capacidades y restricciones.
+
+**3. Definición preliminar de arquitectura objetivo**
+
+Diseño de la arquitectura tecnológica destino para la plataforma BIM/Gemelo Digital, considerando las restricciones identificadas y los lineamientos TI corporativos de MINSUR. Evaluación de estrategia de despliegue (cloud Azure, solución híbrida u on-premise) y definición del flujo de datos entre fuentes, procesamiento BIM, plataforma web y sistemas integrados. Resultado: propuesta de arquitectura objetivo con justificación técnica.
+
+**4. Identificación de brechas técnicas y operacionales**
+
+Contraste sistemático entre el estado actual (datos, arquitectura, capacidades) y los requerimientos de la Etapa 2. Identificación de brechas de información, brechas tecnológicas, brechas de integración y brechas organizacionales que deban ser resueltas antes o durante la implementación. Resultado: matriz de brechas con clasificación, priorización y recomendaciones de resolución.
+
+**5. Definición conceptual de plataforma y componentes**
+
+Diseño conceptual de la plataforma BIM/Gemelo Digital: componentes principales, capas de arquitectura, flujo de interacción del usuario, definición de módulos funcionales y concepto de experiencia de navegación 3D. Incluye maquetas conceptuales de interfaz (wireframes de las vistas principales) para validación con usuarios clave de MINSUR. Resultado: documento de visión de plataforma y mockups conceptuales.
+
+**6. Roadmap evolutivo y estrategia de escalabilidad**
+
+Definición del roadmap de evolución de la plataforma desde su estado inicial hasta su madurez como Gemelo Digital Operacional: fases, hitos, dependencias, prioridades de implementación y estrategia de escalabilidad tecnológica. Identificación de decisiones arquitectónicas críticas que impactan la sostenibilidad a largo plazo. Resultado: roadmap evolutivo con criterios de priorización.
+
+**7. Recomendaciones de interoperabilidad, gobernanza e implementación**
+
+Definición de recomendaciones técnicas y organizacionales orientadas a asegurar la calidad, sostenibilidad y gobernanza de la plataforma: estándares de interoperabilidad, lineamientos de integración TI/OT, políticas de acceso y gestión de datos, buenas prácticas de implementación y requerimientos de coordinación con las áreas de IM y TI de MINSUR.
+
+### Coordinación con área de TI de MINSUR
+
+La Etapa 1 identificará y estructurará los puntos de coordinación necesarios con el area de Tecnologías de la Información (TI) de MINSUR, particularmente en los siguientes aspectos:
+
+| Tema                           | Descripción                                                                             |
+| ------------------------------ | --------------------------------------------------------------------------------------- |
+| Arquitectura empresarial       | Alineamiento de la plataforma con la arquitectura tecnológica corporativa de MINSUR     |
+| Lineamientos de ciberseguridad | Políticas de seguridad aplicables, acceso a redes OT/IT, autenticación y autorización   |
+| Integración de plataformas     | Interfaces con SharePoint, PI Systems y otros sistemas corporativos                     |
+| Acceso y gobernanza de datos   | Roles, permisos, propiedad de datos, reglas de acceso y auditoría                       |
+| Infraestructura                | Recursos de cómputo, red, almacenamiento y despliegue disponibles o a proveer           |
+| Interoperabilidad              | Estándares de intercambio de datos, formatos, APIs y protocolos aceptados por MINSUR    |
+| Políticas de despliegue        | Evaluación de alternativas: local, híbrido u on-premise según lineamientos corporativos |
+
+### Entregables Etapa 1
+
+1. **Informe de assessment del estado actual** — diagnóstico integral de la situación actual de activos digitales, información técnica y capacidades tecnológicas de MINSUR.
+2. **Evaluación de calidad y madurez de datos** — análisis detallado de calidad, cobertura y usabilidad de las fuentes de información existentes.
+3. **Diagnóstico de arquitectura y capacidades tecnológicas actuales** — estado de sistemas, plataformas, restricciones TI y mapa de capacidades.
+4. **Definición preliminar de arquitectura objetivo** — propuesta de arquitectura destino con estrategia de despliegue justificada.
+5. **Identificación de brechas técnicas y operacionales** — matriz de brechas priorizadas entre estado actual y requerimientos de implementación.
+6. **Recomendaciones de interoperabilidad e integración TI/OT** — lineamientos técnicos para la integración con sistemas corporativos y operacionales.
+7. **Definición conceptual de plataforma y componentes** — visión de plataforma, módulos, capas de arquitectura y mockups conceptuales de interfaz.
+8. **Roadmap evolutivo del producto** — plan de evolución desde Portal Visual BIM hasta Gemelo Digital Operacional con hitos y criterios de priorización.
+9. **Recomendaciones de buenas prácticas de implementación y gobernanza** — lineamientos organizacionales y técnicos para asegurar la sostenibilidad del proyecto.
+10. **Estrategia de escalabilidad y sostenibilidad tecnológica** — recomendaciones arquitectónicas orientadas al crecimiento futuro sin dependencias innecesarias.
+11. **Definición preliminar de alcance y prioridades de implementación** — base para contratar la Etapa 2 con alcance controlado.
+12. **Estrategia de despliegue progresivo** — recomendación de implementación por fases o áreas, con criterios de priorización y secuencia de rollout.
+13. **Gantt preliminar de implementación para la Etapa 2** — cronograma referencial con fases, hitos y dependencias principales.
+14. **Estimación referencial de capacidades técnicas y recursos para la Etapa 2** — perfiles necesarios, dedicación estimada y dimensionamiento del equipo de implementación.
+15. **Propuesta técnico-económica de Etapa 2** — documento formal con alcance, cronograma y estimación de inversión para aprobación interna en MINSUR.
+
+### Duración: 6 semanas
+
+---
+
+## Etapa 2 — Materialización y Desarrollo de Plataforma *(referencial)*
+
+> La Etapa 2 se iniciará una vez concluida y validada la Etapa 1 — Discovery / Assessment. Su alcance definitivo, cronograma, nivel de detalle BIM, entregables específicos y estimación económica serán definidos sobre la base de los resultados del Discovery.
+
+### Orientación general
+
+La Etapa 2 estará orientada a la materialización e implementación progresiva de la plataforma BIM / Gemelo Digital de MINSUR, considerando:
+
+- Desarrollo de modelos BIM y/o componentes de Gemelo Digital para las áreas y activos priorizados, al nivel de detalle definido en la Etapa 1.
+- Implementación progresiva de funcionalidades sobre la arquitectura definida: navegación 3D, identificación de activos, paneles de información, integración documental.
+- Integración con las fuentes de datos corporativas de MINSUR, según la estrategia de interoperabilidad establecida.
+- Construcción de interfaces 3D y experiencia de usuario validada con los equipos de MINSUR.
+- Despliegue de la plataforma en la infraestructura definida (cloud, híbrida u on-premise) según los lineamientos TI corporativos.
+- Habilitación operacional: pruebas, validación por áreas, capacitación y soporte inicial de adopción.
+
+### Componentes referenciales de la Etapa 2
+
+| Componente | Descripción referencial |
+|-----------|------------------------|
+| Modelamiento BIM/3D | Activos y áreas priorizadas, LOD según matriz Etapa 1 |
+| Plataforma web | Portal de navegación 3D con acceso desde navegador |
+| Integración documental | Acceso contextual a documentos técnicos corporativos |
+| Integración de datos | Conexión con catálogo de activos y sistemas definidos en Etapa 1 |
+| Arquitectura e infraestructura | Despliegue en ambiente definido con seguridad corporativa |
+| Documentación técnica | Arquitectura, manuales de usuario y administración |
+| Capacitación | Usuarios finales y administradores |
+| Soporte inicial | Período post-lanzamiento a definir |
+
+> El alcance, entregables, cronograma e inversión de la Etapa 2 serán presentados en la propuesta técnico-económica que se generará como entregable de la Etapa 1.
+
+---
+
+# Supuestos
+
+Los siguientes supuestos son base del alcance y la estimación:
+
+1. MINSUR facilitará el acceso a toda la información técnica disponible (nube de puntos, planos DWG, IFC, Navisworks, maqueta preliminar, catálogo de activos) para su revisión durante la Etapa 1.
+2. MINSUR coordinará y gestionará el acceso físico a las instalaciones de Fundición y Refinería Pisco para las dos visitas técnicas a terreno.
+3. MINSUR dispondrá de personal técnico de referencia (operaciones, mantenimiento, TI) para participar en los workshops y acompañar las visitas a campo.
+4. MINSUR entregará la nube de puntos completa (100%) de las áreas en alcance antes del inicio del modelamiento en Etapa 2. La Etapa 1 evaluará el estado actual (~40%) y definirá responsabilidades para completarla.
+5. La estrategia de despliegue (Azure cloud, híbrido u on-premise) será definida durante la Etapa 1 en coordinación con el área TI de MINSUR. No se asume Azure por defecto.
+6. El LOD comprometido por activo y disciplina será definido al finalizar la Etapa 1, una vez evaluada la calidad real de la información disponible y las condiciones de campo.
+7. La integración con datos operacionales en tiempo real (DCS Yokogawa, PI Systems) **no forma parte de la Etapa 2.** Se incluirá en una fase posterior según roadmap.
+8. Los permisos y roles de usuario se gestionarán mediante el sistema de identidad corporativo de MINSUR (Entra ID u otro). ASTAY no gestionará accesos de red corporativa.
+9. ASTAY no realizará escaneo láser ni levantamiento topográfico. Esta actividad es responsabilidad de MINSUR o proveedores designados por MINSUR.
+10. La calidad geométrica del modelo dependerá de la calidad y cobertura de la información entregada. Zonas con información insuficiente serán modeladas con LOD reducido o excluidas, con previo acuerdo documentado.
+11. Ampliaciones de usuarios, áreas adicionales o funcionalidades fuera del alcance validado en Etapa 1 serán cotizadas por separado.
+
+---
+
+# Exclusiones
+
+Las siguientes actividades y entregables están **explícitamente fuera del alcance** de esta propuesta:
+
+**Exclusiones de la Etapa 1 — Discovery / Assessment:**
+
+- Desarrollo de modelos BIM, objetos 3D o geometrías definitivas de planta.
+- Desarrollo de funcionalidades productivas de la plataforma (navegación, portal, integraciones).
+- Escaneo láser o levantamiento topográfico adicional. MINSUR es responsable de la completitud de las nubes de puntos.
+- Reorganización, estructuración o migración del repositorio SharePoint de MINSUR.
+- Desarrollo de software, código fuente o prototipos funcionales de la plataforma.
+- Integración operativa con sistemas DCS, SAP, PI Systems u otros (evaluación referencial sí está incluida).
+- Entrega de documentos técnicos de ingeniería con valor contractual (los entregables son de consultoría y assessment).
+
+**Exclusiones de la Etapa 2 (aplicarán en la propuesta definitiva de implementación):**
+
+- Integración con DCS Yokogawa, PI Systems u otros sistemas OT (corresponde a etapas posteriores del roadmap).
+- Visualización de datos operacionales en tiempo real, alarmas o KPIs operacionales.
+- Desarrollo de módulos de mantenimiento predictivo o salud de activos.
+- Modelamiento a LOD 400 o LOD 500.
+- Desarrollo de aplicaciones móviles nativas.
+- Licencias de software de terceros (Revit, Navisworks u otros).
+
+---
+
+# Riesgos y Mitigaciones
+
+| Riesgo | Probabilidad | Impacto | Mitigación |
+|--------|-------------|---------|------------|
+| Disponibilidad limitada de referentes técnicos MINSUR para workshops y visitas | Media | Alto | Acordar agenda y compromisos de participación antes del kick-off; definir en contrato |
+| Acceso físico restringido a instalaciones durante visitas a terreno | Media | Alto | MINSUR coordina permisos y acompañamiento con anticipación; visitas agendadas con antelación |
+| Restricciones TI no identificadas que condicionan la arquitectura objetivo | Media | Alto | Workshop 5 con área TI es obligatorio; incluir a responsables de ciberseguridad e infraestructura |
+| Información técnica existente de menor calidad o cobertura que la esperada | Alta | Medio | Es precisamente el objetivo del assessment identificarlo; los resultados condicionan el alcance de la Etapa 2 |
+| Expectativas de alcance de la Etapa 1 que excedan el discovery (solicitud de desarrollo parcial) | Media | Alto | Comunicar explícitamente que la Etapa 1 no incluye desarrollo de modelos ni funcionalidades productivas |
+| Cambio de interlocutores clave en MINSUR durante la Etapa 1 | Baja | Medio | Documentar acuerdos y entregables parciales; no depender de un único referente por área |
+| Demora en entrega de información técnica para revisión remota | Media | Medio | Definir cronograma de entrega de información como parte del plan de proyecto del kick-off |
+
+---
+
+# Cronograma — Etapa 1 Discovery / Assessment
+
+## Gantt referencial — 6 semanas
+
+La siguiente tabla presenta la distribución de actividades por semana y los perfiles participantes. **PM** = Project Manager; **TL** = Líder Técnico de Arquitectura; **AN** = Analista de Negocio; **BIMs** = Especialista BIM; **BIMt** = Técnico BIM; **AF** = Analista Funcional.
+
+| Actividad | S1 | S2 | S3 | S4 | S5 | S6 | Perfiles |
+|-----------|:--:|:--:|:--:|:--:|:--:|:--:|---------|
+| **Kick-off y planificación de la Etapa 1** | ● | | | | | | PM, TL, AN |
+| **W1 — Negocio, alcance y objetivos** | ● | | | | | | PM, AN, AF |
+| Revisión remota de documentación técnica existente | ● | ● | | | | | TL, BIMs, BIMt |
+| **W2 — BIM y fuentes técnicas** | | ● | | | | | TL, BIMs, AN |
+| **Visita técnica 1 a terreno — Pisco** | | ● | ● | | | | BIMs, BIMt, AN |
+| Assessment calidad y madurez de datos (nubes de puntos, planos, modelos) | | ● | ● | | | | BIMs, BIMt, AF |
+| **W3 — Activos y metadata** | | | ● | | | | AN, BIMs, AF |
+| **W4 — SharePoint y documentación** | | | ● | | | | TL, AF, AN |
+| Diagnóstico de arquitectura y capacidades TI actuales | | | ● | ● | | | TL, AF |
+| **W5 — Arquitectura TI e interoperabilidad (con equipo TI MINSUR)** | | | | ● | | | TL, PM, AN |
+| **Visita técnica 2 a terreno — Pisco** | | | | ● | ● | | BIMs, BIMt, TL |
+| Identificación de brechas técnicas y operacionales | | | | ● | ● | | TL, BIMs, AN, AF |
+| Definición preliminar de arquitectura objetivo | | | | ● | ● | | TL, AN |
+| **W6 — Diseño conceptual y cierre** | | | | | ● | | PM, TL, AN, AF |
+| Diseño conceptual de plataforma y mockups de interfaz | | | | | ● | | TL, AF, AN |
+| Elaboración de entregables documentales | | | ● | ● | ● | ● | TL, BIMs, AN, AF |
+| Roadmap evolutivo y estrategia de despliegue progresivo | | | | | ● | ● | TL, AN |
+| Gantt Etapa 2 + estimación referencial de recursos | | | | | | ● | PM, TL |
+| Propuesta técnico-económica Etapa 2 | | | | | | ● | PM, TL |
+| **Presentación de resultados a MINSUR** | | | | | | ● | PM, TL, AN |
+
+## Etapa 2 — Cronograma referencial
+
+El cronograma detallado de la Etapa 2 será uno de los entregables de la Etapa 1. Su estructura referencial contempla:
+
+| Componente | Estado |
+|-----------|--------|
+| Modelamiento BIM por áreas y activos priorizados | A dimensionar en Etapa 1 |
+| Desarrollo de plataforma web y visualizador 3D | A dimensionar en Etapa 1 |
+| Integración documental y de datos | A dimensionar en Etapa 1 |
+| Despliegue en infraestructura definida | A dimensionar en Etapa 1 |
+| QA, validación y capacitación | A dimensionar en Etapa 1 |
+| **Duración total estimada Etapa 2** | **A definir en entregables de Etapa 1** |
+
+---
+
+# Equipo de Trabajo
+
+## Equipo ASTAY — Etapa 1
+
+La Etapa 1 será ejecutada por un equipo multidisciplinario que permite abordar en paralelo los aspectos tecnológicos, operacionales y de modelamiento requeridos para un assessment integral.
+
+| Perfil | Rol en la Etapa 1 | Visitas a terreno |
+|--------|------------------|:-----------------:|
+| **Project Manager / Jefe de Proyecto** | Coordinación general, planificación, conducción de workshops, comunicación con MINSUR, control de entregables y cierre | — |
+| **Líder Técnico de Arquitectura e Integración** | Diagnóstico de arquitectura actual, definición de arquitectura objetivo, evaluación de estrategia de despliegue, workshops TI, recomendaciones de interoperabilidad | V1, V2 |
+| **Analista de Negocio (experiencia en planta y procesos operacionales)** | Levantamiento de requerimientos funcionales, mapeo de procesos operacionales, validación de objetivos de negocio, definición de casos de uso, análisis de valor | V1 |
+| **Especialista BIM** | Assessment de calidad de nubes de puntos, planos y modelos existentes, evaluación de LOD alcanzable, definición de estándar BIM referencial, validación en terreno | V1, V2 |
+| **Técnico BIM** | Revisión detallada de archivos DWG, IFC, Navisworks y maqueta preliminar, documentación de hallazgos, apoyo en visitas a campo | V2 |
+| **Analista Funcional y de Levantamiento de Información** | Levantamiento de información documental, catálogo de activos, estructura SharePoint, requerimientos de integración, diseño conceptual de interfaces | V1 |
+
+La participación de este equipo permite:
+
+- Realizar el assessment técnico y funcional del estado actual de forma simultánea en todas sus dimensiones.
+- Dimensionar correctamente el alcance futuro del proyecto desde múltiples perspectivas.
+- Validar calidad y disponibilidad de información tanto en análisis remoto como en terreno.
+- Evaluar factibilidad técnica con criterio especializado en BIM, arquitectura e integración.
+- Definir una arquitectura objetivo alineada a los estándares TI de MINSUR.
+- Construir un roadmap realista basado en la realidad operacional y tecnológica de la planta.
+
+## Participación requerida de MINSUR — Área TI
+
+La ejecución efectiva de la Etapa 1 requiere la participación y soporte activos del área de Tecnologías de la Información de MINSUR, particularmente para los siguientes aspectos:
+
+| Tema | Descripción de la participación esperada |
+|------|------------------------------------------|
+| Arquitectura empresarial | Presentación de la arquitectura tecnológica corporativa actual y lineamientos vigentes |
+| Infraestructura | Recursos de cómputo, red, almacenamiento y capacidades de despliegue disponibles |
+| Ciberseguridad | Lineamientos de seguridad aplicables a nuevas plataformas, acceso a redes OT/IT, autenticación |
+| Acceso y gobierno de datos | Políticas de acceso, roles, propiedad de datos y requisitos de auditoría |
+| Integración con plataformas existentes | Interfaces disponibles con SharePoint, SAP, DCS Yokogawa, PI Systems y otros sistemas |
+| Interoperabilidad | Estándares, protocolos, formatos de intercambio y APIs aceptados corporativamente |
+| Estrategia de despliegue | Restricciones y preferencias para despliegue local, híbrido u on-premise |
+
+La coordinación temprana con TI permitirá asegurar que la arquitectura objetivo propuesta se alinee con los estándares corporativos de MINSUR, evitando ajustes posteriores que impacten tiempos, costos o la sostenibilidad operativa de la plataforma.
+
+## Equipo Etapa 2
+
+El equipo de implementación para la Etapa 2 será definido en la propuesta técnico-económica generada como entregable de la Etapa 1, en función del alcance, tecnologías y arquitectura validados durante el Discovery.
+
+---
+
+# Estimación de Recursos — Etapa 1
+
+## Perfiles y dedicación referencial
+
+La siguiente tabla presenta la dedicación estimada por perfil durante las 6 semanas de la Etapa 1. Las horas están calculadas sobre una base de 40 horas semanales por recurso a tiempo completo.
+
+| Perfil | Dedicación | HH estimadas | Participa en visitas |
+|--------|:----------:|:------------:|:--------------------:|
+| Project Manager / Jefe de Proyecto | 25% | ~60 HH | — |
+| Líder Técnico de Arquitectura e Integración | 60% | ~145 HH | V1, V2 |
+| Analista de Negocio | 60% | ~145 HH | V1 |
+| Especialista BIM | 65% | ~155 HH | V1, V2 |
+| Técnico BIM | 45% | ~110 HH | V2 |
+| Analista Funcional y de Levantamiento | 60% | ~145 HH | V1 |
+| **Total equipo** | | **~760 HH** | |
+
+> Las horas indicadas son referenciales. La dedicación exacta por perfil y semana será ajustada en el plan de proyecto del kick-off.
+
+## Visitas técnicas a terreno
+
+| Visita | Perfiles participantes | Duración estimada | Logística |
+|--------|----------------------|:-----------------:|-----------|
+| Visita 1 (semana 2–3) | Líder Técnico, Analista de Negocio, Especialista BIM, Analista Funcional | 1–2 días | Traslado + alojamiento + viáticos incluidos |
+| Visita 2 (semana 4–5) | Líder Técnico, Especialista BIM, Técnico BIM | 1–2 días | Traslado + alojamiento + viáticos incluidos |
+
+> La duración exacta de cada visita será confirmada en la planificación del kick-off según la extensión de las instalaciones y la disponibilidad de referentes de MINSUR.
+
+---
+
+# Inversión
+
+## Estructura de la inversión
+
+| Etapa | Descripción | Modalidad |
+|-------|-------------|-----------|
+| Etapa 1 — Discovery / Assessment | Equipo multidisciplinario, workshops, visitas a terreno, 15 entregables, propuesta Etapa 2 | Precio fijo |
+| Etapa 2 — Materialización y Desarrollo | Modelamiento BIM + plataforma + integración + despliegue | Precio fijo por alcance validado en Etapa 1 |
+
+## Etapa 1 — Discovery / Assessment
+
+| Componente | Detalle |
+|-----------|---------|
+| Equipo multidisciplinario — 6 perfiles ASTAY | ~760 HH referenciales durante 6 semanas |
+| 6 workshops técnicos con MINSUR | Remoto y/o presencial según disponibilidad |
+| 2 visitas técnicas a terreno en Pisco | Traslado, alojamiento y viáticos incluidos |
+| Assessment de calidad y madurez de datos (nubes de puntos, planos, modelos) | |
+| Diagnóstico de arquitectura y capacidades tecnológicas | |
+| Definición conceptual de plataforma y mockups de interfaz | |
+| Elaboración de 15 entregables documentales | |
+| Gantt preliminar + estimación de recursos para Etapa 2 | |
+| Propuesta técnico-económica de Etapa 2 | |
+| **Duración:** 6 semanas | |
+| **Inversión Etapa 1** | **USD [_______]** |
+
+## Etapa 2 — Portal Visual BIM
+
+> La inversión de la Etapa 2 será definida en el documento de propuesta resultante de la Etapa 1, una vez validado el alcance físico, la lista de activos, el LOD acordado y la arquitectura tecnológica.
+
+Los componentes de costo de la Etapa 2 incluirán:
+
+| Componente | Descripción |
+|-----------|-------------|
+| Modelamiento BIM/3D (HH por LOD y cantidad de activos) | |
+| Desarrollo plataforma web Unity WebGL | |
+| Desarrollo API y servicios backend | |
+| Integración SharePoint | |
+| Configuración Azure + Entra ID + despliegue | |
+| QA, pruebas y protocolo de aceptación | |
+| Capacitación y documentación | |
+| **Inversión Etapa 2** | **USD [definir en Etapa 1]** |
+
+## Condiciones comerciales
+
+- **Moneda:** USD (dólares americanos), sin impuestos.
+- **Forma de pago Etapa 1:** 50% al inicio / 50% contra entrega de entregables.
+- **Forma de pago Etapa 2:** A definir en propuesta Fase 1 (sugerido: hitos de entrega).
+- **Vigencia de esta propuesta:** 30 días calendario desde la fecha de emisión.
+- **Inicio:** A acordar dentro de los 15 días posteriores a la firma del contrato.
+- **Idioma de entregables:** Español.
+
+---
+
+# Hoja de Ruta Futura
+
+Una vez implementado el Portal Visual BIM (Fase 1), ASTAY propone la siguiente hoja de ruta evolutiva hacia un Gemelo Digital Operacional:
+
+## Fase 2 — Gemelo Digital Operacional
+
+Integración de datos operacionales en tiempo real sobre el modelo BIM:
+
+- Integración con DCS Yokogawa.
+- Conexión PI System u otros historiadores industriales.
+- Visualización de variables por activo (temperatura, presión, flujo, rpm, estados).
+- Alarmas y eventos visibles sobre el modelo 3D.
+- KPIs operacionales por área y sistema.
+
+## Fase 3 — Plataforma Inteligente
+
+- Monitoreo de salud de activos (asset health monitoring).
+- Analítica predictiva y tendencias.
+- Mantenimiento predictivo basado en comportamiento de variables.
+- Optimización operacional.
+- Simulación de escenarios.
+
+---
+
+# Próximos Pasos
+
+Para avanzar con esta iniciativa, se propone la siguiente secuencia:
+
+1. Revisión y aprobación interna de esta propuesta por MINSUR.
+2. Firma de contrato Etapa 1 — Discovery / Assessment.
+3. Coordinación de agenda: workshops y fechas de visitas técnicas a terreno en Pisco.
+4. MINSUR designa referentes técnicos por área (operaciones, mantenimiento, TI) para los workshops.
+5. Inicio de la Etapa 1 — semana acordada.
+6. Al cierre de la Etapa 1 (semana 6): presentación de resultados y propuesta definitiva de Etapa 2.
+7. Firma de contrato Etapa 2 e inicio del desarrollo del Portal Visual BIM.
+
+---
+
+# Sobre ASTAY Systems
+
+ASTAY Systems es una empresa especializada en soluciones de digitalización industrial, plataformas de datos y arquitecturas de información para la industria minera y de procesos. Nuestra propuesta combina experiencia en modelamiento BIM/3D, desarrollo de plataformas web industriales y arquitecturas cloud, con foco en entregar soluciones operacionales que generan valor concreto para los equipos de planta.
+
+---
+
+*Propuesta preparada por ASTAY Systems — 2026-05-18*
+*Versión 1.0 — Confidencial*
