@@ -2,8 +2,8 @@
 project: MarCobre
 status: active
 stage: propuesta-tecnica-lista
-owner: ""
-stakeholders: [MarCobre client]
+owner: "Juan Mansilla"
+stakeholders: [Jaime]
 start-date: 2026-05-18
 tags: [marcobre]
 onedrive: ""

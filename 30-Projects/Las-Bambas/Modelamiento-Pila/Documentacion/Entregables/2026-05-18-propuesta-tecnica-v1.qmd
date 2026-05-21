@@ -1,0 +1,667 @@
+---
+title: "Propuesta Técnico-Económica — Sistema de Modelamiento Dinámico de Pila de Mineral (Ore Stockpile)"
+subtitle: "Sistema de Gemelo Digital para Trazabilidad Mine-to-Mill — Las Bambas"
+author: "ASTAY Systems"
+date: "2026-05-19"
+format:
+  docx:
+    reference-doc: "../../../../../_templates/custom-reference.docx"
+    toc: true
+    toc-depth: 2
+    number-sections: true
+lang: es
+---
+
+# Resumen Ejecutivo
+
+La presente propuesta técnico-económica describe el diseño e implementación del **Sistema de Modelamiento Dinámico de Pila OS (Ore Stockpile)**, componente central del programa de Gemelo Digital Mine-to-Mill de Las Bambas.
+
+El sistema propuesto reemplaza el modelo heurístico actual —basado en lógica FIFO con estimación de nivel— por una solución de gemelo digital con fundamento físico progresivo. Su diseño integra dos versiones operacionales complementarias que, en conjunto, cubren la totalidad de los escenarios operacionales relevantes:
+
+- **Modelo Ligero (ML):** modelo dinámico lumped con distribución de tiempos de residencia (RTD), separación Live/Dead Stock y tracking de micro-batches. Opera íntegramente en CPU On-Premise y entrega predicción del feed SAG con horizonte de 2–4 horas.
+- **Modelo Espacial (ME):** extensión del mismo sistema con discretización espacial de la pila en sectores y capas, habilitando tracking de atributos por celda y modelamiento de segregación granulométrica. Requiere que el cliente provea datos de geometría de la pila (levantamiento topográfico o nube de puntos mínima) para la calibración del modelo espacial.
+
+El sistema completo —ML y ME integradas— se implementa en un horizonte de **3 meses (12 semanas)**. Ambas versiones se desarrollan en paralelo y se despliegan de forma coordinada al final del proyecto.
+
+Esta arquitectura de dos versiones en un solo sistema es la decisión técnica correcta: ML entrega valor operacional inmediato con baja complejidad computacional; ME agrega resolución espacial sin reemplazar ML, aprovechando sus datos históricos para calibración. Juntas cubren desde el escenario de operación continua en tiempo cuasi-real hasta la estimación espacialmente resuelta de atributos del mineral.
+
+El sistema opera íntegramente en infraestructura On-Premise dentro de la red de Las Bambas, se integra con PI System vía PI Web API y publica sus resultados de forma controlada vía API REST hacia la plataforma DataTwin y los dashboards operacionales.
+
+El valor operacional se expresa en tres dimensiones: (1) anticipación del estado del feed SAG con horizonte de 2–4 horas, (2) trazabilidad de atributos de calidad —ley Cu/Mo, dureza, humedad— desde mina hasta molienda, y (3) base de datos histórica de estados de pila para optimización y reconciliación metalúrgica.
+
+---
+
+# 1. Contexto y Justificación Técnica
+
+## 1.1 Rol operacional de la pila OS
+
+En una planta concentradora de cobre, la pila de mineral grueso cumple tres funciones estructurales dentro del circuito mine-to-mill:
+
+1. **Buffer dinámico** entre chancado primario y molienda SAG, desacoplando equipos con disponibilidades y tasas de operación distintas.
+2. **Desacople temporal** ante paradas programadas y no programadas en cualquiera de los dos extremos del circuito.
+3. **Blending parcial** del mineral antes de alimentar los molinos, atenuando variaciones de corto plazo en ley, dureza y granulometría.
+
+En la práctica, la pila no es un sistema de mezcla perfecta ni un sistema puramente convectivo. Coexisten en ella zonas de alta movilidad (**live stock**) y zonas de baja o nula movilidad (**dead stock**), generadas por la geometría de descarga gravitacional y el patrón de reclaim sobre los feeders.
+
+## 1.2 Limitaciones del modelo heurístico actual
+
+El modelo actual opera sobre una lógica FIFO con estimación de masa por nivel (regresión lineal/polinomial sobre medianas por intervalo de nivel) y calcula el tiempo de residencia como retardo implícito en función de la masa por delante en la cadena chancadora–correa–pila–feeders.
+
+Este enfoque entrega valor como baseline operacional —con precisión estimada en torno al 80%— pero presenta limitaciones estructurales documentadas en la literatura técnica:
+
+- La descarga sobre feeders genera un **cono de flujo (funnel flow)** que invalida el supuesto FIFO: material depositado cerca del eje de extracción puede salir antes que material anterior ubicado en flancos y periferias.
+- Aparecen **zonas estancadas** en sectores periféricos o contra muros, que ensanchan la distribución de tiempos de residencia y producen colas largas en la edad del material.
+- El apilamiento por gravedad genera **segregación coarse/fine**: partículas gruesas tienden a rodar hacia la periferia, alterando tanto la granulometría del reclaim como los atributos correlacionados con tamaño.
+- La asunción de **densidad aparente constante** introduce sesgo en el cálculo de masa cuando cambia la PSD, la humedad o la compactación.
+- **Igual nivel no implica igual edad media**: dos escenarios con el mismo nivel pueden tener distribuciones de residencia distintas si difieren el reclaim rate, la historia de paradas o las características de la alimentación.
+
+## 1.3 Solución propuesta
+
+El salto propuesto no es reemplazar la heurística por un modelo de alta fidelidad basado en física granular operando en tiempo real —ese camino es computacionalmente inviable para operación continua. El enfoque correcto, coherente con la práctica industrial en gemelos digitales mine-to-mill, es un **sistema con dos versiones operacionales progresivas**:
+
+1. **Modelo Ligero (ML):** reemplaza el FIFO rígido por una RTD dependiente del nivel y del régimen operativo, con separación live/dead stock y tracking de micro-batches. Viable en CPU, deployable en 12 semanas.
+2. **Modelo Espacial (ME):** extiende el mismo sistema con discretización espacial en capas y sectores con reglas de flujo calibradas, modelamiento implícito de segregación y tracking por celda.
+
+Esta secuencia preserva viabilidad computacional, entrega valor incremental en cada versión y construye la base de datos histórica necesaria para calibración progresiva del sistema.
+
+---
+
+# 2. Objetivos
+
+## 2.1 Objetivo general
+
+Desarrollar e implementar el Sistema de Modelamiento Dinámico de Pila OS integrado a la arquitectura de Gemelo Digital Mine-to-Mill de Las Bambas, que permita estimar el estado interno de la pila en tiempo cuasi-real —masa, distribución de atributos, tiempo de residencia— y predecir las características del feed SAG con horizonte de anticipación operacionalmente relevante.
+
+## 2.2 Objetivos específicos
+
+1. Implementar un modelo de balance de masa dinámico diferencial con separación explícita de live stock y dead stock.
+2. Sustituir la lógica FIFO por una distribución de tiempos de residencia (RTD) dependiente del nivel de pila y del régimen operativo.
+3. Implementar tracking de micro-batches para trazabilidad de atributos de calidad (ley Cu/Mo, dureza, humedad, PSD) desde chancado hasta feed SAG.
+4. Establecer integración robusta con PI System vía PI Web API para consumo de tags de proceso en tiempo real.
+5. Persistir estados del sistema en base de datos temporal (SQL Server) para análisis histórico y calibración progresiva.
+6. Extender el sistema hacia resolución espacial 2.5D mediante discretización en sectores y capas (Modelo Espacial).
+7. Establecer indicadores de desempeño del sistema (KPIs de predicción) con protocolo de validación operacional.
+
+---
+
+# 3. Por qué el sistema integra dos versiones operacionales
+
+## 3.1 El espectro de opciones de modelamiento
+
+El modelamiento de una pila de mineral puede abordarse desde múltiples enfoques, que van desde la heurística FIFO hasta la simulación de partículas por física granular. Cada punto del espectro representa un compromiso distinto entre realismo físico, complejidad de implementación, costo computacional y viabilidad operacional.
+
+| Enfoque | Realismo físico | Viable en producción online | Requiere datos previos |
+|---------|:--------------:|:---------------------------:|:---------------------:|
+| FIFO / delay fijo | Bajo | Sí | No |
+| RTD + balance dinámico (**ML**) | Medio-alto | Sí | Mínimo — histórico PI |
+| Modelo Espacial 2.5D (**ME**) | Alto | Sí | Sí — geometría + histórico ML |
+| Física granular avanzada (DEM/CA) | Muy alto | No en tiempo real | Campañas específicas |
+
+## 3.2 Por qué ML y ME son versiones del mismo sistema, no productos separados
+
+El sistema propuesto cubre la totalidad del espectro operacional relevante mediante dos versiones que se complementan:
+
+**ML cubre los escenarios de operación continua en tiempo cuasi-real.** Su fortaleza es la velocidad y la integración directa con el flujo de datos PI: opera en ciclos de 1 minuto, con tiempos de cómputo inferiores a 50 ms, y entrega predicción de feed SAG con base en RTD calibrada. Es la versión que el operador consulta en tiempo real.
+
+**ME cubre los escenarios que requieren resolución espacial.** Cuando la segregación granulométrica, la geometría de la pila o la distribución espacial de atributos son relevantes para la decisión, ML no tiene suficiente resolución. ME agrega la dimensión espacial sin reemplazar ML: ambas versiones coexisten en el mismo sistema, y ME se activa con los datos que ML ha generado en operación.
+
+Diseñar el sistema con solo ML dejaría sin respuesta los escenarios espacialmente complejos —variaciones de ley por zona de pila, segregación durante apilamiento— que son precisamente los de mayor impacto metalúrgico. Proponer solo ME desde el inicio sería técnicamente inviable: sin histórico operacional generado por ML, no hay base de calibración para la discretización espacial.
+
+La combinación ML + ME en un mismo sistema es la arquitectura que la industria utiliza en implementaciones documentadas de gemelos digitales mine-to-mill.
+
+## 3.3 Implementación en 3 meses
+
+El sistema completo se implementa en **12 semanas**. Ambas versiones se desarrollan en paralelo durante el mismo proyecto, con una sola entrega al final:
+
+1. **ML y ME se desarrollan en paralelo** desde la fase de Discovery. El motor ML se construye primero (semanas 2–6) y sirve de base para el motor espacial ME (semanas 3–9).
+2. **El requisito crítico de ME es la geometría de la pila**, no el histórico operacional de ML. El cliente debe proveer durante Discovery (semanas 1–2) los datos de geometría necesarios: levantamiento topográfico, nube de puntos de la pila o, como mínimo, puntos GPS de la superficie y posición de los feeders.
+3. **Ambas versiones se validan y despliegan juntas** al final de las 12 semanas, como un único sistema integrado.
+
+No hay rediseño de arquitectura entre versiones: la capa de integración PI, la base de datos SQL Server y la API REST son compartidas. ME es una extensión del motor del sistema, no un producto paralelo.
+
+---
+
+# 4. Alcance Técnico
+
+## 4.1 Cadena de trazabilidad modelada
+
+El sistema modela la siguiente cadena de transporte y almacenamiento:
+
+```
+Camión / Mina
+    ↓
+Chancadora Primaria
+    ↓  [delay convectivo — correa de descarga]
+Correa de Descarga
+    ↓
+Pila Ore Stockpile (OS)        ← foco principal del sistema
+    ├─ Depósito sobre superficie
+    ├─ Segregación coarse/fine
+    ├─ Mezcla parcial
+    ├─ Zonas activas (live stock)
+    └─ Dead stock / funnel flow
+    ↓
+Feeders / Reclaim
+    ↓  [delay convectivo — correa SAG]
+Correa Alimentación SAG
+    ↓
+Molino SAG
+```
+
+Cada segmento de la cadena se modela con el régimen físico apropiado: **transporte convectivo de baja mezcla** para chancadora y correas; **almacenamiento granular con mezcla parcial y RTD** para la pila; **extracción controlada y readvance convectivo** para feeders y correa SAG.
+
+## 4.2 Modelo Ligero (ML)
+
+- Modelo de balance de masa dinámico diferencial (integración en tiempo discreto, paso 1–5 min)
+- Separación explícita live stock / dead stock con parámetros calibrables
+- RTD paramétrica dependiente de nivel, F_in y F_out
+- Tracking de micro-batches con atributos: ley Cu/Mo, dureza, humedad, PSD (fracción coarse/fine)
+- Predicción de características del feed SAG con horizonte configurable (1–4 horas)
+- Integración con PI System vía PI Web API (lectura de tags de proceso)
+- Ingesta y normalización de señales: nivel OS, caudal chancadora, caudal feeders, estado operativo de equipos
+- Persistencia de estados del sistema en SQL Server
+- API REST para consumo por plataforma DataTwin / dashboard
+- Módulo de configuración de parámetros del sistema (densidad aparente, fracción dead stock, parámetros RTD)
+- Dashboard de monitoreo: estado de pila, predicción SAG, alertas operacionales
+- Protocolo y métricas de validación del sistema
+
+## 4.3 Modelo Espacial (ME)
+
+- Discretización de la pila en sectores radiales y capas horizontales sobre la misma infraestructura ML
+- Reglas de depósito sobre superficie (actualización de celdas por alimentación)
+- Reglas de reclaim por cono de extracción sobre feeders
+- Mezcla parcial entre celdas adyacentes
+- Tracking espacial de atributos por celda
+- Integración de geometría base de la pila a partir de datos provistos por el cliente
+- Calibración de parámetros de discretización espacial
+
+**Requisito de datos — responsabilidad del cliente:** para la implementación de ME, el cliente debe proveer durante la fase de Discovery datos de geometría de la pila en alguno de los siguientes formatos, en orden de preferencia:
+
+| Formato | Descripción | Suficiencia para ME |
+|---------|-------------|:-------------------:|
+| Levantamiento topográfico (DXF/DWG) | Superficie completa con curvas de nivel | Óptimo |
+| Nube de puntos (LAS/LAZ, E57) | Escaneo drone o LiDAR de la pila | Óptimo |
+| Puntos GPS de superficie | Puntos clave: contorno, crestas, feeders | Mínimo viable |
+| Planos de ingeniería (CAD) | Dimensiones de diseño de la pila | Mínimo viable |
+
+Sin este insumo, la calibración del modelo espacial no es posible y ME no puede ser implementada en el plazo del proyecto.
+
+## 4.4 No incluye
+
+- Integración con sistemas DCS/SCADA en protocolo OPC-UA (se integra vía PI System como capa de abstracción)
+- Modelamiento de circuito SAG interno ni de flotación
+- Captura autónoma de topografía con LIDAR/drone (requiere instrumentación adicional del cliente)
+- Módulo de optimización o control avanzado sobre el circuito
+- Modelos de alta fidelidad basados en física granular (DEM/CA) — fuera del alcance de esta propuesta
+
+---
+
+# 5. Enfoque de Modelamiento
+
+## 5.1 Balance de masa dinámico
+
+El sistema mantiene en todo momento un estado de masa actualizado de la pila, calculado a partir del caudal de entrada desde chancado y el caudal de salida hacia los feeders. Este balance se evalúa en ciclos cortos (1 a 5 minutos), lo que permite reflejar con fidelidad los cambios operacionales en tiempo real.
+
+El mismo principio de balance se aplica sobre los atributos de calidad del mineral —ley Cu/Mo, dureza, humedad, granulometría— de modo que el sistema no solo trackea masa sino también la composición del material en la pila en cada momento.
+
+## 5.2 Separación Live Stock / Dead Stock
+
+La masa total de la pila se gestiona como la suma de dos fracciones con comportamiento diferenciado:
+
+- **Live Stock**: fracción activa y recuperable en condiciones normales de operación. Es la que alimenta directamente el cálculo de predicción hacia el SAG.
+- **Dead Stock**: fracción de baja o nula movilidad, retenida en zonas periféricas o de flujo restringido. Su proporción se estima como parámetro del sistema y se calibra contra datos históricos de la operación.
+
+Esta separación es clave para evitar el sesgo que introduce el modelo heurístico actual al tratar toda la masa almacenada como igualmente disponible.
+
+## 5.3 Distribución de Tiempos de Residencia (RTD)
+
+La RTD es el componente central que diferencia este sistema del enfoque FIFO. En lugar de asumir que el material sale en el mismo orden en que entró, el sistema asigna a cada unidad de material una **distribución de probabilidad de salida** en función del tiempo.
+
+Esta distribución se calibra a partir del histórico operacional de la planta y se actualiza dinámicamente según el nivel actual de la pila y las tasas de flujo de entrada y salida. El resultado es que el sistema representa con realismo los fenómenos físicos que el FIFO no puede capturar: el cono de extracción sobre los feeders, la mezcla parcial entre material de distintas edades, y las zonas de flujo restringido.
+
+## 5.4 Tracking de micro-batches
+
+El sistema divide el flujo de entrada en unidades discretas de material (micro-batches), cada una con su timestamp de ingreso y sus atributos de calidad asociados. Estos batches se gestionan en una cola activa dentro del motor del sistema, y se consumen según la RTD calibrada.
+
+Esta mecánica permite responder preguntas operacionales concretas: ¿cuál es la ley Cu esperada en el feed SAG en las próximas 2 horas? ¿Qué material está actualmente activo en la pila? ¿Cuándo llegará al SAG el mineral descargado en la última hora?
+
+## 5.5 Resolución espacial en el Modelo Espacial
+
+La Modelo Espacial extiende el motor de masa en una grilla 2.5D de sectores radiales × capas horizontales. Cada celda tiene sus propios atributos de calidad y se actualiza según reglas de depósito (alimentación desde correa) y reclaim (extracción por feeders). La mezcla entre celdas adyacentes y la propagación del cono de extracción modelan implícitamente la segregación granulométrica sin recurrir a física granular explícita.
+
+## 5.6 Comparativa de versiones del sistema
+
+| Aspecto | Modelo Ligero (ML) | Modelo Espacial (ME) |
+|---------|-------------------|-------------------|
+| Representación de la pila | Lumped (masa total + compartimentos) | Discretizada en celdas/sectores 2.5D |
+| RTD | Paramétrica, dependiente de nivel y flujo | Derivada de geometría de celdas y reglas de flujo |
+| Segregación | No modelada explícitamente | Modelada por reglas de depósito/reclaim entre celdas |
+| Tracking atributos | Por batch temporal | Por celda espacial |
+| Costo computacional | Bajo — CPU | Medio — CPU |
+| Calibración | Regresión sobre histórico PI | Requiere geometría de pila + histórico ML |
+| Escenarios que cubre | Operación continua, predicción feed SAG | Variación espacial de atributos, segregación |
+
+---
+
+# 6. Arquitectura Tecnológica
+
+## 6.1 Principios de diseño
+
+La arquitectura del sistema se basa en tres principios:
+
+1. **Separación de responsabilidades**: la integración de datos OT (PI System), el motor del sistema y la capa de publicación son componentes independientes con interfaces bien definidas.
+2. **Despliegue On-Premise controlado**: el sistema opera en infraestructura On-Premise dentro de la red de la operación. Los resultados se publican de forma controlada hacia los consumidores autorizados (DataTwin, dashboard operacional) vía API REST.
+3. **Arquitectura única para ambas versiones**: ML y ME comparten la misma capa de integración PI, la misma base de datos SQL Server y la misma API REST. ME es una extensión del motor del sistema, no un sistema paralelo.
+
+## 6.2 Diagrama de arquitectura
+
+```
+┌───────────────────────────────────────────────────┐
+│  PI System — Historiador de planta                │
+│  Tags: nivel OS, caudales, estados de equipos     │
+└─────────────────────┬─────────────────────────────┘
+                      │ PI Web API (consulta periódica)
+┌─────────────────────▼─────────────────────────────┐
+│  INFRAESTRUCTURA ON-PREMISE — Servidor del Sistema │
+│  (Red interna de la operación Las Bambas)          │
+│                                                    │
+│  ┌──────────────┐   ┌──────────────────────────┐  │
+│  │ Conector PI  │──▶│  Motor del Sistema       │  │
+│  │ (Python)     │   │  ├─ ML: Balance+RTD+Batch│  │
+│  └──────────────┘   │  └─ ME: Sectores 2.5D    │  │
+│                     └────────────┬─────────────┘  │
+│                                  │                 │
+│                     ┌────────────▼─────────────┐  │
+│                     │  SQL Server              │  │
+│                     │  Estados + Predicciones  │  │
+│                     └────────────┬─────────────┘  │
+│                                  │                 │
+│                     ┌────────────▼─────────────┐  │
+│                     │  API REST (Python)        │  │
+│                     │  Publicación controlada   │  │
+│                     └────────────┬─────────────┘  │
+└──────────────────────────────────┼─────────────────┘
+                                   │ API REST (acceso controlado)
+           ┌───────────────────────┼────────────────────┐
+           ▼                       ▼                    ▼
+     DataTwin / Gemelo      Dashboard operacional   Otros sistemas
+     Digital                (visualización)         autorizados
+```
+
+## 6.3 Tags requeridos desde PI System
+
+El sistema requiere como mínimo los siguientes tags de proceso. La lista exacta se confirma con el equipo de automatización de Las Bambas durante la fase de Discovery.
+
+| Variable | Unidad | Frecuencia mínima |
+|----------|--------|------------------|
+| Nivel de pila OS | % o metros | 1 min |
+| Caudal másico entrada (chancado → pila) | t/h | 1 min |
+| Caudal másico salida (pila → feeders) | t/h | 1 min |
+| Estado operativo chancadora primaria | On/Off | Por evento |
+| Estado operativo correas | On/Off | Por evento |
+| Estado operativo feeders (por feeder) | On/Off | Por evento |
+| Ley Cu en línea (si disponible) | % | Variable |
+| Humedad (si disponible) | % | Variable |
+
+## 6.4 Capacidades publicadas por API
+
+| Consulta | Descripción |
+|---------|-------------|
+| Estado actual de la pila | Masa total, live stock, dead stock, nivel, edad media estimada |
+| Predicción de feed SAG | Atributos esperados (ley Cu/Mo, dureza, humedad) por horizonte de tiempo |
+| Cola de micro-batches activos | Material activo en pila con atributos y tiempo de ingreso |
+| Estado espacial por celda (ME) | Atributos por sector y capa cuando ME está activa |
+| Histórico de estados | Serie temporal de estados del sistema para análisis y calibración |
+| KPIs del sistema | Métricas de desempeño predictivo versus valores reales |
+
+## 6.5 Stack tecnológico
+
+| Componente | Tecnología |
+|-----------|-----------|
+| Lenguaje del sistema | Python |
+| Integración PI System | PI Web API (REST/JSON) |
+| Base de datos | SQL Server |
+| API de publicación | Python (FastAPI) |
+| Modelamiento numérico | SciPy, NumPy, Pandas |
+
+---
+
+# 7. Viabilidad Técnica
+
+## 7.1 Viabilidad computacional — ML en CPU
+
+La Modelo Ligero ejecuta por cada paso temporal (1 min):
+
+- Actualización del balance de masa: operación escalar de bajo costo.
+- Actualización de la cola de micro-batches: 10–50 batches activos simultáneos en operación normal.
+- Cálculo de RTD y convolución discreta sobre el horizonte de predicción (240 pasos para 4 h).
+- Consulta y escritura a SQL Server: latencia típica menor a 10 ms en hardware On-Premise.
+
+El tiempo de cómputo total por ciclo es del orden de **10–50 ms en CPU estándar**, con margen de holgura superior al 95% respecto al paso temporal de 1 minuto.
+
+## 7.2 Viabilidad computacional — ME en CPU
+
+La Modelo Espacial agrega el procesamiento 2.5D con N_sectores × N_capas variables de estado (típicamente 10 sectores × 5 capas = 50 celdas por atributo). Este workload es perfectamente viable en CPU para resoluciones moderadas, con tiempos de cómputo por ciclo estimados en 100–500 ms —dentro del margen operacional con paso temporal de 1 minuto.
+
+## 7.3 Viabilidad de integración con PI System
+
+PI System es el estándar industrial predominante para historiadores de proceso en minería de gran escala. La integración vía PI Web API (REST/JSON) es la arquitectura moderna recomendada por OSIsoft/AVEVA y no requiere clientes PI propietarios en el servidor de aplicaciones. Los requerimientos son:
+
+- URL base del PI Web API server en la red OT de Las Bambas
+- Credenciales de acceso (usuario de servicio con permisos de lectura sobre los tags requeridos)
+- Lista de tags validada con el equipo de automatización de Las Bambas
+- Configuración de red (firewall, VPN o DMZ para tráfico IT↔OT)
+
+## 7.4 Viabilidad del modelo matemático
+
+Los modelos de balance de masa diferencial con RTD paramétrica y tracking de batches son el estándar industrial para sistemas de trazabilidad mine-to-mill. Los principales riesgos de viabilidad son de datos, no de cómputo:
+
+- Disponibilidad y calidad de los tags de nivel y caudal en PI System.
+- Consistencia temporal de las señales (timestamps, frecuencia de muestreo, gestión de gaps).
+- Disponibilidad de datos históricos suficientes para calibración inicial de la RTD y los parámetros live/dead.
+
+---
+
+# 8. Estrategia de Implementación
+
+## 8.1 Actividades del proyecto — Sistema completo ML + ME (12 semanas)
+
+**Objetivo:** Implementar y desplegar el sistema completo con ambas versiones operacionales en 12 semanas.
+
+| N° | Actividad | Responsable | Semanas |
+|----|-----------|-------------|---------|
+| 1 | Discovery: auditoría de tags PI, calidad de señales, histórico. **Recepción de geometría de pila del cliente (req. ME)** | Data Engineer + OT Specialist | 1–2 |
+| 2 | Diseño del motor ML: calibración de RTD inicial sobre histórico | Data Scientist | 2–4 |
+| 3 | Desarrollo conector PI Web API | Backend Dev + OT Specialist | 2–4 |
+| 4 | Setup On-Premise + SQL Server + esquema de persistencia | Data Engineer | 3–5 |
+| 5 | Desarrollo motor ML (balance + RTD + batches) | Data Scientist + Backend Dev | 4–6 |
+| 6 | Desarrollo motor ME — grilla 2.5D (en paralelo con ML) | Data Scientist + Backend Dev | 3–8 |
+| 7 | Desarrollo API Gateway y endpoints REST (ML + ME) | Backend Dev | 5–7 |
+| 8 | Integración interna y pruebas — sistema completo | Equipo técnico | 7–9 |
+| 9 | Validación ML: KPIs de predicción feed SAG | Data Scientist + Operaciones Las Bambas | 8–10 |
+| 10 | Validación ME: atributos espaciales vs. geometría cliente | Data Scientist + Operaciones Las Bambas | 9–11 |
+| 11 | Despliegue sistema completo On-Premise | Data Engineer | 10–11 |
+| 12 | Monitoreo post-despliegue + ajustes finales | Equipo técnico | 11–12 |
+| 13 | Capacitación de usuarios operacionales | PM + Data Scientist | 12 |
+
+**Nota:** Las actividades 5 y 6 (motores ML y ME) se desarrollan en paralelo. La disponibilidad de los datos de geometría de la pila por parte del cliente al inicio de la Semana 1 es condición crítica para cumplir el plazo de 12 semanas.
+
+---
+
+# 9. Roadmap del Sistema
+
+```
+SEMANAS 1–12 — Implementación del Sistema Completo
+┌────────────────────────────────────────────────────────────────────┐
+│                                                                    │
+│  ┌─────────────────────────────────────────┐                      │
+│  │  MODELO LIGERO (ML)               │                      │
+│  │  Balance + RTD + Live/Dead + Batches    │  Semanas 2–10        │
+│  │  Predicción feed SAG — tiempo real      │                      │
+│  └─────────────────────────────────────────┘                      │
+│                                                                    │
+│  ┌─────────────────────────────────────────┐                      │
+│  │  MODELO ESPACIAL (ME)             │                      │
+│  │  Grilla sectores/capas                 │  Semanas 3–11        │
+│  │  Tracking por celda — segregación      │                      │
+│  │  (*) Geometría de pila: cliente        │                      │
+│  └─────────────────────────────────────────┘                      │
+│                                                                    │
+│  DESPLIEGUE SISTEMA COMPLETO ──────────────────────── Semana 12   │
+└────────────────────────────────────────────────────────────────────┘
+```
+
+| Versión | Enfoque | Infraestructura | Escenarios cubiertos | Entrega |
+|---------|---------|----------------|---------------------|---------|
+| Modelo Ligero (ML) | RTD + Live/Dead + Batches | CPU — On-Premise | Predicción feed SAG, operación continua | Semana 12 |
+| Modelo Espacial (ME) | Espacial 2.5D | CPU — On-Premise | Variación espacial, segregación granulométrica | Semana 12 |
+
+(*) La geometría de la pila (levantamiento topográfico, nube de puntos o puntos GPS mínimos) es responsabilidad del cliente y debe estar disponible en Discovery (Semana 1–2).
+
+---
+
+# 10. Requerimientos de Infraestructura
+
+## 10.1 Servidor On-Premise del sistema
+
+El sistema opera sobre un **servidor On-Premise** dentro de la red de la operación Las Bambas. No requiere infraestructura cloud ni conectividad externa.
+
+| Componente | Requerimiento |
+|-----------|--------------|
+| RAM | 32 GB |
+| Almacenamiento | 500 GB disponibles para base de datos y logs |
+| CPU | Procesador moderno de múltiples núcleos (8+ cores recomendado) |
+| Base de datos | SQL Server (instancia existente o nueva) |
+| Red | Acceso a PI Web API del historiador de planta |
+| Sistema operativo | Windows Server (compatible con SQL Server y Python) |
+
+El servidor puede ser una máquina de Las Bambas ya existente si cumple con los requerimientos, o un servidor dedicado provisionado por ASTAY. Esto se define en la fase de Discovery.
+
+## 10.2 Conectividad con PI System
+
+El único requerimiento de red es que el servidor On-Premise tenga acceso a la PI Web API del historiador de Las Bambas. Los detalles de red (acceso, credenciales, firewall) se coordinan con el equipo de automatización e IT de la operación durante la fase de Discovery.
+
+## 10.3 Publicación de resultados
+
+Los resultados del sistema se publican vía API REST desde el mismo servidor On-Premise. El acceso es controlado y se otorga únicamente a los sistemas autorizados (DataTwin, dashboard operacional, usuarios nominados). No hay datos de proceso expuestos hacia internet ni fuera de la red interna de la operación.
+
+---
+
+# 11. Equipo de Trabajo
+
+## 11.1 Composición del equipo
+
+| Perfil | Rol en el proyecto | Dedicación ML | Valor técnico aportado |
+|--------|-------------------|:-------------:|----------------------|
+| **Arquitecto de Solución** | Diseño de arquitectura, revisiones técnicas, decisiones de diseño críticas | 30% | Coherencia técnica del sistema y evolución hacia ME |
+| **Data Scientist** | Diseño e implementación del motor (RTD, live/dead, batches), calibración, KPIs | 80% | Núcleo del valor diferencial — el motor del sistema es la IP del producto |
+| **Ingeniero de Datos** | Esquema SQL Server, pipelines de ingesta, calidad de datos, gestión de gaps | 80% | Garantiza que los datos que llegan al motor son confiables y completos |
+| **Desarrollador Backend Python** | Implementación del motor, conector PI, API de publicación, integración end-to-end | 100% | Convierte el modelo en un servicio productivo y mantenible |
+| **Especialista OT / PI System** | Auditoría de tags PI, configuración de PI Web API, coordinación con automatización | 60% | Resuelve la integración OT — sin esto no hay datos |
+| **Especialista Visualización** | Dashboard de monitoreo, visualización de estado de pila | 40% | Interfaz operacional — el sistema sin visualización no es adoptado |
+| **Project Manager** | Coordinación, control de avance, comunicación con Las Bambas, gestión de riesgos | 25% | Asegura entrega en tiempo y gestión de dependencias con el cliente |
+| **Equipo Comercial / Negocios** | Coordinación de propuesta económica, contratos, escalamiento | Variable | Continuidad comercial y escalamiento a otras operaciones |
+
+## 11.2 Perfiles críticos para el Modelo Ligero
+
+Los perfiles más críticos para el éxito de la Modelo Ligero son el **Data Scientist** (riesgo de subestimación del trabajo de calibración) y el **Especialista OT/PI** (riesgo de bloqueo por integración). La ausencia o subdedicación de cualquiera de estos dos roles es el principal factor de desviación de cronograma.
+
+---
+
+# 12. Cronograma
+
+## 12.1 Sistema completo ML + ME — Gantt (12 semanas)
+
+```
+ACTIVIDAD                              │ S1 │ S2 │ S3 │ S4 │ S5 │ S6 │ S7 │ S8 │ S9 │S10 │S11 │S12 │
+───────────────────────────────────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+1. Discovery + geometría pila (C)      │████│████│    │    │    │    │    │    │    │    │    │    │
+2. Diseño motor + calibración ML       │    │████│████│████│    │    │    │    │    │    │    │    │
+3. Conector PI Web API                 │    │████│████│████│    │    │    │    │    │    │    │    │
+4. Setup On-Premise + SQL Server       │    │    │████│████│████│    │    │    │    │    │    │    │
+5. Motor ML (balance + RTD + batches)  │    │    │    │████│████│████│    │    │    │    │    │    │
+6. Motor ME — grilla 2.5D (*)         │    │    │████│████│████│████│████│    │    │    │    │    │
+7. API Gateway — ML + ME               │    │    │    │    │████│████│████│    │    │    │    │    │
+8. Integración y pruebas sistema       │    │    │    │    │    │    │████│████│████│    │    │    │
+9. Validación ML — KPIs feed SAG       │    │    │    │    │    │    │    │████│████│████│    │    │
+10. Validación ME — atributos espacial │    │    │    │    │    │    │    │    │████│████│████│    │
+11. Despliegue sistema completo        │    │    │    │    │    │    │    │    │    │████│████│    │
+12. Monitoreo + ajustes                │    │    │    │    │    │    │    │    │    │    │████│████│
+13. Capacitación usuarios              │    │    │    │    │    │    │    │    │    │    │    │████│
+───────────────────────────────────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+HITOS                                  │    │ H1 │    │ H2 │    │    │    │ H3 │    │ H4 │    │ H5 │
+
+(C) Geometría de pila provistos por el cliente — requerido antes de Semana 2
+(*) Desarrollo en paralelo con ML; requiere datos de geometría desde Semana 1
+```
+
+## 12.2 Hitos del proyecto
+
+| Hito | Semana | Criterio de aceptación |
+|------|:------:|----------------------|
+| H1 — Discovery completado | 2 | Tags PI validados + geometría de pila recibida del cliente |
+| H2 — Motores diseñados | 4 | RTD calibrada; grilla 2.5D definida sobre geometría del cliente |
+| H3 — Sistema integrado | 8 | ML + ME + API funcionando en pipeline completo |
+| H4 — Validación completada | 10 | KPIs ML y ME dentro de umbrales acordados con Las Bambas |
+| H5 — Sistema completo en producción | 12 | ML + ME desplegados On-Premise, monitoreados, usuarios capacitados |
+
+---
+
+# 13. Entregables
+
+## 13.1 Modelo Ligero
+
+| N° | Entregable | Formato | Hito |
+|----|-----------|---------|------|
+| E01 | Informe de Discovery: auditoría de tags, calidad de señales, histórico disponible | PDF | H1 |
+| E02 | Documento de diseño del motor: parámetros, estrategia de calibración | PDF | H2 |
+| E03 | Código fuente del sistema: conector PI, motor ML, API de publicación | Repositorio Git | H3 |
+| E04 | Esquema SQL Server + scripts de migración | SQL + Git | H3 |
+| E05 | Documentación de API (OpenAPI/Swagger) | HTML/PDF | H3 |
+| E06 | Informe de validación: KPIs de predicción vs. baseline heurístico | PDF | H4 |
+| E07 | Sistema desplegado On-Premise y monitoreado | Sistema en producción | H5 |
+| E08 | Manual de operación y configuración | PDF | H5 |
+| E09 | Registro de parámetros calibrados del sistema | JSON/CSV + documentación | H5 |
+| E10 | Informe de capacitación y transferencia tecnológica | PDF | H5 |
+
+## 13.2 Modelo Espacial
+
+| N° | Entregable | Formato | Hito |
+|----|-----------|---------|------|
+| E11 | Documento de diseño de la grilla 2.5D: sectores, capas, reglas de flujo | PDF | H2 |
+| E12 | Código fuente motor ME integrado al sistema | Repositorio Git | H3 |
+| E13 | Informe de validación ME: atributos espaciales vs. datos de geometría del cliente | PDF | H4 |
+| E14 | Sistema ME desplegado y documentado | Sistema en producción | H5 |
+
+---
+
+# 14. Riesgos y Mitigaciones
+
+| Riesgo | Probabilidad | Impacto | Mitigación |
+|--------|:------------:|:-------:|------------|
+| Tags PI incompletos, con gaps excesivos o sin la resolución temporal requerida | Alta | Alto | Discovery dedicado en Semanas 1–2; criterios mínimos de calidad de señal antes de iniciar el motor |
+| Restricciones de red OT/IT bloquean acceso a PI Web API | Media | Alto | Involucrar a IT/Automatización de Las Bambas desde el inicio; DMZ/VPN como requerimiento formal |
+| Histórico de PI insuficiente para calibración inicial de RTD | Media | Alto | Estrategia de calibración con datos reducidos; arrancar con RTD estándar de literatura y ajustar progresivamente |
+| Variabilidad operacional extrema invalida la calibración del sistema | Media | Medio | Parametrizar por régimen operativo (niveles alto/medio/bajo, modo normal/perturbado) |
+| Subestimación de la complejidad de calibración en ML | Media | Medio | Reserva de contingencia de 2 semanas en cronograma; Data Scientist con experiencia en RTD |
+| Complejidad del modelo 2.5D (ME) subestimada | Alta | Alto | No activar ME sin validación sólida de ML; PoC técnico de discretización antes de desarrollo completo |
+| Resistencia operacional a adoptar la predicción del sistema | Media | Medio | Capacitación con casos reales; comparación visual sistema vs. heurística durante validación |
+| Drift del sistema con el tiempo (cambios en geometría, densidad, operación) | Alta | Medio | Módulo de recalibración periódica; métricas de desempeño en producción con alertas de degradación |
+| Integración OT/IT requiere cambios de red no previstos | Media | Alto | Workshop OT/IT en Discovery; no avanzar al desarrollo sin definición de red confirmada |
+
+---
+
+# 15. Estimación Económica
+
+## 15.1 Estructura de la inversión
+
+| Componente | Modalidad | Fase |
+|-----------|-----------|------|
+| Modelo Ligero — Motor dinámico + Integración PI + Despliegue On-Premise | Precio fijo | Activación ML |
+| Modelo Espacial — Modelo Espacial | Precio fijo | Activación ME |
+| Soporte y mantenimiento (continuo) | Tarifa mensual | Post ML |
+
+## 15.2 Inversión Modelo Ligero
+
+| Componente | Detalle | Inversión USD |
+|-----------|---------|:-------------:|
+| Equipo técnico — 12 semanas | Data Scientist (80%), Data Engineer (80%), Backend Dev (100%), OT Specialist (60%), Arquitecto (30%), Visualización (40%), PM (25%) | [PENDIENTE — área comercial] |
+| Infraestructura On-Premise | Servidor según requerimientos Sección 10 — puede ser existente o nuevo | [PENDIENTE — validar con IT Las Bambas] |
+| Licencias y herramientas | Stack open-source — sin costo de licencia de software | USD 0 |
+| Viajes y gastos | [PENDIENTE — definir modalidad presencial/remoto con Las Bambas] | [PENDIENTE] |
+| **Total Modelo Ligero** | | **USD [PENDIENTE]** |
+
+## 15.3 Condiciones comerciales
+
+- **Moneda:** USD, sin impuestos.
+- **Forma de pago:** 40% al inicio / 30% en Hito H3 / 30% en Hito H5.
+- **Vigencia de propuesta:** 30 días calendario desde emisión.
+- **Inicio:** a acordar dentro de los 15 días posteriores a firma de contrato.
+- **Idioma de entregables:** Español.
+
+---
+
+# 16. Exclusiones
+
+Las siguientes actividades están **explícitamente fuera del alcance** de la Modelo Ligero:
+
+- Discretización espacial 2.5D de la pila (pertenece a la Modelo Espacial del sistema)
+- Integración directa con SCADA/DCS por OPC-UA (la integración se realiza exclusivamente vía PI System)
+- Modelamiento del circuito SAG, flotación u otras etapas del proceso metalúrgico
+- Ejecución de levantamientos topográficos o captura de nube de puntos de la pila (responsabilidad del cliente; los datos resultantes son insumo del sistema para ME)
+- Módulo de optimización o control avanzado del circuito de molienda
+- Modelos de alta fidelidad basados en física granular (DEM/CA)
+- Reorganización del PI System o modificación de la arquitectura de historiadores del cliente
+- Instalación o configuración de hardware de infraestructura (el cliente provee los servidores especificados)
+- Mantenimiento correctivo de señales PI o instrumentación de campo
+- Integración con ERP, SAP u otros sistemas de gestión corporativa
+
+---
+
+# 17. Recomendaciones
+
+1. **Validar ML antes de activar ME.** La Modelo Ligero debe operar con seguimiento activo durante al menos 3 meses antes de activar ME. Las métricas de predicción en condiciones operacionales reales son la única base honesta para parametrizar la discretización espacial.
+
+2. **Campaña de trazadores como inversión estratégica.** Sin datos de trazadores físicos (RFID o trazadores químicos), la calibración de la RTD y los parámetros live/dead seguirá siendo estadística. Una campaña de trazadores en condiciones representativas es la mejor inversión para elevar la confianza del sistema hacia ME.
+
+3. **Instrumentación de la pila.** Un sensor de perfil de pila (radar multilayer o escáner láser de superficie) transforma radicalmente la calidad del motor espacial ME. Si Las Bambas tiene planes de instrumentación, sincronizarlos con la activación de ME.
+
+4. **Gobierno del sistema en producción.** El sistema en producción requiere mantenimiento activo: recalibración semestral, revisión de KPIs, actualización de parámetros ante cambios operacionales (nueva chancadora, cambio en geometría de feeders, variación de densidad por cambio litológico).
+
+5. **Extensión a circuito completo mine-to-mill.** El sistema OS es el componente más complejo del tracking mine-to-mill. La arquitectura On-Premise propuesta es extensible para incorporar modelos de transporte mina-chancado, circuito de molienda SAG-bolas y distribución de leyes hacia flotación. El valor total del gemelo digital se multiplica al cerrar la cadena completa.
+
+---
+
+# Referencias
+
+- *How much would a blending stockpile reduce variation?* — ScienceDirect, Chemometrics and Intelligent Laboratory Systems, 2004.
+- *A review on gravity flow of free-flowing granular solids in silos — Basics and practical aspects* — ScienceDirect, Chemical Engineering Science, 2018.
+- *A numerical sensitivity study — The effectiveness of RFID-based ore tracking through a simulated coarse ore stockpile* — ScienceDirect, Powder Technology, 2023.
+- *A 3D cellular automata ore stockpile model — Part 1: Simulation of size segregation* — ScienceDirect, Minerals Engineering, 2022.
+- *A 3D cellular automata ore stockpile model — Part 2: Simulation and industrial validation of dynamic discharging and trajectory segregation mechanisms* — ScienceDirect, Minerals Engineering, 2023.
+- *Digital Twins with Distributed Particle Simulation for Mine-to-Mill Material Tracking* — MDPI Minerals, 2021.
+- *3D stockpile modelling and quality calculation for continuous stockpile management* — ScienceDirect, International Journal of Mining Science and Technology, 2015.
+- *Segregation Modeling in Stockpile Using Discrete Element Method* — MDPI Applied Sciences, 2022.
+- METSIM Dynamic Simulation documentation — metsim.com.
+- OSIsoft PI Web API Reference — AVEVA/OSIsoft documentation.
+
+---
+
+# Apéndice {.appendix}
+
+## A. Glosario
+
+| Término | Definición |
+|---------|------------|
+| OS | Ore Stockpile — pila de mineral entre chancado primario y molienda SAG |
+| RTD | Residence Time Distribution — distribución de tiempos de residencia del material en la pila |
+| Live Stock | Fracción activa de la masa en la pila, con movilidad real en la ventana operativa |
+| Dead Stock | Fracción de baja o nula movilidad, en zonas periféricas o estancadas de la pila |
+| Micro-batch | Unidad discreta de masa con atributos asignados, usada para tracking temporal de calidad |
+| Funnel Flow | Patrón de descarga granular donde el flujo se concentra en un cono central, dejando zonas estancadas en la periferia |
+| Mass Flow | Patrón de descarga donde todo el material se mueve simultáneamente — ideal pero infrecuente en pilas reales |
+| DEM | Discrete Element Method — simulación numérica de alta fidelidad de interacciones entre partículas granulares |
+| CA | Cellular Automata — modelo espacial discreto que simula dinámica granular mediante reglas locales de celda a celda |
+| PI System | Plataforma de historiador de datos de proceso de OSIsoft/AVEVA, estándar industrial en minería |
+| PI Web API | Interfaz REST/JSON de PI System para acceso moderno a datos de proceso |
+| SQL Server | Base de datos relacional para persistencia de estados del sistema y series de tiempo operacionales |
+| On-Premise | Infraestructura desplegada en el sitio de la operación, sin dependencia de servicios cloud |
+| Mine-to-Mill | Enfoque integrado de optimización que modela la cadena desde la mina hasta el molino como sistema único |
+| Feed SAG | Alimentación al molino SAG — el material que entra a molienda primaria tras salir de los feeders de la pila OS |
+
+## B. Trade-off de enfoques de modelamiento
+
+| Enfoque | Realismo físico | Complejidad | Costo computacional | Explicabilidad | Uso recomendado |
+|---------|:--------------:|:-----------:|:-------------------:|:--------------:|----------------|
+| FIFO / delay fijo | Bajo | Muy bajo | Muy bajo | Muy alto | Baseline / reporting |
+| RTD + balance dinámico (**ML**) | Medio-alto | Bajo-medio | Bajo | Alto | Producción online |
+| Modelo Espacial 2.5D (**ME**) | Alto | Medio | Medio | Medio-alto | Gemelo digital operativo |
+| CA 3D | Alto | Medio-alto | Medio-alto | Medio | Surrogate avanzado |
+| DEM puro | Muy alto | Muy alto | Muy alto | Medio | Calibración off-line |
+
+*Fuente: adaptado de literatura de modelamiento de stockpiles — ScienceDirect, MDPI (ver Referencias)*
+
+---
+
+*Propuesta preparada por ASTAY Systems — 2026-05-19*
+*Modelo Ligero.0 — Confidencial*

@@ -139,6 +139,112 @@ When asked to write a technical report, proposal, or scope document:
 
 ---
 
+## Project Structure Standard
+
+### Project note frontmatter (required fields)
+
+Every project note must have this frontmatter, **in this order**:
+
+```yaml
+---
+project: <ProjectName>          # matches folder name exactly
+status: active | completed | paused
+stage: <current-stage>          # e.g. propuesta-tecnica-en-elaboracion | propuesta-enviada | en-ejecucion
+owner: "Juan Mansilla"
+stakeholders: [Name1, Name2]
+start-date: YYYY-MM-DD
+tags: [project-tag]
+onedrive: ""                    # paste URL when available
+---
+```
+
+### Project note required sections (in this order)
+
+1. `## Estado actual` — status table showing what's done / pending (like MarCobre pattern)
+2. `## Objetivo` — 2-3 sentence goal statement
+3. `## Kanban` — link to `[[<Project>-board]]`
+4. `## Tareas activas` — open tasks with Tasks plugin syntax
+5. `## Tareas completadas` — checked tasks with completion date
+6. `## Decisiones clave` — decision log table
+7. `## Riesgos` — risk table
+8. `## 📎 Documentación` — Dataview query + naming table
+9. `## ☁️ OneDrive` — link placeholder
+10. `## Recursos y referencias` — links to key files
+
+### Sub-project structure
+
+Use sub-project folders when a client project has **2+ independent deliverables** with separate proposals, timelines, or teams.
+
+```
+30-Projects/<Client>/
+├── <Client>.md                    ← parent note: lists sub-projects, status table, cross-cutting tasks
+├── Documentacion/                 ← docs for the client relationship (not a specific sub-project)
+│   ├── Reuniones/
+│   ├── Comunicaciones/
+│   ├── Referencias/
+│   └── Entregables/
+├── <SubProject-A>/
+│   ├── <SubProject-A>.md          ← sub-project note (same frontmatter standard + parent: <Client>)
+│   └── Documentacion/
+│       ├── Reuniones/
+│       ├── Comunicaciones/
+│       ├── Referencias/
+│       └── Entregables/
+│           └── YYYY-MM-DD-propuesta-tecnica-v1.qmd
+└── <SubProject-B>/
+    ├── <SubProject-B>.md
+    └── Documentacion/
+        └── Entregables/
+            └── YYYY-MM-DD-propuesta-tecnica-v1.qmd
+```
+
+Sub-project note frontmatter adds `parent: <Client>` field.
+
+Kanban boards: one board per sub-project → `_kanban/<Client>-<SubProject>-board.md`
+
+### Kanban board naming
+
+| Scope | Board filename |
+|-------|---------------|
+| Single project | `_kanban/<ProjectName>-board.md` |
+| Sub-project | `_kanban/<Client>-<SubProject>-board.md` |
+
+### QMD (Quarto) YAML standard
+
+**Always use this exact YAML block** for all `.qmd` proposals and reports:
+
+```yaml
+---
+title: "Document Title"
+subtitle: "Subtitle — Client Name"
+author: "ASTAY Systems"
+date: "YYYY-MM-DD"
+format:
+  docx:
+    reference-doc: "<relative-path-to>/_templates/custom-reference.docx"
+    toc: true
+    toc-depth: 2
+    number-sections: true
+lang: es
+---
+```
+
+**Reference-doc path** (count levels from file to vault root):
+- File at `30-Projects/<Project>/Documentacion/Entregables/` → `"../../../../_templates/custom-reference.docx"` (4 levels)
+- File at `30-Projects/<Client>/<SubProject>/Documentacion/Entregables/` → `"../../../../../_templates/custom-reference.docx"` (5 levels)
+
+**Never use:** `date: today`, `date-format`, `author` as multi-line block, `highlight-style`, `fig-width`, `execute:` block.
+
+### QMD section hierarchy
+
+- `#` (H1) — top-level sections: `Resumen Ejecutivo`, `1. Contexto`, `2. Solución`, `Apéndice`
+- `##` (H2) — subsections: `1.1 Contexto operacional`, `2.3 Modelo de datos`, `A. Glosario`
+- `###` (H3) — only if truly needed for third-level nesting
+
+With `number-sections: true`, Quarto adds numbers automatically. Never add manual numbers inside headers.
+
+---
+
 ## Dataview Query Conventions
 
 - Use `TABLE` syntax for multi-column views.
@@ -175,4 +281,4 @@ and prompt user to decide fate of each one (tarea / proyecto / archivo / pendien
 
 ---
 
-*Last updated: 2026-05-18 — added documentation standard (Doc-Reunion, Doc-Comunicacion, Doc-Referencia)*
+*Last updated: 2026-05-18 — added Project Structure Standard: frontmatter, sub-project folders, QMD YAML and header conventions*

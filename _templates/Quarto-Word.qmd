@@ -1,57 +1,46 @@
 ---
 title: "Título del Documento"
-subtitle: "Subtítulo opcional"
-author:
-  - name: "Juan Mansilla"
-    affiliation: "Astay Systems"
-date: today
-date-format: "DD [de] MMMM [de] YYYY"
-lang: es
-
+subtitle: "Subtítulo — Cliente"
+author: "ASTAY Systems"
+date: "YYYY-MM-DD"
 format:
   docx:
+    reference-doc: "<ruta-relativa>/_templates/custom-reference.docx"
     toc: true
-    toc-depth: 3
-    toc-title: "Tabla de Contenidos"
+    toc-depth: 2
     number-sections: true
-    highlight-style: github
-    fig-width: 6
-    fig-height: 4
-    fig-cap-location: bottom
-    tbl-cap-location: top
-    # reference-doc: _templates/custom-reference.docx  # descomentar cuando tengas el .docx de estilos
-
-execute:
-  echo: false
-  warning: false
-  message: false
-  freeze: auto
+lang: es
 ---
+<!--
+reference-doc path según profundidad del archivo:
+  30-Projects/<Proyecto>/Documentacion/Entregables/  → "../../../../_templates/custom-reference.docx"
+  30-Projects/<Cliente>/<SubProyecto>/Documentacion/Entregables/ → "../../../../../_templates/custom-reference.docx"
+-->
 
-## Resumen Ejecutivo
+# Resumen Ejecutivo
 
 > Descripción breve del documento: propósito, alcance y principales conclusiones.
 
 ---
 
-## 1. Contexto y Objetivo
+# 1. Contexto y Objetivo
 
 Describir el contexto del documento y el objetivo que se persigue.
 
-### 1.1 Alcance
+## 1.1 Alcance
 
 - Qué incluye este documento
 - Qué NO incluye
 
-### 1.2 Audiencia
+## 1.2 Audiencia
 
 A quién está dirigido este documento y qué se espera que haga con él.
 
 ---
 
-## 2. Análisis
+# 2. Análisis
 
-### 2.1 Datos y fuentes
+## 2.1 Datos y fuentes
 
 Describir las fuentes de datos utilizadas.
 
@@ -62,7 +51,7 @@ Describir las fuentes de datos utilizadas.
 
 : Fuentes de datos utilizadas {#tbl-fuentes}
 
-### 2.2 Resultados
+## 2.2 Resultados
 
 Texto de análisis y hallazgos principales.
 
@@ -89,15 +78,15 @@ print(resumen)
 
 ---
 
-## 3. Conclusiones y Recomendaciones
+# 3. Conclusiones y Recomendaciones
 
-### 3.1 Conclusiones
+## 3.1 Conclusiones
 
 1. Primera conclusión
 2. Segunda conclusión
 3. Tercera conclusión
 
-### 3.2 Recomendaciones
+## 3.2 Recomendaciones
 
 | # | Recomendación | Prioridad | Responsable | Plazo |
 |---|---------------|-----------|-------------|-------|
@@ -108,7 +97,7 @@ print(resumen)
 
 ---
 
-## 4. Riesgos y Consideraciones
+# 4. Riesgos y Consideraciones
 
 | Riesgo | Probabilidad | Impacto | Mitigación |
 |--------|-------------|---------|------------|
@@ -116,21 +105,21 @@ print(resumen)
 
 ---
 
-## Referencias
+# Referencias
 
 <!-- Usar formato Chicago, APA o el que aplique al contexto -->
 
 ---
 
-## Apéndice {.appendix}
+# Apéndice {.appendix}
 
-### A. Glosario
+## A. Glosario
 
 | Término | Definición |
 |---------|------------|
 | BIM | Building Information Modeling |
 | LOD | Level of Detail |
 
-### B. Datos adicionales
+## B. Datos adicionales
 
 Tablas, queries o información de soporte no incluida en el cuerpo principal.

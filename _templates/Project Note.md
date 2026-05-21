@@ -1,7 +1,8 @@
 ---
 project: <% tp.file.title %>
 status: active
-owner: ""
+stage: propuesta-tecnica-en-elaboracion
+owner: "Juan Mansilla"
 stakeholders: []
 start-date: <% tp.date.now("YYYY-MM-DD") %>
 tags: []

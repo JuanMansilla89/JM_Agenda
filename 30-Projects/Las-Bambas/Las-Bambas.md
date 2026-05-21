@@ -1,7 +1,7 @@
 ---
 project: Las-Bambas
 status: active
-owner: ""
+owner: "Juan Mansilla"
 stakeholders: [William]
 start-date: 2026-05-18
 tags: [lasbambas]
@@ -11,42 +11,43 @@ onedrive: ""
 # Las Bambas
 
 ## Objetivo
-Control y seguimiento del despliegue de los módulos finales en Las Bambas. Consolidar el estado real vs roadmap: qué está desplegado, qué falta, riesgos y próximos hitos.
 
-## Kanban
-→ [[Las-Bambas-board]]
+Desarrollo de dos soluciones técnicas para la operación minera Las Bambas: (1) **Modelamiento de Pila** — sistema de modelamiento 3D volumétrico de pilas de mineral; (2) **Reportabilidad y Dashboards** — plataforma centralizada de KPIs operacionales y reportes automáticos. Ambos proyectos requieren propuesta técnica y, posteriormente, propuesta económica.
 
-## Tareas activas
+## Sub-proyectos
 
-- [ ] Consolidar documentación de estado: módulos desplegados, avance técnico, dependencias 📅 2026-05-18 🔺 #lasbambas #hoy
-- [ ] Revisar estado real de Forecasting, Spatial Compliance, Reporting, Integraciones vs roadmap 📅 2026-05-18 ⏫ #lasbambas #hoy
-- [ ] Reunión seguimiento con William — validar despliegue módulos finales y backlog técnico 📅 2026-05-18 🔺 #lasbambas #hoy
-- [ ] Producir lista de pendientes con fecha comprometida por frente + riesgos escalados 📅 2026-05-18 ⏫ #lasbambas #hoy
+| Sub-proyecto | Nota | Kanban | Propuesta Técnica |
+|-------------|------|--------|------------------|
+| Modelamiento de Pila | [[Modelamiento-Pila]] | [[Las-Bambas-Pila-board]] | `Modelamiento-Pila/Documentacion/Entregables/2026-05-18-propuesta-tecnica-v1.qmd` |
+| Reportabilidad y Dashboards | [[Reportabilidad]] | [[Las-Bambas-Reportabilidad-board]] | `Reportabilidad/Documentacion/Entregables/2026-05-18-propuesta-tecnica-v1.qmd` |
 
-## Módulos del proyecto
+## Estado general
 
-| Módulo | Estado | Observaciones |
-|--------|--------|---------------|
-| Forecasting | ? | Validar con William |
-| Spatial Compliance | ? | Validar con William |
-| Reporting | ? | Validar con William |
-| Integraciones | ? | Validar con William |
+| Sub-proyecto | Estado | Próximo hito | Fecha |
+|-------------|--------|-------------|-------|
+| Modelamiento de Pila | Propuesta técnica en elaboración | Enviar propuesta técnica a William | 2026-05-30 |
+| Reportabilidad | Propuesta técnica en elaboración | Enviar propuesta técnica a William | 2026-05-30 |
+
+## Tareas activas (nivel proyecto)
+
+- [ ] Presentar ambas propuestas técnicas a William 📅 2026-05-30 🔺 #lasbambas
+- [ ] Coordinar workshop de descubrimiento con Las Bambas post-aprobación técnica 📅 2026-06-06 ⏫ #lasbambas
 
 ## Decisiones clave
 
 | Fecha | Decisión | Justificación | Estado |
 |-------|----------|---------------|--------|
-| 2026-05-18 | Reunión obligatoria con William para validar estado real | Sin reunión el estado documentado puede no reflejar la realidad operativa | #decision |
+| 2026-05-18 | Separar en dos sub-proyectos: Modelamiento de Pila y Reportabilidad | Alcances, equipos y timelines son independientes | #decision |
+| 2026-05-18 | Propuesta técnica primero, económica después | Alinear solución con necesidad real antes de cotizar | #decision |
 
-## Riesgos
+## Riesgos generales
 
 | Riesgo | Probabilidad | Impacto | Mitigación |
 |--------|-------------|---------|------------|
-| Falta de visibilidad real del despliegue | Alta | Alto | Reunión concreta con William + consolidado de estado |
-| Validación de ambiente cliente bloqueada | Media | Alto | Identificar responsable en cliente, escalar si > 48h |
-| Desviación silenciosa en entrega Q3/Q4 | Alta | Alto | Consolidar estado real hoy, no postergar |
+| Propuestas no alineadas con prioridad real del cliente | Media | Alto | Validar con William antes de elaborar propuesta económica |
+| Recursos insuficientes para dos proyectos paralelos | Media | Alto | Definir secuencia si Las Bambas aprueba ambos simultáneamente |
 
-## 📎 Documentación
+## 📎 Documentación general del proyecto
 
 ```dataview
 TABLE file.mtime AS "Modificado", tipo AS "Tipo", fuente AS "Fuente"
@@ -66,10 +67,5 @@ SORT file.mtime DESC
 
 [📁 Carpeta Las Bambas](PENDIENTE — pegar URL de OneDrive)
 
-## Recursos y referencias
-
-- Output doc: qué está desplegado, qué falta, riesgos, próximos hitos
-- Output reunión William: lista pendientes + fechas + riesgos escalados
-
 ---
-*Tiempo estimado hoy: doc 1h–1h30 (09:00–10:30) + William 45min (10:30–11:15)*
+*Última actualización: 2026-05-18*
