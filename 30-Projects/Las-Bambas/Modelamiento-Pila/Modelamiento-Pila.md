@@ -29,10 +29,6 @@ onedrive: ""
 
 Propuesta técnica para el modelamiento 3D de pilas de mineral en Las Bambas. Incluye captura de geometría, cálculo volumétrico, gestión de calidad de material y visualización integrada en plataforma DataTwin.
 
-## Kanban
-
-→ [[Las-Bambas-Pila-board]]
-
 ## Tareas activas
 
 - [ ] Completar sección económica (Sección 15) con valores reales 📅 2026-05-28 🔺 #lasbambas
@@ -108,5 +104,10 @@ SORT file.mtime DESC
 
 [📁 Carpeta Las Bambas — Modelamiento Pila](PENDIENTE — pegar URL de OneDrive)
 
+## Recursos y referencias
+
+- Propuesta técnica v1: `Documentacion/Entregables/2026-05-18-propuesta-tecnica-v1.qmd`
+- Referencias técnicas en `Documentacion/Referencias/`
+
 ---
-*Última actualización: 2026-05-20*
+*Última actualización: 2026-05-24*

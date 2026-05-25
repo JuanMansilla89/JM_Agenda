@@ -22,7 +22,6 @@ This is a second-brain / productivity vault for a **data architect and data engi
 | `50-Resources/` | Reference material: tech docs, mining domain knowledge. |
 | `60-Archive/` | Completed/inactive projects and old notes. |
 | `_templates/` | Templater templates. Do not edit the `<% %>` syntax blocks. |
-| `_kanban/` | Kanban boards, one per project. |
 
 ---
 
@@ -52,18 +51,6 @@ Always use this format when creating tasks:
 ```
 - [ ] Validar esquema Avro con Duane 📅 2026-05-20 🔺 #datatwin
 ```
-
----
-
-## Kanban Boards
-
-| Project | Board file |
-|---------|-----------|
-| DataTwin | `_kanban/DataTwin-board.md` |
-| GIS / Block Model | `_kanban/GIS-BlockModel-board.md` |
-| GPS Pipeline | `_kanban/GPS-Pipeline-board.md` |
-
-Columns: **Backlog → En curso → En revisión → Bloqueado → Done**
 
 ---
 
@@ -104,9 +91,8 @@ When asked to write a technical report, proposal, or scope document:
 ## Instructions for Claude
 
 ### When asked about projects:
-1. Read the relevant Kanban board in `_kanban/`.
-2. Read the project note(s) in `30-Projects/<ProjectName>/`.
-3. Check `40-Areas/ToDo-Central.md` for task status.
+1. Read the project note(s) in `30-Projects/<ProjectName>/`.
+2. Check `40-Areas/ToDo-Central.md` for task status.
 
 ### When creating tasks:
 - Always use Tasks plugin syntax: `- [ ] Description 📅 YYYY-MM-DD <priority-emoji> <project-tag>`
@@ -162,14 +148,13 @@ onedrive: ""                    # paste URL when available
 
 1. `## Estado actual` — status table showing what's done / pending (like MarCobre pattern)
 2. `## Objetivo` — 2-3 sentence goal statement
-3. `## Kanban` — link to `[[<Project>-board]]`
-4. `## Tareas activas` — open tasks with Tasks plugin syntax
-5. `## Tareas completadas` — checked tasks with completion date
-6. `## Decisiones clave` — decision log table
-7. `## Riesgos` — risk table
-8. `## 📎 Documentación` — Dataview query + naming table
-9. `## ☁️ OneDrive` — link placeholder
-10. `## Recursos y referencias` — links to key files
+3. `## Tareas activas` — open tasks with Tasks plugin syntax
+4. `## Tareas completadas` — checked tasks with completion date
+5. `## Decisiones clave` — decision log table
+6. `## Riesgos` — risk table
+7. `## 📎 Documentación` — Dataview query + naming table
+8. `## ☁️ OneDrive` — link placeholder
+9. `## Recursos y referencias` — links to key files
 
 ### Sub-project structure
 
@@ -199,15 +184,6 @@ Use sub-project folders when a client project has **2+ independent deliverables*
 ```
 
 Sub-project note frontmatter adds `parent: <Client>` field.
-
-Kanban boards: one board per sub-project → `_kanban/<Client>-<SubProject>-board.md`
-
-### Kanban board naming
-
-| Scope | Board filename |
-|-------|---------------|
-| Single project | `_kanban/<ProjectName>-board.md` |
-| Sub-project | `_kanban/<Client>-<SubProject>-board.md` |
 
 ### QMD (Quarto) YAML standard
 
@@ -281,4 +257,4 @@ and prompt user to decide fate of each one (tarea / proyecto / archivo / pendien
 
 ---
 
-*Last updated: 2026-05-18 — added Project Structure Standard: frontmatter, sub-project folders, QMD YAML and header conventions*
+*Last updated: 2026-05-24 — removed Kanban boards per project; updated project note required sections*

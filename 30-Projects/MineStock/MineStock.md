@@ -1,7 +1,8 @@
 ---
 project: MineStock
 status: active
-owner: ""
+stage: en-progreso
+owner: "Juan Mansilla"
 stakeholders: [Milagros, Carlos, Alí]
 start-date: 2026-05-18
 tags: [minestock]
@@ -10,13 +11,16 @@ onedrive: ""
 
 # MineStock
 
+## Estado actual
+
+| Aspecto | Estado |
+|---------|--------|
+| Reestructuración UX con Milagros | ⏳ Pendiente |
+| Alineamiento historias de usuario con Carlos y Alí | ⏳ Pendiente |
+
 ## Objetivo
 
 Producto de gestión de inventario para minería. Dos frentes activos: (1) reestructuración UX con Milagros — nueva estructura de navegación, perfiles y dashboards; (2) alineamiento de historias de usuario con Carlos y Alí — backlog refinado, gaps funcionales, priorización MVP.
-
-## Kanban
-
-→ [[MineStock-board]]
 
 ## Tareas activas
 
@@ -25,6 +29,8 @@ Producto de gestión de inventario para minería. Dos frentes activos: (1) reest
 - [ ] Revisión historias de usuario con Carlos y Alí: redundancias, ambigüedades, dependencias backend, MVP vs nice-to-have 📅 2026-05-18 ⏫ #minestock #hoy
 - [ ] Producir backlog UX + criterios de rediseño (output reunión Milagros) 📅 2026-05-18 🔼 #minestock #hoy
 - [ ] Producir backlog refinado + prioridades + historias bloqueadas (output Carlos/Alí) 📅 2026-05-18 🔼 #minestock #hoy
+
+## Tareas completadas
 
 ## Frentes UX
 

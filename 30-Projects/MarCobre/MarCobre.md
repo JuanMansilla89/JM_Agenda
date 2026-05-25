@@ -28,10 +28,6 @@ onedrive: ""
 
 Ganar la propuesta técnico-económica para el proyecto de Portal Visual BIM / Gemelo Digital de MINSUR en Fundición y Refinería Pisco. Enfoque en dos etapas: **Discovery/Assessment** (6 semanas, cotizar ahora) → **Materialización y Desarrollo** (cotizar al cierre del Discovery).
 
-## Kanban
-
-→ [[MarCobre-board]]
-
 ## Tareas activas
 
 - [ ] Revisar propuesta técnica v1 con equipo — ajustes finales de contenido 📅 2026-05-19 🔺 #marcobre

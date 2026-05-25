@@ -1,7 +1,8 @@
 ---
 project: Toquepala-Cuajone
 status: active
-owner: ""
+stage: validacion-tecnica
+owner: "Juan Mansilla"
 stakeholders: []
 start-date: 2026-05-18
 tags: [toquepala]
@@ -10,13 +11,16 @@ onedrive: ""
 
 # Toquepala + Cuajone
 
+## Estado actual
+
+| Aspecto | Estado |
+|---------|--------|
+| Revisión completitud de queries | ⏳ Pendiente |
+| Validación compatibilidad PostgreSQL 9 | ⏳ Pendiente |
+
 ## Objetivo
 
 Confirmar completitud de las queries del sistema y validar compatibilidad técnica con PostgreSQL 9. Identificar queries faltantes, dependencias rotas y riesgos de compatibilidad.
-
-## Kanban
-
-→ [[Toquepala-Cuajone-board]]
 
 ## Tareas activas
 
@@ -24,6 +28,8 @@ Confirmar completitud de las queries del sistema y validar compatibilidad técni
 - [ ] Producir checklist: OK / faltantes / observaciones por query 📅 2026-05-18 ⏫ #toquepala #hoy
 - [ ] Validar compatibilidad PostgreSQL 9: version exacta, PostGIS, funciones SQL, vistas materializadas, extensiones, drivers 📅 2026-05-18 🔺 #toquepala #hoy
 - [ ] Producir documento: compatible/no compatible + riesgos + recomendación técnica 📅 2026-05-18 🔺 #toquepala #hoy
+
+## Tareas completadas
 
 ## Riesgo crítico: PostgreSQL 9
 

@@ -11,13 +11,21 @@ onedrive: ""
 
 # <% tp.file.title %>
 
+## Estado actual
+
+| Aspecto | Estado |
+|---------|--------|
+|  | ⏳ Pendiente |
+
 ## Objetivo
 
 > Describir el objetivo principal del proyecto en 2-3 oraciones.
 
-## Kanban
+## Tareas activas
 
-→ [[_kanban/<% tp.file.title %>-board]]
+- [ ] 📅 <% tp.date.now("YYYY-MM-DD") %> ⏫
+
+## Tareas completadas
 
 ## Decisiones clave
 

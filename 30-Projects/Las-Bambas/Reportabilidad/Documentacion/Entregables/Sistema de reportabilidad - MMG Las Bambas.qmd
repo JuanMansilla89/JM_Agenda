@@ -1,0 +1,316 @@
+---
+title: "Sistema de Reportabilidad Operacional"
+subtitle: "Propuesta Técnica — MMG Las Bambas"
+author: "ASTAY Systems"
+date: "2026-05-21"
+format:
+  docx:
+    reference-doc: "../../../../../_templates/custom-reference.docx"
+    toc: true
+    toc-depth: 2
+    number-sections: true
+lang: es
+---
+
+# Resumen Ejecutivo
+
+Las Bambas dispone de un ecosistema de datos operacionales — PI System, Komatsu/FMS, sistemas especializados — que cubre toda la cadena de valor mine-to-market. Sin embargo, esa información no está disponible de forma integrada para los equipos que toman decisiones: el IROC, las superintendencias y la gerencia operan con reportes manuales, datos fragmentados y KPIs sin definiciones unificadas.
+
+ASTAY Systems propone implementar un **Sistema de Reportabilidad Operacional (SRO)** que consolida las fuentes de datos existentes en una plataforma centralizada, habilitando visualización en tiempo real, reportes automáticos y seguimiento de indicadores clave por nivel de operación.
+
+El alcance comprende la integración de las fuentes de datos operacionales de Las Bambas, un modelo de datos unificado, cuatro módulos funcionales de visualización y reporte, y generación automática de informes diarios, semanales y mensuales. La implementación considera una ejecución iterativa con validación progresiva con usuarios clave de cada nivel operacional.
+
+Los resultados esperados para Las Bambas incluyen: visibilidad operacional integrada en tiempo real desde el IROC hasta la gerencia, alertas automáticas ante desvíos de indicadores críticos, eliminación del trabajo manual de consolidación de datos, y trazabilidad completa desde señales de proceso hasta el reporte ejecutivo.
+
+---
+
+# Objetivo del Proyecto
+
+Implementar una plataforma de reportabilidad operacional que integre las fuentes de datos existentes de Las Bambas, consolide los indicadores clave de la operación y los distribuya de forma automática y estructurada a cada nivel de la organización: control de turno (IROC), superintendencia y gerencia.
+
+El sistema reemplaza los procesos manuales de consolidación en Excel, reduce la latencia entre la generación del dato y su disponibilidad para la toma de decisiones, y establece definiciones únicas y consistentes para los indicadores operacionales de la operación mine-to-mill.
+
+---
+
+# Alcance Funcional
+
+El SRO habilita las siguientes capacidades operacionales:
+
+**Visualización integrada en tiempo real**
+
+- Estado de la cadena mina-chancado-pila-molienda-flotación en una vista unificada
+- Indicadores de cumplimiento de turno vs. plan actualizados en tiempo real
+- Alertas automáticas ante desvíos de parámetros críticos de proceso y producción
+- Balance mina-planta: ritmo de entrega de material vs. capacidad de absorción de planta
+
+**Seguimiento de indicadores por nivel operacional**
+
+- IROC (control de turno): cumplimiento de plan de turno, balance de flota, estabilidad de proceso, disponibilidad mecánica
+- Superintendencia: performance diario, reconciliación mine-to-mill, tendencias semanales, causas de desvío
+- Gerencia: avance vs. presupuesto, forecast mensual, varianzas y principales drivers de desviación
+
+**Reportabilidad automática**
+
+- Daily Operating Report (DOR) generado automáticamente al cierre de cada turno
+- Reporte semanal consolidado distribuido cada lunes
+- Reporte mensual de operaciones para corporativo, generado el primer día hábil del mes
+
+**Trazabilidad y consistencia**
+
+- Definiciones únicas de indicadores acordadas con el equipo de Las Bambas y documentadas en un diccionario de datos centralizado
+- Trazabilidad desde señales de proceso hasta indicadores ejecutivos
+- Histórico de performance para análisis de tendencias y reconciliación
+
+---
+
+# Fuentes de Información
+
+El SRO integra las fuentes de datos operacionales existentes en Las Bambas mediante conectores estándar (REST API, JDBC, OPC-UA), sin modificar los sistemas fuente ni su operación actual.
+
+| Fuente | Datos integrados | Frecuencia |
+|--------|-----------------|------------|
+| PI System / SCADA | Variables de proceso: potencia SAG, pH flotación, flujos, niveles de stockpile | 1–5 min |
+| Komatsu / FMS | Ciclos de flota, asignaciones, tonelaje acumulado por frente, disponibilidad mecánica | 5 min / por turno |
+| Sistema de pesaje | Tonelaje chancado, alimentación a molienda, balance de stockpile ROM y finos | 1–5 min |
+| LIMS | Ley de cabeza Cu/Mo, recuperaciones metalúrgicas, análisis de muestras | Por análisis |
+| Planes de producción | Plan de turno, diario, mensual y anual (carga desde archivos de planificación) | Diario / semanal |
+| CMMS | Estado de equipos, órdenes de trabajo activas, disponibilidad mecánica comprometida | Diario |
+
+Cada variable integrada queda documentada en el diccionario de datos centralizado con definición canónica, unidad, fuente, frecuencia de actualización y propietario del dato. Esta documentación es parte de los entregables de la Fase 1.
+
+---
+
+# Componentes / Módulos del Sistema
+
+El SRO se estructura en cuatro módulos funcionales que operan de forma integrada sobre un modelo de datos común.
+
+## Módulo de Consolidación de Información
+
+Integra, valida y normaliza los datos provenientes de todas las fuentes operacionales. Genera la capa de datos limpia y consistente sobre la cual operan los demás módulos.
+
+**Qué consolida:**
+
+- Datos de proceso en tiempo real (PI System / SCADA)
+- Datos de flota y producción mina (FMS/Komatsu)
+- Datos de pesaje y tonelaje procesado
+- Resultados de laboratorio (LIMS)
+- Planes de producción como referencia para cálculo de cumplimiento
+
+**Qué habilita:**
+
+- Indicadores derivados calculados automáticamente: ratios de reconciliación mine-to-mill (F1/F2), recuperaciones, eficiencias, cumplimientos de plan
+- Validación de calidad de dato en entrada, con alertas cuando una variable llega fuera de rango o con demora
+- Modelo de datos operacional con series de tiempo históricas para análisis de tendencias
+- Base consistente que elimina la proliferación de versiones distintas del mismo indicador
+
+## Módulo de Indicadores Operacionales
+
+Centraliza la definición y seguimiento de los indicadores clave acordados con el equipo de Las Bambas. Gestiona umbrales, alertas y trazabilidad del performance operacional.
+
+**Qué consolida:**
+
+- Catálogo de KPIs validados con propietarios de dato asignados por área operacional
+- Comparación automática real vs. plan por indicador, turno, día y período acumulado
+- Umbrales de alerta configurables por nivel de operación (amarillo / rojo)
+
+**Qué habilita:**
+
+- Alertas automáticas distribuidas por email y Teams ante cruces de umbral críticos
+- Proyección de cumplimiento al cierre de turno y al cierre del mes
+- Seguimiento de disponibilidad mecánica de flota crítica y equipos de planta
+- Indicadores de reconciliación diaria: tonelaje real vs. modelo, ley real vs. plan, metal contenido
+
+**Indicadores clave por nivel:**
+
+| Nivel | Indicadores principales |
+|-------|------------------------|
+| IROC (control de turno) | Cumplimiento plan de turno, balance flota, balance ROM, potencia SAG, pH flotación |
+| Superintendencia | F1/F2 diario, ley cabeza real vs. plan, recuperación Cu, disponibilidad mecánica |
+| Gerencia | Metal contenido acumulado vs. presupuesto, forecast mensual, costo por tonelada |
+
+## Módulo de Reportabilidad Operacional
+
+Genera y distribuye automáticamente los reportes operacionales estructurados para cada nivel de la organización, eliminando el trabajo manual de consolidación.
+
+**Qué consolida:**
+
+- Datos de turno de todas las áreas (mina, planta, mantenimiento, planificación)
+- Eventos operacionales relevantes: desvíos, detenciones, causas documentadas
+- Acumulados del período para comparación vs. plan
+
+**Qué habilita:**
+
+| Reporte | Periodicidad | Distribución |
+|---------|-------------|-------------|
+| Daily Operating Report (DOR) | Cierre de cada turno + consolidado 07:00 | IROC, superintendentes, jefes de área |
+| Reporte semanal de operaciones | Lunes 08:00 | Gerencia + superintendencias |
+| Reporte mensual de operaciones | 1.° día hábil del mes | Gerencia General + corporativo |
+
+Cada reporte incluye: performance real vs. plan del período, principales desvíos con causa raíz documentada, indicadores de disponibilidad y calidad, y comparación acumulada vs. presupuesto (en reportes semanales y mensuales).
+
+## Módulo de Visualización Ejecutiva
+
+Interfaz de dashboards interactivos accesible desde el IROC, salas de reuniones y dispositivos autorizados. Adapta la granularidad de información al perfil de cada usuario.
+
+**Qué consolida:**
+
+- Todos los indicadores activos del Módulo de Indicadores Operacionales
+- Estado en tiempo real de la cadena mine-to-mill
+- Histórico de performance para comparaciones y tendencias
+
+**Qué habilita:**
+
+| Perfil | Vista principal | Actualización |
+|--------|----------------|---------------|
+| IROC — control de turno | Pantalla operacional: estado flota, balance ROM, proceso planta, alertas activas | 1–5 min |
+| IROC / Superintendencia | Dashboard de turno: cumplimiento vs. plan, desvíos, disponibilidad | Por turno |
+| Superintendencia | Dashboard táctico: tendencias diarias y semanales, reconciliación, causas | Diario |
+| Gerencia | Dashboard ejecutivo: performance vs. presupuesto, forecast, varianzas | Semanal / mensual |
+
+La navegación permite ir desde un indicador ejecutivo hasta la señal de proceso que lo origina (drill-down), habilitando análisis de causa raíz sin necesidad de acceder a los sistemas fuente.
+
+---
+
+# Entregables
+
+## Fase 1 — Diseño y Definición (8 semanas)
+
+| Entregable | Descripción |
+|-----------|-------------|
+| Mapa de fuentes de información | Inventario técnico validado: sistemas fuente, conectividad disponible, calidad de datos, latencias actuales |
+| Catálogo de indicadores validado | KPIs/KAIs acordados con propietarios de dato asignados por área y definiciones únicas aprobadas |
+| Diccionario de datos v1.0 | Documentación de cada variable integrada: nombre canónico, unidad, fuente, fórmula, propietario |
+| Diseños de dashboards aprobados | Mockups validados por usuarios del IROC, superintendencia y gerencia |
+| Plan de implementación Fase 2 | Cronograma, equipo, alcance detallado y estimación de esfuerzo |
+
+## Fase 2 — Implementación (referencial, ~16 semanas)
+
+| Entregable | Descripción |
+|-----------|-------------|
+| Módulo de Consolidación operativo | Conectores de ingesta activos, modelo de datos desplegado, validado en producción |
+| Módulo de Indicadores operativo | Catálogo de KPIs activo con umbrales y alertas configurados |
+| Módulo de Reportabilidad operativo | DOR automático, reporte semanal y reporte mensual en producción |
+| Módulo de Visualización operativo | Dashboards desplegados y validados por usuarios de los tres niveles |
+| Documentación técnica | Manual de operación del sistema, diccionario de datos actualizado, guía de administración |
+
+## Fase 3 — Analítica Avanzada (referencial, ~12 semanas)
+
+Se define y cotiza al cierre de la Fase 2. Extiende el SRO con modelos predictivos, alertas basadas en patrones históricos, BI self-service para superintendencia y gerencia, y Value Driver Trees automatizados que descomponen causas de varianza desde el resultado financiero hasta la señal de proceso.
+
+---
+
+# Cronograma General
+
+La Fase 1 tiene una duración de 8 semanas, organizadas en tres bloques de trabajo:
+
+```
+Fase 1 — Diseño y Definición                      Semanas 1 a 8
+──────────────────────────────────────────────────────────────────────
+  Bloque 1 — Diagnóstico             S1 ─── S2 ─── S3
+  · Contexto operacional e inventario de fuentes
+  · Levantamiento de indicadores y necesidades por nivel
+
+  Bloque 2 — Definición              S4 ─── S5 ─── S6
+  · Catálogo de KPIs validado con propietarios asignados
+  · Diseño de dashboards y flujos de reporte
+
+  Bloque 3 — Consolidación           S7 ─── S8
+  · Validación con usuarios, ajustes finales
+  · Presentación ejecutiva y plan Fase 2
+──────────────────────────────────────────────────────────────────────
+```
+
+La modalidad considera sesiones de trabajo presenciales en Las Bambas (4–6 horas por sesión) con síntesis y documentación remota entre sesiones. Al cierre de la Fase 1 se confirma el alcance detallado y presupuesto de la Fase 2.
+
+**Equipo ASTAY Systems — Fase 1**
+
+| Rol | Dedicación | Responsabilidad principal |
+|-----|------------|--------------------------|
+| Líder de proyecto | 50% | Coordinación general, relación con cliente, presentación ejecutiva |
+| Arquitecto de datos | 75% | Inventario de fuentes, diccionario de datos, conectividad técnica |
+| Consultor funcional | 100% | Levantamiento de indicadores, definición de módulos, documentación |
+| Diseñador UX/UI | 75% | Diseño de dashboards, iteración con usuarios |
+
+**Infraestructura requerida — Fase 2 (referencial)**
+
+La Fase 1 no requiere infraestructura adicional. Para la Fase 2, Las Bambas provee servidor de aplicación (16 vCPU / 64 GB RAM), servidor de base de datos (SQL Server 2019+, 2 TB SSD) y acceso de red LAN a las fuentes de datos integradas. El sistema se adapta a las políticas de seguridad, estándares de TI y procedimientos de change management de Las Bambas.
+
+---
+
+# Próximos Pasos
+
+| # | Acción | Responsable | Plazo |
+|---|--------|------------|-------|
+| 1 | Revisión y aprobación de la propuesta | Las Bambas | 1 semana tras recepción |
+| 2 | Firma de contrato Fase 1 | Ambas partes | Previo al inicio |
+| 3 | Kick-off y confirmación del calendario de trabajo | Ambas partes | Semana 1 |
+| 4 | Inicio Fase 1 — Diseño y Definición | ASTAY Systems | Según cronograma acordado |
+
+---
+
+# Apéndice {.appendix}
+
+## Glosario
+
+| Término | Definición |
+|---------|------------|
+| SRO | Sistema de Reportabilidad Operacional — plataforma descrita en esta propuesta |
+| IROC | Integrated Remote Operations Center — centro de coordinación y visibilidad de la operación |
+| DataTwin | Motor de integración y procesamiento de datos de ASTAY Systems; plataforma base del SRO |
+| DOR | Daily Operating Report — reporte diario de operaciones consolidado |
+| KPI | Key Performance Indicator — indicador de desempeño de proceso |
+| KAI | Key Activity Indicator — indicador de actividad operacional en tiempo real |
+| KMI | Key Management Indicator — indicador de resultado estratégico |
+| Data Owner | Rol funcional responsable de la definición y calidad de una variable |
+| Diccionario de datos | Repositorio centralizado con la definición única de cada variable integrada |
+| F1 / F2 | Factores de reconciliación mine-to-mill: F1 = producción mina / modelo de reservas; F2 = alimentación planta / producción mina |
+| PI System | Plataforma de historiador de procesos de AVEVA (antes OSIsoft) |
+| FMS | Fleet Management System — sistema de gestión de flotas (Komatsu/Modular Mining) |
+| CMMS | Computerized Maintenance Management System — sistema de gestión de mantenimiento |
+| LIMS | Laboratory Information Management System — gestión de resultados de laboratorio |
+| OPC-UA | Protocolo de comunicación industrial para integración de sistemas de automatización |
+| On-Premise | Despliegue en servidores propios del cliente, sin dependencia de nube pública |
+
+## Indicadores de referencia — Punto de partida para Fase 1
+
+Los indicadores listados a continuación son la hipótesis de trabajo que se valida y ajusta con el equipo de Las Bambas durante la Fase 1. Los indicadores finales son los que resulten del proceso de definición colaborativo.
+
+### Indicadores operacionales — IROC y control de turno
+
+| Indicador | Unidad | Fuente | Frecuencia |
+|-----------|--------|--------|------------|
+| Nivel stockpile ROM vs. mínimo operacional | t / % | Sensores / PI | 5 min |
+| Tonelaje acumulado de turno vs. plan | t / % | FMS | 5 min |
+| Proyección de cumplimiento al cierre del turno | % | FMS (calculado) | 5 min |
+| Camiones operativos / en mantención / en standby | n | FMS / CMMS | 5 min |
+| Tph alimentación chancador vs. nominal | tph / % | PI / Pesaje | 1 min |
+| Tph alimentación SAG vs. target | tph / % | PI | 1 min |
+| Potencia demandada SAG vs. punto óptimo | kW / % | SCADA / PI | 1 min |
+| pH flotación por circuito vs. rango operacional | pH | SCADA | 5 min |
+| Disponibilidad mecánica flota turno | % | CMMS / FMS | Por turno |
+
+### Indicadores de seguimiento — Superintendencia
+
+| Indicador | Unidad | Fuente | Frecuencia |
+|-----------|--------|--------|------------|
+| F1 diario (producción mina / modelo reservas) | ratio | FMS + Geología | Diario |
+| F2 diario (alimentación planta / producción mina) | ratio | Pesaje + FMS | Diario |
+| Ley de cabeza Cu real vs. plan | % Cu | LIMS / Analizador | Por análisis |
+| Recuperación Cu real vs. plan | % | LIMS | Por turno |
+| Metal contenido diario vs. plan | t Cu fino / % | Calculado | Diario |
+| Consumo específico SAG | kWh/t | PI | Por turno |
+
+### Indicadores ejecutivos — Gerencia
+
+| Indicador | Unidad | Fuente | Frecuencia |
+|-----------|--------|--------|------------|
+| Tonelaje procesado acumulado vs. plan mensual | % | DOR / BI | Semanal |
+| Metal contenido producido vs. presupuesto mensual | t Cu fino / % | BI | Semanal |
+| Recuperación metalúrgica real vs. plan | % | BI | Semanal |
+| Disponibilidad global de planta vs. plan | % | CMMS / BI | Semanal |
+| Forecast del mes: proyección de cumplimiento | t / % riesgo | Planificación | Semanal |
+
+---
+
+*Versión 2.0 — Confidencial — ASTAY Systems*
+ 

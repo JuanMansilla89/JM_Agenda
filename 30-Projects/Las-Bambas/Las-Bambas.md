@@ -1,6 +1,7 @@
 ---
 project: Las-Bambas
 status: active
+stage: propuesta-tecnica-en-elaboracion
 owner: "Juan Mansilla"
 stakeholders: [William]
 start-date: 2026-05-18
@@ -10,28 +11,30 @@ onedrive: ""
 
 # Las Bambas
 
+## Estado actual
+
+| Sub-proyecto | Estado | Próximo hito | Fecha |
+|-------------|--------|-------------|-------|
+| Modelamiento de Pila | Propuesta técnica lista para envío | Completar sección económica + enviar a William | 2026-05-30 |
+| Reportabilidad | Propuesta técnica v2.0 en revisión | Completar sección económica + enviar a William | 2026-05-30 |
+
 ## Objetivo
 
 Desarrollo de dos soluciones técnicas para la operación minera Las Bambas: (1) **Modelamiento de Pila** — sistema de modelamiento 3D volumétrico de pilas de mineral; (2) **Reportabilidad y Dashboards** — plataforma centralizada de KPIs operacionales y reportes automáticos. Ambos proyectos requieren propuesta técnica y, posteriormente, propuesta económica.
 
 ## Sub-proyectos
 
-| Sub-proyecto | Nota | Kanban | Propuesta Técnica |
-|-------------|------|--------|------------------|
-| Modelamiento de Pila | [[Modelamiento-Pila]] | [[Las-Bambas-Pila-board]] | `Modelamiento-Pila/Documentacion/Entregables/2026-05-18-propuesta-tecnica-v1.qmd` |
-| Reportabilidad y Dashboards | [[Reportabilidad]] | [[Las-Bambas-Reportabilidad-board]] | `Reportabilidad/Documentacion/Entregables/2026-05-18-propuesta-tecnica-v1.qmd` |
-
-## Estado general
-
-| Sub-proyecto | Estado | Próximo hito | Fecha |
-|-------------|--------|-------------|-------|
-| Modelamiento de Pila | Propuesta técnica en elaboración | Enviar propuesta técnica a William | 2026-05-30 |
-| Reportabilidad | Propuesta técnica en elaboración | Enviar propuesta técnica a William | 2026-05-30 |
+| Sub-proyecto | Nota | Propuesta Técnica |
+|-------------|------|------------------|
+| Modelamiento de Pila | [[Modelamiento-Pila]] | `Modelamiento-Pila/Documentacion/Entregables/2026-05-18-propuesta-tecnica-v1.qmd` |
+| Reportabilidad y Dashboards | [[Reportabilidad]] | `Reportabilidad/Documentacion/Entregables/Sistema de reportabilidad - MMG Las Bambas.qmd` |
 
 ## Tareas activas (nivel proyecto)
 
 - [ ] Presentar ambas propuestas técnicas a William 📅 2026-05-30 🔺 #lasbambas
 - [ ] Coordinar workshop de descubrimiento con Las Bambas post-aprobación técnica 📅 2026-06-06 ⏫ #lasbambas
+
+## Tareas completadas
 
 ## Decisiones clave
 
@@ -67,5 +70,10 @@ SORT file.mtime DESC
 
 [📁 Carpeta Las Bambas](PENDIENTE — pegar URL de OneDrive)
 
+## Recursos y referencias
+
+- [[Modelamiento-Pila]] — propuesta técnica v1, stack PostGIS + TimescaleDB
+- [[Reportabilidad]] — propuesta técnica v2.0, sistema de reportabilidad operacional
+
 ---
-*Última actualización: 2026-05-18*
+*Última actualización: 2026-05-24*

@@ -1,7 +1,8 @@
 ---
 project: AA_Qvc
 status: active
-owner: ""
+stage: en-progreso
+owner: "Juan Mansilla"
 stakeholders: []
 start-date: 2026-05-18
 tags: [aa_qvc]
@@ -10,13 +11,16 @@ onedrive: ""
 
 # AA_Qvc
 
+## Estado actual
+
+| Aspecto | Estado |
+|---------|--------|
+| Revisión cronograma y Gantt | ⏳ Pendiente |
+| Decisión sobre la "vista" | ⏳ Pendiente |
+
 ## Objetivo
 
 Validar el plan de AA_Qvc: coherencia de fechas de cierre, entregables e hitos críticos. Revisar consistencia del Gantt operativo, identificar desviaciones, actividades vencidas y hitos sin owner. Tomar decisión sobre el estado de la "vista". Producir cronograma corregido.
-
-## Kanban
-
-→ [[AA_Qvc-board]]
 
 ## Tareas activas
 
@@ -33,6 +37,8 @@ Validar el plan de AA_Qvc: coherencia de fechas de cierre, entregables e hitos c
 |-------|----------|---------------|--------|
 | 2026-05-18 | Validar coherencia del plan antes de comprometer fechas externas | Fechas irreales generan expectativas incorrectas | #decision |
 | 2026-05-18 | Decisión pendiente sobre la "vista" | Sin decisión explícita el equipo no sabe si continuar o parar | #decision ⏳ |
+
+## Tareas completadas
 
 ## La "Vista" — Contexto
 

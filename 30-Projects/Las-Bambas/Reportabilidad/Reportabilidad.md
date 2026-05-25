@@ -2,7 +2,7 @@
 project: Reportabilidad
 parent: Las-Bambas
 status: active
-stage: propuesta-tecnica-en-elaboracion
+stage: propuesta-tecnica-lista-para-revision
 owner: "Juan Mansilla"
 stakeholders: [William]
 start-date: 2026-05-18
@@ -14,34 +14,33 @@ onedrive: ""
 
 ## Estado actual
 
-**Propuesta técnica: EN ELABORACIÓN** — la sección económica se hará después de aprobación técnica.
+**Propuesta técnica: EN REVISIÓN — v2.0** — reenfocada como documento ejecutivo-técnico orientado a capacidades funcionales y módulos del sistema.
 
 | Aspecto | Estado |
 |---------|--------|
-| Definición de KPIs y alcance | ✅ Borrador en nota de proyecto |
-| Propuesta técnica v1 | ⏳ En elaboración — `Documentacion/Entregables/2026-05-18-propuesta-tecnica-v1.qmd` |
-| Revisión interna de propuesta | ⏳ Pendiente |
-| Propuesta económica | ⏳ Bloqueado hasta aprobación técnica |
+| Propuesta técnica v2.0 (tono ejecutivo, módulos funcionales) | ✅ Finalizada — `Documentacion/Entregables/Sistema de reportabilidad - MMG Las Bambas.qmd` |
+| Revisión interna de propuesta v2.0 | ⏳ Pendiente |
+| Propuesta económica (Fase 1) | ⏳ Pendiente — completar con valores reales |
+| Exportación Word v2.0 | ⏳ Pendiente |
 | Envío a William | ⏳ Objetivo: 2026-05-30 |
 
 ## Objetivo
 
 Propuesta técnica para el sistema de reportabilidad y dashboards en Las Bambas. Plataforma de visualización y reporte operacional que consolida datos de producción, equipos y procesos en tiempo real, con generación automática de informes.
 
-## Kanban
-
-→ [[Las-Bambas-Reportabilidad-board]]
-
 ## Tareas activas
 
-- [ ] Elaborar propuesta técnica v1 — Sistema de Reportabilidad 📅 2026-05-25 🔺 #lasbambas #hoy
-- [ ] Levantar requerimientos de KPIs y métricas clave del cliente 📅 2026-05-25 ⏫ #lasbambas
-- [ ] Definir stack de visualización y backend de datos 📅 2026-05-28 ⏫ #lasbambas #arquitectura
-- [ ] Estimar esfuerzo y cronograma del proyecto 📅 2026-05-28 🔼 #lasbambas
+- [ ] Revisión interna de propuesta técnica 📅 2026-05-25 🔺 #lasbambas
+- [ ] Completar sección económica (Fase 1 — valores reales) 📅 2026-05-28 🔺 #lasbambas
+- [ ] Enviar propuesta técnico-económica a William 📅 2026-05-30 🔺 #lasbambas
 
 ## Tareas completadas
 
 - [x] Apertura del sub-proyecto Reportabilidad y Dashboards 📅 2026-05-18 ✅ 2026-05-18 #lasbambas
+- [x] Elaborar propuesta técnica v1 — Sistema de Reportabilidad 📅 2026-05-25 ✅ 2026-05-20 #lasbambas
+- [x] Definir stack de visualización y backend de datos 📅 2026-05-28 ✅ 2026-05-20 #lasbambas #arquitectura
+- [x] Estimar esfuerzo y cronograma del proyecto (Fase 1) 📅 2026-05-28 ✅ 2026-05-20 #lasbambas
+- [x] Reescribir propuesta v2.0 — enfoque ejecutivo, módulos funcionales, sin SAP 📅 2026-05-21 ✅ 2026-05-21 #lasbambas
 
 ## Alcance técnico (borrador)
 
@@ -108,12 +107,20 @@ SORT file.mtime DESC
 
 ## Entregables
 
-- [ ] `2026-05-18-propuesta-tecnica-v1.qmd` — Propuesta Técnica v1 (en elaboración)
-- [ ] Propuesta Económica v1 (posterior a propuesta técnica aprobada)
+- [x] `2026-05-18-propuesta-tecnica-v1.qmd` — Propuesta Técnica v1 (metodológica, archivada) ✅ 2026-05-20
+- [x] `Sistema de reportabilidad - MMG Las Bambas.qmd` — Propuesta Técnica v2.0 (ejecutiva, módulos funcionales) ✅ 2026-05-21
+- [ ] Exportar v2.0 a Word
+- [ ] Completar sección económica — valores USD reales (Fase 1)
+- [ ] Enviar a William
 
 ## ☁️ OneDrive
 
 [📁 Carpeta Las Bambas — Reportabilidad](PENDIENTE — pegar URL de OneDrive)
 
+## Recursos y referencias
+
+- Propuesta técnica v2.0: `Documentacion/Entregables/Sistema de reportabilidad - MMG Las Bambas.qmd`
+- Referencias técnicas en `Documentacion/Referencias/`
+
 ---
-*Última actualización: 2026-05-18*
+*Última actualización: 2026-05-24*

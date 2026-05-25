@@ -1,7 +1,8 @@
 ---
 project: Goldfield
 status: active
-owner: ""
+stage: seguimiento-comercial
+owner: "Juan Mansilla"
 stakeholders: [Goldfield commercial team]
 start-date: 2026-05-18
 tags: [goldfield]
@@ -10,19 +11,24 @@ onedrive: ""
 
 # Goldfield
 
+## Estado actual
+
+| Aspecto | Estado |
+|---------|--------|
+| Revisión estado comercial y pipeline | ⏳ Pendiente |
+| Definición próximos pasos | ⏳ Pendiente |
+
 ## Objetivo
 
 Validar el estado comercial y técnico del pipeline con Goldfield: confirmar si hubo entrevistas, reuniones o feedback, definir próximos pasos, identificar riesgos de timing.
-
-## Kanban
-
-→ [[Goldfield-board]]
 
 ## Tareas activas
 
 - [ ] Revisar Teams / Outlook / notas para consolidar estado del pipeline Goldfield 📅 2026-05-18 🔺 #goldfield #hoy
 - [ ] Documentar estado resumido: stakeholders, pendientes de respuesta, riesgos de timing 📅 2026-05-18 🔺 #goldfield #hoy
 - [ ] Definir próxima acción concreta con responsable y fecha 📅 2026-05-18 ⏫ #goldfield #hoy
+
+## Tareas completadas
 
 ## Decisiones clave
 
