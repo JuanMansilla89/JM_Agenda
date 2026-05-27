@@ -2,7 +2,7 @@
 title: "Sistema de Reportabilidad Operacional"
 subtitle: "Propuesta Técnica — MMG Las Bambas"
 author: "ASTAY Systems"
-date: "2026-05-21"
+date: "2026-05-25"
 format:
   docx:
     reference-doc: "../../../../../_templates/custom-reference.docx"
@@ -14,237 +14,510 @@ lang: es
 
 # Resumen Ejecutivo
 
-Las Bambas dispone de un ecosistema de datos operacionales — PI System, Komatsu/FMS, sistemas especializados — que cubre toda la cadena de valor mine-to-market. Sin embargo, esa información no está disponible de forma integrada para los equipos que toman decisiones: el IROC, las superintendencias y la gerencia operan con reportes manuales, datos fragmentados y KPIs sin definiciones unificadas.
+MMG Las Bambas opera con un ecosistema de información operacional de significativa madurez, que combina plataformas tecnológicas consolidadas con procesos de reportabilidad desarrollados localmente por las áreas operacionales. A lo largo del tiempo, la operación ha construido capacidades de seguimiento de indicadores y generación de reportes en distintos niveles organizacionales, integrando tanto sistemas estructurados como mecanismos propios de captura y consolidación de información.
 
-ASTAY Systems propone implementar un **Sistema de Reportabilidad Operacional (SRO)** que consolida las fuentes de datos existentes en una plataforma centralizada, habilitando visualización en tiempo real, reportes automáticos y seguimiento de indicadores clave por nivel de operación.
+El presente servicio propone un trabajo técnico especializado orientado a **consolidar, alinear y estructurar los lineamientos de un Sistema de Reportabilidad Operacional (SRO) integrado** para Las Bambas. El alcance comprende la definición técnica rigurosa que habilita decisiones arquitectónicas informadas, sostenibles y alineadas con la realidad operacional de la mina.
 
-El alcance comprende la integración de las fuentes de datos operacionales de Las Bambas, un modelo de datos unificado, cuatro módulos funcionales de visualización y reporte, y generación automática de informes diarios, semanales y mensuales. La implementación considera una ejecución iterativa con validación progresiva con usuarios clave de cada nivel operacional.
+ASTAY Systems aporta experiencia acreditada en arquitectura de datos para minería de gran escala, integración de sistemas industriales y diseño de plataformas de reportabilidad operacional. El servicio se desarrolla en un período de **12 semanas** mediante un esquema iterativo que combina sesiones técnicas presenciales en Las Bambas, workshops de validación con usuarios clave y períodos de análisis y documentación remota.
 
-Los resultados esperados para Las Bambas incluyen: visibilidad operacional integrada en tiempo real desde el IROC hasta la gerencia, alertas automáticas ante desvíos de indicadores críticos, eliminación del trabajo manual de consolidación de datos, y trazabilidad completa desde señales de proceso hasta el reporte ejecutivo.
-
----
-
-# Objetivo del Proyecto
-
-Implementar una plataforma de reportabilidad operacional que integre las fuentes de datos existentes de Las Bambas, consolide los indicadores clave de la operación y los distribuya de forma automática y estructurada a cada nivel de la organización: control de turno (IROC), superintendencia y gerencia.
-
-El sistema reemplaza los procesos manuales de consolidación en Excel, reduce la latencia entre la generación del dato y su disponibilidad para la toma de decisiones, y establece definiciones únicas y consistentes para los indicadores operacionales de la operación mine-to-mill.
+Los resultados del servicio incluyen: mapa completo del ecosistema de fuentes de información —sistemas, reportes manuales y consolidaciones operacionales—, análisis AS-IS/TO-BE de la arquitectura de reportabilidad actual, arquitectura conceptual objetivo del SRO, catálogo validado de KPIs por nivel operacional, matriz de integraciones, definición conceptual de vistas y dashboards requeridos por el IROC y las áreas operacionales, lineamientos de gobernanza y trazabilidad, y recomendaciones arquitectónicas priorizadas.
 
 ---
 
-# Alcance Funcional
+# Contexto Operacional Actual
 
-El SRO habilita las siguientes capacidades operacionales:
+Las Bambas cuenta con una infraestructura de datos operacionales de significativa madurez. Entre los sistemas de información en operación se encuentran plataformas como PI System / SCADA, FMS (Komatsu / Modular Mining), AMPLA, SIRE, sistemas de pesaje y plataformas de planificación, además de iniciativas de visualización y seguimiento de indicadores desarrolladas por las distintas áreas de la operación.
 
-**Visualización integrada en tiempo real**
+Junto a estos sistemas estructurados, la operación genera un volumen significativo de información a través de mecanismos operacionales propios: reportes de turno elaborados manualmente, consolidaciones en Excel desarrolladas localmente por cada área, archivos compartidos entre equipos, capturas de pantalla de sistemas, informes semi-estructurados y otros mecanismos de captura de datos que circulan entre los distintos niveles de la organización. Esta diversidad de fuentes —formales e informales, estructuradas y no estructuradas— es parte constitutiva del ecosistema de reportabilidad actual.
 
-- Estado de la cadena mina-chancado-pila-molienda-flotación en una vista unificada
-- Indicadores de cumplimiento de turno vs. plan actualizados en tiempo real
-- Alertas automáticas ante desvíos de parámetros críticos de proceso y producción
-- Balance mina-planta: ritmo de entrega de material vs. capacidad de absorción de planta
+En operaciones de esta escala y complejidad, es frecuente que las iniciativas de integración y reportabilidad evolucionen de forma distribuida a lo largo del tiempo, generando oportunidades de consolidación en aspectos como:
 
-**Seguimiento de indicadores por nivel operacional**
+- Definiciones heterogéneas de indicadores entre áreas operacionales que dificultan la comparabilidad de resultados.
+- Flujos de información —sistémicos y manuales— que pueden documentarse formalmente y optimizarse.
+- Dependencias manuales críticas para la continuidad operacional que requieren ser identificadas y tratadas.
+- Criterios de historización y calidad de datos que requieren estandarización para asegurar la confiabilidad de los indicadores.
+- Arquitecturas de reportabilidad que pueden fortalecerse en términos de trazabilidad, gobernanza y sostenibilidad tecnológica.
 
-- IROC (control de turno): cumplimiento de plan de turno, balance de flota, estabilidad de proceso, disponibilidad mecánica
-- Superintendencia: performance diario, reconciliación mine-to-mill, tendencias semanales, causas de desvío
-- Gerencia: avance vs. presupuesto, forecast mensual, varianzas y principales drivers de desviación
-
-**Reportabilidad automática**
-
-- Daily Operating Report (DOR) generado automáticamente al cierre de cada turno
-- Reporte semanal consolidado distribuido cada lunes
-- Reporte mensual de operaciones para corporativo, generado el primer día hábil del mes
-
-**Trazabilidad y consistencia**
-
-- Definiciones únicas de indicadores acordadas con el equipo de Las Bambas y documentadas en un diccionario de datos centralizado
-- Trazabilidad desde señales de proceso hasta indicadores ejecutivos
-- Histórico de performance para análisis de tendencias y reconciliación
+El trabajo propuesto parte del reconocimiento de estas capacidades existentes y se orienta a consolidar técnicamente el ecosistema de información, estructurando su evolución hacia un modelo de reportabilidad integrado, consistente y sostenible.
 
 ---
 
-# Fuentes de Información
+# Objetivos del Servicio
 
-El SRO integra las fuentes de datos operacionales existentes en Las Bambas mediante conectores estándar (REST API, JDBC, OPC-UA), sin modificar los sistemas fuente ni su operación actual.
+El servicio tiene por objetivo entregar a Las Bambas una base técnica documentada, validada y alineada con su contexto operacional, que habilite decisiones informadas sobre la arquitectura y evolución de su sistema de reportabilidad operacional.
 
-| Fuente | Datos integrados | Frecuencia |
-|--------|-----------------|------------|
-| PI System / SCADA | Variables de proceso: potencia SAG, pH flotación, flujos, niveles de stockpile | 1–5 min |
-| Komatsu / FMS | Ciclos de flota, asignaciones, tonelaje acumulado por frente, disponibilidad mecánica | 5 min / por turno |
-| Sistema de pesaje | Tonelaje chancado, alimentación a molienda, balance de stockpile ROM y finos | 1–5 min |
-| LIMS | Ley de cabeza Cu/Mo, recuperaciones metalúrgicas, análisis de muestras | Por análisis |
-| Planes de producción | Plan de turno, diario, mensual y anual (carga desde archivos de planificación) | Diario / semanal |
-| CMMS | Estado de equipos, órdenes de trabajo activas, disponibilidad mecánica comprometida | Diario |
+Los objetivos específicos son:
 
-Cada variable integrada queda documentada en el diccionario de datos centralizado con definición canónica, unidad, fuente, frecuencia de actualización y propietario del dato. Esta documentación es parte de los entregables de la Fase 1.
-
----
-
-# Componentes / Módulos del Sistema
-
-El SRO se estructura en cuatro módulos funcionales que operan de forma integrada sobre un modelo de datos común.
-
-## Módulo de Consolidación de Información
-
-Integra, valida y normaliza los datos provenientes de todas las fuentes operacionales. Genera la capa de datos limpia y consistente sobre la cual operan los demás módulos.
-
-**Qué consolida:**
-
-- Datos de proceso en tiempo real (PI System / SCADA)
-- Datos de flota y producción mina (FMS/Komatsu)
-- Datos de pesaje y tonelaje procesado
-- Resultados de laboratorio (LIMS)
-- Planes de producción como referencia para cálculo de cumplimiento
-
-**Qué habilita:**
-
-- Indicadores derivados calculados automáticamente: ratios de reconciliación mine-to-mill (F1/F2), recuperaciones, eficiencias, cumplimientos de plan
-- Validación de calidad de dato en entrada, con alertas cuando una variable llega fuera de rango o con demora
-- Modelo de datos operacional con series de tiempo históricas para análisis de tendencias
-- Base consistente que elimina la proliferación de versiones distintas del mismo indicador
-
-## Módulo de Indicadores Operacionales
-
-Centraliza la definición y seguimiento de los indicadores clave acordados con el equipo de Las Bambas. Gestiona umbrales, alertas y trazabilidad del performance operacional.
-
-**Qué consolida:**
-
-- Catálogo de KPIs validados con propietarios de dato asignados por área operacional
-- Comparación automática real vs. plan por indicador, turno, día y período acumulado
-- Umbrales de alerta configurables por nivel de operación (amarillo / rojo)
-
-**Qué habilita:**
-
-- Alertas automáticas distribuidas por email y Teams ante cruces de umbral críticos
-- Proyección de cumplimiento al cierre de turno y al cierre del mes
-- Seguimiento de disponibilidad mecánica de flota crítica y equipos de planta
-- Indicadores de reconciliación diaria: tonelaje real vs. modelo, ley real vs. plan, metal contenido
-
-**Indicadores clave por nivel:**
-
-| Nivel | Indicadores principales |
-|-------|------------------------|
-| IROC (control de turno) | Cumplimiento plan de turno, balance flota, balance ROM, potencia SAG, pH flotación |
-| Superintendencia | F1/F2 diario, ley cabeza real vs. plan, recuperación Cu, disponibilidad mecánica |
-| Gerencia | Metal contenido acumulado vs. presupuesto, forecast mensual, costo por tonelada |
-
-## Módulo de Reportabilidad Operacional
-
-Genera y distribuye automáticamente los reportes operacionales estructurados para cada nivel de la organización, eliminando el trabajo manual de consolidación.
-
-**Qué consolida:**
-
-- Datos de turno de todas las áreas (mina, planta, mantenimiento, planificación)
-- Eventos operacionales relevantes: desvíos, detenciones, causas documentadas
-- Acumulados del período para comparación vs. plan
-
-**Qué habilita:**
-
-| Reporte | Periodicidad | Distribución |
-|---------|-------------|-------------|
-| Daily Operating Report (DOR) | Cierre de cada turno + consolidado 07:00 | IROC, superintendentes, jefes de área |
-| Reporte semanal de operaciones | Lunes 08:00 | Gerencia + superintendencias |
-| Reporte mensual de operaciones | 1.° día hábil del mes | Gerencia General + corporativo |
-
-Cada reporte incluye: performance real vs. plan del período, principales desvíos con causa raíz documentada, indicadores de disponibilidad y calidad, y comparación acumulada vs. presupuesto (en reportes semanales y mensuales).
-
-## Módulo de Visualización Ejecutiva
-
-Interfaz de dashboards interactivos accesible desde el IROC, salas de reuniones y dispositivos autorizados. Adapta la granularidad de información al perfil de cada usuario.
-
-**Qué consolida:**
-
-- Todos los indicadores activos del Módulo de Indicadores Operacionales
-- Estado en tiempo real de la cadena mine-to-mill
-- Histórico de performance para comparaciones y tendencias
-
-**Qué habilita:**
-
-| Perfil | Vista principal | Actualización |
-|--------|----------------|---------------|
-| IROC — control de turno | Pantalla operacional: estado flota, balance ROM, proceso planta, alertas activas | 1–5 min |
-| IROC / Superintendencia | Dashboard de turno: cumplimiento vs. plan, desvíos, disponibilidad | Por turno |
-| Superintendencia | Dashboard táctico: tendencias diarias y semanales, reconciliación, causas | Diario |
-| Gerencia | Dashboard ejecutivo: performance vs. presupuesto, forecast, varianzas | Semanal / mensual |
-
-La navegación permite ir desde un indicador ejecutivo hasta la señal de proceso que lo origina (drill-down), habilitando análisis de causa raíz sin necesidad de acceder a los sistemas fuente.
+1. **Análisis técnico del estado actual**: identificar, mapear y documentar la totalidad del ecosistema de información existente —sistemas estructurados, fuentes manuales, consolidaciones y reportes operacionales— y los procesos de reportabilidad vigentes (análisis AS-IS).
+2. **Entendimiento operacional y alineamiento con el negocio**: comprender cómo el IROC y las áreas operacionales utilizan la información en la práctica, qué indicadores son relevantes para cada nivel, cómo fluyen los datos entre áreas y qué brechas existen entre disponibilidad de datos y necesidades reales de decisión.
+3. **Definición de arquitectura conceptual objetivo**: estructurar la visión técnica del SRO integrado con criterios de interoperabilidad, escalabilidad y sostenibilidad tecnológica (análisis TO-BE).
+4. **Consolidación de criterios de reportabilidad**: alinear con los equipos operacionales las definiciones de indicadores, capas de reporte, periodicidades y criterios de visualización por perfil de usuario.
+5. **Evaluación de fuentes e integraciones**: analizar la diversidad de fuentes existentes —estructuradas y manuales—, identificar dependencias críticas, brechas técnicas y oportunidades de consolidación.
+6. **Definición de lineamientos de gobernanza y trazabilidad**: establecer los criterios técnicos y organizacionales para la gestión sostenible del dato operacional.
+7. **Generación de recomendaciones priorizadas**: documentar las brechas identificadas y las opciones arquitectónicas con análisis de factibilidad técnica, operacional y organizacional.
 
 ---
 
-# Entregables
+# Alcance Técnico
 
-## Fase 1 — Diseño y Definición (8 semanas)
+El servicio comprende las siguientes actividades técnicas:
 
-| Entregable | Descripción |
+**Levantamiento y análisis del ecosistema de información actual**
+
+- Identificación y mapeo de la totalidad de fuentes de información utilizadas por las áreas operacionales: sistemas estructurados, reportes manuales, consolidaciones en Excel, archivos compartidos, capturas de pantalla y otros mecanismos de captura de datos.
+- Revisión de sistemas fuente activos y sus capacidades de integración (APIs, conectores, protocolos disponibles).
+- Documentación de flujos de información entre sistemas y áreas operacionales, incluyendo mecanismos manuales y semi-estructurados.
+- Inventario de reportes operacionales en uso: formato, frecuencia, origen de datos, responsable y nivel de confiabilidad.
+- Identificación y clasificación de dependencias manuales críticas para la continuidad operacional.
+- Evaluación de calidad, frecuencia y disponibilidad de los datos operacionales por fuente.
+
+**Definición conceptual de la arquitectura objetivo**
+
+- Estructuración de la arquitectura conceptual del SRO integrado.
+- Definición de capas funcionales: ingesta, consolidación, indicadores y presentación.
+- Análisis de patrones de integración y criterios de interoperabilidad entre sistemas.
+- Definición de criterios de historización, retención y calidad de dato por tipo de variable.
+
+**Definición de indicadores y reportabilidad**
+
+- Levantamiento y validación de KPIs por nivel operacional: IROC, superintendencia y gerencia, incluyendo indicadores de producción, proceso, disponibilidad de equipos, mantenimiento y continuidad operacional.
+- Definición de estructuras de reporte: periodicidades, contenido y destinatarios por nivel.
+- Alineamiento de definiciones entre áreas operacionales —mina, planta, mantenimiento y planificación— para asegurar consistencia de criterios.
+- Conceptualización de vistas y dashboards por perfil de usuario, incluyendo vistas operacionales de equipos y disponibilidad.
+
+**Gobernanza y trazabilidad**
+
+- Definición de modelo de propiedad del dato (Data Owners por área operacional).
+- Lineamientos de trazabilidad desde señal de proceso hasta indicador ejecutivo.
+- Criterios de calidad de dato, alertas de disponibilidad y gestión de versiones de definiciones.
+- Marco de gobernanza para la evolución y mantenimiento sostenible del SRO.
+
+---
+
+# Metodología de Trabajo
+
+El servicio adopta una metodología iterativa y colaborativa, estructurada en tres bloques de trabajo progresivos. Cada bloque combina sesiones técnicas presenciales en Las Bambas con períodos de análisis y documentación remota.
+
+**Principios metodológicos**
+
+- **Iteración y validación progresiva**: cada bloque produce entregables parciales que son validados con los equipos de Las Bambas antes de avanzar al siguiente.
+- **Colaboración técnica**: el trabajo se desarrolla en conjunto con los referentes técnicos y operacionales de Las Bambas, con un enfoque de construcción conjunta, no de auditoría externa.
+- **Documentación continua**: los acuerdos, definiciones y decisiones técnicas se registran formalmente a lo largo de todo el proceso.
+- **Enfoque en sostenibilidad**: las definiciones y lineamientos se diseñan para que Las Bambas pueda operarlos y evolucionarlos de forma autónoma con posterioridad al servicio.
+
+**Estructura de trabajo**
+
+| Modalidad | Descripción | Frecuencia estimada |
+|-----------|-------------|-------------------|
+| Sesión técnica presencial | Levantamiento, análisis y validación con equipos | Cada 2–3 semanas |
+| Mesa de trabajo técnica | Definición colaborativa de criterios y lineamientos | Según bloque de trabajo |
+| Workshop de validación | Presentación y aprobación de entregables parciales | Al cierre de cada bloque |
+| Trabajo remoto | Análisis, documentación y modelado conceptual | Entre sesiones presenciales |
+
+---
+
+# Estrategia de Levantamiento y Validación
+
+El levantamiento de información sigue una secuencia estructurada que parte de lo existente —sistemas, procesos, datos— y avanza progresivamente hacia la definición de la arquitectura objetivo.
+
+## Levantamiento de sistemas fuente
+
+- Inventario técnico de sistemas activos con sus capacidades de exposición de datos (APIs REST, JDBC, OPC-UA, archivos planos, servicios web).
+- Documentación de volúmenes, frecuencias, formatos y latencias actuales por sistema fuente.
+- Identificación de restricciones técnicas, de seguridad o de licenciamiento relevantes para la integración.
+
+## Levantamiento de procesos operacionales
+
+- Análisis de los flujos de información actuales entre áreas operacionales.
+- Identificación de reportes, consolidaciones manuales y procesos de toma de decisiones vigentes.
+- Relevamiento de las necesidades de información no satisfechas por la arquitectura actual.
+
+## Análisis de calidad de datos
+
+- Evaluación de completitud, consistencia y oportunidad de las variables críticas por sistema fuente.
+- Identificación de brechas de calidad que impacten en la confiabilidad de los indicadores operacionales.
+- Definición de criterios de validación y umbrales de aceptabilidad por tipo de dato.
+
+## Validación con usuarios
+
+- Sesiones de validación estructuradas por nivel organizacional: IROC, superintendencia y gerencia.
+- Mecanismo formal de registro de acuerdos y definiciones aprobadas.
+- Iteración sobre entregables parciales antes de su cierre formal como entregable del servicio.
+
+---
+
+# Arquitectura Conceptual Objetivo
+
+La arquitectura conceptual del SRO define las capas funcionales y los principios de diseño que orientan la evolución técnica del sistema. Su propósito es establecer lineamientos claros sin comprometer una solución tecnológica específica, preservando la flexibilidad para decisiones de implementación posteriores.
+
+## Capas funcionales del SRO
+
+**Capa de Integración**
+
+Gestiona la conectividad con los sistemas fuente y la ingesta de datos operacionales. Define los patrones de integración (streaming, batch, consulta directa) y los estándares de protocolo por tipo de sistema industrial.
+
+**Capa de Consolidación**
+
+Normaliza, valida y estructura los datos integrados en un modelo de datos operacional consistente. Gestiona la historización, la calidad de dato y la resolución de inconsistencias entre fuentes heterogéneas.
+
+**Capa de Indicadores**
+
+Implementa las definiciones técnicas de KPIs validadas con el equipo de Las Bambas. Gestiona los cálculos derivados, las comparaciones real vs. plan y los criterios de alerta por nivel operacional.
+
+**Capa de Presentación**
+
+Expone los datos consolidados e indicadores calculados a través de interfaces de visualización y mecanismos de distribución de reportes, adaptados a los perfiles de usuario definidos para cada nivel de la organización.
+
+## Principios de diseño
+
+| Principio | Descripción |
 |-----------|-------------|
-| Mapa de fuentes de información | Inventario técnico validado: sistemas fuente, conectividad disponible, calidad de datos, latencias actuales |
-| Catálogo de indicadores validado | KPIs/KAIs acordados con propietarios de dato asignados por área y definiciones únicas aprobadas |
-| Diccionario de datos v1.0 | Documentación de cada variable integrada: nombre canónico, unidad, fuente, fórmula, propietario |
-| Diseños de dashboards aprobados | Mockups validados por usuarios del IROC, superintendencia y gerencia |
-| Plan de implementación Fase 2 | Cronograma, equipo, alcance detallado y estimación de esfuerzo |
-
-## Fase 2 — Implementación (referencial, ~16 semanas)
-
-| Entregable | Descripción |
-|-----------|-------------|
-| Módulo de Consolidación operativo | Conectores de ingesta activos, modelo de datos desplegado, validado en producción |
-| Módulo de Indicadores operativo | Catálogo de KPIs activo con umbrales y alertas configurados |
-| Módulo de Reportabilidad operativo | DOR automático, reporte semanal y reporte mensual en producción |
-| Módulo de Visualización operativo | Dashboards desplegados y validados por usuarios de los tres niveles |
-| Documentación técnica | Manual de operación del sistema, diccionario de datos actualizado, guía de administración |
-
-## Fase 3 — Analítica Avanzada (referencial, ~12 semanas)
-
-Se define y cotiza al cierre de la Fase 2. Extiende el SRO con modelos predictivos, alertas basadas en patrones históricos, BI self-service para superintendencia y gerencia, y Value Driver Trees automatizados que descomponen causas de varianza desde el resultado financiero hasta la señal de proceso.
+| Interoperabilidad | El SRO se integra con los sistemas fuente existentes sin modificar su operación ni arquitectura actual. |
+| Trazabilidad | Cualquier indicador debe ser rastreable hasta su señal de origen con trazabilidad documentada. |
+| Escalabilidad | La arquitectura soporta incorporación de nuevas fuentes y métricas sin requerir rediseño estructural. |
+| Sostenibilidad | Los componentes son operables y mantenibles por el equipo técnico de Las Bambas de forma autónoma. |
+| Gobernanza | Las definiciones de datos e indicadores están documentadas, versionadas y con propietarios asignados. |
 
 ---
 
-# Cronograma General
+# Evaluación de Integraciones
 
-La Fase 1 tiene una duración de 8 semanas, organizadas en tres bloques de trabajo:
+## Sistemas fuente en evaluación
 
-```
-Fase 1 — Diseño y Definición                      Semanas 1 a 8
-──────────────────────────────────────────────────────────────────────
-  Bloque 1 — Diagnóstico             S1 ─── S2 ─── S3
-  · Contexto operacional e inventario de fuentes
-  · Levantamiento de indicadores y necesidades por nivel
+La siguiente tabla presenta el ecosistema de sistemas actualmente en operación, incluyendo tanto plataformas estructuradas como fuentes de información operacional. El detalle técnico de conectividad, capacidades y restricciones de cada sistema se determina durante el levantamiento de la Fase 1.
 
-  Bloque 2 — Definición              S4 ─── S5 ─── S6
-  · Catálogo de KPIs validado con propietarios asignados
-  · Diseño de dashboards y flujos de reporte
+| Sistema / Fuente | Tipo de información | Naturaleza |
+|-----------------|--------------------|-----------|
+| PI System / SCADA | Variables de proceso: analógicas y discretas de planta | Estructurada |
+| FMS — Komatsu | Ciclos de flota, tonelaje acumulado, asignaciones | Estructurada |
+| AMPLA | Producción, disponibilidad y paradas de equipos | Estructurada |
+| SIRE | Información operacional consolidada | Estructurada |
+| Sistema de pesaje | Tonelaje chancado, balance ROM | Estructurada |
+| Sistemas de planificación | Plan de turno, diario y mensual | Estructurada |
+| Reportes manuales de turno | Consolidados operacionales elaborados por supervisores | Semi-estructurada |
+| Consolidaciones en Excel | Seguimiento local por área, KPIs calculados manualmente | Semi-estructurada |
+| Archivos compartidos | Información circulante entre áreas operacionales | No estructurada |
+| Capturas de pantalla e imágenes | Registro visual de estados de sistemas y plataformas | No estructurada |
 
-  Bloque 3 — Consolidación           S7 ─── S8
-  · Validación con usuarios, ajustes finales
-  · Presentación ejecutiva y plan Fase 2
-──────────────────────────────────────────────────────────────────────
-```
+## Criterios de evaluación
 
-La modalidad considera sesiones de trabajo presenciales en Las Bambas (4–6 horas por sesión) con síntesis y documentación remota entre sesiones. Al cierre de la Fase 1 se confirma el alcance detallado y presupuesto de la Fase 2.
+Para cada fuente se evalúan los siguientes aspectos:
 
-**Equipo ASTAY Systems — Fase 1**
+- **Disponibilidad técnica**: protocolos habilitados, mecanismos de acceso, restricciones de red o licenciamiento.
+- **Calidad y completitud del dato**: cobertura de variables críticas, latencias, datos faltantes o inconsistentes.
+- **Criticidad operacional**: impacto ante indisponibilidad de la fuente en la toma de decisiones.
+- **Dependencia manual**: grado de intervención humana requerido para generar, validar o transferir la información.
+- **Madurez del dato**: nivel de estandarización, documentación existente e historial de confiabilidad.
 
-| Rol | Dedicación | Responsabilidad principal |
-|-----|------------|--------------------------|
-| Líder de proyecto | 50% | Coordinación general, relación con cliente, presentación ejecutiva |
-| Arquitecto de datos | 75% | Inventario de fuentes, diccionario de datos, conectividad técnica |
-| Consultor funcional | 100% | Levantamiento de indicadores, definición de módulos, documentación |
-| Diseñador UX/UI | 75% | Diseño de dashboards, iteración con usuarios |
-
-**Infraestructura requerida — Fase 2 (referencial)**
-
-La Fase 1 no requiere infraestructura adicional. Para la Fase 2, Las Bambas provee servidor de aplicación (16 vCPU / 64 GB RAM), servidor de base de datos (SQL Server 2019+, 2 TB SSD) y acceso de red LAN a las fuentes de datos integradas. El sistema se adapta a las políticas de seguridad, estándares de TI y procedimientos de change management de Las Bambas.
+Los resultados se consolidan en la **Matriz de Integraciones** y el **Mapa de Fuentes de Información**, entregables técnicos centrales de este servicio.
 
 ---
 
-# Próximos Pasos
+# Análisis de Fuentes de Información
 
-| # | Acción | Responsable | Plazo |
-|---|--------|------------|-------|
-| 1 | Revisión y aprobación de la propuesta | Las Bambas | 1 semana tras recepción |
-| 2 | Firma de contrato Fase 1 | Ambas partes | Previo al inicio |
-| 3 | Kick-off y confirmación del calendario de trabajo | Ambas partes | Semana 1 |
-| 4 | Inicio Fase 1 — Diseño y Definición | ASTAY Systems | Según cronograma acordado |
+Uno de los objetivos centrales del servicio es identificar, mapear, clasificar y documentar la totalidad de las fuentes de información actualmente utilizadas por las áreas operacionales de Las Bambas. Esta identificación es el punto de partida para cualquier definición técnica del SRO, ya que la arquitectura objetivo debe reflejar la realidad del ecosistema de datos existente, incluyendo tanto sus capacidades como sus restricciones y dependencias.
+
+## Tipos de fuentes de información
+
+El ecosistema de información de Las Bambas incluye fuentes de naturaleza diversa. El levantamiento considera explícitamente las siguientes categorías:
+
+**Fuentes estructuradas y sistemas transaccionales**
+
+- Sistemas operacionales con interfaces de integración disponibles (PI System, FMS, AMPLA, SIRE, sistemas de pesaje, plataformas de planificación).
+- Bases de datos internas con información consolidada por área.
+- Plataformas de visualización y dashboards existentes en la operación.
+
+**Fuentes semi-estructuradas y operacionales**
+
+- Reportes de turno elaborados manualmente por operadores y supervisores del IROC.
+- Consolidaciones en Excel desarrolladas localmente por cada área operacional.
+- Archivos compartidos entre equipos (carpetas de red, correo, Teams) que contienen información de producción y seguimiento.
+- Informes periódicos semi-estructurados elaborados por las distintas áreas (mina, planta, planificación).
+
+**Fuentes no estructuradas y capturadas manualmente**
+
+- Capturas de pantalla de sistemas operacionales utilizadas como respaldo de información.
+- Imágenes exportadas desde plataformas de control y supervisión.
+- Registros manuales de turno y notas operacionales que no ingresan a ningún sistema estructurado.
+
+## Objetivo del levantamiento de fuentes
+
+El levantamiento tiene como propósito responder las siguientes preguntas clave:
+
+- ¿Cuáles son las fuentes reales que el negocio utiliza para tomar decisiones operacionales?
+- ¿Cómo fluye actualmente la información entre sistemas, áreas y niveles del IROC?
+- ¿Qué información es consumida por cada área y con qué frecuencia real?
+- ¿Qué indicadores son relevantes para cada área según sus procesos de toma de decisión?
+- ¿Cómo interpreta operacionalmente el IROC la información disponible?
+- ¿Qué brechas existen entre la disponibilidad actual de datos y las necesidades operacionales reales?
+- ¿Qué dependencias manuales existen y cuál es su criticidad para la continuidad operacional?
+
+## Dimensiones del análisis
+
+| Dimensión | Variables evaluadas |
+|-----------|-------------------|
+| Completitud | Cobertura de variables críticas, porcentaje de datos faltantes por fuente |
+| Consistencia | Uniformidad de formatos, unidades y nomenclaturas entre sistemas y fuentes |
+| Oportunidad | Latencia entre generación del dato y disponibilidad efectiva para consumo |
+| Exactitud | Correspondencia entre valores registrados y realidad operacional medida |
+| Trazabilidad | Capacidad de identificar origen, transformaciones y propietario del dato |
+| Criticidad | Impacto operacional ante indisponibilidad de la fuente |
+| Dependencia manual | Grado de intervención humana requerido para generar o transferir la información |
+
+## Información relevante por área operacional
+
+El siguiente mapa constituye la hipótesis de trabajo para el levantamiento. Las definiciones finales, prioridades y fuentes reales son resultado del proceso de validación con las áreas del IROC durante el Bloque 1.
+
+### Mina
+
+| Sub-área | Información clave |
+|----------|------------------|
+| Planificación y cumplimiento | Avance de minado, cumplimiento del plan de turno / diario / mensual, adherencia operacional, secuencia de minado, reconciliación operacional, KPIs de cumplimiento vs. plan |
+| Movimiento de materiales | Material roto, material movido, trazabilidad de material, balance mina-stock-planta, rutas de acarreo, ciclos, destinos por tipo de material |
+| Perforación y voladura | Taladros perforados, campañas de voladura ejecutadas, cumplimiento de perforación, parámetros diseño vs. ejecutado |
+| Carguío y acarreo | Productividad de palas, tiempos de ciclo de camiones, utilización de flota, distancias de acarreo, balance operacional de equipos |
+| Equipos mina | Disponibilidad de palas, camiones, perforadoras y auxiliares; horas operativas y horas pérdidas; detenciones programadas y no programadas; confiabilidad; KPIs de mantenimiento por tipo de equipo |
+
+### Planta
+
+| Sub-área | Información clave |
+|----------|------------------|
+| Chancado | Alimentación al chancador, throughput, continuidad operacional, disponibilidad de chancadores primario y secundario, granulometría de producto |
+| Molienda | Tonelaje procesado SAG/bolas, eficiencia energética (kWh/t), variables de proceso, continuidad operacional, KPIs de proceso |
+| Flotación | Recuperación Cu/Mo, desempeño por circuito, variables operacionales, pH, dosificación de reactivos, KPIs metalúrgicos |
+| Equipos planta | Disponibilidad de líneas de chancado y molienda, continuidad operacional, utilización de activos, eventos de mantenimiento, detenciones por área, impacto de mantenimiento en producción |
+
+### Planificación e IROC
+
+| Área | Información clave |
+|------|------------------|
+| Planificación | Plan de turno, diario y mensual; seguimiento de cumplimiento vs. presupuesto; balance mina-planta |
+| IROC | Consolidados de turno, reportes de desvío, balance operacional integrado, alertas activas, alineamiento mina-planta-mantenimiento |
+
+---
+
+# Definición de KPIs y Reportabilidad
+
+## Enfoque de definición: operación y negocio primero
+
+La definición de indicadores en el SRO parte de la comprensión de las necesidades operacionales reales, no de la disponibilidad tecnológica. El trabajo con el IROC y las áreas operacionales busca responder: ¿qué necesita saber cada nivel de la organización para tomar decisiones?, ¿con qué frecuencia?, ¿con qué nivel de detalle? y ¿desde qué fuentes confiables?
+
+La definición estructurada de reportabilidad considera:
+
+- **Qué información necesita el negocio**: relevada colaborativamente con las áreas del IROC.
+- **Cómo debe presentarse**: granularidad, formato y nivel de agregación por perfil de usuario.
+- **Con qué frecuencia**: según el ciclo de decisión de cada nivel organizacional.
+- **Desde qué fuentes**: con trazabilidad explícita hasta el origen del dato.
+- **Bajo qué criterios de validación**: umbrales de calidad y mecanismos de alerta por variable.
+
+La arquitectura técnica es consecuencia de estas definiciones. Primero se define qué información necesita el negocio y cómo debe presentarse. Luego se define la arquitectura que lo habilita.
+
+## Marco de indicadores
+
+La definición de KPIs se estructura en tres categorías técnicas alineadas con la jerarquía operacional de Las Bambas:
+
+| Categoría | Descripción | Nivel |
+|-----------|-------------|-------|
+| KAI — Key Activity Indicator | Indicadores de actividad operacional en tiempo real: producción, flota, proceso, disponibilidad de equipos | IROC / Control de turno |
+| KPI — Key Performance Indicator | Indicadores de desempeño de proceso, producción y equipos por turno o período: cumplimiento, rendimiento, mantenimiento | Superintendencia |
+| KMI — Key Management Indicator | Indicadores de resultado estratégico y financiero: tonelaje, recuperación, disponibilidad global, presupuesto | Gerencia |
+
+## Criterios técnicos para la definición de indicadores
+
+Cada indicador se documenta con los siguientes atributos:
+
+| Atributo | Descripción |
+|----------|-------------|
+| Nombre canónico | Denominación única, acordada y consistente entre áreas |
+| Definición técnica | Fórmula, lógica de cálculo, condiciones de borde |
+| Fuente | Sistema(s) de origen del dato |
+| Frecuencia | Periodicidad de actualización |
+| Unidad | Unidad de medida estándar |
+| Propietario | Área y rol responsable de la definición y calidad |
+| Umbrales | Rangos de operación normal, alerta y crítico |
+| Trazabilidad | Variables de origen y transformaciones aplicadas |
+
+## Estructura de reportabilidad
+
+| Reporte | Periodicidad | Contenido principal | Destinatarios |
+|---------|-------------|--------------------|-----------------------|
+| Daily Operating Report (DOR) | Por turno + consolidado diario | Performance real vs. plan, desvíos, disponibilidad | IROC, superintendentes |
+| Reporte semanal de operaciones | Lunes 08:00 | Tendencias, reconciliación, análisis de causas | Superintendencia, gerencia |
+| Reporte mensual de operaciones | 1.° día hábil | Acumulado vs. presupuesto, varianzas, drivers | Gerencia general, corporativo |
+
+---
+
+# Gobierno y Trazabilidad de Datos
+
+La gobernanza del dato es condición necesaria para la sostenibilidad a largo plazo del SRO. Este servicio define el modelo de gobernanza en su dimensión técnica y organizacional como parte de los lineamientos entregados a Las Bambas.
+
+## Modelo de propiedad del dato
+
+Cada variable integrada en el SRO tendrá un **Data Owner** asignado: el rol funcional responsable de la definición, calidad y evolución de esa variable. La asignación se realiza durante las mesas de trabajo técnicas con los equipos de Las Bambas y queda formalizada en el Catálogo de KPIs validado.
+
+## Trazabilidad técnica
+
+La arquitectura conceptual define los mecanismos de trazabilidad que permiten:
+
+- Identificar el origen de cualquier indicador hasta su señal de proceso de origen.
+- Documentar las transformaciones aplicadas sobre el dato crudo en cada capa del sistema.
+- Registrar versiones y cambios en las definiciones de indicadores a lo largo del tiempo.
+- Auditar el linaje del dato para soporte a decisiones operacionales y análisis de causa raíz.
+
+## Lineamientos de calidad de dato
+
+| Lineamiento | Descripción |
+|-------------|-------------|
+| Validación en ingesta | Criterios de rango, completitud y consistencia aplicados en el punto de integración |
+| Gestión de datos faltantes | Estrategias definidas por tipo de variable (último valor conocido, interpolación, nulo explícito) |
+| Alertas de disponibilidad | Criterios de notificación ante indisponibilidad prolongada de una fuente de datos crítica |
+| Versionado de definiciones | Registro formal de cambios en fórmulas y criterios de cálculo de KPIs |
+
+---
+
+# Workshops y Sesiones con el IROC
+
+El componente de trabajo colaborativo con las áreas operacionales del IROC es un elemento central de la metodología. La comprensión de cómo opera el negocio, qué información consume, cómo interpreta los datos y qué necesita para tomar decisiones no puede obtenerse únicamente a partir de la revisión de sistemas tecnológicos: requiere sesiones estructuradas de levantamiento y validación con los equipos operacionales, realizadas en su propio contexto de trabajo.
+
+## Objetivo de las sesiones con el IROC
+
+Las sesiones con el IROC y las áreas operacionales tienen por propósito:
+
+- **Entender la operación desde la perspectiva del negocio**: identificar qué información necesita cada área, cómo la interpreta y con qué criterios toma decisiones en la práctica.
+- **Levantar los flujos de decisión operacional**: documentar cómo circula la información entre turnos, áreas y niveles de la organización, incluyendo mecanismos informales.
+- **Identificar los indicadores realmente relevantes**: validar cuáles son los KPIs que importan en la operación real —producción, proceso, disponibilidad de equipos, mantenimiento— más allá de los definidos formalmente.
+- **Mapear dependencias manuales**: relevar qué procesos de consolidación de datos dependen hoy de intervención humana y cuál es su criticidad operacional.
+- **Definir criterios de visualización**: entender cómo cada perfil de usuario necesita ver la información, con qué granularidad y con qué frecuencia.
+- **Validar flujos de trazabilidad**: confirmar qué información llega efectivamente a cada nivel y desde qué fuentes reales.
+- **Alinear operación y mantenimiento**: identificar la relación entre disponibilidad de activos, eventos de mantenimiento y cumplimiento de producción, y cómo se reporta esa relación entre las áreas.
+- **Alinear áreas operacionales**: identificar inconsistencias en definiciones de indicadores entre mina, planta, mantenimiento y planificación, y construir criterios consensuados.
+
+## Workshops estructurados
+
+| Workshop | Semanas | Participantes clave | Objetivo principal |
+|----------|:-------:|---------------------|-------------------|
+| W1 — Kick-off técnico | S1 | TI, Operaciones, Planificación, referentes IROC | Alineamiento metodológico, confirmación de agenda, accesos y referentes por área |
+| W2 — Ecosistema de información | S3 | TI, referentes de sistemas, operadores IROC | Inventario de fuentes: sistemas, reportes manuales, consolidaciones y archivos operacionales |
+| W3 — Levantamiento operacional IROC | S4 | Supervisores de turno, jefes de área IROC, referentes de mantenimiento | Flujos de información por turno, reportes utilizados, dependencias manuales; criterios de disponibilidad y KPIs de equipos |
+| W4 — Levantamiento de indicadores | S5 | Superintendentes, Planificación, Mantenimiento, referentes IROC | KPIs de producción, proceso, disponibilidad de equipos y mantenimiento; frecuencia, criterios de decisión, brechas percibidas |
+| W5 — Definición de vistas y reportabilidad | S7 | IROC, superintendentes, analistas | Qué necesitan ver, cómo debe presentarse, con qué frecuencia y desde qué fuentes; vistas de mina, planta y equipos |
+| W6 — Validación arquitectura conceptual | S8 | Arquitectos TI, gerencia técnica, referentes IROC | Revisión y validación colaborativa de la arquitectura objetivo |
+| W7 — Validación KPIs y lineamientos | S10 | Superintendentes, Mantenimiento, Data Owners, analistas | Catálogo de indicadores —producción, proceso, mantenimiento—, estructuras de reporte, criterios de trazabilidad |
+| W8 — Gobernanza y criterios técnicos | S11 | TI, Data Owners, gerencia técnica | Acuerdos de gobernanza, propiedad del dato por área, criterios de calidad y trazabilidad de activos |
+| W9 — Presentación ejecutiva de cierre | S12 | Gerencia general, equipo técnico | Entregables finales, recomendaciones priorizadas, lineamientos para etapas futuras |
+
+## Modalidad de las sesiones
+
+Cada sesión con el IROC y las áreas operacionales se estructura en tres partes:
+
+1. **Presentación contextual** (15–20 min): ASTAY Systems presenta los avances del bloque y el foco específico de la sesión.
+2. **Levantamiento colaborativo** (60–90 min): sesión de trabajo conjunta orientada a extraer conocimiento operacional, validar definiciones y resolver ambigüedades.
+3. **Síntesis y acuerdos** (15–20 min): documentación en sesión de los acuerdos alcanzados y próximos pasos acordados.
+
+Los resultados de cada sesión se sintetizan en un acta técnica remitida al equipo de Las Bambas en un plazo máximo de 48 horas hábiles.
+
+---
+
+# Plan de Trabajo — 12 Semanas
+
+El servicio se estructura en tres bloques de trabajo de cuatro semanas cada uno, con entregables parciales al cierre de cada bloque y workshops de validación integrados.
+
+## Bloques de trabajo
+
+**Bloque 1 — Diagnóstico y Levantamiento (S1 a S4)**
+
+Análisis del estado actual de la arquitectura de datos y reportabilidad. Inventario de sistemas fuente, evaluación de calidad de datos, relevamiento de procesos operacionales y necesidades de información por nivel organizacional.
+
+**Bloque 2 — Definición y Análisis (S5 a S8)**
+
+Definición de la arquitectura conceptual objetivo. Análisis AS-IS/TO-BE, evaluación de integraciones, definición técnica de KPIs y estructuras de reportabilidad. Validación formal de la arquitectura conceptual con el equipo de Las Bambas.
+
+**Bloque 3 — Consolidación y Validación (S9 a S12)**
+
+Validación con usuarios y stakeholders de los entregables técnicos. Definición de lineamientos de gobernanza, consolidación de entregables, análisis de brechas y recomendaciones arquitectónicas priorizadas. Presentación ejecutiva de cierre.
+
+## Gantt de alto nivel
+
+| Actividad | S1 | S2 | S3 | S4 | S5 | S6 | S7 | S8 | S9 | S10 | S11 | S12 |
+|-----------|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:---:|:---:|:---:|
+| **Bloque 1 — Diagnóstico y Levantamiento** | | | | | | | | | | | | |
+| Kick-off técnico (W1) | ■ | | | | | | | | | | | |
+| Mapeo de fuentes de información | ■ | ■ | ■ | | | | | | | | | |
+| Workshop ecosistema de información (W2) | | | ■ | | | | | | | | | |
+| Levantamiento operacional IROC (W3) | | | | ■ | | | | | | | | |
+| Inventario de reportes y dependencias manuales | | ■ | ■ | ■ | | | | | | | | |
+| Evaluación de calidad y criticidad de datos | | | ■ | ■ | | | | | | | | |
+| **Bloque 2 — Definición y Análisis** | | | | | | | | | | | | |
+| Análisis AS-IS / TO-BE | | | | ■ | ■ | | | | | | | |
+| Workshop levantamiento de indicadores (W4) | | | | | ■ | | | | | | | |
+| Definición de arquitectura conceptual | | | | | ■ | ■ | ■ | | | | | |
+| Levantamiento y definición de KPIs | | | | | ■ | ■ | ■ | | | | | |
+| Workshop definición de vistas (W5) | | | | | | | ■ | | | | | |
+| Evaluación de integraciones y fuentes | | | | | | ■ | ■ | ■ | | | | |
+| Workshop validación arquitectura (W6) | | | | | | | | ■ | | | | |
+| **Bloque 3 — Consolidación y Validación** | | | | | | | | | | | | |
+| Validación de KPIs y reportabilidad | | | | | | | | | ■ | ■ | | |
+| Workshop validación KPIs y lineamientos (W7) | | | | | | | | | | ■ | | |
+| Definición de gobernanza y trazabilidad | | | | | | | | | ■ | ■ | ■ | |
+| Workshop gobernanza y criterios técnicos (W8) | | | | | | | | | | | ■ | |
+| Análisis de brechas y recomendaciones | | | | | | | | | | ■ | ■ | |
+| Consolidación de entregables técnicos | | | | | | | | | | | ■ | ■ |
+| Presentación ejecutiva de cierre (W9) | | | | | | | | | | | | ■ |
+
+---
+
+# Entregables Técnicos
+
+Al cierre del servicio, ASTAY Systems entrega a Las Bambas el siguiente conjunto de documentos técnicos:
+
+| # | Entregable | Descripción | Bloque |
+|---|-----------|-------------|--------|
+| 1 | Mapa de fuentes de información | Inventario completo del ecosistema de información: sistemas estructurados, reportes manuales, consolidaciones, archivos compartidos y fuentes no estructuradas | 1 |
+| 2 | Inventario de reportes operacionales | Catálogo de reportes actualmente en uso por las áreas del IROC: formato, frecuencia, origen de datos, responsable y nivel de confiabilidad | 1 |
+| 3 | Identificación de dependencias manuales | Documentación de procesos de consolidación manual críticos para la operación y criterios para su tratamiento en la arquitectura objetivo | 1 |
+| 4 | Matriz de origen de datos | Trazabilidad de cada indicador relevante hasta su fuente de origen, incluyendo fuentes manuales y dependencias entre áreas | 1 |
+| 5 | Clasificación de criticidad de información | Priorización de variables y fuentes según impacto en la toma de decisiones operacional y nivel de dependencia manual actual | 1 |
+| 6 | Análisis AS-IS / TO-BE | Diagnóstico del estado actual del ecosistema de información y reportabilidad, y definición estructurada del estado objetivo | 2 |
+| 7 | Arquitectura conceptual del SRO | Documento técnico con capas funcionales, principios de diseño y lineamientos de interoperabilidad | 2 |
+| 8 | Matriz de integraciones | Mapa técnico de fuentes e interfaces: capacidades, latencias, brechas identificadas y recomendaciones | 2 |
+| 9 | Catálogo de KPIs operacionales | Definición técnica de indicadores por nivel operacional: nombre canónico, fórmula, fuente, frecuencia, umbral y propietario asignado | 3 |
+| 10 | Lineamientos técnicos de reportabilidad | Definición de capas de reportabilidad, estructuras de reporte, periodicidades y criterios de consolidación por nivel organizacional | 3 |
+| 11 | Definición conceptual de vistas y dashboards | Conceptualización de las vistas requeridas por el IROC, superintendencia y gerencia: información necesaria, granularidad y criterios de presentación | 3 |
+| 12 | Definiciones de gobernanza y trazabilidad | Modelo de propiedad del dato, criterios de calidad, lineamientos de historización y marco de auditoría | 3 |
+| 13 | Análisis de brechas y recomendaciones | Identificación de gaps técnicos y operacionales, opciones arquitectónicas y recomendaciones priorizadas | 3 |
+| 14 | Informe ejecutivo de cierre | Síntesis de resultados, decisiones técnicas documentadas y lineamientos para etapas futuras | 3 |
+
+---
+
+# Riesgos y Dependencias
+
+| Riesgo / Dependencia | Probabilidad | Impacto | Estrategia de mitigación |
+|---------------------|:-----------:|:-------:|--------------------------|
+| Disponibilidad limitada de referentes técnicos de Las Bambas | Media | Alto | Definir agenda de sesiones con anticipación; comprometer participantes clave desde el kick-off |
+| Restricciones de acceso a sistemas fuente (seguridad TI) | Media | Alto | Gestionar autorizaciones en la Semana 1; prever instancias de demostración guiada por referentes TI |
+| Calidad de datos insuficiente en fuentes críticas | Alta | Medio | El análisis de calidad es parte del alcance; los hallazgos se documentan como brechas sin impactar el avance |
+| Ausencia de consenso en definición de KPIs entre áreas | Alta | Medio | Proceso de validación colaborativa con registro formal de acuerdos; escalamiento a gerencia en caso de impasse |
+| Cambios organizacionales o de prioridades durante el servicio | Media | Medio | Plan de trabajo formalizado desde el inicio; gestión de cambios acordada con el sponsor del proyecto |
+| Documentación técnica de sistemas existentes no disponible | Media | Bajo | Prever instancias de entrevistas técnicas con proveedores o referentes internos como fuente alternativa |
+
+---
+
+# Exclusiones
+
+El presente servicio no incluye:
+
+- Desarrollo de software productivo ni construcción de componentes de infraestructura.
+- Configuración, despliegue ni puesta en marcha de conectores, pipelines de datos o integraciones operacionales.
+- Implementación de dashboards, plataformas de visualización ni herramientas de reporte en entornos productivos.
+- Configuración, administración ni soporte técnico de los sistemas existentes de Las Bambas.
+- Desarrollo de modelos de datos físicos ni bases de datos productivas.
+- Definición de arquitectura de hardware, servidores o infraestructura de red.
+- Capacitación masiva de usuarios finales ni acompañamiento en gestión del cambio organizacional.
+- Automatización de procesos operacionales o construcción de flujos de trabajo productivos.
+- Soporte técnico continuo posterior al cierre del servicio.
+- Integraciones definitivas ni validación productiva de conectividad con sistemas fuente.
+
+Las actividades anteriores corresponden a etapas posteriores cuyo alcance, esfuerzo y condiciones técnicas se determinan a partir de los resultados entregados por este servicio.
 
 ---
 
@@ -255,62 +528,27 @@ La Fase 1 no requiere infraestructura adicional. Para la Fase 2, Las Bambas prov
 | Término | Definición |
 |---------|------------|
 | SRO | Sistema de Reportabilidad Operacional — plataforma descrita en esta propuesta |
+| AS-IS | Estado actual documentado de la arquitectura y procesos de reportabilidad |
+| TO-BE | Estado objetivo definido y validado técnicamente como resultado del servicio |
 | IROC | Integrated Remote Operations Center — centro de coordinación y visibilidad de la operación |
-| DataTwin | Motor de integración y procesamiento de datos de ASTAY Systems; plataforma base del SRO |
 | DOR | Daily Operating Report — reporte diario de operaciones consolidado |
 | KPI | Key Performance Indicator — indicador de desempeño de proceso |
 | KAI | Key Activity Indicator — indicador de actividad operacional en tiempo real |
 | KMI | Key Management Indicator — indicador de resultado estratégico |
-| Data Owner | Rol funcional responsable de la definición y calidad de una variable |
-| Diccionario de datos | Repositorio centralizado con la definición única de cada variable integrada |
-| F1 / F2 | Factores de reconciliación mine-to-mill: F1 = producción mina / modelo de reservas; F2 = alimentación planta / producción mina |
+| Data Owner | Rol funcional responsable de la definición, calidad y evolución de una variable de datos |
+| Diccionario de datos | Repositorio centralizado con la definición única y canónica de cada variable integrada |
+| Trazabilidad | Capacidad de rastrear un indicador desde su valor calculado hasta la señal de proceso de origen |
+| Gobernanza del dato | Marco de políticas, roles y procesos para la gestión sostenible del dato operacional |
+| Linaje del dato | Registro documentado del origen, transformaciones y destino de un dato a lo largo del sistema |
+| Interoperabilidad | Capacidad de los sistemas de intercambiar y utilizar información de forma transparente y estandarizada |
+| F1 / F2 | Factores de reconciliación mine-to-mill: F1 = producción mina / modelo reservas; F2 = alimentación planta / producción mina |
 | PI System | Plataforma de historiador de procesos de AVEVA (antes OSIsoft) |
-| FMS | Fleet Management System — sistema de gestión de flotas (Komatsu/Modular Mining) |
-| CMMS | Computerized Maintenance Management System — sistema de gestión de mantenimiento |
-| LIMS | Laboratory Information Management System — gestión de resultados de laboratorio |
-| OPC-UA | Protocolo de comunicación industrial para integración de sistemas de automatización |
+| FMS | Fleet Management System — sistema de gestión de flotas |
+| AMPLA | Plataforma de gestión de producción y disponibilidad de equipos |
+| SIRE | Sistema de información operacional en uso por las áreas de la operación |
+| OPC-UA | Protocolo de comunicación industrial estándar para integración de sistemas de automatización |
 | On-Premise | Despliegue en servidores propios del cliente, sin dependencia de nube pública |
-
-## Indicadores de referencia — Punto de partida para Fase 1
-
-Los indicadores listados a continuación son la hipótesis de trabajo que se valida y ajusta con el equipo de Las Bambas durante la Fase 1. Los indicadores finales son los que resulten del proceso de definición colaborativo.
-
-### Indicadores operacionales — IROC y control de turno
-
-| Indicador | Unidad | Fuente | Frecuencia |
-|-----------|--------|--------|------------|
-| Nivel stockpile ROM vs. mínimo operacional | t / % | Sensores / PI | 5 min |
-| Tonelaje acumulado de turno vs. plan | t / % | FMS | 5 min |
-| Proyección de cumplimiento al cierre del turno | % | FMS (calculado) | 5 min |
-| Camiones operativos / en mantención / en standby | n | FMS / CMMS | 5 min |
-| Tph alimentación chancador vs. nominal | tph / % | PI / Pesaje | 1 min |
-| Tph alimentación SAG vs. target | tph / % | PI | 1 min |
-| Potencia demandada SAG vs. punto óptimo | kW / % | SCADA / PI | 1 min |
-| pH flotación por circuito vs. rango operacional | pH | SCADA | 5 min |
-| Disponibilidad mecánica flota turno | % | CMMS / FMS | Por turno |
-
-### Indicadores de seguimiento — Superintendencia
-
-| Indicador | Unidad | Fuente | Frecuencia |
-|-----------|--------|--------|------------|
-| F1 diario (producción mina / modelo reservas) | ratio | FMS + Geología | Diario |
-| F2 diario (alimentación planta / producción mina) | ratio | Pesaje + FMS | Diario |
-| Ley de cabeza Cu real vs. plan | % Cu | LIMS / Analizador | Por análisis |
-| Recuperación Cu real vs. plan | % | LIMS | Por turno |
-| Metal contenido diario vs. plan | t Cu fino / % | Calculado | Diario |
-| Consumo específico SAG | kWh/t | PI | Por turno |
-
-### Indicadores ejecutivos — Gerencia
-
-| Indicador | Unidad | Fuente | Frecuencia |
-|-----------|--------|--------|------------|
-| Tonelaje procesado acumulado vs. plan mensual | % | DOR / BI | Semanal |
-| Metal contenido producido vs. presupuesto mensual | t Cu fino / % | BI | Semanal |
-| Recuperación metalúrgica real vs. plan | % | BI | Semanal |
-| Disponibilidad global de planta vs. plan | % | CMMS / BI | Semanal |
-| Forecast del mes: proyección de cumplimiento | t / % riesgo | Planificación | Semanal |
 
 ---
 
-*Versión 2.0 — Confidencial — ASTAY Systems*
- 
+*Versión 3.2 — Confidencial — ASTAY Systems*
