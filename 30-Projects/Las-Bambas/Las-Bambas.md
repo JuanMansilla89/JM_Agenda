@@ -17,6 +17,7 @@ onedrive: ""
 |-------------|--------|-------------|-------|
 | Modelamiento de Pila | Propuesta técnica lista para envío | Completar sección económica + enviar a William | 2026-05-30 |
 | Reportabilidad | Propuesta técnica v2.0 en revisión | Completar sección económica + enviar a William | 2026-05-30 |
+| Predicción de Mineral | Inicio — con código frontend | Definir alcance y stack | 2026-05-30 |
 
 ## Objetivo
 
@@ -28,6 +29,7 @@ Desarrollo de dos soluciones técnicas para la operación minera Las Bambas: (1)
 |-------------|------|------------------|
 | Modelamiento de Pila | [[Modelamiento-Pila]] | `Modelamiento-Pila/Documentacion/Entregables/2026-05-18-propuesta-tecnica-v1.qmd` |
 | Reportabilidad y Dashboards | [[Reportabilidad]] | `Reportabilidad/Documentacion/Entregables/Sistema de reportabilidad - MMG Las Bambas.qmd` |
+| Predicción de Mineral | [[Prediccion-de-mineral]] | *(pendiente)* |
 
 ## Tareas activas (nivel proyecto)
 
@@ -74,6 +76,7 @@ SORT file.mtime DESC
 
 - [[Modelamiento-Pila]] — propuesta técnica v1, stack PostGIS + TimescaleDB
 - [[Reportabilidad]] — propuesta técnica v2.0, sistema de reportabilidad operacional
+- [[Prediccion-de-mineral]] — inicio, incluye código frontend
 
 ---
 *Última actualización: 2026-05-24*

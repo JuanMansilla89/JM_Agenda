@@ -14,6 +14,11 @@
 # Claude Code internals
 .claude/
 
+# Frontend code — build artifacts and dependencies inside Documentacion/Codigo/
+**/node_modules/
+**/dist/
+**/dist-ssr/
+
 # Quarto generated outputs (keep .qmd sources, ignore compiled .docx/.pdf/.html)
 *.docx
 *.pdf
@@ -24,3 +29,7 @@ _output/
 
 /.quarto/
 **/*.quarto_ipynb
+.venv/
+.vscode/
+/30-Projects/Las-Bambas/Prediccion-de-mineral/Documentacion/Codigo/mockups/*
+Datos Demo/

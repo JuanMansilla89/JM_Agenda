@@ -123,6 +123,36 @@ When asked to write a technical report, proposal, or scope document:
   - Deliverable/proposal: `YYYY-MM-DD-[tipo]-[version].qmd` (template: `Quarto-Word.qmd`)
 - Every new project must have these 4 subfolders created with a `.gitkeep` file each.
 
+### Projects with code (frontend / backend)
+
+When a project includes a code repository (frontend, backend, or both):
+
+1. Add `repo: ""` field to frontmatter (after `onedrive`, paste URL when available).
+2. Create a 5th subfolder: `Documentacion/Codigo/` (with `.gitkeep`).
+3. Add section `## 💻 Repositorio y código` to the project note (after `## 📎 Documentación`, before `## ☁️ OneDrive`).
+4. The vault documents the code — actual code lives in the external repo. Store in `Documentacion/Codigo/`:
+   - Architecture docs (component tree, data flow diagrams)
+   - API contracts (frontend ↔ backend)
+   - Wireframes or mockup references
+   - Tech decisions specific to the codebase
+
+Sub-project frontmatter with code:
+
+```yaml
+---
+project: <ProjectName>
+parent: <Client>
+status: active | completed | paused
+stage: <current-stage>
+owner: "Juan Mansilla"
+stakeholders: [Name1, Name2]
+start-date: YYYY-MM-DD
+tags: [project-tag]
+onedrive: ""
+repo: ""                          # paste repo URL when available
+---
+```
+
 ---
 
 ## Project Structure Standard
@@ -141,6 +171,7 @@ stakeholders: [Name1, Name2]
 start-date: YYYY-MM-DD
 tags: [project-tag]
 onedrive: ""                    # paste URL when available
+repo: ""                        # ONLY for projects with code — paste repo URL; omit field if no code
 ---
 ```
 
@@ -153,8 +184,9 @@ onedrive: ""                    # paste URL when available
 5. `## Decisiones clave` — decision log table
 6. `## Riesgos` — risk table
 7. `## 📎 Documentación` — Dataview query + naming table
-8. `## ☁️ OneDrive` — link placeholder
-9. `## Recursos y referencias` — links to key files
+8. `## 💻 Repositorio y código` — ONLY for projects with code; repo link + table of code docs in `Documentacion/Codigo/`
+9. `## ☁️ OneDrive` — link placeholder
+10. `## Recursos y referencias` — links to key files
 
 ### Sub-project structure
 
