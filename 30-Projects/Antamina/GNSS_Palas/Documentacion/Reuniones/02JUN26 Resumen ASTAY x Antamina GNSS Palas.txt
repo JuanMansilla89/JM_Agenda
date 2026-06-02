@@ -1,0 +1,108 @@
+James
+00:01
+y comentándonos
+
+Juan Mansilla
+00:03
+si si les escuchamos muy bien James, no sé si nos hemos reunido una anterior vez sino para presentarme rápidamente soy Juan Bencía soy el sitio de la empresa a mi derecha está Ignacio Uribe que es gerente de operaciones y Más a mi derecha está Límeres, que también es líder en analítica de la empresa. Y a mi izquierda está Yulisa, que es del área comercial. Es para que tengas en cuenta quiénes estamos acá reuniendo.
+
+James
+00:45
+Mucho gusto a todo el equipo. A ver, Juan, tal vez para que me recuerdes. Nos hemos conocido en el Perumín. Puse el proyecto acerca de este tema del análisis de la velocidad de los camiones por temas de mapa de calor. Ahí estábamos por ahí en varias reuniones que hemos coincidido. Y con Fernando, solo para hacer memoria porque tiene relación con lo que vamos a conversar ahora, la última reunión que tuvimos, Fernando, es a través de Kim y David, que estábamos viendo el tema de trazabilidad. Sí. Entonces, la trazabilidad es un proyecto grande, David es uno de los líderes de la parte tecnológica de ese proyecto, y al equipo de Kim, entre otros encargos, le habían dado el tema de evaluar el desempeño del GPS de las palas. Ahora, ¿por qué menciono a Kim y a Jorge? Ha habido un change en el cambio del equipo. Kim ha sido promovido en otra área y Jorge Oviedo ahora está tomando esa superintendencia, así que está haciéndose cargo de trazabilidad. Perfecto, James. Ok. Quedamos claros. Gracias. Ok, entonces en el marco de trazabilidad es donde me ubico Juan y Fernando, entonces no sé si por ahí necesitamos un refresco de lo que era trazabilidad o si lo tienen en la mente para ir de frente al grande.
+
+Juan Mansilla
+02:23
+Si lo recuerdo bien, si lo recuerdo, estamos hablando de los, bueno, en su momento vimos stops, pero entiendo que el proyecto es más grande, de repente el alcance final no lo tengo tan claro. James.
+
+James
+02:36
+Ya. Estania tuvimos un nuevo VP, tiene una visión de que se deben integrar todas las tecnologías. Ahí David me apuntó con algún detalle mayor de lo que voy a mencionar. Y estas tecnologías van desde lo que interactúan, la pala con el modelo de bloques, su proceso de carguío, el proceso de acarreo, hasta que llega la chancadora, donde la lectura del geoscano ayudaría a tener un entendimiento de cuál es el material, volumen y ley que ha llegado. Todo ese proceso, que lo he mencionado a muy alto nivel, debe estar interconectado y alimentándose cíclicamente. O sea, lo que la chancadora haya leído debe estar ajustando el modelo de bloques. Hay cuatro tecnologías que Antamina las tiene, solo que cada una funciona independiente y la idea es que se junten. Entonces el proyecto de trazabilidad apunta a tener interconectada la información, interconectados los procesos de campo y los procesos tecnológicos y estas herramientas conversan entre sí para validar y retroalimentar. Entre ellos también entra el tema de los stocks, que era por lo que King conversó con Fernando. Ahora, en parte de eso también es validar y evaluar el desempeño de algunos componentes tecnológicos. Uno de ellos, el que me comprende a mí, es el tema del GPS de las palas. Correcto. Hasta ahí, no sé si hay alguna duda. O David, ¿quieres complementarme con alguien?
+
+David Velazco
+04:42
+¿Qué tal? Buenas tardes con todos. ¿Qué tal el equipo? Hasta ahí. ¿Qué tal? Sí, ¿qué tal? ¿Cómo están? Sí, todo lo que ha comentado Erickson, estamos en una etapa de integración tecnológica. Tenemos varios frentes que atender. En general, estamos viendo en conjunto, tenemos soluciones para que tengan una idea de toda la magnitud que estamos viendo. Tenemos sensores en las palas, estamos leyendo el tema del Johnson, World Sorting, esto está a mi cargo. Estamos viendo el tema del GeoScan, tenemos leyes, tenemos un dispositivo en la chancadora, un tema de lecturas de leyes. También tenemos conexiones con Dispatch para Provision y Modular. Tenemos temas de Pai System también, por los tags que estamos leyendo de la información. Tenemos información de los recursos, las reservas, el modelo dinámico, integraciones como el plan. Tenemos toda una serie de trazabilidad y reportabilidad que nos han puesto objetivo este año. Y estamos uniendo diferentes tecnologías para conversar. También tenemos un tema de desarrollo de los stoppacks que están pendientes, que entra también en este punto. Todo eso es importante y lo que nos amerita en esta reunión es la evaluación de desempeño de las palas en cuanto a los sensores. O sea, nosotros tenemos que ver la precisión de esas palas cuando el bloque sea desplazado. Estamos integrando también ya en esta semana el All Pro 3D Predict, que nos hace ver el tema de desplazamiento de los bloques desplazados, integrando con el tema de Provision y nuestro sistema de modelo dinámico. Entonces requerimos que si nuestros equipos en los frentes tienen alta precisión, tenemos todo un tema también de evaluación de las palas, de cuánto estamos hablando de la precisión, centímetros, metros, entonces no lo sabemos, estamos pidiendo información y un proceso que nos digan si estamos en lo correcto, si es conforme a ese tema para indicar a los usuarios de cuánta precisión, porque es importante ahora que los modelos de bloques son desplazados, tienen la precisión más exacta de estos bloques que van a alimentar a la chancadora, a los stop-bytes. Eso es un complemento en lo que ha comentado Erickson y en lo que estamos actualmente. No sé si hasta ahí tienen una consulta.
+
+Juan Mansilla
+07:40
+Sí me queda claro, sí tenemos experiencia trabajando con Oracle 3D, justamente en la medición de desplazamiento por voladura. Interesante lo que están queriendo hacer, bastante vicioso también. Sí, no hay problema en podernos apoyar. Sí nos gustaría entender un poco acerca de cómo están planteando el tema de precisión de las palas, Yo sé que Comanzu estima, bueno, todos los sistemas de gestión de flota estiman en qué momento captura, hace la balada exactamente. Entonces se tiene que llegar hasta esa granularidad para poder decir exactamente la presión, porque seguramente el RTK o el sistema de posicionamiento debe estar en los centímetros de error posiblemente, pero si la disposición o cuál es el mecanismo para estimar exactamente la bandada que ahora sí entra bastante a tallar es algo que seguramente hay que validarlo y si tienen algún procedimiento o en este caso el proveedor que sería Comatsu, lo calibra lo hace mantenimiento porque nosotros hemos tenido casos en otras operaciones donde hasta te cambian las antenitas y se mueve por la instalación mantenimiento empieza a insertar el error no bueno esas cosas que hemos podido ver en otros en otros lugares hasta que cambia el sensor entre entre equipos y bueno a nivel de sistemas se ve un error grave y como ustedes están enfocando eso porque yo tenía no sé si tiene una presentación yo también tenía una porque hay varios temas con lo que es precisión de palas, si desean, si tienen algo para mostrar, pueden mostrar para entender bien el alcance de lo que están queriendo tener, o si no yo les puedo compartir lo que tengo.
+
+James
+09:40
+¿Te parece si arranco yo con lo que necesitamos? Más de lo... Dame un segundo. Ya, dame un segundo. Mira, en el tema del GPS hay todo un... No sé si llamarle... En riedo de términos, pero espero con ustedes nos podamos entender, clarificar y luego proseguir. Ahora voy a proyectar yo algo. Y me comentan si ya lo están viendo, por favor. Sí. A ver, uno que se nos pidió es que hay una cierta diferencia entre lo que dice el modelo de bloques y lo que dice Provision, ¿no? Entonces, para deslindar esa diferencia, lo que se ha pedido es que definamos cuál es una precisión a la que se requiere, evaluar qué tenemos hoy con respecto a disponibilidad, confiabilidad y visibilidad. Ahora voy a entrar al detalle de ese paso número 2. ¿Y cuál podría ser la hoja de ruta para reducir si es que encontráramos una brecha? Entonces, primero, el equipo de geología todavía no lo tiene formalmente, pero a grosso modo nos ha definido. Oye, mira, de acuerdo a las dimensiones de la pala, en los dos modelos que tenemos, la 4100 y la 4800, nuestro modelo bloque creo que hay un error ahí en su modelo de bloques 15 por 15 si mal no recuerdo
+
+David Velazco
+11:22
+si 20 por 15 en los frentes son 5 por 5 por 15 el frente 5 por 5 por 15 correcto y entonces ya
+
+James
+11:32
+y el modelo bloques es 20 por 20 bueno ahí lo que nos decía en su momento el equipo de geología es Es que mira, la posición de la pala máximo debería tener un error de 50 centímetros para que cuando se calcule esa baldada que mencionabas, Juan, la baldada también herede los 50 centímetros respecto al frente que va a hacer el carguido. Ahora, esa posición de GPS en el largo del año lo necesario es que esté disponible 7 días de la semana, las 24 horas, los 365 días del año. Si es así, nosotros en este momento desconocemos cuánto es esa disponibilidad. A eso le llamamos la disponibilidad. Si está el 95, el 97, el 98, en una reunión con Provision, llegó a decirnos, si mal no recuerdo, el 97% de eso, pero no nos respondió, ese 97% es del último semestre, del último año, y la diferencia de ese 3-4%, qué impacto podría tener a nivel de CarGear y cómo la podríamos ir reduciendo con apoyo de antenas en terreno. Con respecto a la disponibilidad, con respecto a la visibilidad, es cuánta visibilidad tienen los GPS respecto a las antenas para poder inferir la precisión. En los GPS hay unos términos para medir la precisión vertical, horizontal y la posición, que le llaman el HDOP y el PDOP. Nosotros le hemos pedido esos datos a Comatsu, nos han habilitado una base de datos ahí del equipo de David, pero por temas de política no podemos conectarnos directamente, así que estamos en el proceso de hacer una réplica para nosotros tener acceso a la data y poder evaluar esos datos que no es visible para despacho. Finalmente, despacho lo que es el registro XYZ, pero no sabe cuánto es la precisión de ese XYZ. Por un lado. Y el otro lado que le pedíamos a Komatsu, ¿cuánto es la cobertura? O sea, en el tajo tengo puntos ciegos en profundidad y más cerca a las paredes. Tengo la misma precisión que estando arriba en mi fase 10 y en mi fase 11, que es la parte más expuesta. Como te digo, estos tres grandes objetivos de la disponibilidad, la visibilidad y la cobertura, además de la confiabilidad mecánica, me refiero a la parte física del hardware, en este momento no lo conocemos. Cuando hemos ido con Provision, hemos hecho las preguntas, nos han mostrado unas estadísticas, pero de tiempos bien cortos hacia atrás. Y no tenemos la diferencia también si en época seca, en época lluvia se mueve. Y algo que nosotros conocemos por otras unidades mineras en Chile es el término que se llama centilleo, que a veces todo lo mencionado no está afectando, sino es un factor externo a la NASA, pero es un factor externo a la Tierra que por temas de, ¿cómo le llaman?, tormentas solares, el GPS se queda apagado por unos segundos. Entonces nosotros en Chile ya conocemos esas experiencias y en Chile lo están solucionando en realidad con varias unidades mineras. Esto le pasa mucho más a los países que están más al sur del hemisferio sur, valga la redundancia. El Perú está pegado a la línea ecuatorial, lo que no significa que seamos exentos, solamente que nos pasa en menor medida en el transcurso de un año. Por alguna razón atmosférica en el transcurso de la última década, eso se está haciendo más recurrente. Así como el fenómeno del niño, cada vez pasa menos y ahora cada vez pasa más. Sí, adelante. Una pregunta Entiendo modular ¿Le ha dado alguna especificación técnica En cuanto a la cantidad De constelaciones que tienen los GPS? Si Creo que lo está En la siguiente lámina, dame un segundo Mira, todo lo que yo le he pedido A modular es lo que tu ves en la pantalla Le he preguntado exactamente Todo eso Dime la disponibilidad de multiconstelación posicionamiento los seis parámetros le he pedido porque eso entrar a cada uno es entrar como a tres columnas en su base de datos que estaríamos hablando de algo de 30 columnas para tener la precisión exactitud no pero todo lo que ves ahí le pregunté y me dijo que tiene cuatro constelaciones estamos hablando la más conocida que todos mencionamos gps está el tema de beidú que es chino, Galileo que es europeo y Glonaz que es ruso esas son todas las constelaciones o la multiconstelación que se necesita para que tengas validez, pero no tienes que conectarte a todas las bandas de esa multiconstelación y eso es lo que necesitamos saber por eso cuando hablé con si mal no recuerdo fue Frank o Fernando ahí corrígeme Fernando o con Frank creo, no lo veo en esta reunión de Frank, ¿no? ¿Cierto? Ok, yo le especificaba, mira ese conocimiento no es exclusivo de minería el tema del GPS es un conocimiento abierto porque todos los proveedores de información GPS son mundiales y son los mismos las constelaciones son los mismos proveedores acá el tema es conocer el desempeño del hardware que se ha instalado en la máquina y ahí es donde o los operadores como ComaH, o CatarpeerLat, son los únicos que conocen el desempeño de su hardware. Para evaluar el desempeño de ese hardware, necesitamos entrar a la caja negra de la base de datos del GPS. Los factores que comunicaba al inicio, haciendo esa lectura, puedes llegar a saber la precisión del registro XYZ sin medirla en campo, en campo te va a parecer una comparación, pero es como que, oye, yo te dije que mi punto hoy XY es este y su cota es este, y sin necesidad de un cálculo topográfico en campo, ya puedo saber cuánto es su error horizontal y vertical, entendiendo todos los factores que están en pantalla. La medición topográfica en campo es para medirlo, y hay que tener mucho cuidado con la medición topográfica en campo, a veces utilizan altura ortogonal y no la geoidal, y ahí hay una diferencia muy grande con el GPS, porque el GPS por lo general usa datos métricos y no geodésicos, y eso depende de la configuración. Ya me ha pasado en alguna otra experiencia, no de pala, sino de medición de GPS en campo, donde esos conceptos entre finalmente la gente operativa no se terminan alineando, son conceptos que están detrás de la configuración y no son visibles en el registro a la hora que se toman las decisiones de la palabra. Entonces, bajo esto, una conversación con Fran y lo que yo le decía, Fran, mira, ustedes lo conocemos a Stice por tener un conocimiento aterrizado acerca de los procesos mineros y con una buena traducción de pérdidas de algún tipo de señal en valores expresados en tonelaje, porcentaje, todo esto, ¿no? Pero este conocimiento del GPS sí necesita un conocimiento más especializado, que solamente lo encontramos, acá hay una empresa que se llama Metatec, que fabrica GPS y está certificado por la ANOA norteamericana que sus datos de su GPS que fabrica son de precisión. Entonces nosotros le comunicaba a Fran por interno, le decíamos, mira, necesitamos ambos puntos de vista, una empresa especializada en evaluar el desempeño de equipos físicos de GPS con todos los registros y una empresa que conozca cuál es el impacto de esas brechas y traducirlo a términos de negocio minero. en función del proceso, porque acá no hay solamente un tema de precisión, no solamente basta decir, oye, el GPS está más allá, más acá, hay esta brecha de unos metros, sino ya. ¿Cómo esa brecha me impacta o no me impacta? Si me impacta, ¿cuánto? ¿Cuánto es el riesgo? Y si no me impacta, ¿cómo me puedo asegurar que en el tiempo se siga manteniendo esa buena calidad? Es algo que no hemos tenido respuesta de Provision. Hicimos preguntas de tipo técnica, de calidad. Nos dijeron, mira, estamos sacando un desarrollo para que tengan una pantalla tipo esto. Por ejemplo, les muestro de otro lado. Esto es un par de pantallas de cómo analizan el registro del GPS. Y ahí los valores que te decía en la imagen de la izquierda hacia abajo. El PDOP, base, la presión horizontal, vertical. y hay esos huequitos en el lapso de 24 horas donde tú pierdes señal. Pierdes señal, pierdes precisión, pierdes cobertura, a veces todo a la vez. Entonces, en estas imágenes es como un ejemplo de monitoreo. Provision nos mostró algo parecido, como que está avanzando en generar una pantalla, algo así. Pero nosotros queremos ser agnósticos y que sea una empresa que evalúe el GPS. Después me imagino que si encontramos algo se puede extender el tema hacia camiones y otros equipos como los perfodadores. No sé si hasta ahí se entendió. Sí,
+
+Juan Mansilla
+22:08
+sí, sí, sí, sí, sí, sí, sí me queda claro. Ahorita la posición es que nosotros demos valor de repente, por ejemplo, ¿Cuánto es el costo, la pérdida en oportunidad de no tener cobertura o tener alguna, o de repente esta baja precisión que se genera o este desvío que puede tener el GPS, cuantificarlo, llevarlo a números, ¿no? y algunas medidas correctivas y algunas sugerencias también, ¿no? Desde cara a este proyecto que tienen de integrar todos los sistemas y que al final no, de repente no tengan, o sea, integran todo, pero de repente van a empezar a tener outliers, posiblemente porque hay algo que el proceso está fallando y quieren adelantarse a ese posible error y ya tener todo claro, estandarizado, para cuando se haga la integración no llevarse de sorpresa, ¿no? Yo lo digo así,
+
+James
+23:05
+sí. Correcto, y validar el proceso, como sabemos, el GPS ahora nos dijeron que la pala 4800 tiene dos antenas y el GPS sigue siendo el centroide del equipo, pero finalmente el que actúa no es la cabina del operador con el frente de minado, sino el que actúa es la pala. Entonces, el punto del GPS, si encuentran una brecha, siempre va a ser referido al centro del equipo. Luego hay eso, hay que extrapolarlo a la ubicación de la pala, si está correctamente. Y ahí es donde entran ustedes con ese conocimiento aterrizado en campo.
+
+Juan Mansilla
+23:43
+Claro, claro, claro. Sí, sí me queda claro. Entonces, como una siguiente fase de esta parte sería, o sea, me llama mucho la atención, porque comentaste esta empresa que es Metatec, que están... O sea, nosotros nos enfocaríamos en la parte de negocio, en cuantificar algunos lineamientos que nosotros consideramos que son necesarios para que esta empresa trabaje, porque entiendo que ellos lo que van a hacer es acceder de repente a la base de datos de GPS, medir en campo la zona de cobertura de GPS, no sé cómo están definiendo esa parte del alcance y las responsabilidades en cada empresa. ¿O es un trabajo en conjunto? ¿Nos vemos con ellos? Porque sí, sí.
+
+James
+24:36
+Ok, es un trabajo en conjunto, pero los líderes son ustedes. Porque ustedes son los traductores de la brecha en términos de negocio. Yo no he conversado con ellos. Antes de ir con ellos, yo quería conversar con ustedes, si están de acuerdo, de mi lado, de mi superintendencia y mi gerencia, he recibido el visto bueno de esta idea. Por temas de facilidad en logística, las empresas en el sur, en el Chile, otras que conozco, no están registradas en Antamina, entiendo que ustedes sí, y eso aceleraría el proceso logístico, igual esto va a ir a concurso.
+
+Juan Mansilla
+25:16
+Sí, sí, sí, lo entendemos, no hay problema en ese sentido. Ya, si desean, puedo desarrollar una propuesta técnica con una parte metodológica y cómo trabajaremos con ellos. No sé si eso está bien, si nos envío la propuesta técnica nada más.
+
+James
+25:33
+Yo diría una reunión intermedia con ellos, yo me puedo adelantar a conversar adelante con ellos, ya lo hemos conversado antes, como te digo, fabrican GPS acá en Perú, y tendríamos una reunión conjunta donde también participaría David, siempre vamos de la mano, y eso sería, ¿no? A partir de ahí creo que recién podríamos hablar de tener una propuesta metodológica del lado de ustedes y nada, la logística les haría alcanzar en su momento el RFQ. Claro,
+
+Juan Mansilla
+26:08
+claro, claro, no hay problema, no hay problema. Entonces, de nuestro lado está claro, no sé si alguien acá del equipo tiene una consulta. ¿Alguien? No, no. No, está claro por acá. Si David tiene algo que agregar, Farad, no hay que salir, pero no hay problema. James, si David tiene algo que comentar.
+
+David Velazco
+26:32
+No, está bien, todo lo que ya comentó Erickson sobre el tema, está bien, para que ustedes evalúen su propuesta, ¿no?
+
+Juan Mansilla
+26:40
+Ya, no hay problema, entonces quedamos a la espera de la reunión con MetaTec y de todas maneras vamos a preparar algo al interno para tener claro de lo que les has comentado y ya en ese momento lo podemos discutir con ellos en cuál sería la mejor posición.
+
+James
+26:58
+Ok, ok. Nada, entonces yo les agradezco su tiempo y consulta, ¿sigo haciendo el canal de comunicación con Frank? ¿O me dejas tu número?
+
+Juan Mansilla
+27:09
+si no lo pongo acá me escribes y podemos agendar una sesión no hay problema
+
+James
+27:15
+para saber con quien ya me comunico directamente para estas próximas reuniones y a Juan entonces yo te escribo a ti
+
+Juan Mansilla
+27:24
+no hay problema
+
+James
+27:32
+déjame matar tu nombre por favor Ok, lo tengo anotado Listo,
+
+Juan Mansilla
+27:57
+eso sería todo de mi lado Muchas gracias Muchas gracias, Jules, por la confianza Muchas gracias, David
+
+David Velazco
+28:03
+Ok, gracias, Juan el equipo está ahí
+
+Speaker 4
+28:06
+buen día, hasta luego nos vemos, hasta luego
+

@@ -1,0 +1,282 @@
+---
+title: "GNSS en Palas de Carguío"
+subtitle: "Marco de Evaluación, Estándares y Mejores Prácticas — Antamina"
+author: "ASTAY Systems"
+date: "2026-06-02"
+format:
+  pptx:
+    slide-number: true
+lang: es
+---
+
+# Contexto y motivación
+
+## El problema: ¿por qué importa la precisión GNSS?
+
+La precisión posicional no es un parámetro aislado — propaga errores a través de **cinco niveles operacionales**:
+
+::: columns
+::: {.column width="50%"}
+**Cadena de impacto:**
+
+1. Posicionamiento del equipo
+2. Clasificación de ciclos (FMS)
+3. KPIs de productividad
+4. Grade control mineral/desmonte
+5. Cumplimiento geotécnico de taludes
+:::
+::: {.column width="50%"}
+**Consecuencias económicas:**
+
+- Dilución y pérdida de mineral
+- Misclassification de material
+- Sobreestimación del OEE
+- Riesgo geotécnico en bermas y crests
+- Revenue uplift de 13–35% al mejorar GNSS
+:::
+:::
+
+## Arquitecturas de posicionamiento disponibles
+
+| Arquitectura | Precisión Horizontal | Casos de uso |
+|---|---|---|
+| **RTK GNSS (Fix)** | 1–3 cm | Estándar minería de precisión |
+| **GNSS + INS** | 1–3 cm + puente de coasting | Zonas de sombra satelital |
+| **Machine Guidance** | 1–3 cm con guiado cabina | Komatsu, Cat MineStar, Hexagon |
+| **Locata / JPS** | cm-level sin satélites | Pits profundos sin cobertura GNSS |
+
+> **RTK Fix** es el estándar de facto para minería de precisión — error horizontal 1–3 cm RMS.
+
+## Precisión típica por modo de operación
+
+| Modo GNSS | Horizontal (RMS) | Vertical (RMS) |
+|---|---|---|
+| Punto simple L1/L2 | 1.5 m | 3–5 m |
+| DGNSS | 0.45 m | 0.8–1.5 m |
+| **RTK Fix** | **1–3 cm** | **2–4 cm** |
+| RTK Float | 0.3–1 m | 0.5–2 m |
+| GNSS+INS (RTK activo) | 1–3 cm | 2–5 cm |
+| GNSS+INS (coasting) | Deriva 0.5–2 m/min | Deriva 1–5 m/min |
+| Cat MS992 (MineStar) | 10 mm | 20 mm |
+
+## Factores de degradación en open pit
+
+::: columns
+::: {.column width="50%"}
+**Obstrucción del highwall**
+
+- Reduce visibilidad satelital
+- Eleva PDOP/VDOP
+- Meta: **PDOP < 3** operacional, **PDOP < 2** grade control
+- Fushun (388 m): PDOP 3.6 → 0.97 con pseudolitos
+:::
+::: {.column width="50%"}
+**Multipath y pérdida de Fix**
+
+- Taludes + maquinaria: error hasta 3 m
+- Float RTK: error salta de 3 cm → 0.3–1 m en segundos
+- Time-to-fix: 30 s a varios minutos
+- Mitigación: antenas choke-ring, multi-constelación
+:::
+:::
+
+# Framework de Evaluación — 5 Niveles
+
+## Framework metodológico: visión general
+
+```
+NIVEL 1 — POSICIONAMIENTO   → ¿funciona el GNSS?
+    ↓
+NIVEL 2 — OPERACIÓN         → ¿se detectan bien los ciclos?
+    ↓
+NIVEL 3 — PRODUCCIÓN        → ¿los KPIs de flota son confiables?
+    ↓
+NIVEL 4 — GEOLOGÍA          → ¿hay dilución por error de posición?
+    ↓
+NIVEL 5 — GEOTECNIA         → ¿se cumple el diseño de taludes?
+```
+
+Cada nivel tiene **métricas definidas, tolerancias recomendadas y método de validación**.
+
+## Nivel 1 — Posicionamiento (evaluación del sensor)
+
+| Métrica | Meta | Método |
+|---|---|---|
+| RTK Fix Rate | ≥ 95% por turno | Log receptor Fix/Float/SP |
+| RMSE Horizontal | ≤ 3 cm | Punto control geodésico |
+| RMSE Vertical | ≤ 5 cm | Nivel de precisión + GNSS estático |
+| PDOP medio | < 3.0 | Log receptor por turno |
+| Latencia posicional | ≤ 100 ms | Señal trigger + timestamp |
+| Tiempo a Fix | ≤ 60 s (p90) | Log eventos Fix/Float |
+
+**Instrumentación:** receptor geodésico de referencia independiente + log completo del receptor de la pala.
+
+## Nivel 2 — Operación (detección de ciclos)
+
+| Métrica | Meta | Método |
+|---|---|---|
+| Tasa detección de carga | ≥ 98% | Video sincronizado vs. FMS log |
+| Error timestamp de carga | ≤ 30 s | Análisis de video |
+| Zero Spot Rate | ≤ 2% | Reporte DISPATCH/FMS |
+| Misclassification de estado | ≤ 3% | Audit log vs. video |
+| Hang time: real vs. reportado | ≤ 10% | Video + FMS export |
+
+::: callout-note
+**Método clave:** cámara fija con campo de visión completo de la zona de carguío — 24–48 h de referencia sincronizada con el FMS.
+:::
+
+## Nivel 3 — Producción (KPIs de flota)
+
+::: columns
+::: {.column width="50%"}
+**Métricas clave**
+
+| KPI | Meta |
+|---|---|
+| Error tonelaje reportado | ≤ 3% |
+| Error tasa de producción | ≤ 5% |
+| Error utilización (OEE) | ≤ 3 pp |
+| Error Cycle Time | ≤ 5% |
+
+:::
+::: {.column width="50%"}
+**Impacto GNSS en ciclos**
+
+Un GNSS errático genera:
+
+- Falsa activación de zona → estado incorrecto
+- Registros de tiempo incorrectos
+- Hang time sobreestimado
+- Equipment Utilization con error 2–5% en OEE
+
+:::
+:::
+
+## Nivel 4 — Geología y grade control
+
+**4 mecanismos de dilución vinculados al error GNSS:**
+
+1. **Boundary Dig Error** — balde excava más allá del polígono de ore
+2. **Material Misclassification** — camión asignado a tolva incorrecta
+3. **Blast Movement no compensado** — polígonos no ajustados post-voladura
+4. **Contact Inaccuracy** — incertidumbre en contacto ore/desmonte
+
+| Métrica | Meta |
+|---|---|
+| Dig Boundary Error | ≤ 0.5 m |
+| Polygon Mismatch Rate | ≤ 10% |
+| Material Misclassification | ≤ 2% |
+
+## Nivel 5 — Geotecnia y diseño de banco
+
+| Métrica | Tolerancia típica | Método |
+|---|---|---|
+| Desviación de Crest | ≤ 1.0 m | Dron/LiDAR vs. CAD |
+| Desviación de Toe | ≤ 1.5 m | Dron/LiDAR |
+| Ancho Berma real vs. diseño | ≤ 0.5 m | Perfil topográfico |
+| Ángulo de talud efectivo | ≤ 2° | Perfil de levantamiento |
+| Cumplimiento geotécnico | ≥ 90% de bermas/crests | Análisis estadístico periódico |
+
+> **Regla práctica:** 1 m de desviación sistemática de la pala hacia el talud = 1 m menos de ancho de berma efectivo → riesgo geomecánico real.
+
+# Impacto económico
+
+## Cuantificando el impacto de la dilución
+
+**Fórmula de dilución volumétrica por error GNSS:**
+
+$$D_{total} \approx N \cdot \varepsilon \cdot A_b$$
+
+donde $N$ = ciclos/día en contacto, $\varepsilon$ = error posicional (m), $A_b$ = área de corte del balde (m²).
+
+**Ejemplo (pala 12 m³, ε = 0.5 m, 200 ciclos/día en contacto):**
+
+- Dilución volumétrica diaria: ~300 m³ = 810 toneladas
+- Con ore grade 1.5 g/t Au: ~$77,000 USD/día en metal perdido
+- Cube Consulting: pérdidas combinadas ~$7.7 M/año para operación 2 Mtpa a 1.5 g/t Au
+
+## Casos de éxito industriales
+
+| Operación | Sistema | Resultado |
+|---|---|---|
+| **Kansanshi Mine** (Zambia) | Wenco BenchManager + HPM | Mismatch polígono 34% → 15%; calidad crusher 65% → 75% |
+| **Fushun West** (China) | GNSS + Pseudolitos | PDOP 3.6 → 0.97; mejora significativa precisión vertical |
+| **Mina australiana** (VIU Africa) | DISPATCH HCA | Zero spots 3.7% → 1.9%; +6 kt/día; ~$50M/año uplift |
+| **Múltiples operaciones** | ProVision Guided Spotting | Hang time –35%; +2–8 cargas/hora; productividad +13% |
+
+# Recomendaciones
+
+## Tolerancias recomendadas por aplicación
+
+| Aplicación | Tol. Horizontal | Tol. Vertical | Sistema mínimo |
+|---|---|---|---|
+| Despacho / FMS básico | ≤ 2 m | N/A | DGNSS / GNSS+WAAS |
+| Guiado de banco y cota | ≤ 0.3 m | ≤ 0.2 m | GNSS RTK Fix |
+| Grade control contacto ore/waste | ≤ 0.1 m | ≤ 0.15 m | RTK Fix + GNSS+INS |
+| High Precision Digging | ≤ 0.05 m | ≤ 0.10 m | RTK Fix + cadena cinemática |
+| Monitoreo geotécnico de taludes | ≤ 0.01 m | ≤ 0.01 m | GNSS estático geodésico |
+
+## Protocolo de evaluación — 4 fases
+
+::: columns
+::: {.column width="50%"}
+**Fase 1 — Caracterización GNSS** *(1–2 semanas)*
+
+- Receptor geodésico de referencia en punto de control
+- Logs continuos 3 turnos completos
+- Calcular métricas Nivel 1
+- Mapear zonas de degradación
+
+**Fase 2 — Validación operacional** *(2–4 semanas)*
+
+- Cámara referencia sincronizada con FMS
+- Métricas Niveles 2 y 3
+- Cruce con básculas y producción
+:::
+::: {.column width="50%"}
+**Fase 3 — Grade control** *(mensual/trimestral)*
+
+- Levantamientos dron post-voladura y post-minado
+- Métricas Nivel 4
+- Reconciliación modelo/mill (F1, F2, F3)
+
+**Fase 4 — Auditoría geotécnica** *(trimestral)*
+
+- Perfiles crest/toe con dron o levantamiento
+- Métricas Nivel 5
+- Reporte de cumplimiento geotécnico
+:::
+:::
+
+## Próximos pasos — Antamina GNSS_Palas
+
+::: columns
+::: {.column width="60%"}
+**Acciones inmediatas:**
+
+- [ ] Levantar requerimientos técnicos con operaciones Antamina
+- [ ] Identificar tipo de palas y FMS actualmente instalado
+- [ ] Revisar infraestructura GNSS existente (estaciones base, cobertura RTK)
+- [ ] Definir arquitectura de solución: captura → procesamiento → visualización
+
+**Objetivo del proyecto:**
+
+Implementar un sistema de monitoreo de desempeño GNSS que cubra los 5 niveles del framework, con dashboard en tiempo real para soporte a decisiones operacionales.
+:::
+::: {.column width="40%"}
+**KPIs objetivo:**
+
+| Nivel | Meta |
+|---|---|
+| Fix Rate | ≥ 95% |
+| Zero Spots | ≤ 2% |
+| Dig Boundary | ≤ 0.5 m |
+| Cumpl. Geotécnico | ≥ 90% |
+
+**Contacto:**
+
+Juan Mansilla
+jmansilla@astaysystems.com
+ASTAY Systems
+:::
+:::
