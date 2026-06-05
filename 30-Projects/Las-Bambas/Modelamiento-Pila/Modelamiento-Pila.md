@@ -14,25 +14,32 @@ onedrive: ""
 
 ## Estado actual
 
-**Propuesta técnica: LISTA PARA ENVÍO** — sección económica pendiente de completar con valores reales antes de enviar.
+**Propuesta técnica v2 exportada a Word** — lista para revisión interna y envío al cliente. Propuesta económica pendiente como documento separado (política cliente).
 
 | Aspecto | Estado |
 |---------|--------|
-| Definición de alcance y stack tecnológico | ✅ Definido en propuesta |
+| Definición de alcance y stack tecnológico | ✅ Definido en propuesta v2 |
 | Propuesta técnica v1 | ✅ Finalizada — `Documentacion/Entregables/2026-05-18-propuesta-tecnica-v1.qmd` |
-| Exportación Word | ✅ `_output/.../2026-05-18-propuesta-tecnica-v1.docx` |
-| Revisión interna de propuesta | ✅ Completada 2026-05-20 |
-| Propuesta económica (precios) | ⏳ Pendiente — completar Sección 15 con valores reales |
-| Envío a William | ⏳ Objetivo: 2026-05-30 |
+| Sesión técnica con Las Bambas | ✅ Realizada 2026-05-26 — acta en `Documentacion/Reuniones/` |
+| Propuesta técnica v2 (incorpora feedback sesión) | ✅ Generada — `2026-05-26-propuesta-tecnica-v2.qmd` |
+| Arquitectura + lista de 40 TAGs con justificación | ✅ `2026-06-05-arquitectura-tags-modelamiento-pila.md` |
+| Flujograma Mermaid arquitectura y TAGs | ✅ `2026-06-05-flujograma-arquitectura-tags.md` |
+| Apéndice TAGs para validación por cliente (Apéndice E) | ✅ Incluido en propuesta v2 — 2026-06-05 |
+| Exportar propuesta técnica v2 a Word | ✅ `2026-05-26-propuesta-tecnica-v2.docx` — 2026-06-05 |
+| Propuesta económica (documento separado) | ⏳ Pendiente — Frank Echegaray |
+| Revisión interna v2 + propuesta comercial (ME pionero) | ⏳ Pendiente — Frank Echegaray |
+| Envío propuesta técnica v2 al cliente | ⏳ Objetivo: 2026-06-06 |
 
 ## Objetivo
 
-Propuesta técnica para el modelamiento 3D de pilas de mineral en Las Bambas. Incluye captura de geometría, cálculo volumétrico, gestión de calidad de material y visualización integrada en plataforma DataTwin.
+Diseño e implementación del Sistema de Modelamiento Dinámico de Pila OS (Ore Stockpile) para Las Bambas. El sistema relaciona la información de calidad y tonelaje de mina con la información de planta (feed SAG) para cerrar la brecha mine-to-mill: predecir los atributos del feed SAG con horizonte de 2–4 horas y mantener trazabilidad de ley Cu/Mo y dureza desde el frente activo hasta molienda. Incluye servidor On-Premise nuevo, dos motores de modelamiento (ML en CPU continuo + ME en GPU por levantamiento), API REST e interfaz web operacional.
 
 ## Tareas activas
 
-- [ ] Completar sección económica (Sección 15) con valores reales 📅 2026-05-28 🔺 #lasbambas
-- [ ] Enviar propuesta técnico-económica a William 📅 2026-05-30 🔺 #lasbambas
+- [ ] Elaborar propuesta económica — documento separado — Frank Echegaray 📅 2026-06-09 🔺 #lasbambas
+- [ ] Revisión interna propuesta técnica v2 — Frank Echegaray 📅 2026-06-06 🔼 #lasbambas
+- [ ] Enviar propuesta técnica v2 al cliente 📅 2026-06-06 🔺 #lasbambas
+- [ ] Agregar imágenes interfaz web en Sección 4.5 (carpeta `imagenes/`) y re-exportar a Word 📅 2026-06-09 🔼 #lasbambas
 
 ## Tareas completadas
 
@@ -42,27 +49,35 @@ Propuesta técnica para el modelamiento 3D de pilas de mineral en Las Bambas. In
 - [x] Estimar esfuerzo y cronograma del proyecto 📅 2026-05-28 ✅ 2026-05-20 #lasbambas
 - [x] Revisión interna y coherencia de propuesta ✅ 2026-05-20 #lasbambas
 - [x] Exportar propuesta a Word ✅ 2026-05-20 #lasbambas
+- [x] Sesión técnica de presentación de propuesta con Las Bambas ✅ 2026-05-26 #lasbambas
+- [x] Generar acta de reunión sesión técnica 2026-05-26 ✅ 2026-06-04 #lasbambas
+- [x] Actualizar propuesta técnica v2 con hallazgos de sesión ✅ 2026-06-04 #lasbambas
+- [x] Crear arquitectura del sistema + lista de 40 TAGs requeridos con justificación ✅ 2026-06-05 #lasbambas #arquitectura
+- [x] Crear flujograma Mermaid: flujo físico mine-to-SAG con TAGs + componentes del sistema ✅ 2026-06-05 #lasbambas
+- [x] Agregar Apéndice D (flujograma) y Apéndice E (TAGs para validación cliente) a propuesta v2 ✅ 2026-06-05 #lasbambas
+- [x] Retirar sección económica de propuesta técnica (política cliente: documentos separados) ✅ 2026-06-05 #lasbambas
+- [x] Exportar propuesta técnica v2 a Word ✅ 2026-06-05 #lasbambas
 
-## Alcance técnico (borrador)
+## Alcance técnico
 
-### Problema
-Las Bambas requiere visibilidad en tiempo (sub)real sobre la geometría, volumen y calidad del material apilado en pilas de mineral. Actualmente el tracking es manual o semi-manual.
+### Stack tecnológico (v2 — definido en propuesta)
 
-### Solución propuesta
-- **Captura de geometría**: integración con levantamientos topográficos (drone/LiDAR/survey GPS)
-- **Modelo 3D**: representación volumétrica en PostGIS (geometría 3D, cálculo de volúmenes diferenciales)
-- **Gestión de calidad**: asociar layers de ley (Cu, Mo) por zona de pila
-- **API de consulta**: endpoints para consulta de volumen actual, evolución temporal, calidad por sector
-- **Visualización**: integración con dashboard DataTwin (MapLibre / deck.gl)
-
-### Stack tecnológico propuesto
 | Componente | Tecnología |
 |-----------|-----------|
-| Almacenamiento espacial | PostGIS + TimescaleDB |
-| Procesamiento geométrico | PDAL, GDAL, Shapely |
-| API | FastAPI + GeoJSON |
-| Visualización | MapLibre GL / deck.gl |
-| Orquestación | Airflow / Prefect |
+| Motor Ligero ML | Python — CPU On-Premise, ciclo 1–5 min |
+| Motor Espacial ME | Python + NVIDIA CUDA — GPU bajo demanda c/15 días |
+| Persistencia | SQL Server 2022 |
+| API | FastAPI + REST/JSON |
+| Interfaz web | React + TypeScript (SPA, red interna) |
+| Integración PI | PI Web API — REST/JSON |
+| Servidor | On-Premise nuevo — provisionado por Las Bambas (specs: ASTAY) |
+| SO | Windows Server 2022 |
+
+### Condiciones operacionales específicas incorporadas en el modelo
+- **MODO_TRACTOR**: SAG2 sin flujo gravitacional cuando nivel OS ≤ 60% (~20% del tiempo operativo)
+- **8 feeders asimétricos**: F1–F4 SAG1 zona central / F5–F8 SAG2 contra muro de concreto
+- **Flujos de retorno**: finos ~40 t/día continuos + pebbles ~72,000 t × 2/año (eventos de campaña)
+- **40 TAGs requeridos** en 5 categorías (A: mina/chancadora, B: estado pila, C: feeders, D: retornos, E: validación SAG)
 
 ## Decisiones clave
 
@@ -97,8 +112,13 @@ SORT file.mtime DESC
 ## Entregables
 
 - [x] `2026-05-18-propuesta-tecnica-v1.qmd` — Propuesta Técnico-Económica v1 ✅ 2026-05-20
-- [ ] Completar sección económica — valores USD reales (Sección 15)
-- [ ] Enviar a William
+- [x] `2026-05-26-reunion-kickoff-modelamiento-pila.md` — Acta sesión técnica con Las Bambas ✅ 2026-06-04
+- [x] `2026-05-26-propuesta-tecnica-v2.qmd` — Propuesta v2 con hallazgos de sesión ✅ 2026-06-04
+- [x] `2026-06-05-arquitectura-tags-modelamiento-pila.md` — Arquitectura del sistema + lista de 40 TAGs requeridos con justificación (E01-b) ✅ 2026-06-05
+- [x] `2026-06-05-flujograma-arquitectura-tags.md` — Flujograma Mermaid: flujo físico mine-to-SAG con TAGs + componentes del sistema ✅ 2026-06-05
+- [x] `2026-05-26-propuesta-tecnica-v2.docx` — Word export para envío al cliente ✅ 2026-06-05
+- [ ] Propuesta económica — documento separado (pendiente Frank Echegaray)
+- [ ] Enviar propuesta técnica v2 al cliente
 
 ## ☁️ OneDrive
 
@@ -110,4 +130,4 @@ SORT file.mtime DESC
 - Referencias técnicas en `Documentacion/Referencias/`
 
 ---
-*Última actualización: 2026-05-24*
+*Última actualización: 2026-06-05*

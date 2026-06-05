@@ -17,8 +17,8 @@ tags: [antamina, gnss, trazabilidad, kickoff]
 - **David Velazco** — Líder tecnológico, Antamina
 - **Juan Mansilla** — ASTAY Systems (líder)
 - **Ignacio Uribe** — Gerente de Operaciones, ASTAY Systems
-- **Límeres** — Líder Analítica, ASTAY Systems
-- **Yulisa** — Área Comercial, ASTAY Systems
+- **Ali Meres** — Líder Analítica, ASTAY Systems
+- **Julisa** — Área Comercial, ASTAY Systems
 
 **Modalidad:** Videollamada
 
