@@ -2,7 +2,7 @@
 project: Reportabilidad
 parent: Las-Bambas
 status: active
-stage: propuesta-tecnica-finalizada-pendiente-envio
+stage: seguimiento-comercial
 owner: "Juan Mansilla"
 stakeholders: [William]
 start-date: 2026-05-18
@@ -14,15 +14,13 @@ onedrive: ""
 
 ## Estado actual
 
-**Propuesta técnica: FINALIZADA — v3.2** — consultoría técnica especializada. Enfoque AS-IS/TO-BE, 12 semanas, fuentes estructuradas y manuales, workshops iROC, mantenimiento y equipos incluidos.
+**En seguimiento comercial** — propuesta técnica v3.2 entregada. Equipo comercial gestiona respuesta de William y propuesta económica.
 
 | Aspecto | Estado |
 |---------|--------|
-| Propuesta técnica v3.2 (consultoría técnica, iROC, mina-planta-mantenimiento) | ✅ Finalizada — `Documentacion/Entregables/Sistema de reportabilidad - MMG Las Bambas.qmd` |
-| Exportación Word v3.2 | ✅ Generada — `_output/.../Sistema de reportabilidad - MMG Las Bambas.docx` |
-| Revisión interna técnica | ✅ Completada — 2026-05-25 |
+| Propuesta técnica v3.2 (consultoría técnica, iROC, mina-planta-mantenimiento) | ✅ Finalizada y exportada a Word — 2026-05-25 |
 | Propuesta económica | ⏳ Pendiente — completar con valores reales |
-| Envío a William | ⏳ Objetivo: 2026-05-30 |
+| Respuesta del cliente | ⏳ En seguimiento comercial |
 
 ## Objetivo
 
@@ -30,8 +28,7 @@ Propuesta técnica para el sistema de reportabilidad y dashboards en Las Bambas.
 
 ## Tareas activas
 
-- [ ] Completar sección económica (valores reales) 📅 2026-05-28 🔺 #lasbambas
-- [ ] Enviar propuesta técnico-económica a William 📅 2026-05-30 🔺 #lasbambas
+- [ ] Hacer seguimiento respuesta cliente con comercial 📅 2026-06-25 🔼 #lasbambas
 
 ## Tareas completadas
 
@@ -113,8 +110,6 @@ SORT file.mtime DESC
 - [x] `Sistema de reportabilidad - MMG Las Bambas.qmd` — Propuesta Técnica v2.0 (ejecutiva, módulos funcionales) ✅ 2026-05-21
 - [x] `Sistema de reportabilidad - MMG Las Bambas.qmd` — Propuesta Técnica v3.2 (consultoría técnica, iROC, mina-planta-mantenimiento) ✅ 2026-05-25
 - [x] Exportar v3.2 a Word → `_output/.../Sistema de reportabilidad - MMG Las Bambas.docx` ✅ 2026-05-25
-- [ ] Completar sección económica — valores USD reales
-- [ ] Enviar a William
 
 ## ☁️ OneDrive
 

@@ -1,7 +1,7 @@
 ---
 project: Las-Bambas
 status: active
-stage: propuesta-tecnica-en-elaboracion
+stage: en-ejecucion
 owner: "Juan Mansilla"
 stakeholders: [William]
 start-date: 2026-05-18
@@ -15,9 +15,9 @@ onedrive: ""
 
 | Sub-proyecto | Estado | Próximo hito | Fecha |
 |-------------|--------|-------------|-------|
-| Modelamiento de Pila | Propuesta técnica lista para envío | Completar sección económica + enviar a William | 2026-05-30 |
-| Reportabilidad | Propuesta técnica v2.0 en revisión | Completar sección económica + enviar a William | 2026-05-30 |
-| Predicción de Mineral | Inicio — con código frontend | Definir alcance y stack | 2026-05-30 |
+| Modelamiento de Pila | 🔄 Seguimiento comercial | Respuesta cliente — Frank Echegaray | 2026-06-25 |
+| Reportabilidad | 🔄 Seguimiento comercial | Respuesta cliente — comercial | 2026-06-25 |
+| Predicción de Mineral | 🔺 Activo — demo en preparación | Demo a Mario Rojas (Ore Projector) | 2026-06-26 |
 
 ## Objetivo
 
@@ -33,8 +33,8 @@ Desarrollo de dos soluciones técnicas para la operación minera Las Bambas: (1)
 
 ## Tareas activas (nivel proyecto)
 
-- [ ] Presentar ambas propuestas técnicas a William 📅 2026-05-30 🔺 #lasbambas
-- [ ] Coordinar workshop de descubrimiento con Las Bambas post-aprobación técnica 📅 2026-06-06 ⏫ #lasbambas
+- [ ] Demo Ore Projector a Mario Rojas 📅 2026-06-26 🔺 #lasbambas
+- [ ] Seguimiento propuestas Modelamiento-Pila y Reportabilidad con comercial 📅 2026-06-25 🔼 #lasbambas
 
 ## Tareas completadas
 
@@ -79,4 +79,4 @@ SORT file.mtime DESC
 - [[Prediccion-de-mineral]] — inicio, incluye código frontend
 
 ---
-*Última actualización: 2026-05-24*
+*Última actualización: 2026-06-18*

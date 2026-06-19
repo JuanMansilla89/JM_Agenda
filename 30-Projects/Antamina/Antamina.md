@@ -3,7 +3,7 @@ project: Antamina
 status: active
 stage: propuesta-tecnica-en-elaboracion
 owner: "Juan Mansilla"
-stakeholders: []
+stakeholders: [James, David Velazco]
 start-date: 2026-06-02
 tags: [antamina]
 onedrive: ""

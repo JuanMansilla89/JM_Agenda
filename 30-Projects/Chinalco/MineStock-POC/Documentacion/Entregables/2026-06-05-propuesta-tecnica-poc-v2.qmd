@@ -1,0 +1,243 @@
+---
+title: "Propuesta Técnica — Prueba de Concepto MineStock"
+subtitle: "Sistema de Gestión de Inventario Minero — Chinalco Toromocho"
+author: "ASTAY Systems"
+date: "2026-06-05"
+format:
+  docx:
+    reference-doc: "../../../../../_templates/custom-reference.docx"
+    toc: true
+    toc-depth: 2
+    number-sections: true
+lang: es
+---
+
+# Resumen Ejecutivo
+
+La presente propuesta describe la ejecución de una **Prueba de Concepto (POC) del producto MineStock** para la operación Toromocho de Chinalco Perú. MineStock es el sistema de gestión de inventario minero desarrollado por ASTAY Systems, diseñado para proveer visibilidad en tiempo real sobre el estado del inventario de mineral, la trazabilidad de atributos de calidad y la generación de reportes de reconciliación.
+
+El POC contempla el despliegue de cuatro capacidades del sistema: **Estimación**, **Inventario**, **Calidad** y **Reportes**. La implementación se realiza íntegramente dentro de la red interna de Toromocho, sin conexiones externas, sobre infraestructura provisionada por Chinalco. La duración total es de **cuatro semanas**: tres semanas de implementación y despliegue, más una semana de evaluación operacional con el equipo del cliente.
+
+El objetivo central del POC es **demostrar el valor operacional de MineStock en el entorno real de Toromocho** y proveer los elementos de juicio necesarios para evaluar el paso a una etapa de licenciamiento. El criterio de éxito se define como la validación de las capacidades clave por parte del equipo de Chinalco dentro del período de evaluación.
+
+---
+
+# 1. Contexto
+
+## 1.1 Antecedentes
+
+ASTAY Systems y el equipo de Chinalco Toromocho han sostenido una reunión técnica previa en la que se presentaron las capacidades del producto MineStock y se identificó la necesidad de validar su aplicabilidad en el contexto específico de la operación. Como resultado de esa conversación, se acuerda ejecutar una Prueba de Concepto acotada que permita al equipo de Chinalco evaluar la solución con datos reales antes de comprometerse con un modelo de licenciamiento.
+
+## 1.2 Necesidad operacional
+
+La gestión eficiente del inventario de mineral en una operación minera de gran escala como Toromocho requiere visibilidad continua sobre tres dimensiones:
+
+1. **Cantidad**: masa y volumen de material disponible en cada punto del circuito de procesamiento.
+2. **Calidad**: atributos metalúrgicos del material —ley de minerales de interés, humedad, granulometría— para anticipar el comportamiento en planta.
+3. **Trazabilidad**: capacidad de relacionar el material que entra al circuito desde mina con el material que procesa la planta, cerrar los balances y generar reportes para la reconciliación metalúrgica.
+
+MineStock centraliza estas tres dimensiones en una plataforma única, accesible desde la red interna de la operación sin necesidad de instalar software adicional en los equipos de usuario.
+
+---
+
+# 2. Solución — MineStock
+
+## 2.1 Descripción del producto
+
+MineStock es un sistema de gestión de inventario minero desarrollado por ASTAY Systems. Opera como una aplicación web accesible desde cualquier equipo dentro de la red interna de la operación, sin instalación en el cliente. Está diseñado para integrarse con las fuentes de datos de la operación y proveer una vista unificada del estado del inventario en tiempo real.
+
+## 2.2 Capacidades incluidas en el POC
+
+El POC de Toromocho desplegará las siguientes cuatro capacidades:
+
+### Motor — Estimación
+
+Calcula y actualiza en tiempo cuasi-real la estimación de inventario en los puntos de acopio definidos por el cliente. Provee:
+
+- Balance de masa por punto de acopio: entradas, salidas e inventario neto.
+- Estimación de masa disponible según parámetros de densidad y geometría.
+- Alertas configurables por umbrales de inventario (mínimo / máximo operativo).
+- Registro de eventos de carga y descarga con timestamp y atributos asociados.
+
+### Componente — Inventario
+
+Gestión del estado del inventario a nivel de lote y ubicación:
+
+- Registro y seguimiento de lotes de mineral desde su ingreso hasta su consumo en planta.
+- Estado por punto de inventario: activo, en tránsito, consumido.
+- Vista consolidada del inventario total y por punto de acopio.
+- Historial de movimientos de inventario auditables.
+
+### Componente — Calidad
+
+Trazabilidad de atributos de calidad por lote:
+
+- Registro de análisis de laboratorio por lote: ley de elementos de interés, humedad, granulometría.
+- Asociación de atributos de calidad a cada movimiento de inventario.
+- Vista de calidad promedio ponderada del inventario actual por punto de acopio.
+- Alerta por desvío de calidad respecto a parámetros operacionales configurados.
+
+### Función — Reportes
+
+Generación de reportes operacionales y de reconciliación:
+
+- Reporte de balance de masa por período (turno / día / semana).
+- Reporte de calidad consolidada por período y por punto de acopio.
+- Reporte de movimientos de inventario: entradas, salidas, transferencias.
+- Exportación a Excel y PDF para distribución interna.
+
+## 2.3 Fuera del alcance del POC
+
+Los siguientes elementos quedan explícitamente fuera del alcance de esta Prueba de Concepto:
+
+- Integración automática con sistemas externos (PI System, ERP, SAP, FMS u otros historiadores).
+- Funciones de modelamiento predictivo o simulación (incluidas en ediciones avanzadas de MineStock).
+- Configuración de múltiples sitios o instancias.
+- Acceso desde fuera de la red interna de Toromocho.
+
+La carga de datos durante el POC se realizará mediante los mecanismos de ingreso disponibles en la plataforma: formularios web y/o carga de archivos estructurados (Excel/CSV).
+
+---
+
+# 3. Metodología del POC
+
+## 3.1 Fases del POC
+
+| Semana | Fase | Actividades principales |
+|--------|------|------------------------|
+| Semana 1 | Instalación y configuración | Despliegue On-Premise en servidor Toromocho; configuración de parámetros del sistema (puntos de acopio, elementos de interés, umbrales); carga de datos históricos de referencia. |
+| Semana 2 | Puesta en marcha operacional | Capacitación al equipo de Chinalco; inicio de operación con datos reales; acompañamiento diario por ASTAY. |
+| Semana 3 | Operación autónoma | El equipo de Chinalco opera el sistema de forma autónoma; ASTAY disponible para soporte remoto; registro de observaciones y ajustes menores. |
+| Semana 4 | Evaluación y cierre | Sesión de revisión con Yuri Ramírez y equipo; presentación de KPIs del POC; reporte de resultados; recomendación para la etapa de licenciamiento. |
+
+## 3.2 Criterios de éxito
+
+Al término de la Semana 4, el POC se considera exitoso si se cumplen los siguientes criterios:
+
+| Criterio | Indicador de validación |
+|---------|------------------------|
+| El sistema se despliega correctamente en la red de Toromocho | Sistema accesible desde al menos 2 equipos de usuario en la red interna al término de la Semana 1 |
+| El equipo de Chinalco opera el sistema sin asistencia continua | Operación autónoma sostenida durante la Semana 3 |
+| Los balances de masa son coherentes con los registros operacionales | Diferencia entre inventario calculado por MineStock y registro manual ≤ 5% en al menos el 80% de los períodos evaluados |
+| Los reportes generados son utilizables por el equipo de proceso | Al menos un reporte exportado y revisado en reunión de turno durante la Semana 3 o 4 |
+| El equipo identifica valor operacional en la solución | Validación formal por Yuri Ramírez al cierre del POC |
+
+## 3.3 Modelo de colaboración
+
+Durante las Semanas 1 y 2, ASTAY dispondrá de un ingeniero de implementación en sitio o en acompañamiento remoto intensivo (acuerdo según disponibilidad y preferencia del cliente). A partir de la Semana 3, el soporte pasa a ser remoto con disponibilidad acordada. La Semana 4 incluye una sesión de evaluación presencial o por videoconferencia.
+
+---
+
+# 4. Infraestructura y despliegue
+
+## 4.1 Arquitectura de despliegue
+
+MineStock se despliega como una aplicación web en un servidor On-Premise dentro de la red interna de Toromocho. Los usuarios acceden desde sus equipos mediante un navegador web estándar, sin instalación de software adicional.
+
+```
+Red interna Toromocho
+│
+├── Servidor MineStock (On-Premise — provisto por Chinalco)
+│   ├── Aplicación web MineStock (frontend + backend)
+│   └── Base de datos local
+│
+└── Equipos de usuario (navegador web)
+    ├── Ingenieros de proceso
+    ├── Operadores de turno
+    └── Supervisión
+```
+
+## 4.2 Requerimientos de servidor
+
+Chinalco provee el servidor para el despliegue del POC. Los requerimientos mínimos son:
+
+| Componente | Mínimo | Recomendado |
+|-----------|--------|-------------|
+| CPU | 4 cores | 8 cores |
+| RAM | 16 GB | 32 GB |
+| Almacenamiento | 100 GB SSD | 250 GB SSD |
+| Sistema Operativo | Windows Server 2019 o Ubuntu 20.04 LTS | Windows Server 2022 o Ubuntu 22.04 LTS |
+| Red | Acceso desde red interna (puerto 80/443) | Acceso desde red interna (puerto 80/443) |
+| Conectividad externa | No requerida | No requerida |
+
+## 4.3 Requerimientos de red
+
+- Acceso desde los equipos de usuario al servidor por HTTP/HTTPS (puertos 80/443) dentro de la LAN de Toromocho.
+- No se requiere conectividad a internet ni acceso desde fuera del sitio.
+- No se requiere apertura de puertos hacia sistemas externos.
+
+---
+
+# 5. Cronograma
+
+| Semana | Fechas | Hito |
+|--------|--------|------|
+| Semana 1 | [Por definir al firmar] | **H1** — Sistema desplegado y accesible en red interna |
+| Semana 2 | [Por definir] | **H2** — Equipo capacitado, operación iniciada con datos reales |
+| Semana 3 | [Por definir] | **H3** — Operación autónoma completada, observaciones registradas |
+| Semana 4 | [Por definir] | **H4** — Sesión de evaluación realizada, reporte de POC entregado |
+
+Las fechas de inicio se definen al momento de la firma del acuerdo de POC. El cronograma se activa dentro de los 7 días hábiles posteriores a la firma.
+
+---
+
+# 6. Equipo ASTAY
+
+| Rol | Responsabilidad |
+|-----|----------------|
+| Líder de proyecto | Coordinación general, comunicación con Yuri Ramírez, cierre del POC |
+| Ingeniero de implementación | Despliegue, configuración y soporte técnico On-Premise |
+| Ingeniero de producto | Acompañamiento funcional, capacitación y ajustes de configuración |
+
+---
+
+# 7. Entregables del POC
+
+| Código | Entregable | Formato | Hito |
+|--------|-----------|---------|------|
+| E01 | Sistema MineStock desplegado en red Toromocho | Sistema en producción | H1 |
+| E02 | Manual de usuario — capacidades del POC | PDF | H2 |
+| E03 | Sesión de capacitación al equipo Chinalco | Sesión presencial / remota | H2 |
+| E04 | Reporte de resultados del POC | PDF / Word | H4 |
+| E05 | Recomendación para etapa de licenciamiento | Presentación + documento | H4 |
+
+---
+
+# 8. Exclusiones
+
+Las siguientes actividades y elementos no están incluidos en esta Propuesta de POC:
+
+- Integración con PI System, SAP, ERP o cualquier sistema externo de Chinalco.
+- Desarrollo de funcionalidades adicionales a las capacidades descritas en la Sección 2.2.
+- Provisión de hardware o infraestructura de servidor.
+- Acceso remoto desde fuera de la red interna de Toromocho.
+- Soporte post-POC más allá de la Semana 4 (cubierto bajo acuerdo de licenciamiento posterior).
+- Funciones de modelamiento predictivo o simulación espacial.
+
+---
+
+# 9. Condiciones del POC
+
+- **Vigencia de esta propuesta:** 15 días calendario desde la fecha de emisión.
+- **Inicio del POC:** dentro de los 7 días hábiles posteriores a la firma del acuerdo.
+- **Acceso al sitio:** Chinalco gestiona los permisos de acceso al sitio para el equipo ASTAY durante las semanas de implementación.
+- **Datos de prueba:** Chinalco provee los datos históricos de referencia necesarios para la carga inicial del sistema (formato acordado en kick-off de Semana 1).
+- **Servidor:** disponible y con sistema operativo instalado antes del inicio de la Semana 1.
+- **Confidencialidad:** toda la información compartida por Chinalco durante el POC es tratada con estricta confidencialidad por ASTAY Systems.
+
+---
+
+# 10. Próximos pasos
+
+| Paso | Responsable | Plazo sugerido |
+|------|------------|----------------|
+| Revisión y aprobación de esta propuesta | Yuri Ramírez — Chinalco | 5 días hábiles |
+| Firma del acuerdo de POC | Ambas partes | Al aprobar la propuesta |
+| Confirmación de servidor disponible | Chinalco — IT Toromocho | Antes de Semana 1 |
+| Kick-off y definición de fechas exactas | Ambas partes | Al firmar acuerdo |
+
+---
+
+*Propuesta técnica preparada por ASTAY Systems — 2026-06-05*
+*Contacto cliente: Yuri Ramírez — Chinalco Toromocho*
+*Confidencial — para uso exclusivo de Chinalco Perú y ASTAY Systems*

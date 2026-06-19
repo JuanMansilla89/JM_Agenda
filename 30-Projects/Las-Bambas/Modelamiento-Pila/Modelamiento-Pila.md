@@ -2,7 +2,7 @@
 project: Modelamiento-Pila
 parent: Las-Bambas
 status: active
-stage: propuesta-tecnica-lista-para-envio
+stage: seguimiento-comercial
 owner: "Juan Mansilla"
 stakeholders: [William]
 start-date: 2026-05-18
@@ -14,20 +14,14 @@ onedrive: ""
 
 ## Estado actual
 
-**Propuesta técnica v2 exportada a Word** — lista para revisión interna y envío al cliente. Propuesta económica pendiente como documento separado (política cliente).
+**En seguimiento comercial** — propuesta técnica v2 entregada. Equipo comercial (Frank Echegaray) gestiona respuesta del cliente y propuesta económica.
 
 | Aspecto | Estado |
 |---------|--------|
-| Definición de alcance y stack tecnológico | ✅ Definido en propuesta v2 |
-| Propuesta técnica v1 | ✅ Finalizada — `Documentacion/Entregables/2026-05-18-propuesta-tecnica-v1.qmd` |
-| Sesión técnica con Las Bambas | ✅ Realizada 2026-05-26 — acta en `Documentacion/Reuniones/` |
-| Propuesta técnica v2 (incorpora feedback sesión) | ✅ Generada — `2026-05-26-propuesta-tecnica-v2.qmd` |
-| Arquitectura + lista de 40 TAGs con justificación | ✅ `2026-06-05-arquitectura-tags-modelamiento-pila.md` |
-| Flujograma Mermaid arquitectura y TAGs | ✅ `2026-06-05-flujograma-arquitectura-tags.md` |
-| Apéndice TAGs para validación por cliente (Apéndice E) | ✅ Incluido en propuesta v2 — 2026-06-05 |
-| Exportar propuesta técnica v2 a Word | ✅ `2026-05-26-propuesta-tecnica-v2.docx` — 2026-06-05 |
+| Propuesta técnica v2 + Apéndice TAGs | ✅ Finalizada y exportada a Word — 2026-06-05 |
+| Sesión técnica con Las Bambas | ✅ Realizada 2026-05-26 |
 | Propuesta económica (documento separado) | ⏳ Pendiente — Frank Echegaray |
-| Revisión interna v2 + propuesta comercial (ME pionero) | ⏳ Pendiente — Frank Echegaray |
+| Respuesta del cliente | ⏳ En seguimiento comercial |
 | Envío propuesta técnica v2 al cliente | ⏳ Objetivo: 2026-06-06 |
 
 ## Objetivo
@@ -36,10 +30,7 @@ Diseño e implementación del Sistema de Modelamiento Dinámico de Pila OS (Ore 
 
 ## Tareas activas
 
-- [ ] Elaborar propuesta económica — documento separado — Frank Echegaray 📅 2026-06-09 🔺 #lasbambas
-- [ ] Revisión interna propuesta técnica v2 — Frank Echegaray 📅 2026-06-06 🔼 #lasbambas
-- [ ] Enviar propuesta técnica v2 al cliente 📅 2026-06-06 🔺 #lasbambas
-- [ ] Agregar imágenes interfaz web en Sección 4.5 (carpeta `imagenes/`) y re-exportar a Word 📅 2026-06-09 🔼 #lasbambas
+- [ ] Hacer seguimiento respuesta cliente con Frank Echegaray 📅 2026-06-25 🔼 #lasbambas
 
 ## Tareas completadas
 
@@ -117,8 +108,6 @@ SORT file.mtime DESC
 - [x] `2026-06-05-arquitectura-tags-modelamiento-pila.md` — Arquitectura del sistema + lista de 40 TAGs requeridos con justificación (E01-b) ✅ 2026-06-05
 - [x] `2026-06-05-flujograma-arquitectura-tags.md` — Flujograma Mermaid: flujo físico mine-to-SAG con TAGs + componentes del sistema ✅ 2026-06-05
 - [x] `2026-05-26-propuesta-tecnica-v2.docx` — Word export para envío al cliente ✅ 2026-06-05
-- [ ] Propuesta económica — documento separado (pendiente Frank Echegaray)
-- [ ] Enviar propuesta técnica v2 al cliente
 
 ## ☁️ OneDrive
 
