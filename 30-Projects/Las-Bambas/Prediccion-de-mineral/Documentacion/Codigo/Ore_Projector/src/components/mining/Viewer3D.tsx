@@ -93,12 +93,12 @@ function BlockModel({ blocks, selectedBlocks, editMode, onToggleBlock, projectio
                 }
               } : undefined}
             >
-              <boxGeometry args={[2.2, 2.6, 2.2]} />
+              <boxGeometry args={[0.9, 2.6, 0.9]} />
               <meshStandardMaterial color={color} transparent opacity={opacity} wireframe={isWireframe} side={THREE.DoubleSide} depthWrite={!polygonMode} />
             </mesh>
             {isActive && !polygonMode && (
               <lineSegments>
-                <edgesGeometry args={[new THREE.BoxGeometry(2.22, 2.62, 2.22)]} />
+                <edgesGeometry args={[new THREE.BoxGeometry(0.92, 2.62, 0.92)]} />
                 <lineBasicMaterial color={isSelected ? SELECTED_COLOR : new THREE.Color(0x222222)} transparent opacity={isSelected ? 1 : 0.55} />
               </lineSegments>
             )}
