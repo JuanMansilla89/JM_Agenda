@@ -1,4 +1,4 @@
-import { MousePointer, Crosshair, Mountain, Trash2, CircleDot, Sparkles, Hexagon, Drill, Filter } from 'lucide-react';
+import { MousePointer, Crosshair, Mountain, Trash2, CircleDot, Sparkles, Hexagon, Drill, Filter, ScanLine } from 'lucide-react';
 import type { FilterClass, FilterSource, LayerVisibility } from '@/types/mining';
 
 interface ViewerToolbarProps {
@@ -125,6 +125,14 @@ export default function ViewerToolbar({
               icon={Drill}
               label="Taladros"
               title="Mostrar/ocultar taladros"
+            />
+            <Chip
+              active={layers.dxfArea}
+              onClick={() => onToggleLayer('dxfArea')}
+              color="#f59e0b"
+              icon={ScanLine}
+              label="Área DXF"
+              title="Mostrar/ocultar área de proyección (DXF)"
             />
           </div>
 

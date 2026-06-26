@@ -411,11 +411,32 @@ function BankReferenceGrid({ bank }: { bank: number }) {
   );
 }
 
+const DXF_AREA_COLOR = new THREE.Color(0xf59e0b);
+
+function DxfAreaPolygon({ points, bankY }: { points: [number, number][]; bankY: number }) {
+  const pts3 = useMemo(
+    () => points.map(([x, z]) => [x, bankY + 0.05, z] as [number, number, number]),
+    [points, bankY]
+  );
+  return (
+    <Line
+      points={pts3}
+      color={DXF_AREA_COLOR}
+      lineWidth={2.5}
+      transparent
+      opacity={0.9}
+      depthTest={false}
+      renderOrder={15}
+    />
+  );
+}
+
 interface Viewer3DProps {
   blocks: Block[];
   drillholes: Drillhole[];
   boundaryLoaded: boolean;
   layers: LayerVisibility;
+  dxfAreaPoly?: [number, number][] | null;
   selectedBlocks: Set<string>;
   editMode: string;
   onToggleBlock: (id: string) => void;
@@ -457,6 +478,7 @@ export default function Viewer3D({
   drawing, onAddDrawingPoint, onFinishDrawing,
   findSnap, onCursorChange,
   filterClass, filterSource, cameraVersion, showNeighbors,
+  dxfAreaPoly,
 }: Viewer3DProps) {
   const isTop = viewMode === 'top';
   const isSide = viewMode === 'side';
@@ -464,10 +486,10 @@ export default function Viewer3D({
   const showDrillsBySource = filterSource !== 'projected';
   const bankY = bankYof(currentBank);
 
-  const perspectivePos: [number, number, number] = [22, 16, 22];
+  const perspectivePos: [number, number, number] = [22, bankY + 12, 22];
   const topPos: [number, number, number] = [0, 40, 0];
   const sidePos: [number, number, number] = [0, bankY, 40];
-  const target: [number, number, number] = isOrtho ? [0, bankY, 0] : [0, 0, 0];
+  const target: [number, number, number] = [0, bankY, 0];
 
   const [cursorXZ, setCursorXZ] = useState<{ x: number; z: number } | null>(null);
 
@@ -557,6 +579,10 @@ export default function Viewer3D({
         );
       })}
 
+      {layers.dxfArea && dxfAreaPoly && dxfAreaPoly.length > 1 && (
+        <DxfAreaPolygon points={dxfAreaPoly} bankY={bankY} />
+      )}
+
       {drawing && (
         <DrawingOverlay
           drawing={drawing}
@@ -596,6 +622,7 @@ export default function Viewer3D({
         target={target} makeDefault
         minDistance={isOrtho ? 0.1 : 8}
         maxDistance={isOrtho ? 500 : 80}
+        maxPolarAngle={isOrtho ? Math.PI : Math.PI * 0.72}
       />
     </Canvas>
   );

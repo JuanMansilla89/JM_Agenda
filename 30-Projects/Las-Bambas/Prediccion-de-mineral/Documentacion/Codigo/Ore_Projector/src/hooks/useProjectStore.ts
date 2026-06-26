@@ -148,6 +148,7 @@ export function useProjectStore() {
     boundaryWaste: true,
     projection: true,
     historical: false,
+    dxfArea: true,
   });
   const [viewMode, setViewMode] = useState<ViewMode>('3d');
   const [currentBank, setCurrentBank] = useState<number>(1);

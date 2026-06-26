@@ -97,6 +97,7 @@ export interface LayerVisibility {
   boundaryWaste: boolean;
   projection: boolean;
   historical: boolean;
+  dxfArea: boolean;
 }
 
 export type BoundaryKind = 'mineral' | 'waste';

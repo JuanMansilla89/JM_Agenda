@@ -8,6 +8,7 @@ import LithologyLegend from '@/components/mining/LithologyLegend';
 import ViewerControls from '@/components/mining/ViewerControls';
 import CoordHUD from '@/components/mining/CoordHUD';
 import { useProjectStore } from '@/hooks/useProjectStore';
+import { LB_DXF_AREA_POLY } from '@/data/lasBambasDemo';
 
 export default function Index() {
   const store = useProjectStore();
@@ -93,6 +94,7 @@ export default function Index() {
                 filterSource={store.filterSource}
                 cameraVersion={store.cameraVersion}
                 showNeighbors={store.showNeighbors}
+                dxfAreaPoly={LB_DXF_AREA_POLY}
               />
               {store.blocks.length > 0 && (
                 <>
