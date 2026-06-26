@@ -1,5 +1,5 @@
-import { MousePointer, Crosshair, Mountain, Trash2, CircleDot, Sparkles, Hexagon, Drill, Filter, ScanLine } from 'lucide-react';
-import type { FilterClass, FilterSource, LayerVisibility } from '@/types/mining';
+import { MousePointer, Crosshair, Mountain, Trash2, CircleDot, Sparkles, Hexagon, Drill, Filter, ScanLine, Layers2 } from 'lucide-react';
+import type { FilterClass, FilterSource, LayerVisibility, DrillColorMode } from '@/types/mining';
 
 interface ViewerToolbarProps {
   editMode: 'explore' | 'classify';
@@ -11,6 +11,8 @@ interface ViewerToolbarProps {
   onSetFilterSource: (f: FilterSource) => void;
   layers: LayerVisibility;
   onToggleLayer: (l: keyof LayerVisibility) => void;
+  drillColorMode: DrillColorMode;
+  onSetDrillColorMode: (m: DrillColorMode) => void;
 }
 
 function Chip({ active, onClick, color, icon: Icon, label, title }: {
@@ -37,7 +39,7 @@ function Chip({ active, onClick, color, icon: Icon, label, title }: {
 export default function ViewerToolbar({
   editMode, projectionRun, blocksLoaded,
   filterClass, filterSource, onSetFilterClass, onSetFilterSource,
-  layers, onToggleLayer,
+  layers, onToggleLayer, drillColorMode, onSetDrillColorMode,
 }: ViewerToolbarProps) {
   const allOff = filterClass === 'all' && filterSource === 'all';
 
@@ -133,6 +135,29 @@ export default function ViewerToolbar({
               icon={ScanLine}
               label="Área DXF"
               title="Mostrar/ocultar área de proyección (DXF)"
+            />
+          </div>
+
+          <div className="w-px h-5 bg-border" />
+
+          {/* Color por */}
+          <div className="flex items-center gap-1">
+            <Layers2 className="w-3 h-3 text-muted-foreground" />
+            <span className="text-[10px] font-mono text-muted-foreground">Color:</span>
+            <Chip
+              active={drillColorMode === 'lithology'}
+              onClick={() => onSetDrillColorMode('lithology')}
+              icon={MousePointer}
+              label="Litología"
+              title="Colorear taladros por litología"
+            />
+            <Chip
+              active={drillColorMode === 'minzone'}
+              onClick={() => onSetDrillColorMode('minzone')}
+              color="#7c3aed"
+              icon={Sparkles}
+              label="Minzone"
+              title="Colorear taladros por zona mineralizada (MINZONE)"
             />
           </div>
 

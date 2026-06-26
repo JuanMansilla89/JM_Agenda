@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo } from 'react';
 import type {
   Block, Drillhole, ChangeRecord, LayerVisibility, WorkflowStep,
-  Classification, BoundaryKind, FilterClass, FilterSource, BoundaryPoly,
+  Classification, BoundaryKind, FilterClass, FilterSource, BoundaryPoly, DrillColorMode,
 } from '@/types/mining';
 import { LITHOLOGIES } from '@/lib/lithology';
 import {
@@ -175,6 +175,7 @@ export function useProjectStore() {
   // ───────── Quick filters ─────────
   const [filterClass, setFilterClass] = useState<FilterClass>('all');
   const [filterSource, setFilterSource] = useState<FilterSource>('all');
+  const [drillColorMode, setDrillColorMode] = useState<DrillColorMode>('lithology');
 
   const labelFor = useCallback((kind: BoundaryKind, bank: number) => {
     const prefix = kind === 'mineral' ? 'MIN' : 'DES';
@@ -548,6 +549,7 @@ export function useProjectStore() {
     cursor, setCursor,
 
     filterClass, setFilterClass, filterSource, setFilterSource,
+    drillColorMode, setDrillColorMode,
     loadBlockModel, loadProdDrills, loadDiamondDrills,
     loadBoundary, loadHistorical, runProjection,
     classifySelected, classifySingleBlock, undoLastChange, toggleLayer,

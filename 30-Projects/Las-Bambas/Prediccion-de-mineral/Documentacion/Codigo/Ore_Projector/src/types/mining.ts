@@ -17,12 +17,15 @@ export interface Block {
   lithology?: string;
 }
 
+export type DrillColorMode = 'lithology' | 'minzone';
+
 export interface Drillhole {
   id: string;
   type: 'production' | 'diamond';
   collar: { x: number; y: number; z: number };
   depth: number;
   intervals: DrillInterval[];
+  minzone?: string;
 }
 
 export interface DrillInterval {

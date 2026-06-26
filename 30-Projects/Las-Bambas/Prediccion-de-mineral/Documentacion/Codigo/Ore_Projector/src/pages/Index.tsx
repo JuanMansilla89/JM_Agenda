@@ -60,6 +60,8 @@ export default function Index() {
             onSetFilterSource={store.setFilterSource}
             layers={store.layers}
             onToggleLayer={store.toggleLayer}
+            drillColorMode={store.drillColorMode}
+            onSetDrillColorMode={store.setDrillColorMode}
           />
           <div className="flex-1 relative flex">
             <div className="flex-1 relative">
@@ -95,6 +97,7 @@ export default function Index() {
                 cameraVersion={store.cameraVersion}
                 showNeighbors={store.showNeighbors}
                 dxfAreaPoly={LB_DXF_AREA_POLY}
+                drillColorMode={store.drillColorMode}
               />
               {store.blocks.length > 0 && (
                 <>
@@ -133,6 +136,7 @@ export default function Index() {
                     onToggle={store.toggleLithology}
                     onHighlight={store.toggleHighlightLithology}
                     onClearSolo={store.clearDrillholeSolo}
+                    colorMode={store.drillColorMode}
                   />
                   <CoordHUD
                     cursor={store.cursor}

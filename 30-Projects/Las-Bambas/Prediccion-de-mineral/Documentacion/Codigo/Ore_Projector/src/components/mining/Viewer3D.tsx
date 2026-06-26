@@ -3,8 +3,9 @@ import { OrbitControls, Grid, Line, OrthographicCamera, PerspectiveCamera, Gizmo
 import { useMemo, useRef, useState, useEffect } from 'react';
 import * as THREE from 'three';
 import type { Block, Drillhole, LayerVisibility, BoundaryKind, FilterClass, FilterSource, BoundaryPoly } from '@/types/mining';
-import { lithColor } from '@/lib/lithology';
+import { lithColor, minzoneColor, deriveMinzone } from '@/lib/lithology';
 import type { ViewMode, DrawingState, CursorCoord } from '@/hooks/useProjectStore';
+import type { DrillColorMode } from '@/types/mining';
 
 const MINERAL_COLOR = new THREE.Color(0x2e8b57);
 const WASTE_COLOR = new THREE.Color(0x888888);
@@ -111,7 +112,7 @@ function BlockModel({ blocks, selectedBlocks, editMode, onToggleBlock, projectio
 
 function DrillholeLines({
   drillholes, type, fallbackColor, visibleLithologies, highlightedLithology,
-  soloDrillholes, onToggleSolo,
+  soloDrillholes, onToggleSolo, colorMode,
 }: {
   drillholes: Drillhole[];
   type: 'production' | 'diamond';
@@ -120,10 +121,18 @@ function DrillholeLines({
   highlightedLithology: string | null;
   soloDrillholes: Set<string>;
   onToggleSolo: (id: string) => void;
+  colorMode: DrillColorMode;
 }) {
   const tubeRadius = type === 'production' ? 0.08 : 0.12;
   const filtered = drillholes.filter(d => d.type === type);
   const soloActive = soloDrillholes.size > 0;
+  const byMinzone = colorMode === 'minzone';
+
+  function drillMinzone(d: Drillhole): string {
+    if (d.minzone) return d.minzone;
+    const maxGrade = Math.max(...d.intervals.map(i => i.grade ?? 0), 0);
+    return deriveMinzone(maxGrade);
+  }
 
   return (
     <group>
@@ -131,25 +140,28 @@ function DrillholeLines({
         const isSolo = soloDrillholes.has(d.id);
         const dimDrill = soloActive && !isSolo;
         const trunkOpacity = dimDrill ? 0.1 : 0.55;
+        const mz = byMinzone ? drillMinzone(d) : null;
+        const mzColor = mz ? new THREE.Color(minzoneColor(mz)) : fallbackColor;
+        const lineColor = byMinzone ? mzColor : fallbackColor;
         return (
           <group key={d.id}>
             <Line
               points={[[d.collar.x, d.collar.z, d.collar.y], [d.collar.x, d.collar.z - d.depth, d.collar.y]]}
-              color={fallbackColor} lineWidth={type === 'production' ? 1.2 : 2}
+              color={lineColor} lineWidth={type === 'production' ? 1.2 : 2}
               transparent opacity={trunkOpacity}
             />
             <mesh position={[d.collar.x, d.collar.z, d.collar.y]} onClick={(e) => { e.stopPropagation(); onToggleSolo(d.id); }}>
               <cylinderGeometry args={[tubeRadius * 2.2, tubeRadius * 2.2, 0.35, 8]} />
-              <meshStandardMaterial color={isSolo ? new THREE.Color(0xc0392b) : fallbackColor} transparent opacity={dimDrill ? 0.25 : 1} />
+              <meshStandardMaterial color={isSolo ? new THREE.Color(0xc0392b) : lineColor} transparent opacity={dimDrill ? 0.25 : 1} />
             </mesh>
             {d.intervals.map((interval, idx) => {
               const lithCode = interval.lithology;
-              if (lithCode && !visibleLithologies.has(lithCode)) return null;
+              if (!byMinzone && lithCode && !visibleLithologies.has(lithCode)) return null;
               const midY = d.collar.z - (interval.from + interval.to) / 2;
               const height = interval.to - interval.from;
-              const segColor = new THREE.Color(lithColor(lithCode));
-              const isHighlighted = highlightedLithology && lithCode === highlightedLithology;
-              const isDimByHighlight = highlightedLithology && !isHighlighted;
+              const segColor = byMinzone ? mzColor : new THREE.Color(lithColor(lithCode));
+              const isHighlighted = !byMinzone && highlightedLithology && lithCode === highlightedLithology;
+              const isDimByHighlight = !byMinzone && highlightedLithology && !isHighlighted;
               let opacity = 0.85;
               if (dimDrill) opacity = 0.12;
               else if (isDimByHighlight) opacity = 0.18;
@@ -467,6 +479,7 @@ interface Viewer3DProps {
   filterSource: FilterSource;
   cameraVersion: number;
   showNeighbors: boolean;
+  drillColorMode: DrillColorMode;
 }
 
 export default function Viewer3D({
@@ -478,7 +491,7 @@ export default function Viewer3D({
   drawing, onAddDrawingPoint, onFinishDrawing,
   findSnap, onCursorChange,
   filterClass, filterSource, cameraVersion, showNeighbors,
-  dxfAreaPoly,
+  dxfAreaPoly, drillColorMode,
 }: Viewer3DProps) {
   const isTop = viewMode === 'top';
   const isSide = viewMode === 'side';
@@ -543,12 +556,14 @@ export default function Viewer3D({
       {layers.prodDrills && showDrillsBySource && (
         <DrillholeLines drillholes={drillholes} type="production" fallbackColor={PROD_COLOR}
           visibleLithologies={visibleLithologies} highlightedLithology={highlightedLithology}
-          soloDrillholes={soloDrillholes} onToggleSolo={onToggleDrillholeSolo} />
+          soloDrillholes={soloDrillholes} onToggleSolo={onToggleDrillholeSolo}
+          colorMode={drillColorMode} />
       )}
       {layers.diamondDrills && showDrillsBySource && (
         <DrillholeLines drillholes={drillholes} type="diamond" fallbackColor={DIAM_COLOR}
           visibleLithologies={visibleLithologies} highlightedLithology={highlightedLithology}
-          soloDrillholes={soloDrillholes} onToggleSolo={onToggleDrillholeSolo} />
+          soloDrillholes={soloDrillholes} onToggleSolo={onToggleDrillholeSolo}
+          colorMode={drillColorMode} />
       )}
 
       {boundaryLoaded && polygons.map(p => {
