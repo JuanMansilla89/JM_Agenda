@@ -30,6 +30,10 @@ _output/
 /.quarto/
 **/*.quarto_ipynb
 .venv/
+.conda/
 .vscode/
 /30-Projects/Las-Bambas/Prediccion-de-mineral/Documentacion/Codigo/mockups/*
 Datos Demo/
+
+/30-Projects/Las-Bambas/Prediccion-de-mineral/Documentacion/Codigo/Ore_Projector/node_modules/
+/30-Projects/Las-Bambas/Prediccion-de-mineral/Documentacion/Codigo/Ore_Projector/dist/
