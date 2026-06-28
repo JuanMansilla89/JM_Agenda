@@ -98,6 +98,7 @@ export default function Index() {
                 showNeighbors={store.showNeighbors}
                 dxfAreaPoly={LB_DXF_AREA_POLY}
                 drillColorMode={store.drillColorMode}
+                filterMinzones={store.filterMinzones}
               />
               {store.blocks.length > 0 && (
                 <>
@@ -128,6 +129,10 @@ export default function Index() {
                     onToggleSnap={() => store.setSnapEnabled(!store.snapEnabled)}
                     snapTolerance={store.snapTolerance}
                     onSetSnapTolerance={store.setSnapTolerance}
+                    filterMinzones={store.filterMinzones}
+                    onToggleFilterMinzone={store.toggleFilterMinzone}
+                    onClearFilterMinzones={store.clearFilterMinzones}
+                    drillsLoaded={store.drillholes.length > 0}
                   />
                   <LithologyLegend
                     visible={store.visibleLithologies}

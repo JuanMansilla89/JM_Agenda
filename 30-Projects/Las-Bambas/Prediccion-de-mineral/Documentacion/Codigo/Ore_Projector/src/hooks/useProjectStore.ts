@@ -176,6 +176,15 @@ export function useProjectStore() {
   const [filterClass, setFilterClass] = useState<FilterClass>('all');
   const [filterSource, setFilterSource] = useState<FilterSource>('all');
   const [drillColorMode, setDrillColorMode] = useState<DrillColorMode>('lithology');
+  const [filterMinzones, setFilterMinzones] = useState<Set<string>>(new Set());
+  const toggleFilterMinzone = useCallback((code: string) => {
+    setFilterMinzones(prev => {
+      const next = new Set(prev);
+      if (next.has(code)) next.delete(code); else next.add(code);
+      return next;
+    });
+  }, []);
+  const clearFilterMinzones = useCallback(() => setFilterMinzones(new Set()), []);
 
   const labelFor = useCallback((kind: BoundaryKind, bank: number) => {
     const prefix = kind === 'mineral' ? 'MIN' : 'DES';
@@ -550,6 +559,7 @@ export function useProjectStore() {
 
     filterClass, setFilterClass, filterSource, setFilterSource,
     drillColorMode, setDrillColorMode,
+    filterMinzones, toggleFilterMinzone, clearFilterMinzones,
     loadBlockModel, loadProdDrills, loadDiamondDrills,
     loadBoundary, loadHistorical, runProjection,
     classifySelected, classifySingleBlock, undoLastChange, toggleLayer,

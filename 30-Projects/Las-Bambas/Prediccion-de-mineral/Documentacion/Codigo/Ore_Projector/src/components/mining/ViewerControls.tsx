@@ -1,6 +1,7 @@
-import { Box, Square, ChevronUp, ChevronDown, Layers, Pencil, Mountain, Trash2, Check, X, ArrowLeftRight, Crosshair, Eye, EyeOff, Plus, Magnet, ArrowRightLeft } from 'lucide-react';
+import { Box, Square, ChevronUp, ChevronDown, Layers, Pencil, Mountain, Trash2, Check, X, ArrowLeftRight, Crosshair, Eye, EyeOff, Plus, Magnet, ArrowRightLeft, Filter } from 'lucide-react';
 import type { ViewMode } from '@/hooks/useProjectStore';
 import type { BoundaryKind, BoundaryPoly } from '@/types/mining';
+import { MINZONES } from '@/lib/lithology';
 
 interface Props {
   viewMode: ViewMode;
@@ -38,6 +39,12 @@ interface Props {
   onToggleSnap: () => void;
   snapTolerance: number;
   onSetSnapTolerance: (v: number) => void;
+
+  // Minzone filter
+  filterMinzones: Set<string>;
+  onToggleFilterMinzone: (code: string) => void;
+  onClearFilterMinzones: () => void;
+  drillsLoaded: boolean;
 }
 
 export default function ViewerControls({
@@ -49,6 +56,7 @@ export default function ViewerControls({
   onDeletePolygon, onReclassify,
   drawing, onStartDrawing, onCancelDrawing, onFinishDrawing,
   snapEnabled, onToggleSnap, snapTolerance, onSetSnapTolerance,
+  filterMinzones, onToggleFilterMinzone, onClearFilterMinzones, drillsLoaded,
 }: Props) {
   const elevation = baseElevation - (currentBank - 1) * bankHeight;
   const isReal = currentBank === 1;
@@ -113,6 +121,50 @@ export default function ViewerControls({
           <span className={showNeighbors ? 'text-primary' : 'text-muted-foreground'}>{showNeighbors ? 'CONTEXTO' : 'SOLO ACTIVO'}</span>
         </button>
       </div>
+
+      {/* Filtro MINZONE */}
+      {drillsLoaded && (
+        <div className="bg-card/95 backdrop-blur border border-border rounded-md shadow-md min-w-[240px] overflow-hidden">
+          <div className="px-2.5 py-1 border-b border-border flex items-center justify-between">
+            <div className="flex items-center gap-1.5">
+              <Filter className="w-3 h-3 text-muted-foreground" />
+              <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground">Filtro MINZONE</span>
+            </div>
+            {filterMinzones.size > 0 && (
+              <button onClick={onClearFilterMinzones}
+                className="text-[9px] font-mono text-primary hover:underline">
+                limpiar
+              </button>
+            )}
+          </div>
+          <div className="p-1.5 flex flex-wrap gap-1">
+            {MINZONES.map(mz => {
+              const active = filterMinzones.has(mz.code);
+              return (
+                <button
+                  key={mz.code}
+                  onClick={() => onToggleFilterMinzone(mz.code)}
+                  title={mz.label}
+                  className="flex items-center gap-1 px-2 py-0.5 rounded-sm text-[10px] font-mono border transition-colors"
+                  style={active
+                    ? { backgroundColor: mz.color, borderColor: mz.color, color: '#fff', fontWeight: 700 }
+                    : { borderColor: 'hsl(var(--border))', color: 'hsl(var(--muted-foreground))' }
+                  }
+                >
+                  <span className="w-2 h-2 rounded-full flex-shrink-0"
+                    style={{ backgroundColor: mz.color, opacity: active ? 1 : 0.7 }} />
+                  {mz.code}
+                </button>
+              );
+            })}
+          </div>
+          {filterMinzones.size > 0 && (
+            <div className="px-2.5 pb-1.5 text-[9px] font-mono text-muted-foreground">
+              Mostrando: {[...filterMinzones].join(', ')}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Polygons panel */}
       <div className="bg-card/95 backdrop-blur border border-border rounded-md shadow-md w-[260px] overflow-hidden">

@@ -3,7 +3,7 @@ import { OrbitControls, Grid, Line, OrthographicCamera, PerspectiveCamera, Gizmo
 import { useMemo, useRef, useState, useEffect } from 'react';
 import * as THREE from 'three';
 import type { Block, Drillhole, LayerVisibility, BoundaryKind, FilterClass, FilterSource, BoundaryPoly } from '@/types/mining';
-import { lithColor, minzoneColor, deriveMinzone } from '@/lib/lithology';
+import { lithColor, minzoneColor, deriveMinzone, MINZONE_BY_CODE } from '@/lib/lithology';
 import type { ViewMode, DrawingState, CursorCoord } from '@/hooks/useProjectStore';
 import type { DrillColorMode } from '@/types/mining';
 
@@ -112,7 +112,7 @@ function BlockModel({ blocks, selectedBlocks, editMode, onToggleBlock, projectio
 
 function DrillholeLines({
   drillholes, type, fallbackColor, visibleLithologies, highlightedLithology,
-  soloDrillholes, onToggleSolo, colorMode,
+  soloDrillholes, onToggleSolo, colorMode, filterMinzones, onHoverDrill,
 }: {
   drillholes: Drillhole[];
   type: 'production' | 'diamond';
@@ -122,17 +122,18 @@ function DrillholeLines({
   soloDrillholes: Set<string>;
   onToggleSolo: (id: string) => void;
   colorMode: DrillColorMode;
+  filterMinzones: Set<string>;
+  onHoverDrill: (d: Drillhole | null) => void;
 }) {
   const tubeRadius = type === 'production' ? 0.08 : 0.12;
-  const filtered = drillholes.filter(d => d.type === type);
   const soloActive = soloDrillholes.size > 0;
   const byMinzone = colorMode === 'minzone';
 
-  function drillMinzone(d: Drillhole): string {
-    if (d.minzone) return d.minzone;
-    const maxGrade = Math.max(...d.intervals.map(i => i.grade ?? 0), 0);
-    return deriveMinzone(maxGrade);
-  }
+  const filtered = drillholes.filter(d => {
+    if (d.type !== type) return false;
+    if (filterMinzones.size > 0 && !filterMinzones.has(effectiveMz(d))) return false;
+    return true;
+  });
 
   return (
     <group>
@@ -140,11 +141,15 @@ function DrillholeLines({
         const isSolo = soloDrillholes.has(d.id);
         const dimDrill = soloActive && !isSolo;
         const trunkOpacity = dimDrill ? 0.1 : 0.55;
-        const mz = byMinzone ? drillMinzone(d) : null;
-        const mzColor = mz ? new THREE.Color(minzoneColor(mz)) : fallbackColor;
+        const mz = effectiveMz(d);
+        const mzColor = new THREE.Color(minzoneColor(mz));
         const lineColor = byMinzone ? mzColor : fallbackColor;
         return (
-          <group key={d.id}>
+          <group
+            key={d.id}
+            onPointerOver={(e) => { e.stopPropagation(); onHoverDrill(d); }}
+            onPointerOut={() => onHoverDrill(null)}
+          >
             <Line
               points={[[d.collar.x, d.collar.z, d.collar.y], [d.collar.x, d.collar.z - d.depth, d.collar.y]]}
               color={lineColor} lineWidth={type === 'production' ? 1.2 : 2}
@@ -425,6 +430,65 @@ function BankReferenceGrid({ bank }: { bank: number }) {
 
 const DXF_AREA_COLOR = new THREE.Color(0xf59e0b);
 
+function effectiveMz(d: Drillhole): string {
+  if (d.minzone) return d.minzone;
+  const max = Math.max(...d.intervals.map(i => i.grade ?? 0), 0);
+  return deriveMinzone(max);
+}
+
+function DrillTooltip({ drill }: { drill: Drillhole }) {
+  const maxGrade = Math.max(...drill.intervals.map(i => i.grade ?? 0), 0);
+  const mzCode = effectiveMz(drill);
+  const mzDef = MINZONE_BY_CODE[mzCode];
+  const lith = drill.intervals[0]?.lithology;
+  const isReal = !!drill.minzone;
+  const depthM = (drill.depth * 5).toFixed(1);
+
+  return (
+    <div style={{
+      background: 'rgba(10,14,22,0.94)',
+      border: `1px solid ${mzDef?.color ?? '#4b5563'}55`,
+      borderLeft: `3px solid ${mzDef?.color ?? '#4b5563'}`,
+      borderRadius: 6,
+      padding: '7px 11px',
+      fontSize: 11,
+      fontFamily: '"JetBrains Mono", "Fira Mono", monospace',
+      color: '#cbd5e1',
+      whiteSpace: 'nowrap',
+      pointerEvents: 'none',
+      userSelect: 'none',
+      boxShadow: '0 4px 16px rgba(0,0,0,0.5)',
+      minWidth: 195,
+    }}>
+      <div style={{ fontWeight: 700, fontSize: 12, color: '#f1f5f9', marginBottom: 6, letterSpacing: '0.02em' }}>
+        {drill.id}
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '2px 10px' }}>
+        <span style={{ color: '#64748b' }}>MINZONE</span>
+        <span>
+          <span style={{
+            display: 'inline-block', width: 8, height: 8,
+            borderRadius: 2, backgroundColor: mzDef?.color ?? '#6b7280',
+            marginRight: 5, verticalAlign: 'middle',
+          }} />
+          <span style={{ color: mzDef?.color ?? '#94a3b8', fontWeight: 700 }}>{mzCode}</span>
+          {' '}<span style={{ color: '#475569', fontSize: 10 }}>{mzDef?.label ?? '—'}</span>
+          {!isReal && <span style={{ color: '#334155', fontSize: 9 }}> *derivado</span>}
+        </span>
+        <span style={{ color: '#64748b' }}>CU%</span>
+        <span style={{ color: maxGrade >= 0.60 ? '#a78bfa' : maxGrade >= 0.30 ? '#f59e0b' : '#94a3b8', fontWeight: 600 }}>
+          {maxGrade > 0 ? maxGrade.toFixed(3) + ' %' : '—'}
+        </span>
+        {lith && <><span style={{ color: '#64748b' }}>Litol.</span><span>{lith}</span></>}
+        <span style={{ color: '#64748b' }}>Tipo</span>
+        <span>{drill.type === 'production' ? 'Producción (BH)' : 'Diamantina'}</span>
+        <span style={{ color: '#64748b' }}>Prof.</span>
+        <span>{depthM} m</span>
+      </div>
+    </div>
+  );
+}
+
 function DxfAreaPolygon({ points, bankY }: { points: [number, number][]; bankY: number }) {
   const pts3 = useMemo(
     () => points.map(([x, z]) => [x, bankY + 0.05, z] as [number, number, number]),
@@ -480,6 +544,7 @@ interface Viewer3DProps {
   cameraVersion: number;
   showNeighbors: boolean;
   drillColorMode: DrillColorMode;
+  filterMinzones: Set<string>;
 }
 
 export default function Viewer3D({
@@ -491,7 +556,7 @@ export default function Viewer3D({
   drawing, onAddDrawingPoint, onFinishDrawing,
   findSnap, onCursorChange,
   filterClass, filterSource, cameraVersion, showNeighbors,
-  dxfAreaPoly, drillColorMode,
+  dxfAreaPoly, drillColorMode, filterMinzones,
 }: Viewer3DProps) {
   const isTop = viewMode === 'top';
   const isSide = viewMode === 'side';
@@ -505,6 +570,7 @@ export default function Viewer3D({
   const target: [number, number, number] = [0, bankY, 0];
 
   const [cursorXZ, setCursorXZ] = useState<{ x: number; z: number } | null>(null);
+  const [hoveredDrill, setHoveredDrill] = useState<Drillhole | null>(null);
 
   // Snap preview for drawing/editing
   const snapPreview = useMemo(() => {
@@ -557,13 +623,25 @@ export default function Viewer3D({
         <DrillholeLines drillholes={drillholes} type="production" fallbackColor={PROD_COLOR}
           visibleLithologies={visibleLithologies} highlightedLithology={highlightedLithology}
           soloDrillholes={soloDrillholes} onToggleSolo={onToggleDrillholeSolo}
-          colorMode={drillColorMode} />
+          colorMode={drillColorMode} filterMinzones={filterMinzones} onHoverDrill={setHoveredDrill} />
       )}
       {layers.diamondDrills && showDrillsBySource && (
         <DrillholeLines drillholes={drillholes} type="diamond" fallbackColor={DIAM_COLOR}
           visibleLithologies={visibleLithologies} highlightedLithology={highlightedLithology}
           soloDrillholes={soloDrillholes} onToggleSolo={onToggleDrillholeSolo}
-          colorMode={drillColorMode} />
+          colorMode={drillColorMode} filterMinzones={filterMinzones} onHoverDrill={setHoveredDrill} />
+      )}
+
+      {hoveredDrill && (
+        <Html
+          position={[hoveredDrill.collar.x, hoveredDrill.collar.z + 1.8, hoveredDrill.collar.y]}
+          center
+          distanceFactor={isOrtho ? undefined : 12}
+          style={{ pointerEvents: 'none' }}
+          zIndexRange={[100, 200]}
+        >
+          <DrillTooltip drill={hoveredDrill} />
+        </Html>
       )}
 
       {boundaryLoaded && polygons.map(p => {
