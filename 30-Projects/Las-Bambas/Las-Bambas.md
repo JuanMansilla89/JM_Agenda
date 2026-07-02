@@ -17,7 +17,7 @@ onedrive: ""
 |-------------|--------|-------------|-------|
 | Modelamiento de Pila | 🔄 Seguimiento comercial | Respuesta cliente — Frank Echegaray | 2026-06-25 |
 | Reportabilidad | 🔄 Seguimiento comercial | Respuesta cliente — comercial | 2026-06-25 |
-| Predicción de Mineral | 🔺 Activo — demo en preparación | Demo a Mario Rojas (Ore Projector) | 2026-06-26 |
+| Predicción de Mineral | 🔄 Seguimiento propuesta | Respuesta cliente — Mario Rojas | 2026-07-05 |
 
 ## Objetivo
 
@@ -33,10 +33,12 @@ Desarrollo de dos soluciones técnicas para la operación minera Las Bambas: (1)
 
 ## Tareas activas (nivel proyecto)
 
-- [ ] Demo Ore Projector a Mario Rojas 📅 2026-06-26 🔺 #lasbambas
-- [ ] Seguimiento propuestas Modelamiento-Pila y Reportabilidad con comercial 📅 2026-06-25 🔼 #lasbambas
+- [ ] Hacer seguimiento propuesta técnico-económica Predicción de Mineral con Mario Rojas 📅 2026-07-05 🔺 #lasbambas
+- [ ] Seguimiento propuestas Modelamiento-Pila y Reportabilidad con comercial 📅 2026-07-05 🔼 #lasbambas
 
 ## Tareas completadas
+
+- [x] Demo Ore Projector a Mario Rojas ✅ 2026-06-26 #lasbambas
 
 ## Decisiones clave
 
@@ -79,4 +81,4 @@ SORT file.mtime DESC
 - [[Prediccion-de-mineral]] — inicio, incluye código frontend
 
 ---
-*Última actualización: 2026-06-18*
+*Última actualización: 2026-06-28*

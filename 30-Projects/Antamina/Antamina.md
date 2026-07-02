@@ -15,13 +15,13 @@ onedrive: ""
 
 | Sub-proyecto | Estado | Etapa |
 |-------------|--------|-------|
-| [[GNSS_Palas/GNSS_Palas\|GNSS_Palas]] | 🟡 Activo | propuesta-tecnica-en-elaboracion |
+| [[GNSS_Palas/GNSS_Palas\|GNSS_Palas]] | 🟡 Activo | prelicitacion-espera-rfp |
 
 ## Estado actual
 
 | Aspecto | Estado |
 |---------|--------|
-| GNSS_Palas — propuesta técnica | ⏳ En elaboración |
+| GNSS_Palas — esperando RFP oficial de Antamina | 🔴 Bloqueado |
 
 ## Objetivo
 
@@ -67,4 +67,4 @@ SORT file.mtime DESC
 - 
 
 ---
-*Última actualización: 2026-06-02*
+*Última actualización: 2026-06-29*

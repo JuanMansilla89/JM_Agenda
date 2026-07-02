@@ -2,9 +2,9 @@
 project: GNSS_Palas
 parent: Antamina
 status: active
-stage: propuesta-tecnica-en-elaboracion
+stage: prelicitacion-espera-rfp
 owner: "Juan Mansilla"
-stakeholders: [James, David Velazco]
+stakeholders: [James, David Velazco, Metatec]
 start-date: 2026-06-02
 tags: [antamina, gnss]
 onedrive: ""
@@ -17,42 +17,54 @@ onedrive: ""
 | Aspecto | Estado |
 |---------|--------|
 | Kickoff con James y David Velazco | ✅ Realizado 2026-06-02 |
-| Reunión conjunta con Metatec + David | ⏳ Pendiente — James coordina |
-| Metodología interna preliminar | ⏳ En preparación |
-| Propuesta técnica v1 | ⏳ Bloqueado — requiere reunión con Metatec |
-| Envío al cliente / RFQ | ⏳ Bloqueado |
+| Reunión conjunta ASTAY + Metatec (comercial) | ✅ Realizada (equipo comercial — Juan en campo) |
+| Espera del RFP oficial de Antamina | 🔴 Bloqueado — principal cuello de botella |
+| Definición modelo de participación con Metatec | ⏳ Pendiente — depende de bases del RFP |
+| Metodología y propuesta técnica | ⏳ Bloqueado — requiere RFP |
+| Envío al cliente | ⏳ Bloqueado — requiere RFP |
 
 ## Objetivo
 
-Evaluar el desempeño GPS de las palas 4100 y 4800 de Antamina en cuatro dimensiones (disponibilidad, visibilidad, cobertura y confiabilidad mecánica), cuantificar el impacto de negocio de las brechas encontradas (dilución, tonelaje, riesgo) y definir una hoja de ruta de mejora. El proyecto se enmarca en la iniciativa de Trazabilidad de Antamina. ASTAY lidera como traductor de brechas técnicas a términos de negocio; Metatec actúa como especialista técnico GPS.
+Evaluar el desempeño GPS de las palas de Antamina, cuantificar el impacto de negocio de las brechas encontradas y definir una hoja de ruta de mejora, en respuesta a un proceso de licitación formal (RFP). El proyecto se enmarca en la iniciativa de Trazabilidad de Antamina. ASTAY lidera como integrador de la solución y traductor de brechas técnicas a términos de negocio; Metatec aporta experiencia especializada en análisis GNSS/GPS aplicado a equipos mineros.
 
 ## Tareas activas
 
-- [ ] Preparar metodología preliminar y preguntas para reunión con Metatec 📅 2026-06-07 ⏫ #antamina #gnss #arquitectura
-- [ ] James coordina reunión conjunta ASTAY + Metatec + David Velazco 📅 2026-06-09 ⏫ #antamina #gnss #blocked
-- [ ] Elaborar propuesta técnica con metodología (post-reunión Metatec) 📅 2026-06-16 🔼 #antamina #gnss
+- [ ] Dar seguimiento a emisión del RFP esta semana (contacto con cliente) 📅 2026-07-04 🔺 #antamina #gnss
+- [ ] Analizar RFP inmediatamente tras su publicación — alcance, criterios de evaluación, bases 📅 2026-07-11 🔺 #antamina #gnss
+- [ ] Definir modelo de participación con Metatec según bases del RFP (subcontratista / partner / otro) 📅 2026-07-11 ⏫ #antamina #gnss #decision
+- [ ] Revisar requisitos de homologación y declaración de alianzas en el RFP 📅 2026-07-11 ⏫ #antamina #gnss
+- [ ] Preparar metodología de implementación y arquitectura de solución (post-RFP) 📅 2026-07-18 🔼 #antamina #gnss #arquitectura
+- [ ] Elaborar propuesta técnica y económica 📅 2026-07-25 🔼 #antamina #gnss #blocked
 
 ## Tareas completadas
 
 - [x] Kickoff con James y David Velazco — alineamiento de alcance y objetivos 📅 2026-06-02 ✅ 2026-06-02 #antamina #gnss
+- [x] Reunión conjunta ASTAY (equipo comercial) + Metatec — presentación mutua, evaluación de colaboración 📅 2026-06-29 ✅ 2026-06-29 #antamina #gnss
 
 ## Decisiones clave
 
 | Fecha | Decisión | Justificación | Estado |
 |-------|----------|---------------|--------|
-| 2026-06-02 | ASTAY lidera como traductor de impacto de negocio; Metatec como especialista técnico GPS | James quiere evaluación agnóstica — no que Provision valide su propio hardware | #decision |
+| 2026-06-02 | ASTAY lidera como integrador; Metatec como especialista técnico GPS | James quiere evaluación agnóstica — no que Provision valide su propio hardware | #decision |
 | 2026-06-02 | Canal de comunicación directo: James ↔ Juan Mansilla | Simplificar coordinación, antes pasaba por Frank | #decision |
 | 2026-06-02 | Propuesta técnica solo después de reunión conjunta con Metatec | Sin alineamiento con especialista técnico no hay base sólida para la metodología | #decision |
+| 2026-06-29 | No iniciar propuesta técnica hasta recibir RFP | Antamina emitirá RFP formal — el alcance, criterios y bases no están definidos aún | #decision |
+| 2026-06-29 | El proceso es un RFP (no RFQ) | Cliente solicita propuesta integral de solución y metodología, no solo cotización | #decision |
+| 2026-06-29 | Modelo de participación con Metatec a definir post-RFP | Las bases del proceso determinarán si se puede subcontratar, declarar alianzas o qué esquema conviene | #decision |
 
 ## Riesgos
 
 | Riesgo | Probabilidad | Impacto | Mitigación |
 |--------|-------------|---------|------------|
+| RFP se retrasa indefinidamente o no se publica | Media | Alto | Seguimiento semanal comercial; mantener relación con James |
+| Antamina exige homologación específica de partners o subcontratistas | Media | Alto | Revisar bases del RFP en cuanto se publique |
+| El RFP exige que experiencia técnica pertenezca exclusivamente al contratista principal | Media | Alto | Evaluar si ASTAY puede sustentar experiencia propia o necesita otro modelo |
+| Modelo de participación con Metatec incompatible con bases del proceso | Media | Alto | Analizar bases antes de comprometerse con Metatec |
 | Acceso a BD Komatsu restringido por política | Alta | Alto | Antamina construye réplica — seguimiento con David Velazco |
 | Metatec no registrada en Antamina | Baja | Medio | ASTAY sí está registrada — puede facilitar logística |
-| Propuesta queda desalineada de lo que Metatec puede medir | Media | Alto | Reunión conjunta antes de escribir metodología |
+| Propuesta queda desalineada de lo que Metatec puede medir | Media | Alto | Alinear con Metatec post-RFP antes de escribir metodología |
 | Impacto del centilleo (scintillation) subestimado | Baja | Medio | Solicitar historial de eventos a Komatsu/Modular |
-| Errors de mantenimiento (swap de antenas/sensores) no documentados | Media | Alto | Incluir protocolo de verificación post-mantenimiento en propuesta |
+| Errores de mantenimiento (swap de antenas/sensores) no documentados | Media | Alto | Incluir protocolo de verificación post-mantenimiento en propuesta |
 
 ## 📎 Documentación
 
@@ -87,4 +99,4 @@ SORT file.mtime DESC
 - Marco metodológico: `Documentacion/Referencias/Evaluación del Desempeño GNSS en Palas de Minería Superficial.md`
 
 ---
-*Última actualización: 2026-06-02 — kickoff realizado, pendiente reunión con Metatec*
+*Última actualización: 2026-06-29 — reunión con Metatec realizada por equipo comercial; proyecto bloqueado esperando RFP oficial de Antamina*

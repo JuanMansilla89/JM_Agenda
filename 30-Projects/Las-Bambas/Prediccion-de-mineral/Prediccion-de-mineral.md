@@ -2,7 +2,7 @@
 project: Prediccion-de-mineral
 parent: Las-Bambas
 status: active
-stage: demo-en-preparacion
+stage: seguimiento-propuesta
 owner: "Juan Mansilla"
 stakeholders: [Mario Rojas]
 start-date: 2026-05-28
@@ -17,10 +17,11 @@ repo: ""
 
 | Aspecto | Estado |
 |---------|--------|
-| Frontend — visor 3D (Ore Projector) | 🟡 En desarrollo — código en `Documentacion/Codigo/Ore_Projector/` |
-| Demo a William — presentación en sitio | 🔺 Programada 2026-06-26 |
-| Propuesta técnica | ⏳ Pendiente — post-demo |
-| Propuesta económica | ⏳ Pendiente — post-demo |
+| Frontend — visor 3D (Ore Projector) | ✅ Demo realizado — código en `Documentacion/Codigo/Ore_Projector/` |
+| Demo a Mario Rojas — presentación en sitio | ✅ Realizado 2026-06-26 |
+| Seguimiento propuesta técnico-económica | 🔺 En curso — contacto: Mario Rojas |
+| Propuesta técnica | ⏳ En elaboración |
+| Propuesta económica | ⏳ En elaboración |
 | Integración con datos reales de Las Bambas | ⏳ Pendiente |
 | Backend / API de datos | ⏳ Pendiente |
 | Repositorio externo (repo:) | ⏳ Pendiente — pegar URL en frontmatter |
@@ -31,17 +32,18 @@ Herramienta de visualización y proyección de clasificación de mineral para el
 
 ## Tareas activas
 
-- [ ] Preparar y ensayar demo Ore Projector para William 📅 2026-06-25 🔺 #lasbambas
-- [ ] Demo a Mario Rojas — presentación Ore Projector en sitio 📅 2026-06-26 🔺 #lasbambas
-- [ ] Redactar propuesta técnica del sistema completo 📅 2026-06-30 ⏫ #lasbambas
-- [ ] Elaborar propuesta económica 📅 2026-06-30 ⏫ #lasbambas
-- [ ] Definir fuentes de datos reales: modelo de bloques + sondajes Las Bambas 📅 2026-06-30 🔼 #lasbambas
-- [ ] Registrar URL del repositorio en frontmatter `repo:` 📅 2026-06-30 🔼 #lasbambas
+- [ ] Hacer seguimiento propuesta técnico-económica con Mario Rojas 📅 2026-07-05 🔺 #lasbambas
+- [ ] Redactar propuesta técnica del sistema completo 📅 2026-07-11 ⏫ #lasbambas
+- [ ] Elaborar propuesta económica 📅 2026-07-11 ⏫ #lasbambas
+- [ ] Definir fuentes de datos reales: modelo de bloques + sondajes Las Bambas 📅 2026-07-11 🔼 #lasbambas
+- [ ] Registrar URL del repositorio en frontmatter `repo:` 📅 2026-07-11 🔼 #lasbambas
 
 ## Tareas completadas
 
 - [x] Apertura del sub-proyecto Predicción de Mineral 📅 2026-05-28 ✅ 2026-05-28 #lasbambas
 - [x] Cargar código frontend Ore Projector en vault ✅ 2026-05-28 #lasbambas
+- [x] Preparar y ensayar demo Ore Projector ✅ 2026-06-25 #lasbambas
+- [x] Demo a Mario Rojas — presentación Ore Projector en sitio ✅ 2026-06-26 #lasbambas
 
 ## Arquitectura del frontend — Ore Projector
 
@@ -142,4 +144,4 @@ SORT file.mtime DESC
 - Documentación de código en `Documentacion/Codigo/`
 
 ---
-*Última actualización: 2026-06-18*
+*Última actualización: 2026-06-28*
