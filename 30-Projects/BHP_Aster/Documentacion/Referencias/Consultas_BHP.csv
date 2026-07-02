@@ -1,0 +1,105 @@
+Pregunta,Respuesta
+"En relación al desafío ""Transformar la gestión del tráfico en la mina para lograr un flujo continuo y seguro"" (Área Operaciones Mina):
+¿Es posible conocer qué tipo de sistemas de telemetría, posicionamiento o dispatch operan actualmente en los equipos móviles y livianos contemplados en el alcance de este desafío? Esta información nos permitiría evaluar la integración técnica de
+nuestra solución con la infraestructura existente.",Se podria entregar esa información para los proyectos finalistas que firmen el acuerdo de confidencialidad
+"¿La red de datos de BHP disponible a lo largo de las vías principales de la mina (WiFi mesh, LTE privado, radio) tiene capacidad para transmitir datos de tráfico en tiempo real desde los puntos de control hacia un sistema centralizado dentro de la infraestructura interna de la operación? Indicar tecnología, cobertura estimada y estándar de ciberseguridad OT de BHP que rige esa red.","A lo largo de las vías principales de la mina existe infraestructura de comunicaciones disponible, basada principalmente en LTE privado, complementada en algunos sectores por otros medios de comunicación industrial. Esta red permite la transmisión de datos de tráfico en tiempo real o casi real desde puntos de control hacia sistemas centralizados dentro de la infraestructura interna de la operación, aunque la cobertura no es completamente uniforme en todo el trazado.
+Las soluciones no deben asumir conectividad continua ni latencia constante, y se espera que consideren mecanismos de resiliencia (procesamiento local, buffering). El uso de esta red se rige por el estándar de ciberseguridad OT de BHP, que define controles de seguridad, segregación de redes y gobierno tecnológico aplicables a este tipo de integraciones."
+"Sobre infraestructura en cabina y AHS: a) ¿Existe actualmente infraestructura en las cabinas de los CAEX (pantallas, tablets, sistemas de dispatch) para recibir alertas dinámicas de una solución de terceros, o la startup debe incluir ese hardware como parte de la solución? b) Para los CAEX en operación autónoma (AHS), ¿el sistema del fabricante (ej. Cat Command for Hauling) acepta inputs de rutas o alertas de sistemas de terceros a través de alguna API, o es un sistema cerrado? c) ¿Los vehículos livianos (camionetas, minibuses de personal) que circulan en el pit tienen actualmente GPS corporativo con tracking en tiempo real, o la cobertura de posicionamiento de livianos es parcial o inexistente?","Para las preguntas a y b, ambos sistemas son cerrados por provedor y a través de esas pantallas no se puede recibir más información (Ademas en los camiones autonomos, no existe operador que vea la información, porque no son tripulados) por lo que si la solución plantea pantallas, es parte de lo que debe proveer el equipo postulante. c) Tienen GPS en tiempo real, pero son para fines de seguridad actualmente y no se puede utilizar para otro fin que no se haya especificado."
+"¿Qué restricciones de seguridad mina no pueden ser violadas por la optimización (distancias mínimas entre CAEX, prohibición de adelantamientos en rampa, prioridad de equipos cargados sobre vacíos, reglas de derecho de paso)? ¿Existe un reglamento formal que la solución deba respetar como constraints duros?","Existe un procedimiento que indica todas las distancias y reglamentos para manejar dentro de la mina, pero este podra ser compartido una vez este firmado el acuerdo de confidencialidad"
+"Existe acceso a energía eléctrica en zonas relevantes para el
+desafío?","Solo las que naturalmente se encuentran disponibles en operación mina de cielo
+abierto"
+"Los equipos CAEX de interés para este desafío son en su totalidad
+tripulados o Autónomos?","Primera instancia tripulados, pero si es posible abordar ambos en un solo piloto seria
+lo ideal"
+"¿Posterior a los pilotajes, se llevará a cabo un RFP?",Depende del resultado del piloto
+"¿Un sistema basado en visión computacional para monitoreo de zonas acotadas (caminos in-pit), detectando intrusiones, detenciones y congestiones, responde al desafío? ¿O se busca
+una solución que abarque la mina completa?","Si este sistema puede mejorar la gestión de trafico, se puede iniciar en esa primera instancia, pero la expectativa es que sea para la mina completa"
+"¿Se busca una solución complementaria al sistema de despacho
+existente, o una capa de inteligencia adicional que se integre con él?","No tenemos preferencia en la propuesta de la solución, siempre y cuando no tenga riesgos adicionales"
+"¿Qué restricciones existen para instalar hardware o sensores
+adicionales en la mina (cámaras, antenas, edge computing)?","No tenemos restricciones, tenemos un proceso de gestión del cambio donde se
+evalúan los riesgos, controles y beneficio para robustecer la instalación"
+"2,- Existe un modelo operacional?para gestionar las actividades en la mina  y este modelo operación esta soportado por algún sistema como SAP u otros?","Sí, en la operación mina existe un modelo operacional definido que estructura y coordina las actividades principales (perforación, tronadura, carguío, transporte, planificación y mantenimiento), así como los procesos de apoyo. Este modelo establece roles, flujos de información y responsabilidades operacionales.
+El modelo operacional está soportado por distintos sistemas empresariales y operacionales, entre ellos sistemas de despacho y control de flota, plataformas de planificación y sistemas corporativos como SAP, principalmente para la gestión de mantenimiento, órdenes de trabajo, logística y reportabilidad. Las integraciones
+específicas y su alcance se evalúan caso a caso."
+3.- es posible en la fase iniciales tener un piloto que use software Open Source?,"Sí, en las fases iniciales (piloto) es posible evaluar una solución que utilice software Open Source, siempre que su uso sea controlado y acotado al piloto.
+No obstante, el software Open Source debe cumplir con los estándares de ciberseguridad, gobierno tecnológico y licenciamiento de BHP, no introducir riesgos operacionales ni de propiedad intelectual, y permitir trazabilidad, soporte y actualización. La continuidad de uso en etapas posteriores o en producción se
+evaluará caso a caso."
+"4. En una fase de validación, es posible usar con infraestructura de TI cercana a los sistemas FMS,  AHS, DAS, AMS, OM (sistema sistema operacional)(baja latencia)?","En una fase de validación puede evaluarse el uso de infraestructura de TI cercana a los sistemas operacionales (como entornos próximos a FMS, AHS, DAS, AMS u OM) para habilitar baja latencia y pruebas controladas de desempeño.
+No obstante, no se autoriza el despliegue directo ni acoplamiento a los sistemas productivos críticos en esta etapa. El uso de infraestructura cercana debe ser desacoplado, de solo lectura y sin impacto operacional, cumpliendo los estándares de ciberseguridad OT y gobierno tecnológico de BHP. El alcance exacto se valida caso a caso durante el piloto."
+"5.- es posible conocer los rutinas operacionales y sus resultados de
+planificación y programación tales como (reunión mensual o semanal de programación)?","Si, se puede revisar el compartir esta información una vez firmado un acuerdo de confidencialidad entre las partes, ya que es data confidencial"
+"6. Existe un sistema de acceso a la mina con sus entradas
+geolocalizadas?",Si
+7.-Es posible contar con información histórica de los sistemas mencionados para proceso de validación de modemo?,"Si, una vez avanzada la propuesta de valor se podrían ver los datos que disponemos para los modelos luego de firmar un acuerdo de confidencialidad entre las partes"
+"¿Cómo se coordina actualmente la asignación de rutas cuando
+ambas flotas comparten tramos del camino?","Se puede revisar el compartir esta información una vez firmado un acuerdo de
+confidencialidad entre las partes, ya que es data confidencial"
+"El alcance del desafío es para vehículos livianos y flota pesada (CAEX). ¿El protipo inical puede partir con una flota inicial y luego
+involucrar a las otras?","Es para la flota pesada CAEX, se puede armar un piloto con una flota definida de camiones y luego en el proceso de escalamiento avanzar con el resto"
+"¿Cuál es la estimación del costo operacional por minuto de camión
+CAEX en espera?","Se puede revisar el compartir esta información una vez firmado un acuerdo de
+confidencialidad entre las partes, ya que es data confidencial"
+"¿Qué información o tipo de alertas se espera que reciban los operadores de camiones, tanto autónomos como tripulados, y los
+conductores de vehículos livianos?",Buscamos que la operación de camiones no tenga grandes interferencia por la saturación de señales - alertas y condiciones
+"¿Se espera el mismo nivel de detalle en la información para vehículos livianos y pesados, o existen diferencias en los
+requerimientos?",La oportunidad esta mas orientada en CAEX que en otros movimientos
+"Técnica, ¿En que formato les entrega los datos Modular y la reportabilidad de gestión de datos?","El sistema de despacho Modular entrega los datos operacionales principalmente en formatos estructurados, asociados a bases de datos relacionales y vistas de reportabilidad que luego son consumidas por plataformas analíticas y de visualización. La información se explota típicamente a través de extracciones de datos, modelos semánticos y reportes consolidados.
+La reportabilidad de gestión se presenta mediante tableros y reportes analíticos (por ejemplo, indicadores de producción, flota, tiempos y eventos), generalmente con datos agregados o históricos, más que como flujos crudos en tiempo real. El acceso y formato específico se definen según el caso y deben ser validados en etapas
+posteriores del piloto."
+"Técnica, ¿Podemos acceder a las rutas de transporte en formato
+.DXF o .DWG?","Existen archivos y planos de rutas de transporte generados durante procesos de ingeniería y planificación, los cuales pueden estar disponibles en formatos CAD como .DXF o .DWG. Sin embargo, estos archivos no se encuentran habilitados de forma estándar para uso directo en la fase inicial del desafío.
+Las soluciones no deben asumir acceso inmediato a archivos CAD de rutas. En caso de que una solución preseleccionada requiera este tipo de información para escalar  o refinar su propuesta, la disponibilidad y formato de entrega se evaluarán en etapas
+posteriores, considerando gobierno de la información y uso previsto."
+"Técnica, ¿Cuál es el ""evento no esperado"" que más se repite en su
+operación mina?","Se puede revisar el compartir esta información una vez firmado un acuerdo de
+confidencialidad entre las partes, ya que es data confidencial"
+"Técnica, ¿Cómo podemos conectar con los planificadores mina?
+¿En que formato les serviría esta gestión y toma de decisiones en tiempo real?","Si, se puede conectar con las planificación mina, no tenemos un formato especifico para avanzar con la propuesta"
+"Técnica, La “decisión inteligente” en tiempo real que entregue
+nuestra herramienta. ¿A quién se le comunica y en que formato o interfase?","Al Centro Integrado de Operaciones, ningún formato de preferencia por el momento"
+"Económica, ¿Que documentos solicitan para poder participar y en el caso de adjudicación?","Para participar, se solicitan antecedentes legales básicos, declaraciones de cumplimiento y una propuesta técnica-económica preliminar.
+En caso de adjudicación, se exigen documentos legales completos, cumplimiento de seguridad y ciberseguridad, y una oferta comercial formal según estándares de BHP."
+Existen sistemas de georreferenciación al interior de túneles?,Escondida es una minera de rajo abierto
+"Cuales son las limitaciones técnicas de intervenir sistemas al
+interior de la mina?","Se puede revisar el compartir esta información una vez firmado un acuerdo de
+confidencialidad entre las partes, ya que es data confidencial"
+Cuales son todos los procesos mina que se requiren unificar?,Flujo de camiones CAEX en las distintas expansiones
+"El desafío es desarrollar una recomedador de destino e itinerario
+para equipos móviles y liviano en linea?",El desafío esta mas orientado para equipo de alto tonelaje
+"Para abordar el desafío, se permite el uso de IA? Si la respuesta es si, cuales son las restricciones?","Sí, se permite el uso de Inteligencia Artificial (IA) para abordar el desafío, incluyendo analítica avanzada y modelos de machine learning orientados a apoyo a la operación, predicción y optimización. El uso de IA es consistente con prácticas actuales de BHP, siempre que esté claramente enfocado en generar valor operacional y seguridad.
+El uso de IA está sujeto a restricciones de gobierno tecnológico, incluyendo: cumplimiento de los estándares corporativos de IA y ciberseguridad OT de BHP, protección de datos operacionales y propiedad intelectual, trazabilidad y explicabilidad de los modelos, y evaluación de riesgos antes de su uso en entornos productivos. Los detalles de arquitectura, entrenamiento y despliegue se revisarán
+en etapas posteriores con las soluciones preseleccionadas."
+"Esta dentro del alcance la revision de procesos mina que pueden
+incrementar tráfico mina?","si, consideramos que el análisis se puede revisar y si es beneficioso se puede
+avanzar con gestiones de cambios"
+Does the company use traffic management system today on the mining site?,"Sí. Actualmente la operación minera gestiona el tráfico como parte de los sistemas de despacho, control de flota y control mina, los cuales permiten coordinar rutas, prioridades de tránsito, zonas operativas y segregación de equipos en tiempo real o casi real.
+Esta gestión se apoya en procedimientos operacionales definidos, herramientas de despacho y monitoreo, y planes de gestión de tráfico asociados a seguridad y operación. No obstante, la gestión del tráfico no está totalmente integrada como un sistema único optimizado para flujo continuo, lo que abre oportunidades de mejora y
+transformación a través de este desafío"
+What is the main vendor for your technology capabilities- Microsoft / IBM / Amazon?,"La operación utiliza principalmente un enfoque multi-cloud, con Microsoft y Amazon Web Services (AWS) como los principales proveedores tecnológicos.
+-Microsoft es predominante para productividad, desarrollo de aplicaciones, analítica y visualización, especialmente mediante Power Platform, Power BI y entornos Azure.
+-AWS es ampliamente usado para plataformas de datos, analítica avanzada, procesamiento a escala y soluciones industriales, especialmente en casos de uso de IoT, data engineering y analítica operacional."
+Does the site use any A.I to support operations on the site?,"Sí. Actualmente el sitio utiliza soluciones basadas en Inteligencia Artificial y analítica avanzada para apoyar la operación, principalmente en ámbitos como planificación minera, seguridad, análisis operacional y optimización del desempeño.
+Estas aplicaciones de IA se usan como herramientas de apoyo a la toma de decisiones, generando análisis, predicciones e insights a partir de datos operacionales. No sustituyen la decisión humana ni controlan directamente la operación, y su uso está sujeto a estándares de gobierno y uso responsable de IA."
+What A.I. vendor do you use today?,"Actualmente usamos proveedores de Inteligencia Artificial basados principalmente en Microsoft y Amazon Web Services (AWS).
+Ambos proveedores soportan distintas capacidades de IA, machine learning y analítica avanzada que se utilizan para necesidades corporativas y operacionales del
+sitio."
+"What is the total number of operational shifts that this traffic design
+must support in One Day?","Se puede revisar el compartir esta información una vez firmado un acuerdo de
+confidencialidad entre las partes, ya que es data confidencial"
+"Who is the original equipment manufacturer (OEM) for the
+equipment?","Se puede revisar el compartir esta información una vez firmado un acuerdo de
+confidencialidad entre las partes, ya que es data confidencial"
+"Is there a control tower today managing the traffic movements on
+the site?","Yes, we have a Center of Remotre Control who managing the traffic"
+How many human operators are in the control tower?,"Se puede revisar el compartir esta información una vez firmado un acuerdo de
+confidencialidad entre las partes, ya que es data confidencial"
+What are their responsibilities while in the control tower?,Control by optimizing movement routes according to the needs of the expansions
+"What is the current traffic process and which department owns this
+process?","Se puede revisar el compartir esta información una vez firmado un acuerdo de
+confidencialidad entre las partes, ya que es data confidencial"
+How many accidents has this site had in the last year?,"Se puede entregar esa información una vez se firmen los acuerdos de
+confidencialidad con los finalistas"
+What is the current number of movements on the site in one day?,"Se puede entregar esa información una vez se firmen los acuerdos de
+confidencialidad con los finalistas"

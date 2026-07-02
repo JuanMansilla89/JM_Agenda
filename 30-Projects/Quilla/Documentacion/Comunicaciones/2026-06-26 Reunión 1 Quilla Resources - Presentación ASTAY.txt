@@ -1,0 +1,200 @@
+Juan Mansilla
+00:05
+Luis, me indica si tienes si estás mejor o si no yo hago la presentación no tengo problema
+
+Luis ASTAY
+00:13
+si, un favor Sote Juan porque está aquí medio raro el internet pero
+
+Juan Mansilla
+00:19
+te pido ese favor yo te pongo ya, ya, no hay problema esa técnica mecánica o leitica Nada más, no, porque operación... a ver voy a compartir uno de mis escritorios y me confirma si se puede ver voy a tratar de configurar esto para poder verlos también ya, a ver si nos puedo ya, muchas gracias a todos bueno, gracias Eduardo nuevamente te saluda Juan Mancilla está el equipo comercial acá por Luis Quispe que es el que ha estado haciendo el seguimiento y el contacto Yulisa Mejía que también es del equipo del equipo Yo soy el gerente técnico, como comentaba, y bueno, nosotros somos Aztai, somos parte del equipo de la empresa. Y Aztai es una empresa de tecnología especializada en la industria minera. En general, nuestras soluciones lo que buscan es convertir los datos en activos que aporten valor y transformen a las organizaciones. Nosotros hoy en día abordamos diversos retos, desde desarrollar lo que viene a ser BI o inteligencia de negocios, todo lo que son construir sistemas de reportabilidad. Tenemos también automatizaciones que hacemos para diferentes clientes. Tenemos proyectos de analítica, tenemos también productos como el germenio digital y Mindstock, que es para modelamiento de stocks y también y para que tienen capacidades de analítica está ingresando ¿qué tal? María, un gusto buenas tardes
+
+Julissa
+03:01
+Hola, buenas tardes, un gusto
+
+Juan Mansilla
+03:05
+¿qué tal?
+
+Eduardo Quilla
+03:06
+María, ¿cómo estás?
+
+Juan Mansilla
+03:07
+¿qué tal? Sí, ya había empezado un poco yo voy a empezar un poco con la presentación a Eduardo para que nos conozcan, entiendo que es nuestra primera sesión Eduardo y bueno, nosotros tenemos bastante experiencia trabajando con diversas empresas mineras acá en el Perú y en el extranjero tenemos oficinas también en Estados Unidos y Chile, este año se han abierto y estamos por empezar proyectos en el sur tenemos servicios que hacemos a corporativos como Angloamérica por ejemplo, y hoy en día estamos en minas como Las Bambas, Minsur, también haciendo algunos servicios y productos que tenemos. Como comentaba, nosotros tenemos dos áreas, la de servicios especializados y la de productos. Vamos a empezar por el lado de servicios. Nosotros tenemos bastante experiencia en lo que es construir el core de inteligencia de negocios, donde de repente pasar de un estado de sistemas dispersos, con muchos trabajos manuales, que de repente la información no llega a tiempo o demora en llegar. Entonces nosotros tenemos mucha experiencia trabajando con resolver este tipo de problemas. Hemos trabajado en varias operaciones mineras y tenemos más de 40 sistemas mineros que conocemos en diferentes países también. Y lo que nosotros buscamos es simplificar todo esto, ¿no? Simplificar para que los usuarios se enfoquen en resolver de repente sus necesidades en el core del negocio y lo que es datos, lo que es tecnología, nosotros nos enfocamos en trabajarlo y lo que nosotros buscamos es generar una menos fricción operativa, más visibilidad, más coordinación y mayor capacidad de poder anticiparnos. Dentro de los servicios que nosotros tenemos, tenemos el diagnóstico de ASIS, que es un assessment que hacemos nosotros a nivel de procesos, sistemas, datos, desarrollamos roadmap para proyectos de inteligencia de negocios, proyectos de analítica. Esto nosotros lo hemos hecho para Mineras acá en el Perú, donde nos ha tocado revisar y tocar la puerta a las diversas áreas de negocio, entrevistarlos, saber quién es el owner del producto, quiénes son los consumidores de esa información, y establecer un mapa de trabajo. Tenemos mucha experiencia trabajando también con integración de sistemas, y desarrollo de sistemas de reportabilidad. Es un core fuerte, hoy en día lo hacemos para varias mineras, donde estamos a cargo de su sistema principal de reportabilidad. No es el típico dashboard en Power BI que de repente, como usuario final, uno puede percibir, sino que llegamos desde mucho más atrás, desde conocer los sistemas de origen e integrarlo. También desarrollamos dashboards operacionales. Acá la diferencia entre sistema de reportabilidad y dashboard es que sistema de reportabilidad es algo que de repente cada seis horas, cada ocho horas, cada cambio de turno, se va actualizando con información ya validada, reportada, conciliada. Y los dashboards buscan ser aplicaciones web, por lo federal web, con la tecnología que hoy en día nosotros trabajamos en tiempo real. Muy en tiempo real, en donde tenemos experiencia trabajando hoy en día con plantas, Estamos integrando los sistemas de planta en nuestra plataforma, agregando las reglas de negocio, generando alertas, alertas sobre condiciones o que se mande ya sea al Teams o a un cliente de correo electrónico hacia ciertos usuarios, la información que requieran. Y por último tenemos la capa de Machine Learning, la capa de Analítica Avanzada. Le decimos nosotros Analítica porque no solamente vemos Inteligencia Artificial, sino también trabajamos con algoritmos heurísticas complejas muy del área minera para poder integrarlos a una capa, nos va a depender mucho del proyecto del roadmap que tengan nosotros podemos trabajar en cualquier con un scope, con un alcance que puedan tener, con un objetivo que se han planteado, podemos ofrecernos estos servicios. Nosotros, esto debí comentarlo un poco antes, somos una empresa peruana, estamos acá en Surco, por Chacaríac, creo que estamos muy cerca, así que de todas maneras, estamos acá en las oficinas de la empresa, y nos pueden visitar si también quieren oportuno. Para que vean algunos de nuestros productos, por lo general hay información que no podemos compartir libremente por temas de confidencialidad, pero sí podemos mostrar algo más acá. Algo importante por lo general para cualquier empresa es ubicarse dónde está, qué proyectos tienen cartera, para eso nosotros ofrecemos el servicio de diagnóstico ASIS, que es un assessment de todo lo que se tiene, qué es lo que se quiere hacer, qué se requiere para hacer, digamos, hacer casos de negocio para ver un tema de priorización, para ver qué cosa mueve más la aguja de acuerdo a la situación actual que tiene la minera y nos enfocamos en entender el proceso acá todos somos ingenieros de minas, la mayoría por lo menos que atiende al cliente son mineros porque somos muy cercanos a las necesidades que puede tener cada operación y bueno, tenemos un pool de ingenieros de sistemas, informáticos, matemáticos, de plasques, son los que al final de cuentas se invierten las horas desarrollando, haciendo las automatizaciones que se requieran. Hacemos todo ese mapeo, entender qué sistemas tiene, hacemos algunas recomendaciones también en cuanto a adquirir sistemas. Por experiencia que ya tenemos, sobre todo si el roadmap llega hasta analítica, tenemos experiencia trabajando con varios proveedores y que de repente podemos apoyar ahí. Lo que buscamos es tener una calidad, una trazabilidad en datos, o sea, saber que ese KPI se estima así y así es el estándar, porque de la experiencia que tenemos, puede ser que entre dos y tres áreas tienen el mismo KPI, pero se calcula diferente. Y al final, ¿cuál es la verdad? De repente uno reporta una verdad A, otra una verdad B. Estas son cosas que nosotros hemos visto, y nosotros podemos enfocar la experiencia que tenemos en poder materializar todo esto en entregables, en etapas que los usuarios o clientes pueden tener. Dentro de integración de sistemas, como comentaba, hemos trabajado con más de 40 sistemas mineros. Yo creo que ya la lista ya creció. Sistema de gestión de flota, sistema de planificación minera, perforación, voladura. Hemos hecho integración con todos estos sistemas. planta hoy en día, PaiSystem, todos los sistemas historiadores, tenemos experiencia trabajando, construyendo capas de datos donde toda la información esté estructurada, para que sea consumida, para que sea analizada por el negocio y para que sirva no solamente para sistemas de reportabilidad como tal, sino para hacer analíticas, encontrar patrones, oportunidades en el negocio a través de los datos. Unificamos todas estas fuentes para tener esta trazabilidad, como comentaba, de saber dónde están como operación, en qué situación está, construir una capa de analítica encima de eso. Bueno, en temas de reportabilidad y dashboard es lo que hoy en día es nuestro servicio más común. Es decir, que para varios de sus clientes ya han construido alguna capa de integración o la construimos como parte de este proyecto y podemos hacer diversos reportes que sean de acuerdo al nivel de la operación. Nosotros trabajamos con un concepto que se llama Left Flow o nivel de trabajo, o sea que cada área tiene una jerarquía donde cierta persona debe ver cierto KPI porque es lo que realmente interesa y está dentro de su alcance y su gestión poder corregirlo. corregirlo. Entonces, para cada área nosotros podemos establecer qué reportes hay, hacer la propuesta, trabajar para entender qué KPI es el que quieren ver, qué KPI es el que realmente pueden ellos trabajar, ¿no? Y tener todo mapeado. Nosotros hemos llegado hasta más ya en el sentido de que hemos podido integrar mini planta para uno ya estamos terminando, el otro cliente estamos empezando, donde tiene la información desde el bloque que se cargó, en qué momento fue procesado por molinos, por chancadora, todo el flujo, ese bloque con qué fue volado, cuál fue el resultado de la voladura, cuánta energía se utilizó para la comisión de ese bloque. Llegamos hasta ese detalle. Hasta ese detalle hoy en día es nuestro alcance. Hemos hecho este tipo de reportes. Bueno, acá hay algunos ejemplos más que al final se los podemos compartir porque estos son reportes que nosotros hemos creado justamente para mostrar. pero nosotros nos ajustamos a Look and Feel, a la marca de la empresa, y que sea un reporte institucional, y que esté de acuerdo a sus necesidades. No sé si hasta este punto tienen alguna consulta, Eduardo, María.
+
+Eduardo Quilla
+13:55
+Sí, yo tengo un par de dudas, pero creo que voy a estar a que termines la presentación para realizarlas.
+
+Juan Mansilla
+14:03
+Ya, no hay problema, no hay problema.
+
+Julissa
+14:05
+Disculpa, me tengo que tener otra llamada, pero lo dejo con Eduardo.
+
+Juan Mansilla
+14:09
+Ya, no hay problema. Gracias. Ya, ese toque. También tenemos automatizaciones que hemos desarrollado, no aplicaciones. Hoy en día trabajamos mucho con la tecnología de Microsoft. La mayoría de nuestros clientes trabaja con ella, no es una limitante, pero tratamos de aprovechar la infraestructura que ya tienen servidores, servicios que cuenten, para aprovecharla y poder ahí colocar nuestros desarrollos, de manera que el cliente pueda más adelante actualizarlo, gestionarlo por ellos mismos. Lo hemos hecho, por ejemplo, para Marcobre, que se lo ha entregado todo el proyecto, y ellos pueden autogestionarse si así lo requieren, o si quieren elevarlo, como ha pasado, van con los otros. Vemos temas de automatización, como indicaba, con Power Automate, hacemos aplicaciones con Power Apps, para llenar comentarios, para tener forms que sean accesibles desde el teléfono, que se envíen alertas, que se envíen correos a nuestros usuarios. Y también tenemos aplicaciones de analítica avanzada para fragmentación, para modelamiento de bloques. ¿Y cómo trabajamos? Primero nosotros hacemos una sesión. Sabemos que nuestros clientes tienen poco tiempo, por eso que la mayoría que trabajamos en primera línea somos mineros. y entendemos cuál es el requerimiento. Conocemos la mayoría de sistemas, hacemos una planificación, una evaluación técnica. A nosotros nos toma muy poco tiempo hacer una propuesta, pero ya conocemos la mayoría de sistemas mineros. Si el objetivo es claro, de algún proceso que se quiera automatizar. En el caso que quiera hacer de repente un proyecto mucho más grande, mucho más transversal, también tenemos experiencia trabajando pero sí, ahí hay de repente mayores consultas que tenemos que realizar al equipo técnico para poder acertar correctamente al alcance que se tiene y luego de eso hacemos la ejecución nosotros conocemos muy bien el negocio como comento y podemos separarlo por etapas por etapas y con materiales claros si es necesario trabajar con una metodología de entregar MVPs, ¿no? Por cada área y después evolucionar los productos también lo hacemos, ¿no? Porque siempre es importante tener casos de éxito para mostrar a la gerencia a la alta gerencia a las jefaturas, entonces trabajamos con esa metodología para tener ganancias rápidas, ¿no? Y poder elevarlo, ¿no? Y bueno, luego de eso tenemos nuestros productos, está el gemelo digital. En este caso, que es una aplicación web, lo que busca es tener un entorno integrado, unificado, en tiempo real. Nosotros tenemos la aplicación hoy en día en web, para que uno pueda saber qué está pasando en la mina. No solamente buscamos agregar fuentes por agregarlas, sino construir una capa superior de... De... De... De... De... De inteligencia operacional. Es decir, saber qué APIs van en el turno, qué fase ya tengo. es una aplicación que busca resolver problemas muy tácticos del día a día, con un alcance, con un modelamiento de semana. Encima de eso, nosotros construimos una capa de analítica donde puedes correr simulaciones, donde puedes entender de repente cómo se está comportando la flota en la mina, qué tan alejado estás del plan de minado. Igual, acá ponemos todo nuestro expertise integrando diversas fuentes de minado en la misma plataforma y pudiendo generar la visualización, las recomendaciones. Esto nosotros lo configuramos a los objetivos que puedan tener. Eduardo, por ejemplo, trabajamos con temas de contaminantes, con temas de restrictores del proceso dentro de la plataforma. Y al ser web, nosotros podemos conectarnos desde cualquier punto. dentro de un momento voy a buscar ahí la demo para poder compartirlo si no, Yulisa, si tienes por ahí la demo igual más adelante te indico para poder compartirlo DataTree en sí tiene tres módulos, el módulo de visualización el módulo de BI le llamamos MyMetrics y el módulo de analítica que es MyAnalytics ya se ha implementado dos minas a la fecha lo que se está viendo acá es la demo en realidad en las minas es mucho más atractivo y más allá de atractivo lo que buscamos es que sea útil nosotros participamos en el Perú el año pasado donde nuestro cliente ganó el de tecnología ya justamente porque ellos tienen muchos problemas en control de axillas y bueno esto hace que se cae el tropo lo mismo pasa con otros clientes que pueden tener problemas de dureza o sea, puedan hacer un blending correcto para la alimentación de manera que el trópol no caiga o que los contaminantes huelen de repente como ley se está agregando pero como mezcla planta va a empezar a caer recuperación por un tema de priorización por un tema de que no se liberó el área de mineral para hacer blending entonces esto es una de nuestras de nuestros productos y no sé si tienes alguna consulta Eduardo para poder atenderla
+
+Eduardo Quilla
+20:35
+Sí Bueno, primero es muy interesante todo lo que han mostrado Me voy a presentar antes Eduardo Sánchez, yo soy el superintendente de planeamiento de mina de KIA Resources, de Mina Chapi. Entiendo de que esto ya lo había visto Marinés antes o también era la primera vez que iba a visualizar la presentación de ustedes.
+
+Juan Mansilla
+21:02
+No, este era la tercera vez creo, ¿no Luis?
+
+Luis ASTAY
+21:06
+Sí, ahí mira, Eduardo, te cuento un poquito, discúlpame ahí que es todo un tema con la red, pero prefiero ahorita apagar la cámara, pero en primera instancia nosotros tuvimos una primera sesión con Víctor. Con Víctor fue necesariamente ahí el gemelo digital, o bueno, el Data Twin. La segunda sesión con María sí fue enfocada en esta parte de servicios porque Víctor nos comentó ahí que, bueno, María está encargada de todo el área de planeamiento, y bueno, ya cuando se hizo la sesión con María, pues nos indicó para poder atender estas necesidades y explicarlas también a parte de su equipo contigo, pues, ¿no? Y así fue un poco la línea.
+
+Eduardo Quilla
+21:43
+Claro. María Inés es la directora de servicios técnicos de Quilla. entonces sí, nosotros somos una mina que recién estamos iniciando nuestro proceso de producción y como estamos reactivando todo el plan de producción requerimos bastante este soporte en la reportabilidad los reportes que estamos generando carecen de estas características en cuanto a todo lo que tú has mencionado la data, la toma de la data la comparación de la data entre áreas los reportes que nos ayuden a tomar decisiones, etcétera, etcétera, etcétera. Entonces, mi primera pregunta es, yo veo que todo lo que tú has mostrado, incluso veo las experiencias que tú mencionas, son más que nada en OP. ¿Han probado este sistema en underground?
+
+Juan Mansilla
+22:37
+En realidad, para todos estos desarrollos, lo que es dashboard, iteración, no hay problema en OP, siempre y cuando hay el dato. Podemos generar los medios para capturarlo, que pueden ser aplicaciones, o conectarlos a sistemas. Pero respondiendo directamente a la pregunta, no hemos implementado... En OpenPit sí, pero no en Underground todavía.
+
+Eduardo Quilla
+23:12
+Te comento de que actualmente Mina Chapi es una mina que tiene la producción tanto OpenPi como el Aminogen, es una parte clara que tenemos como mina de que es extremo mineral de ambos lados. Mi consulta es sobre el Data Twin. Entiendo que el Data Twin es un complemento a la primera parte que tú mostraste acerca de la reportabilidad, o es un complemento, algo que se requiere para generar todos esos reportes que mencionaste al inicio de la presentación.
+
+Juan Mansilla
+23:41
+No, el G-Mail no es una solución que está pensada para OP, ya actualmente la versión OP. Está dentro de los productos. Los servicios responden mucho a la necesidad del cliente, ¿no? De repente quiere establecer un sistema de reportabilidad. Nosotros podemos trabajar en eso y volcar toda nuestra expertise en ese punto, bajo sus condiciones operativas, bajo sus alineamientos de TI. Todo eso lo podemos ver dentro de los servicios. Y lo que es productos, si hay un tema de requerimiento es porque consumimos en muchos casos, dependemos de algunos sistemas que tengan ya el cliente para poder que el sistema funcione. en el caso de servicios no no necesariamente si es un sistema de reportabilidad lo que estamos buscando podemos trabajar en eso
+
+Eduardo Quilla
+24:39
+claro, pero por ahí va mi pregunta que era una verdad que tenía entiendo que todo lo que nos han mostrado para la primera parte que es reportabilidad requieren que tengamos el Power BI o sea que nosotros tengamos los software que ustedes nos van a mencionar y básicamente el sistema de ustedes sería el generar el reporte como una etapa de un mes, dos meses, donde ustedes nos ayudan a la generación, a la reportabilidad a la captación de data y luego quedamos nosotros por nuestra cuenta o es un proceso de continuo de acompañamiento que vamos a tener esa parte, si quisiera saberla
+
+Juan Mansilla
+25:16
+sí, depende depende mucho del caso hoy en día nosotros hacemos las dos cosas hay clientes que Nos contratan solamente por el proyecto, nosotros dejamos todo implementado y nos retiramos y damos una bolsa de horas para soporte. O en su defecto, nos contratan y tenemos horas hombre para generar reportes, para dar soporte en general sobre el producto. Hay ambas situaciones. Ahora, respecto a la tecnología, va a depender mucho del cliente. Nosotros podemos no depender absolutamente de ninguna licencia del cliente, o sea que no le podemos decir licencia cero, pero eso sí, habría que conversar con TI para ver si qué stack tecnológico está autorizado. Hay temas de gobernanza, de seguridad de la información, de ciberseguridad, que es importante. Nosotros tenemos aplicaciones que son open source, no hay costo de licenciamiento, pero sí hay un tema de conversar con el área TI para poder implementar.
+
+Eduardo Quilla
+26:30
+Claro, sí, me queda claro que hice dos modalidades que podríamos tomar. Y si quisiéramos hacer una implementación de acuerdo a su experiencia, ¿qué tiempo nos tomaría llegar a este nivel que estás mostrando en la pantalla? Que Minaquilla tenga el nivel de reportabilidad mostrado actualmente.
+
+Juan Mansilla
+26:49
+Ya. Habría que, bueno, no conozco mucho acerca del nivel de sistemas que tienen. Sería un punto de partida, por eso a veces ofrecemos el servicio de ASIS, sobre todo para conocer las políticas del cliente, para no prometer algo que de repente no es alcanzable en corto plazo. Hoy en día nosotros trabajamos con sprint de un proyecto de tres meses, seis meses. No buscamos proyectos muy largos porque también el tema del entregable pierde sustancia si nos embargamos un proyecto de dos años. Nosotros buscamos trabajar con entregables de corta duración, con un roadmap claro, o sea, donde se está apuntando, pero con paquetes que puedan ser útiles desde los primeros tres meses, cuatro meses, en general. De repente la estrategia sería primero los principales KPIs para la alta gerencia y vamos bajando para la gerencia, para la superintendencia hacia abajo. Y en esa línea vertical diversificar. De repente sería una estrategia para poder trabajar así.
+
+Eduardo Quilla
+28:01
+Te cuento un caso. Algo que tengo en la mente ahora. ¿Qué tan automático es este proceso una vez que esté implementado? Me ha pasado en varias minas de que cuando se quieren hacer reportes, dadas o reportabilidades, sobre todo en lo que estoy viendo actualmente, se requiere mucho trabajo de una persona llenando los datos. Son varias áreas las que tenemos. Este reporte es muy completo, está muy bueno, pero también tenemos que saber que requiere presencia de varias personas llenando esta información para generar toda la data. Me ha tocado muchas veces contratar a una persona, generalmente practicantes, que se pasan todo el día llenando estos cuadros. Entonces, ¿qué pasaría si yo no tengo esa capacidad de tener una persona que me llene el cuadro todo el día? ¿Qué me ha pasado? ¿Qué tan automático es este proceso? ¿Qué tan automático, qué tan rápido puedo tener estos reportes día a día?
+
+Juan Mansilla
+28:56
+Ya, esa es una buena pregunta también. O sea, nosotros partimos de que debe haber algún sistema. O sea, si no hay sistema que recopile los datos, obviamente va a tener que haber una persona que llene esos formularios lo más rápido posible. o que los llenen, habría que priorizar exactamente qué exactamente se quiere ver, porque se pueden generar muchos reportes, pero tiene que haber uno que otro que mueva más de repente la dirección o la aguja para el negocio en general. Entonces, priorizar por ahí. Lo que hacemos nosotros es, en caso no haya de repente estas personas, es en la parte de análisis entender y proponer plantillas. Si existen ya plantillas, si trabajan con SharePoint, por ejemplo, no sé si trabajan con Teams. Con SharePoint. Y con SharePoint, sí. Por ejemplo, con SharePoint se puede hacer muchas automáticas. Con SharePoint, por acá lo ponemos. Con SharePoint. Por acá. todo lo que es SharePoint bueno, que dice Databricks se puede hacer muchas automatizaciones esto con Power Automate te puedes extraer los datos las puedes copiar, mover, consolidar en una sola base de datos que esté bajo su gobernanza de ustedes ¿no? y bueno, de lo que es rutinario que alguien tiene que llenar, lo capturamos de repente ya te quitas el trabajo de estar moviendo, de estar validando que esa nueva persona reciba un feedback si está correcto sus datos, si está cumpliendo la plantilla. Y acá hay un tema mucho de gestión del cambio de cultura también respecto a esto. Es si se trabaja, o sea, por X motivo, de repente no hay un sistema que capture los datos y es una captura más manual y cada supervisión, cada área tiene cierta responsabilidad en llenar bien sus datos.
+
+Eduardo Quilla
+31:00
+Nosotros lo que hacemos es... Hay un paréntesis antes de que se vaya la idea. Cuando es un sistema de captura de datos, ¿te refieres a algo al SAP o algo parecido al SAP? ¿O a qué te refieres?
+
+Juan Mansilla
+31:11
+Claro, puede ser algo similar al SAP, como PySystem, por ejemplo, como un sistema de gestión de flota, un sistema de perforación. No sé con qué sistemas estén contando actualmente. El Excel. El Excel es nuestro sistema ahorita. Sí, sí lo entendemos.
+
+Eduardo Quilla
+31:33
+Como somos nuevos, recién estamos implementando ahorita, no nosotros.
+
+Juan Mansilla
+31:39
+Entonces, ahí lo más valioso es establecer controles. O sea, controles sobre cada punto de llenado dentro de la plataforma. Es decir, tener flujos ya establecidos, el Power Automate, que tiene Microsoft, sería lo mejor, donde si tal persona saber en qué momento llenó, si le llenó bien, si se equivocó, que se le dé feedback a esa persona, el mismo sistema que hace esto, o sea, decir, le llevo un correo, estás mal llenado tus datos, has agregado dos, la clásica, ¿no? Te agregan dos columnas más, te cambian la fórmula, se malogró la plantilla y se malogró de repente todo lo que estaba aguas abajo. Entonces, eso nosotros, ¿cómo lo evitamos? Con Power Automate y dándole reportes hacia arriba. Es decir, oye, el practicante, por decirlo así, o tal persona de tal área no está llenando a la hora que debería de acuerdo a lo que se hizo, de acuerdo a lo que se quedó, y está llegando mal. En vez de colocar números, pone letras, no lo sé. Oye, te modificó la plantilla. Ese tipo de cosas es lo que nosotros colocamos como instrumentos dentro de los flujos automatizados para detectar casos. Y que al final la solución, oye, es una llamada de atención, una orientación, una capacitación nuevamente a este usuario para que llene bien. Entonces ya entra mucho en la parte de la gestión humana porque si no hay sistemas va a tener que caer por la humano y es cuestión de uso y costumbre, básicamente.
+
+Eduardo Quilla
+33:22
+La experiencia que ustedes tienen cuando no es una persona el que llena, tú lo mencionaste, ¿no? Tomas la información del control de flota, tomas la información de... ¿De qué más tomas la información? Por ejemplo, de los planes de producción elaborados en el Scare o en el MPSO, ¿de ahí también toma información?
+
+Juan Mansilla
+33:42
+En nuestra experiencia, la mayoría de esos sistemas, o sea, no hemos trabajado con Desweek, porque me parece que es Desweek lo que mencionabas. No hemos trabajado todavía con Desweek, podemos trabajar con las planillas de Desweek, o sea, con toda esa información podemos trabajar, pero no nos conectamos directamente al sistema. Podríamos tener una oportunidad en algún momento me puse a analizar para una mina e integrar con Desweek, pero no. Lo que sí podemos hacer es con MyPlan si es que trabajan con base de datos. Con eso sí podemos. Pero si no tienen, lo que nosotros hacemos es generar el plan, lo pones en la carpeta de SharePoint y de ahí lo leemos. ESEX y lo leemos de ahí.
+
+Eduardo Quilla
+34:33
+el ASIS sería la primera etapa en la cual tendríamos que tener participación o sea entiendo que es la etapa donde ustedes evalúan y ahí recién ustedes nos dan un feedback de qué es lo que requieren para que el sistema esté integrado es como el primer step, el ASIS ¿verdad?
+
+Juan Mansilla
+34:48
+es lo que nosotros recomendamos sobre todo en este caso que estamos conversando y hay muchas cosas que son manuales seguramente todavía no están documentadas, todavía no está muy claro quién es el owner de ese proceso estoy de repente un poquito más allá, pero no está claro de repente la definición ni siquiera del KPI, entonces sí lo mejor es empezar por el ASIS para tenerlo todo, la cancha pintada, saber de repente qué le interesa ver a a María de repente o a quien corresponda como reporte y que lo tenga lo antes posible esa priorización porque tranquilamente nos podemos ir de repente en otras áreas que no vamos a la augusta en corto plazo
+
+Eduardo Quilla
+35:42
+ok, sí, sí me queda claro, ya volviendo a la primera pregunta ya para cerrar mis preguntas entonces lo que requeriríamos como unidad sería para esta implementación sería el Microsoft, el Power BI el Microsoft y con eso podríamos iniciar lo que es la reportabilidad no requerimos una licencia de parte de ustedes de algún software diferente al que no sea Microsoft o Power BI si
+
+Juan Mansilla
+36:13
+en general lo que nosotros recomendamos ni siquiera es la licencia de Power BI porque existe Power BI Desktop y se puede trabajar con Power BI Desktop lo que si es Microsoft con SharePoint y sí licencias de Power Automate. Eso te lo cobran por flujo y bueno, en general no es tan caro. Eso sería lo mínimo de repente para empezar. Para empezar y ya de ahí va a depender mucho del caso de negocio que se quiera revisar, ¿no? Porque se puede llevar todo a base de datos. O sea, sí hay ese potencial. Pero que nosotros les demos una licencia de Astai, en general no, a menos que sean los productos, ahí sí licenciamos el software, pero en esta trabajamos con lo que tiene el cliente o con lo que está adquiriendo el cliente
+
+Eduardo Quilla
+37:16
+está bueno está bueno creo que en gran parte cubre las necesidades que actualmente estamos requiriendo de todas maneras va a tener que conversar con Marinés y explicarle todo lo que hemos visto el día de hoy.
+
+Juan Mansilla
+37:33
+Sí, claro, no hay problema, Eduardo.
+
+Eduardo Quilla
+37:40
+Claro, yo entiendo que para que esto funcione, entiendo que para que esto no sea el trabajo de una sola persona, es de que todas las áreas tengan la opción de llenar o pushar point, llenar la parte que le corresponde, y creo que si dividimos y cada área es el responsable de la data, demostrada, creo que esto puede funcionar mejor.
+
+Juan Mansilla
+38:01
+Sí, es lo recomendable, ¿no? Por eso que establecemos ahí algunas medidas de control como para saber quién que de repente no está llenando correctamente o está teniendo más problemas. Entonces ya solamente a ellos se les alinea, se les dice, ¿no? O se les capacita, ¿no?
+
+Eduardo Quilla
+38:17
+Sí. No, buenazo. Bueno, eso como les digo de mi parte queda claro, tengo claro mis dudas. Y hoy ya comestaré con Marín de todo lo que hemos hablado ahora.
+
+Juan Mansilla
+38:29
+listo Eduardo, igual estamos atentos cualquier solicitud o establecer algún punto igual lo podemos usar
+
+Luis ASTAY
+38:37
+si, hay solo una consulta Eduardo, bueno dado el tema del interés de todas maneras el siguiente paso por nuestra parte va a ser poder enviarles una propuesta tecnico-económica, claro tienes que conversar con Marínés, pero para consultarles a ambos cuando podemos hacer una respuesta para poder avanzar con ello dado todo este avance, ¿cuándo crees que podría ser?
+
+Eduardo Quilla
+39:03
+Yo creo que puede ser el próximo viernes, pero tengo que hablarlo con Marinés primero mi idea sería que el próximo viernes vamos a dar una siguiente sesión pero igual déjame cerrarlo con ella primero La propuesta económica es, ¿el ASIS viene separado de los pasos del 2 al 5 o esto en conjunto? ¿O podríamos pedir solamente el ASIS? Porque me parece que es un punto clave, porque me parece que cuando ustedes hagan el análisis, el mapeo del proceso, ustedes también no creo que lancen una propuesta si saben cuál es el estatus actual de KIA, o aún así van a lanzar el 1 al 5.
+
+Juan Mansilla
+39:43
+No. Ahorita nuestra... Hay dos escenarios, ya. Una, que nosotros hacemos el ASIS, que es el primer paso y lo recomendado, y lo otro que nos pidan un reporte específico. Si sabes que es Juan, me interesa este reporte específico, que ustedes lo automaticen o lo haga un Power BI. Entonces, nos formamos un NDA y hacemos preguntas respecto a eso y acotamos el alcance a ese reporte. Pero no podemos automatizar todo así de golpe, o sea, porque no sabríamos exactamente cómo afinar el alcance y el tema de recursos y tiempos también
+
+Eduardo Quilla
+40:28
+ya, de acuerdo y para este proceso de diagnóstico ¿hacen subidas a Mina o virtuales Teams con todas las áreas involucradas?
+
+Juan Mansilla
+40:40
+vamos a Mina preferible por lo general entender un poco cómo actualmente están trabajando un poco de ver cuál es la rutina obviamente no hacemos todo el trabajo ahí la mayoría son entrevistas virtuales que nos compartan las casetas que nos compartan información, mucho trabajo en gabinete pero siempre es bueno entender un poco la coyuntura laboral del cliente para acentuar mejor la propuesta y el informe
+
+Eduardo Quilla
+41:18
+Ya, perfecto. Perfecto. No, me queda claro. Yo agradezco el tiempo y la preparación para esta presentación. Y lo que ocurrió con Marienes, como digo, yo diría que sea la próxima semana continuar con una segunda reunión. ¿Ya enviarían ustedes la propuesta antes del viernes o lo enviarían después de que nos reunamos con Marienes?
+
+Juan Mansilla
+41:39
+Podemos hacer algunas asunciones, ¿no? Y con eso, no sé si, Luis, para el lunes preparamos unas preguntas de repente de lo que estaríamos... Eduardo, te enviaremos una lista de preguntas el día lunes, ya para que puedan contestarla o más o menos encuadrar un primer alcance de la experiencia que tenemos. Para ayudarles ahí y también nosotros estar un poco seguros de lo que estamos ofreciéndonos.
+
+Eduardo Quilla
+42:08
+Ya, de acuerdo. Me parece bien. Envíame el lunes esas preguntas, yo les respondo y con eso ustedes pueden ir armando una propuesta para nosotros.
+
+Juan Mansilla
+42:19
+Está bien. Gracias, entonces, Eduardo. Listo. Muchas gracias, Eduardo.
+
+Speaker 5
+42:24
+Gracias, Luis, gracias. Muchísimas gracias. Nos vemos. Gracias, Eduardo, por su tiempo. Hasta luego. chao
+

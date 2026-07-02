@@ -1,39 +1,52 @@
-# Obsidian — excluir archivos de sistema y código de plugins
+# ── Obsidian ────────────────────────────────────────────────────────────────
+# Estado de sesión (machine-specific, no compartir)
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
 .obsidian/workspace-mobile-mac.json
 .obsidian/cache
+
+# Plugins: ignorar binarios compilados, conservar data.json (configuración)
 .obsidian/plugins/**/main.js
 .obsidian/plugins/**/styles.css
 .obsidian/plugins/**/patchedFiles.mjs
+# Plugins con assets voluminosos propios
 .obsidian/plugins/obsidian-advanced-slides/
 .obsidian/plugins/obsidian-excalidraw-plugin/
+
 .trash/
 .DS_Store
 
-# Claude Code internals
+# ── Claude Code ──────────────────────────────────────────────────────────────
 .claude/
 
-# Frontend code — build artifacts and dependencies inside Documentacion/Codigo/
+# ── Quarto ───────────────────────────────────────────────────────────────────
+.quarto/
+_freeze/
+_site/
+_output/
+**/*.quarto_ipynb
+
+# Salidas compiladas (se conserva la plantilla de referencia)
+*.docx
+*.pdf
+!_templates/custom-reference.docx
+
+# ── Python / Conda ───────────────────────────────────────────────────────────
+.venv/
+.conda/
+__pycache__/
+*.py[cod]
+
+# ── Node / JavaScript ────────────────────────────────────────────────────────
 **/node_modules/
 **/dist/
 **/dist-ssr/
 
-# Quarto generated outputs (keep .qmd sources, ignore compiled .docx/.pdf/.html)
-*.docx
-*.pdf
-_freeze/
-_site/
-_output/
-!_templates/custom-reference.docx
-
-/.quarto/
-**/*.quarto_ipynb
-.venv/
-.conda/
+# ── Editores ─────────────────────────────────────────────────────────────────
 .vscode/
-/30-Projects/Las-Bambas/Prediccion-de-mineral/Documentacion/Codigo/mockups/*
-Datos Demo/
+*.swp
+*.swo
 
-/30-Projects/Las-Bambas/Prediccion-de-mineral/Documentacion/Codigo/Ore_Projector/node_modules/
-/30-Projects/Las-Bambas/Prediccion-de-mineral/Documentacion/Codigo/Ore_Projector/dist/
+# ── Datos sensibles / temporales ─────────────────────────────────────────────
+Datos Demo/
+/30-Projects/Las-Bambas/Prediccion-de-mineral/Documentacion/Codigo/mockups/*
