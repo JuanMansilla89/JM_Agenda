@@ -41,6 +41,12 @@ __pycache__/
 **/node_modules/
 **/dist/
 **/dist-ssr/
+nohup.out
+
+# ── Renders self-contained (vendorizan librerías de terceros: bootstrap, tippy, etc.) ──
+README.html
+**/README_files/
+**/*_files/libs/
 
 # ── Editores ─────────────────────────────────────────────────────────────────
 .vscode/
@@ -50,3 +56,8 @@ __pycache__/
 # ── Datos sensibles / temporales ─────────────────────────────────────────────
 Datos Demo/
 /30-Projects/Las-Bambas/Prediccion-de-mineral/Documentacion/Codigo/mockups/*
+
+/.quarto/
+
+# ── Graphify (regenerable, no versionar) ─────────────────────────────────────
+graphify-out/
