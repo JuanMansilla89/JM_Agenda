@@ -16,19 +16,19 @@ onedrive: ""
 **Canal:** Open Aster 2026 — Desafío "Gestión inteligente de tráfico mina" — **Escondida | BHP**, Atacama, Chile
 **Estado ASTAY:** ✅ Preseleccionada
 
-| Hito del proceso | Estado | Fecha |
-|-----------------|--------|-------|
-| Preselección Open Aster 2026 | ✅ Confirmada | 2026-06-16 |
-| Faena del piloto | ✅ Confirmada — Escondida \| BHP | — |
-| Envío presentación para feedback | ✅ Enviada | 2026-06-23 |
-| Formulario preguntas previo al webinar | ⏳ Pendiente — recuperar link | Antes del webinar |
-| Confirmación tanda de webinar | ⏳ Pendiente — Open Aster informa | Próximamente |
-| Webinar (tanda 1) | ⏳ Condicional | 7–9 jul 2026 |
-| Webinar (tanda 2) | ⏳ Condicional | 14–15 jul 2026 |
-| Sesión con Experto de Pilotaje (tanda 1) | ⏳ Condicional | 13–24 jul 2026 |
-| Sesión con Experto de Pilotaje (tanda 2) | ⏳ Condicional | 20–31 jul 2026 |
-| Presentación ante Comité Evaluador | ⏳ Pendiente | 27 jul – 7 ago 2026 |
-| Anuncio oficial de seleccionados | ⏳ Pendiente | 31 ago 2026 |
+| Hito del proceso                         | Estado                           | Fecha               |
+| ---------------------------------------- | -------------------------------- | ------------------- |
+| Preselección Open Aster 2026             | ✅ Confirmada                     | 2026-06-16          |
+| Faena del piloto                         | ✅ Confirmada — Escondida \| BHP  | —                   |
+| Envío presentación para feedback         | ✅ Enviada                        | 2026-06-23          |
+| Formulario preguntas previo al webinar   | ⏳ Pendiente — recuperar link     | Antes del webinar   |
+| Confirmación tanda de webinar            | ⏳ Pendiente — Open Aster informa | Próximamente        |
+| Webinar (tanda 1)                        | ⏳ Condicional                    | 7–9 jul 2026        |
+| Webinar (tanda 2)                        | ⏳ Condicional                    | 14–15 jul 2026      |
+| Sesión con Experto de Pilotaje (tanda 1) | ⏳ Condicional                    | 13–24 jul 2026      |
+| Sesión con Experto de Pilotaje (tanda 2) | ⏳ Condicional                    | 20–31 jul 2026      |
+| Presentación ante Comité Evaluador       | ⏳ Pendiente                      | 27 jul – 7 ago 2026 |
+| Anuncio oficial de seleccionados         | ⏳ Pendiente                      | 31 ago 2026         |
 
 ---
 
