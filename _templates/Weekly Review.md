@@ -47,14 +47,6 @@ SORT due ASC
 - 
 - 
 
-## 📋 Kanban — Tarjetas movidas a Done esta semana
-
-```dataview
-TABLE file.name AS "Proyecto", file.mtime AS "Última modificación"
-FROM "_kanban"
-SORT file.mtime DESC
-```
-
 ## 🧠 Procesamiento de RAW Ideas
 
 ```dataview

@@ -41,18 +41,6 @@ SORT file.folder ASC
 
 ---
 
-## 🗃️ Kanban Boards
-
-| Proyecto | Board |
-|----------|-------|
-| DataTwin | ![[DataTwin-board]] |
-| GIS / Block Model | ![[GIS-BlockModel-board]] |
-| GPS Pipeline | ![[GPS-Pipeline-board]] |
-
-> *Para navegación rápida sin embed:* [[DataTwin-board]] · [[GIS-BlockModel-board]] · [[GPS-Pipeline-board]]
-
----
-
 ## 🧠 Ideas sin procesar
 
 ```dataview

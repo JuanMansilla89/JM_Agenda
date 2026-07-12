@@ -1,7 +1,6 @@
 # Manual — Proyecto GIS / Block Model
 
 **Propósito:** Convenciones para trabajo PostGIS, modelado espacial y gestión del block model de Quellaveco.
-**Kanban:** [[GIS-BlockModel-board]]
 **Nota de proyecto:** `30-Projects/GIS-BlockModel/`
 **Tag:** `#gis`
 
@@ -54,7 +53,7 @@ Formato: `query-descripcion.md`
 
 1. **Crea una nota DDL** en `DDL/` antes de escribir el SQL
 2. **Documenta el por qué** — el SQL lo leerá cualquiera, el contexto no
-3. Crea una card en [[GIS-BlockModel-board]] en "En curso"
+3. Crea la tarea en `## Tareas activas` de `GIS-BlockModel.md`
 4. Aplica el cambio en **dev primero** y documenta el resultado de performance
 5. Para cambios en prod: requiere autorización de Jaime (permisos de escritura)
 6. Actualiza el estado en la nota DDL al final: `aplicado-prod`
@@ -126,4 +125,4 @@ Usar para filtros rápidos antes de ST_Intersects.
 
 ---
 
-*Ver también: [[Manual-Proyectos-Kanban]] · [[Manual-GPS-Pipeline]] · [[GIS-BlockModel-board]]*
+*Ver también: [[Manual-Proyectos]] · [[Manual-GPS-Pipeline]]*

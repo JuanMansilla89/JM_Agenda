@@ -1,7 +1,6 @@
 # Manual — Proyecto DataTwin
 
 **Propósito:** Convenciones, estructura y flujos de trabajo específicos del proyecto DataTwin.
-**Kanban:** [[DataTwin-board]]
 **Nota de proyecto:** `30-Projects/DataTwin/`
 **Tag:** `#datatwin`
 
@@ -59,13 +58,12 @@ Formato: `schema-entidad-version.md`
 
 ## Cómo agregar una tarea al proyecto
 
-1. Determina en qué columna del Kanban pertenece: ¿ya se puede empezar? → "En curso". ¿Es futura? → "Backlog"
-2. Crea la card en [[DataTwin-board]]
-3. Si la tarea es para esta semana, créala también en la Daily Note del día con syntax Tasks:
+1. Añádela a `## Tareas activas` en `DataTwin.md` con syntax Tasks:
 ```
 - [ ] Descripción 📅 2026-05-18 ⏫ #datatwin
 ```
-4. No dupliques: la card en Kanban es el registro visual; la tarea en Daily/proyecto es el registro ejecutable.
+2. Si la tarea es para hoy, créala también (o referénciala) en la Daily Note del día.
+3. No dupliques: la tarea vive en un solo lugar — el proyecto o la Daily, no ambos con contenido divergente.
 
 ---
 
@@ -107,7 +105,7 @@ Cuando Duane o tú toman una decisión técnica que cambiaría el diseño si se 
 
 ## Checklist para cerrar un workstream de DataTwin
 
-- [ ] Todas las cards del Kanban en Done o reubicadas
+- [ ] Todas las tareas activas cerradas o reubicadas en Tareas completadas
 - [ ] Decisiones clave documentadas en tabla ADR
 - [ ] Stakeholders notificados (Duane, Jaime)
 - [ ] Esquemas finales documentados en `Esquemas/`
@@ -115,4 +113,4 @@ Cuando Duane o tú toman una decisión técnica que cambiaría el diseño si se 
 
 ---
 
-*Ver también: [[Manual-Proyectos-Kanban]] · [[DataTwin-board]]*
+*Ver también: [[Manual-Proyectos]]*

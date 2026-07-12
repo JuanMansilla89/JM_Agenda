@@ -15,7 +15,7 @@ focus-area: ""
 
 ## ⏰ Time Blocks
 
-- [ ] 09:00 Stand-up / revisión Kanban
+- [ ] 09:00 Stand-up / revisión tareas activas
 - [ ] 10:00 Deep work — [proyecto del día]
 - [ ] 12:00 Lunch
 - [ ] 13:00 Reuniones / sync

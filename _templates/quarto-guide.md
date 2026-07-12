@@ -144,4 +144,4 @@ quarto check
 
 ---
 
-*Ver también: [[Manual-Proyectos-Kanban]] · [[CLAUDE]]*
+*Ver también: [[Manual-Proyectos]] · [[CLAUDE]]*

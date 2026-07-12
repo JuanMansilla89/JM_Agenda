@@ -1,7 +1,6 @@
 # Manual — Proyecto GPS Pipeline
 
 **Propósito:** Convenciones para el pipeline Flink/Kafka de posicionamiento GPS de flota en Quellaveco.
-**Kanban:** [[GPS-Pipeline-board]]
 **Nota de proyecto:** `30-Projects/GPS-Pipeline/`
 **Tag:** `#gps`
 
@@ -117,19 +116,19 @@ Formato: PascalCase, verbo o nombre descriptivo. El nombre en el cluster debe co
 1. Verificar consumer lag por partición
 2. Revisar configuración de batch.size y linger.ms en producers
 3. Verificar si el broker está bajo carga inusual
-4. Crear card `#blocked` si no se puede resolver localmente
+4. Crear tarea con tag `#blocked` en `Tareas activas` si no se puede resolver localmente
 
 ---
 
 ## Flujo para agregar un nuevo Flink job
 
 1. **Crea nota** en `Flink-Jobs/job-[nombre].md` con: inputs, outputs, lógica de transformación, config
-2. **Crea card** en [[GPS-Pipeline-board]] en Backlog
+2. **Crea la tarea** en `## Tareas activas` de `GPS-Pipeline.md`
 3. **Implementa localmente** con Flink mini-cluster de desarrollo
 4. **Valida con Shadow Mode** si reemplaza lógica existente
 5. **Documenta en la nota**: paralelismo final, checkpointing, métricas observadas
 6. **Deploy a staging** → validar latencia y consumer lag
-7. Mueve card a Done cuando esté en producción y estable por 48h
+7. Marca la tarea como completada cuando esté en producción y estable por 48h
 
 ---
 
@@ -155,4 +154,4 @@ Formato: PascalCase, verbo o nombre descriptivo. El nombre en el cluster debe co
 
 ---
 
-*Ver también: [[Manual-Proyectos-Kanban]] · [[Manual-DataTwin]] · [[GPS-Pipeline-board]]*
+*Ver también: [[Manual-Proyectos]] · [[Manual-DataTwin]]*

@@ -46,4 +46,4 @@ GROUP BY file.folder
 
 ---
 
-*→ [[Home]] | Kanban: [[DataTwin-board]] · [[GIS-BlockModel-board]] · [[GPS-Pipeline-board]]*
+*→ [[Home]]*

@@ -78,7 +78,7 @@ La idea tiene una acción concreta y corta. Crea una tarea en el proyecto corres
 Luego cambia `procesada: true` en el frontmatter de la idea.
 
 ### Decisión 2: Convertir en proyecto
-La idea es demasiado grande para una tarea. Crea una nota en `30-Projects/<NombreProyecto>/` usando el template `Project Note`. Añade una card al Kanban correspondiente en Backlog.
+La idea es demasiado grande para una tarea. Crea una nota en `30-Projects/<NombreProyecto>/` usando el template `Project Note`, con al menos una tarea inicial en `Tareas activas`.
 
 Cambia `procesada: true` en la idea y pon un link al proyecto:
 ```
@@ -97,7 +97,7 @@ Déjala en `RAW-Ideas/` con `procesada: false`, pero añade una nota al final de
 
 - El INDEX muestra menos de 10 ideas sin procesar la mayoría de las semanas
 - Cada Weekly Review procesa al menos el 50% de las ideas acumuladas
-- Las ideas en `proyectos/` tienen link a un Kanban o proyecto real
+- Las ideas en `proyectos/` tienen link a un proyecto real
 
 ## Señales de que algo está roto
 
@@ -110,4 +110,4 @@ Déjala en `RAW-Ideas/` con `procesada: false`, pero añade una nota al final de
 
 ---
 
-*Ver también: [[Manual-Weekly-Review]] · [[Manual-Daily-Note]] · [[Manual-Proyectos-Kanban]]*
+*Ver también: [[Manual-Weekly-Review]] · [[Manual-Daily-Note]] · [[Manual-Proyectos]]*

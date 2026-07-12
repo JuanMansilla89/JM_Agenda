@@ -30,7 +30,7 @@ El bloque Dataview lo llena automáticamente con las tareas completadas (`[x]`).
 Revisa cada tarea que aparece aquí. Para cada una decide:
 - ¿Sigue siendo relevante esta semana?
 - ¿Tiene dueño y fecha?
-- ¿Está en el Kanban del proyecto correspondiente?
+- ¿Está en la sección Tareas activas de la nota del proyecto correspondiente?
 
 Si una tarea lleva más de 2 semanas "en progreso" sin avance → revisar si está bloqueada o si es demasiado grande y debe descomponerse.
 
@@ -60,7 +60,7 @@ status: closed
 | Síntoma | Causa | Solución |
 |---------|-------|----------|
 | Dataview vacío en "Cerrado" | Las tareas no se marcaron `[x]` | Marcar completadas antes del review |
-| Lista de "En progreso" enorme | Tareas never-ending sin fecha | Poner fecha o mover a Backlog Kanban |
+| Lista de "En progreso" enorme | Tareas never-ending sin fecha | Poner fecha o dejarla sin priorizar en Tareas activas |
 | RAW Ideas acumulándose semanas | No se procesa el inbox | Reservar 5 min fijos en el flujo |
 | "Bloqueado" siempre los mismos items | No se escala el bloqueo | Crear tarea explícita de escalación |
 
@@ -78,4 +78,4 @@ status: closed
 
 ---
 
-*Ver también: [[Manual-Daily-Note]] · [[Manual-RAW-Ideas]] · [[Manual-Proyectos-Kanban]]*
+*Ver también: [[Manual-Daily-Note]] · [[Manual-RAW-Ideas]] · [[Manual-Proyectos]]*

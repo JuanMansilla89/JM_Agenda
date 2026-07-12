@@ -39,7 +39,6 @@ El archivo no es la basura. Es una biblioteca de decisiones y contexto históric
   60-Archive/Daily/        ← Daily Notes antiguas
   60-Archive/Weekly/       ← Weekly Reviews cerradas
   60-Archive/Proyectos/    ← Proyectos terminados o pausados
-  60-Archive/_kanban/      ← Boards de proyectos archivados
   60-Archive/RAW-Ideas/    ← Ideas procesadas
 ```
 
@@ -50,11 +49,10 @@ Estas subcarpetas no existen aún — créalas la primera vez que necesites arch
 ## Cómo archivar paso a paso
 
 ### Archivar un proyecto
-1. Verifica que no haya tareas abiertas en el Kanban (`En curso`, `En revisión`, `Bloqueado`)
+1. Verifica que no haya tareas abiertas en `## Tareas activas` de la nota del proyecto
 2. Cambia en la nota del proyecto: `status: done`
 3. Mueve la carpeta: `30-Projects/<Nombre>/` → `60-Archive/Proyectos/<Nombre>/`
-4. Mueve el board: `_kanban/<Nombre>-board.md` → `60-Archive/_kanban/<Nombre>-board.md`
-5. Busca links rotos con Obsidian (menú: `Options → Files and links → Detect all files not linked`)
+4. Busca links rotos con Obsidian (menú: `Options → Files and links → Detect all files not linked`)
 
 ### Archivar Daily Notes en batch
 Cada 2 meses, mueve las notas de `10-Daily/` que tengan más de 60 días a `60-Archive/Daily/`. Mantén siempre los últimos 30 días en `10-Daily/`.
@@ -83,4 +81,4 @@ Sólo mueve las que tienen `procesada: true`. Las que tienen `procesada: false` 
 
 ---
 
-*Ver también: [[Manual-Proyectos-Kanban]] · [[Manual-Weekly-Review]]*
+*Ver también: [[Manual-Proyectos]] · [[Manual-Weekly-Review]]*
