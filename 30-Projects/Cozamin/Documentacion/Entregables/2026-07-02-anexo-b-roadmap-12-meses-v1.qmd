@@ -1,0 +1,48 @@
+---
+title: "Anexo B — Roadmap Referencial 12 Meses"
+subtitle: "Propuesta Técnica Contrato Paraguas — Mina Cozamin (Capstone)"
+author: "ASTAY Systems"
+date: "2026-07-02"
+format:
+  docx:
+    reference-doc: "../../../../_templates/custom-reference.docx"
+    toc: false
+    number-sections: false
+lang: es
+---
+
+## B.1 Condición habilitante del plazo de 4 meses
+
+La meta de cerrar los seis reportes base en **4 meses** (en vez de los 6 meses considerados en un esquema convencional) solo es alcanzable si, desde la **Semana 1** del contrato, el cliente habilita:
+
+- Acceso a SharePoint y creación del repositorio de documentos.
+- Workspace de Power BI y licencias Pro para el equipo de desarrollo.
+- Grupos de seguridad en Microsoft Entra ID.
+- Acceso a los seis archivos Excel base (versión vigente) y a los usuarios clave de cada dominio para las entrevistas de levantamiento.
+
+El checklist completo de accesos y decisiones a validar se encuentra en el **Anexo C**. Si alguna de estas condiciones no está disponible en la Semana 1, el plazo de 4 meses se recalcula proporcionalmente al retraso, sin que esto afecte la vigencia del contrato paraguas ni el resto del backlog planificado para los meses 5 a 12.
+
+## B.2 Roadmap mensual — primeros 4 meses (seis reportes base)
+
+| Mes | Fases ejecutadas | Actividades principales | Hito de cierre de mes |
+|---|---|---|---|
+| **Mes 1** | Fase 0 (Semana 1) + Fase 1 (Semanas 2–4) | Kickoff con validación inmediata de accesos; confirmación del alcance de los seis reportes (y evaluación de geología/planta); fichas funcionales, KPIs homologados y reglas de negocio por reporte | Backlog inicial priorizado; arquitectura base validada |
+| **Mes 2** | Fase 2 + Fase 3 (en paralelo, Semanas 5–8) | Estándar visual y wireframes; repositorio SharePoint estructurado; modelo de datos de la zona Silver; corrección de los hallazgos críticos de integridad de datos (Anexo A): vínculo roto de Productividad, fórmulas `#REF!` | Arquitectura de datos y estándar UX/UI listos para desarrollo |
+| **Mes 3** | Fase 4 (Semanas 9–12) | Construcción de los seis dashboards Power BI; modelo semántico único; medidas DAX homologadas (Disponibilidad, Utilización, Mts/Hr, Cumplimiento de Plan); primeras automatizaciones con Power Automate | Seis dashboards construidos, en etapa de revisión interna |
+| **Mes 4** | Fase 5 (Semanas 13–16) | Validación funcional por dominio con usuarios clave; correcciones; documentación técnica y manual de usuario; capacitación; publicación productiva | **Seis reportes base validados y en producción** |
+
+: Roadmap mensual detallado — meta de 4 meses {#tbl-roadmap-mensual}
+
+## B.3 Roadmap trimestral — meses 5 a 12 (soporte y evolución)
+
+| Trimestre | Foco | Actividades principales | Hitos |
+|---|---|---|---|
+| **T2** (meses 5–6) | Estabilización y primeras mejoras evolutivas | Soporte post-puesta en marcha de los seis reportes; ajustes según uso real; incorporación de reportes adicionales priorizados (geología/planta si se confirma la fuente en Acquire); inicio de migración de fuentes críticas hacia SQL Server/Azure SQL | Backlog evolutivo activo; primer reporte adicional en desarrollo |
+| **T3** (meses 7–9) | Gobierno estructurado | Gobierno de datos estructurado (diccionario, catálogo de KPIs); consolidación del modelo de datos; automatizaciones adicionales con Power Automate/Power Apps según demanda | Modelo de datos gobernado en operación; al menos un reporte adicional en producción |
+| **T4** (meses 10–12) | Soporte, optimización y cierre de año | Soporte funcional/técnico continuo; optimización de modelos semánticos; evaluación de Power Apps/Automate Premium según demanda; propuesta de roadmap para el siguiente año | Balance anual de horas consumidas vs. disponibles; roadmap año 2 presentado |
+
+: Roadmap referencial por trimestre — meses 5 a 12 {#tbl-roadmap-trimestral}
+
+## B.4 Nota sobre flexibilidad del cronograma
+
+El cronograma es referencial. Los primeros 4 meses son una **meta comprimida y alcanzable**, condicionada a la disponibilidad oportuna de accesos, licencias, usuarios clave para validación y a la calidad de los datos fuente (ver B.1). A partir del mes 5, la priorización mensual de actividades se ajusta mediante el backlog gobernado por el comité de seguimiento (ver sección "Modelo de seguimiento y control" de la propuesta principal), sin necesidad de renegociar el contrato paraguas.

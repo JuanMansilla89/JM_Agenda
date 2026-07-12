@@ -1,0 +1,51 @@
+---
+title: "Anexo A — Matriz de los Seis Reportes Base"
+subtitle: "Propuesta Técnica Contrato Paraguas — Mina Cozamin (Capstone)"
+author: "ASTAY Systems"
+date: "2026-07-02"
+format:
+  docx:
+    reference-doc: "../../../../_templates/custom-reference.docx"
+    toc: false
+    number-sections: false
+lang: es
+---
+
+Este anexo detalla los seis libros de Excel identificados en la carpeta `Excel Base` del cliente, base del alcance inicial del contrato paraguas. La caracterización proviene de un análisis técnico programático (fórmulas, vínculos externos, macros) realizado sobre los archivos entregados, con periodo de datos junio 2026.
+
+## A.1 Matriz funcional por reporte
+
+| # | Reporte / Libro | Objetivo operacional | Área usuaria | Fuente actual | Frecuencia | KPIs principales | Brecha identificada |
+|---|---|---|---|---|---|---|---|
+| 1 | Demoras Junio | Captura de estado de cada equipo cada 30 min y causa de demora | Sala de control (COMS) / Mina | Excel matriz manual (radio → captura) | Turno / diaria | Horas Operación, Standby y Mantenimiento por causa; catálogo de 91 códigos | Sin vínculo de fórmula confirmado hacia Tiempos; catálogo de causas no versionado |
+| 2 | Resumen Turno — Junio | Consolidar disponibilidad y cumplimiento de plan por turno | Mina / Gerencia (táctico) | Excel con hoja oculta (ACM) como base transaccional | Turno / diaria | D.F. (Disponibilidad), U.D. (Utilización), % Cumplimiento de Plan | Fórmulas `#REF!` en columnas clave de ACM; plan embebido como valor fijo (50/60), no configurable |
+| 3 | Acarreo Junio | Registrar viajes de camión origen-destino y tonelaje | Mina / Producción | Excel con macros VBA + BD Camiones interna | Turno / diaria | Toneladas y viajes por origen-destino; utilización de flota de camiones | Captura incompleta (sin datos desde el día 20 de junio); macro VBA no versionada |
+| 4 | Dis y Uti Junio | Calcular disponibilidad y utilización de flota | Mantenimiento / Gerencia | Excel, con vínculo externo activo hacia Tiempos Junio | Diaria + acumulado mensual | Disp%, Util% por equipo y familia | Fórmula de Disponibilidad usa base "horas totales reales", inconsistente con la de Resumen Turno (jornada fija 10 h) |
+| 5 | Productividad Junio | Medir avance físico (metros) por hora efectiva | Mina / Planeamiento | Excel con vínculo externo a Demoras y Tiempos | Turno / diaria + acumulado mensual | Mts/Hr, % Real vs. Plan | **Hallazgo crítico:** vínculo externo apunta a archivos de **mayo**, no de junio — el reporte de productividad reportado puede estar usando datos del mes incorrecto |
+| 6 | Tiempos Junio | Totalizar horas por código de causa (operación, mantenimiento, standby) | Mantenimiento / Gerencia | Excel, fuente para Dis y Uti (vínculo confirmado) | Diaria + acumulado mensual | % Operación Efectiva, % Standby, % Mtto Mecánico/Eléctrico | Fórmulas `#REF!` en celda de Tiempo Efectivo y en catálogo de códigos |
+
+: Matriz funcional — seis libros Excel base {#tbl-matriz-reportes}
+
+## A.2 Nota técnica sobre el alcance
+
+> La denominación final, reglas de negocio, fuentes oficiales y criterios de aceptación de cada reporte serán confirmados con el usuario de negocio durante la Fase 0 (Ideación y Alineamiento). Los nombres, KPIs y brechas de esta matriz provienen directamente del contenido de los seis libros entregados por el cliente; no se incluyen reportes no evidenciados documentalmente.
+
+## A.3 Hallazgo relevante para la validación de alcance
+
+Los seis libros analizados cubren de forma exclusiva el **dominio operativo de mina** (tiempo de equipo, disponibilidad, utilización, avance físico, acarreo). No se encontró evidencia de lógica de merma, ley de mineral, humedad, dilución, recuperación metalúrgica ni reconciliación de tonelaje mina-planta en ninguno de los seis archivos, pese a que las notas de levantamiento funcional mencionan reportes de **geología** y **planta** como parte del set operativo de Cozamin.
+
+Esto no implica que dichos reportes estén fuera del contrato paraguas — implica que **no forman parte de los seis libros Excel Base analizados** y que su fuente (posiblemente la plataforma Acquire, mencionada en las notas de ideación) deberá confirmarse en Fase 0 antes de incorporarlos al backlog priorizado. Asimismo, el cliente indicó en las notas de ideación su intención de partir con **cuatro o cinco reportes principales**; esta propuesta toma como base los seis libros documentados y deja la validación del número final de reportes de la primera etapa como punto a cerrar en el kickoff.
+
+## A.4 Riesgos de integridad de datos a resolver antes de la digitalización
+
+| Riesgo | Libro(s) afectado(s) | Impacto si no se corrige |
+|---|---|---|
+| Vínculo externo apunta al mes incorrecto (mayo en vez de junio) | Productividad Junio | KPI de productividad reportado puede no corresponder al periodo vigente |
+| Fórmulas `#REF!` sin resolver | Resumen Turno, Tiempos Junio | Indicadores de disponibilidad y cumplimiento con valores potencialmente erróneos |
+| Fórmula de Disponibilidad inconsistente entre libros (base "horas reales" vs. "jornada fija 10 h") | Dis y Uti, Resumen Turno | Mismo KPI con dos definiciones distintas — imposible de comparar entre reportes sin unificar |
+| Captura incompleta del periodo | Acarreo Junio | El libro no puede usarse como fuente de verdad para el cierre mensual completo hasta cerrar la brecha |
+| Meta de plan embebida como valor fijo en fórmula, no configurable | Resumen Turno, Productividad | Imposibilidad de ajustar metas sin modificar fórmulas manualmente |
+
+: Riesgos de datos identificados en el levantamiento técnico {#tbl-riesgos-datos}
+
+Se recomienda que la corrección de estos hallazgos forme parte de las actividades de la Fase 1 (Levantamiento Funcional), como condición previa a la construcción de los dashboards Power BI, de modo que la digitalización parta de una base de datos confiable y no automatice errores ya presentes en los archivos fuente.

@@ -8,13 +8,13 @@ El principal problema identificado es que la información no está completamente
 
 # 2. Reportes que actualmente existen
 
-2.1 Reporte gerencial
+## 2.1 Reporte gerencial
 
 Existe un reporte gerencial que se envía al final del turno. Este reporte se alimenta desde los reportes matriz y consolida información relevante para la gerencia general.
 
 Actualmente depende de información preparada previamente por distintas áreas, por lo que su actualización no es automática ni integrada en línea.
 
-2.2 Reporte de tiempos, utilización y disponibilidad
+## 2.2 Reporte de tiempos, utilización y disponibilidad
 
 Uno de los reportes base corresponde al control de tiempos de los equipos. Desde este reporte se obtienen indicadores de utilización y disponibilidad.
 
@@ -24,7 +24,7 @@ Mantenimiento, por su parte, utiliza la plataforma MySandvik para descargar info
 
 Lo que se busca es integrar la información proveniente de MySandvik con los registros manuales, para generar un reporte de mantenimiento y disponibilidad más alineado entre operación y mantenimiento.
 
-2.3 Reporte de acarreo y producción
+## 2.3 Reporte de acarreo y producción
 
 El segundo reporte matriz mencionado corresponde al acarreo y la producción.
 
@@ -32,7 +32,7 @@ Este reporte considera producción por frentes y también producción por camió
 
 Con esta información se realiza una primera corrida con tonelaje nominal y una segunda corrida con tonelaje real. Este tonelaje es la base para alimentar los reportes de geología y planta.
 
-2.4 Reporte de geología
+## 2.4 Reporte de geología
 
 El reporte de geología utiliza el tonelaje proveniente del reporte de acarreo y lo asocia con leyes de mineral. Se mencionó que trabajan con cobre, plata, plomo y zinc.
 
@@ -44,7 +44,7 @@ La intención es conectar la reportabilidad con Acquire para que el reporte de g
 
 También se mencionó que geología considera humedades y que, al cierre de mes, se realiza una corrida con información de humedad entregada por planta.
 
-2.5 Reporte de planta
+## 2.5 Reporte de planta
 
 El reporte de planta se construye con las leyes que entrega planta, las cuales pueden estar disponibles después de 2, 3 o hasta 7 días.
 

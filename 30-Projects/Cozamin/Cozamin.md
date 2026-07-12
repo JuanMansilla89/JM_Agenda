@@ -3,7 +3,7 @@ project: Cozamin
 status: active
 stage: propuesta-en-elaboracion
 owner: "Juan Mansilla"
-stakeholders: []
+stakeholders: [Frank Echegaray]
 start-date: 2026-07-01
 tags: [cozamin]
 onedrive: ""
@@ -31,13 +31,14 @@ Implementar una solución de **reportabilidad operacional** para Mina Cozamin. E
 
 ## Tareas activas
 
-- [ ] Elaborar propuesta técnico-económica — reportabilidad Cozamin 📅 2026-07-11 🔺 #cozamin
-- [ ] Definir alcance y áreas incluidas en la propuesta 📅 2026-07-07 ⏫ #cozamin
-- [ ] Identificar stakeholders y estructura de toma de decisiones 📅 2026-07-07 🔼 #cozamin
+- [ ] Agregar componente económico (horas, tarifas, bolsa de horas) a la propuesta técnica 📅 2026-07-11 🔺 #cozamin
+- [ ] Validar con el cliente el alcance final de los 6 reportes (incluir/descartar geología y planta) 📅 2026-07-07 ⏫ #cozamin
+- [ ] Completar estructura de toma de decisiones y stakeholders adicionales (Cozamin/Capstone) 📅 2026-07-07 🔼 #cozamin
 
 ## Tareas completadas
 
 - [x] Apertura del proyecto Cozamin en el vault ✅ 2026-07-01 #cozamin
+- [x] Elaborar propuesta técnica (contrato paraguas) — v1 extendida, con Anexos A/B/C ✅ 2026-07-02 #cozamin
 
 ---
 
@@ -45,7 +46,9 @@ Implementar una solución de **reportabilidad operacional** para Mina Cozamin. E
 
 | Fecha | Decisión | Justificación | Estado |
 |-------|----------|---------------|--------|
-| — | — | — | — |
+| 2026-07-01 | Solución basada en ecosistema Microsoft (Power BI + Power Automate), no aplicación web a medida | Implementación más rápida y costo-eficiente; el cliente ya evaluó y descartó una plataforma web básica de un tercero por baja adopción | ✅ Confirmada |
+| 2026-07-01 | Iniciar con Escenario Mínimo Viable (Quick Win) diseñado para escalar hacia Escenario Base con SQL Server/Azure SQL | Evita rehacer el trabajo de la primera etapa; entrega valor rápido sin sobredimensionar la solución | ✅ Confirmada |
+| 2026-07-02 | Alcance inicial de la propuesta técnica se basa en los 6 libros Excel de la carpeta Excel Base, no en los 4-5 reportes mencionados verbalmente por el cliente | Los 6 libros son la única fuente documental confirmada; el número final se validará en Fase 0 | 🔄 Pendiente de validar con cliente |
 
 ---
 

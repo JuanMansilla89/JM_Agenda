@@ -1,0 +1,642 @@
+---
+title: "Propuesta Técnica — Contrato Paraguas de Reportabilidad Operacional"
+subtitle: "Mina Cozamin, Zacatecas, México — Capstone"
+author: "ASTAY Systems"
+date: "2026-07-02"
+format:
+  docx:
+    reference-doc: "../../../../_templates/custom-reference.docx"
+    toc: true
+    toc-depth: 2
+    number-sections: true
+lang: es
+---
+
+# Carta de presentación
+
+Estimados representantes de Capstone Cozamin:
+
+ASTAY Systems presenta a continuación su propuesta técnica para un **contrato paraguas de 12 meses**, orientado a implementar, evolucionar y soportar una solución de reportabilidad operacional para Mina Cozamin.
+
+La propuesta parte de los seis reportes contenidos en la carpeta de Excel base compartida por el cliente y se construye sobre una arquitectura base del ecosistema Microsoft, con un enfoque progresivo: entregar valor operativo desde las primeras semanas del contrato y escalar hacia un modelo de datos gobernado a lo largo del año contractual.
+
+Este documento no corresponde a la construcción puntual de seis dashboards. Corresponde a un **marco anual de trabajo técnico** para levantar, ordenar, digitalizar, automatizar, validar, mantener y evolucionar la reportabilidad operacional de Cozamin, comenzando por los seis reportes priorizados e incorporando progresivamente nuevos requerimientos mediante un modelo de backlog y órdenes de trabajo.
+
+El contenido describe el entendimiento de la necesidad, la arquitectura propuesta, la metodología de trabajo, el equipo, el modelo operativo del contrato y las condiciones técnicas bajo las cuales ASTAY ejecutará este contrato marco. Los anexos complementan el documento con el detalle funcional de los seis reportes base (Anexo A), el roadmap referencial de 12 meses (Anexo B) y el checklist de información a validar con el cliente (Anexo C).
+
+Quedamos atentos a la revisión conjunta de esta propuesta.
+
+Atentamente,
+**ASTAY Systems**
+
+---
+
+# Resumen ejecutivo
+
+Cozamin requiere ordenar y automatizar su reportabilidad operacional. Hoy, la información clave —tiempos y disponibilidad de equipos, acarreo, avance y productividad de mina, más los reportes de geología y planta— se gestiona de forma manual o semiautomatizada: se comunica en gran parte por radio desde mina hacia la sala de control (COMS), se registra en archivos Excel matriz y desde ahí alimenta los reportes por área. El cliente ya evaluó una plataforma web básica desarrollada por un tercero, pero no la utiliza de forma efectiva porque cubre solo un reporte con información limitada.
+
+El análisis técnico de los seis libros de Excel entregados por el cliente confirma que esta problemática no es solo de visualización: existen vínculos frágiles entre archivos (uno de ellos apuntando al mes incorrecto), fórmulas con errores sin resolver, definiciones de KPI inconsistentes entre reportes y ausencia de trazabilidad de cargas y cambios.
+
+Esta propuesta plantea un **contrato paraguas anual** cuya primera etapa se enfoca en digitalizar, estructurar y automatizar los seis reportes priorizados, bajo una arquitectura base Microsoft (SharePoint, Power BI, Power Automate) que evoluciona progresivamente hacia un modelo de datos estructurado (SQL Server / Azure SQL) conforme la solución madura y se valida con el negocio. Se plantea como **meta alcanzable la publicación y validación de los seis reportes base en 4 meses**, siempre que los accesos, permisos y licencias requeridos (Anexo C) estén disponibles desde el inicio del contrato.
+
+La primera etapa generará **quick wins** visibles en las primeras semanas del contrato. El resto del año contractual permitirá evolucionar la solución —incorporando nuevos reportes (incluyendo geología y planta, sujeto a validación de fuente), mejorando la gobernanza de datos y ampliando la automatización— mediante un modelo de backlog priorizado y órdenes de trabajo, sin necesidad de renegociar el contrato en cada solicitud.
+
+La solución no busca reemplazar los sistemas actuales de Cozamin (MySandvik, Fractall One, Acquire, Arena), sino **consolidar, estructurar y visualizar** la información que hoy se dispersa entre esos sistemas y los archivos Excel matriz, entregando una base confiable para operación, mantenimiento, geología, planta y gerencia.
+
+---
+
+# Antecedentes y contexto
+
+## Tipo de operación
+
+Cozamin es una operación minera subterránea de metales (cobre, plata, plomo y zinc), con procesos de perforación (jumbos), acarreo con equipos LHD/scooptram, sostenimiento (anclaje) y una sala de control operativo (COMS) que centraliza el registro de eventos de flota mina.
+
+## Flujo actual de información
+
+- **Mina → COMS:** los eventos de equipo (detenciones, motivo, hora de retorno a operación) se reportan mayormente por radio y se registran manualmente en un Excel matriz. Al fin de turno, ese matriz genera los reportes gerenciales.
+- **Mantenimiento:** utiliza la plataforma **MySandvik** para descargar información en tiempo real de equipos Sandvik, pero esta no está integrada con lo registrado por sala de control; los equipos de otros fabricantes siguen siendo de registro manual. Los tickets de falla hacia mantenimiento se generan mediante la plataforma **Fractall One**.
+- **Acarreo:** se registra el tonelaje nominal del volquete al inicio y el tonelaje real al momento de la descarga (pesaje), generando una primera corrida con tonelaje nominal y una segunda con tonelaje real. Este tonelaje real es la base que alimenta los reportes de geología y planta.
+- **Geología:** asocia el tonelaje de acarreo con leyes de mineral (Cu, Ag, Pb, Zn), hoy estimadas por zona circundante mediante el modelo de bloques de corto plazo (**Vulcan** y **Leapfrog**, exportado en CSV). Las leyes reales se capturan cada 4 horas en frente mediante colector itinerante en la plataforma **Acquire**, pero actualmente Acquire solo alimenta el modelo de corto plazo, no la reportabilidad directa. Las leyes oficiales de planta llegan con un desfase de 2 a 7 días, por lo que geología trabaja con leyes aproximadas para su forecasting mensual.
+- **Planta:** genera un reporte gerencial comparativo de molienda (toneladas húmedas, humedad al turno y al día), cuya carga a la base de datos de planta debe ser monitoreada manualmente por el equipo de reportabilidad para saber cuándo actualizar.
+- **Reportes mensuales de geología** combinan varias fuentes, incluida la propia plataforma **AcQuire**, y se procesan con **Arena** como base de datos — a evaluar si es viable migrar o integrar con SQL Server.
+
+## Situación actual de la reportabilidad
+
+Los archivos Excel se completan de forma manual y luego se consolidan en un plan de producción en PDF, también gestionado manualmente. No existe una plataforma única donde el usuario pueda ingresar, seleccionar el reporte correspondiente por sección (gerencial, mantenimiento, acarreo, geología, planta) y visualizar información actualizada. Durante las sesiones de levantamiento, el cliente confirmó su preferencia por trabajar con **Power BI y Power Automate**, en lugar de desarrollar una aplicación web completa, por ser una alternativa de implementación más rápida y eficiente en costos.
+
+## Hallazgos técnicos sobre los seis libros Excel base
+
+El análisis programático de los seis libros de la carpeta Excel Base (37 a 201 hojas en conjunto, periodo junio 2026) confirma que estos cubren de forma exclusiva el **dominio operativo de mina** (tiempo de equipo, disponibilidad, utilización, avance físico, acarreo), sin evidencia de lógica de merma, ley de mineral, humedad, dilución, recuperación metalúrgica o reconciliación de tonelaje. El detalle completo, incluyendo los hallazgos de integridad de datos, se presenta en el **Anexo A**.
+
+---
+
+# Entendimiento de la necesidad
+
+La problemática identificada no es únicamente de visualización de datos. El levantamiento funcional y el análisis técnico documental evidencian una problemática estructural de mayor alcance:
+
+| Dimensión del problema | Evidencia concreta |
+|---|---|
+| Dispersión de archivos | Seis libros de Excel independientes, sin repositorio controlado ni versionado formal, más reportes de geología y planta en otras fuentes no centralizadas |
+| Dependencia de Excel | Toda la lógica de negocio (fórmulas de KPI, catálogos, validaciones) vive en fórmulas de hoja de cálculo, no en reglas documentadas o código versionable |
+| Falta de trazabilidad | No existe registro de auditoría de cargas, cambios o versiones entre los libros ni entre sistemas (MySandvik, Fractall One, Acquire, Excel matriz) |
+| Ausencia de flujo formal de datos | Los vínculos entre libros son manuales o mediante `externalLinks` frágiles de Excel; uno de ellos apunta al periodo incorrecto (mayo en vez de junio) |
+| Necesidad de homologar KPIs | El indicador de Disponibilidad se calcula con dos fórmulas distintas según el libro (horas totales reales vs. jornada fija de 10 horas) |
+| Necesidad de automatizar cargas | Las cargas actuales dependen de que el usuario esté pendiente de cuándo planta o geología actualizan su información |
+| Necesidad de controlar versiones | Sin versionado formal, no es posible auditar qué versión de un reporte se usó para una decisión gerencial |
+| Necesidad de definir responsables por fuente | No existe una matriz formal de responsables por dominio de datos (mina, mantenimiento, geología, planta) |
+| Necesidad de pasar de reportes manuales a reportabilidad gobernada | El gobierno actual es inexistente; se requiere un modelo ligero pero explícito de dueños, reglas y periodicidad |
+
+: Dimensiones de la problemática identificada {#tbl-problematica}
+
+---
+
+# Objetivos del contrato paraguas
+
+## Objetivo general
+
+> Implementar y evolucionar una solución de reportabilidad operacional basada en tecnologías Microsoft, iniciando con la digitalización y automatización progresiva de los seis reportes priorizados, bajo un modelo de contrato paraguas anual que permita incorporar mejoras, nuevos requerimientos, soporte y gobierno básico de datos.
+
+## Objetivos específicos
+
+1. Levantar funcionalmente los seis reportes base y confirmar su alcance final con el cliente, incluyendo la evaluación de incorporar geología y planta.
+2. Definir reglas de negocio, KPIs unificados, fuentes y responsables por reporte.
+3. Corregir los hallazgos de integridad de datos identificados en el levantamiento técnico (Anexo A) antes de automatizar sobre ellos.
+4. Diseñar un estándar visual y de experiencia de usuario único para la reportabilidad de Cozamin.
+5. Implementar dashboards Power BI para los seis reportes base.
+6. Automatizar flujos de carga, alertas y notificación donde la calidad de los datos lo permita.
+7. Establecer una arquitectura base Microsoft, escalable hacia un modelo de datos estructurado (SQL Server / Azure SQL).
+8. Incorporar trazabilidad mínima de cargas, versiones y cambios.
+9. Establecer un modelo de soporte, priorización y mejora continua durante los 12 meses del contrato.
+10. Dejar la solución preparada para escalar hacia nuevos reportes, fuentes (Acquire, MySandvik) e integraciones futuras.
+
+---
+
+# Alcance general del contrato anual
+
+El contrato paraguas cubre, durante 12 meses y sujeto a priorización mensual con el cliente, un marco de trabajo técnico que incluye:
+
+- Análisis funcional de reportes operacionales.
+- Diseño UX/UI de reportabilidad.
+- Desarrollo de dashboards y modelos semánticos en Power BI.
+- Modelamiento de datos y estructuración progresiva de fuentes.
+- Automatización de flujos con Power Automate.
+- Desarrollo de aplicaciones ligeras con Power Apps, si se confirma la necesidad.
+- Estructuración de repositorios en SharePoint y, progresivamente, en SQL Server/Azure SQL.
+- Gobierno básico de datos (catálogos, diccionario, responsables).
+- Soporte funcional y técnico continuo.
+- Mejoras evolutivas mediante backlog priorizado.
+- Documentación técnica y funcional.
+- Capacitación a usuarios clave.
+- Acompañamiento técnico durante la operación.
+
+El contrato se ejecuta **por etapas, priorización y disponibilidad de información**, no como un proyecto de alcance cerrado y fijo desde el día uno.
+
+---
+
+# Alcance inicial: seis reportes base
+
+La primera prioridad contractual es resolver los seis reportes de la carpeta Excel Base: **Demoras, Resumen Turno, Acarreo, Dis y Uti, Productividad y Tiempos** — todos correspondientes al dominio operativo de mina. La matriz funcional completa —objetivo, área usuaria, fuente, KPIs y brechas por reporte— se presenta en el **Anexo A**.
+
+> La denominación final, reglas de negocio, fuentes oficiales y criterios de aceptación de cada reporte serán confirmados con el usuario de negocio durante la Fase 0 (Ideación y Alineamiento).
+
+## Nota sobre el número de reportes de la primera etapa
+
+Las notas de levantamiento funcional registran que el cliente busca partir con **cuatro o cinco reportes principales**, dejando abierta la incorporación de nuevos reportes durante los 12 meses del contrato mediante bolsa de horas. Esta propuesta toma como base documental los **seis libros Excel** efectivamente entregados, ya que son la única fuente verificable disponible al momento de esta propuesta. El número final de reportes de la Fase 1 —y la eventual inclusión de geología y planta, no contenidos en estos seis libros— se cerrará en el kickoff del contrato.
+
+## Meta de plazo: 4 meses, condicionada a permisos
+
+Se define como objetivo alcanzable cerrar los seis reportes base en **4 meses** desde el kickoff (ver "Cronograma referencial"). Esta meta asume que el cliente habilita, desde la Semana 1, los accesos y licencias mínimos requeridos (SharePoint, Power BI, Entra ID y acceso a los seis Excel y a los usuarios clave — checklist completo en el **Anexo C**). Sin esa condición cumplida a tiempo, el plazo de 4 meses no es exigible y se recalcula proporcionalmente al retraso en la disponibilidad de accesos.
+
+---
+
+# Enfoque técnico de la solución
+
+La solución se basa en tecnologías Microsoft, priorizando el aprovechamiento de licencias que el cliente probablemente ya posee:
+
+- **Power BI** como capa de visualización y modelo semántico único.
+- **SharePoint Online** como repositorio controlado de archivos Excel y punto de integración documental.
+- **Excel como fuente inicial controlada**, no como arquitectura final.
+- **SQL Server o Azure SQL** como repositorio estructurado, incorporado progresivamente.
+- **Power Automate** para automatización de cargas, alertas y flujos de notificación.
+- **Power Apps** para formularios o captura estructurada, si se confirma la necesidad operativa.
+- **Microsoft Entra ID** para autenticación, grupos de seguridad y control de accesos.
+- **On-Premises Data Gateway**, únicamente si existen fuentes locales que lo requieran (por ejemplo, SQL Server on-premise o Arena).
+- **Microsoft Fabric o Azure Data Factory** como evolución futura, si el cliente cuenta con licencias y madurez de datos suficiente hacia el final del contrato.
+
+La arquitectura debe ser pragmática: iniciar simple, entregar valor rápido y escalar sin necesidad de rehacer la solución construida en la primera etapa.
+
+---
+
+# Arquitectura base propuesta
+
+## Principio de diseño
+
+Se recomienda iniciar con un **Escenario Mínimo Viable (Quick Win)**, diseñado desde el inicio con la estructura de datos del **Escenario Base Escalable**, de modo que el trabajo de estandarización de la primera etapa sea reutilizable y no deba descartarse al escalar.
+
+## Arquitectura mínima viable
+
+```
+┌────────────────────────────────────────────────────────┐
+│  FUENTES: Excel matriz (COMS) · MySandvik · Fractall One │
+│  Acquire* · Arena*                                       │
+└───────────────────────┬──────────────────────────────────┘
+                        │ Power Automate (flujos estándar)
+                        ▼
+┌────────────────────────────────────────────────────────┐
+│  ALMACENAMIENTO CONTROLADO: SharePoint Online            │
+│  (versionado, permisos por rol, nomenclatura estándar)   │
+└───────────────────────┬──────────────────────────────────┘
+                        │ Conector SharePoint (sin Gateway)
+                        ▼
+┌────────────────────────────────────────────────────────┐
+│  MODELADO Y ANÁLISIS: Power BI Desktop / Service         │
+│  Modelo semántico único · medidas DAX homologadas         │
+└───────────────────────┬──────────────────────────────────┘
+                        ▼
+┌────────────────────────────────────────────────────────┐
+│  CONSUMO: Mina · Mantenimiento · Geología · Planta ·      │
+│  Gerencia                                                 │
+└────────────────────────────────────────────────────────┘
+
+* Acquire y Arena se incorporan sujeto a validación de alcance en Fase 0.
+```
+
+## Arquitectura objetivo escalable
+
+```
+┌──────────────────────────────────────────────────────────┐
+│  FUENTES: Excel/SharePoint · MySandvik · Fractall One ·    │
+│  Acquire · Arena · modelo de bloques (Vulcan/Leapfrog CSV) │
+└──────────────────┬───────────────────────────────────────┘
+                   │ Power Automate Premium / ETL programado
+                   ▼
+┌──────────────────────────────────────────────────────────┐
+│  ZONA BRONZE — Archivos originales sin modificar           │
+│  SharePoint / Azure Blob Storage                           │
+└──────────────────┬───────────────────────────────────────┘
+                   │ Transformación y validación
+                   ▼
+┌──────────────────────────────────────────────────────────┐
+│  ZONA SILVER — Datos validados y estructurados             │
+│  SQL Server / Azure SQL: tablas maestras, transaccionales, │
+│  de auditoría                                               │
+└──────────────────┬───────────────────────────────────────┘
+                   │ Direct Query / Import Mode
+                   ▼
+┌──────────────────────────────────────────────────────────┐
+│  ZONA GOLD — Modelo semántico gobernado                    │
+│  Power BI: dimensiones + hechos + KPIs homologados          │
+└──────────────────┬───────────────────────────────────────┘
+                   ▼
+┌──────────────────────────────────────────────────────────┐
+│  CONSUMO Y GOBIERNO — Power BI App · RLS por área ·         │
+│  Entra ID · Audit Logs                                      │
+└──────────────────────────────────────────────────────────┘
+```
+
+## Capas de la arquitectura
+
+1. **Capa de fuentes:** Excel matriz, MySandvik, Fractall One, Acquire, Arena y el modelo de bloques exportado desde Vulcan/Leapfrog.
+2. **Capa de almacenamiento controlado:** SharePoint con bibliotecas estructuradas, versionado (mínimo 10 versiones por archivo) y reglas de nomenclatura por área.
+3. **Capa de integración:** Power Automate para flujos simples; ETL programado para escenarios con mayor volumen o control, con validaciones automáticas antes de cargar a la zona Silver.
+4. **Capa de datos estructurados:** SQL Server/Azure SQL con modelo staging, modelo curado, tablas maestras, transaccionales y de auditoría.
+5. **Capa semántica:** modelo Power BI único, con medidas DAX homologadas y catálogo de KPIs versionado.
+6. **Capa de visualización:** dashboards por área (mina, mantenimiento, geología, planta, gerencia).
+7. **Capa de seguridad y gobierno:** Microsoft Entra ID, permisos por rol, logs, auditoría, responsables de datos y control de cambios.
+
+## Componentes tecnológicos y criterio de uso
+
+| Componente | Función en la arquitectura | Cuándo usar | Licencia requerida |
+|---|---|---|---|
+| Power BI Desktop | Desarrollo de reportes y modelos semánticos | Siempre — herramienta de desarrollo principal | Gratuito |
+| Power BI Pro | Publicar, compartir y ver reportes en Power BI Service | Todos los autores y lectores en workspaces compartidos | Licencia por usuario |
+| SharePoint Online | Repositorio centralizado de archivos Excel controlados | Desde Fase 1, como fuente de datos para Power BI | Incluido en M365 E3/E5 |
+| Power Automate (estándar) | Flujos de notificación, movimiento de archivos, alertas básicas | Fase 1: flujos con SharePoint y Teams | Incluido en M365 |
+| Power Automate Premium | Flujos con conectores a SQL Server u otros sistemas externos | Fase 2 en adelante, al conectar con SQL/Acquire/Arena | Licencia adicional por usuario |
+| SQL Server / Azure SQL | Base de datos estructurada para el modelo curado | Fase 2-3, al escalar desde Excel hacia un repositorio gobernado | On-premise (perpetua) o PaaS (pago por uso) |
+| Power Apps | Formularios de captura de datos estructurada en campo | Solo si se confirma la necesidad de reemplazar captura manual | Incluido (conectores estándar) o licencia premium |
+| Microsoft Entra ID | Gestión de identidades, grupos de seguridad, autenticación | Desde Fase 1, para SSO y control de accesos por grupo | Incluido en M365 |
+| On-Premises Data Gateway | Puente entre fuentes locales (Arena, SQL on-premise) y la nube | Solo si existen fuentes que no están en SharePoint/OneDrive | Gratuito, requiere servidor dedicado |
+
+: Componentes tecnológicos recomendados {#tbl-componentes}
+
+---
+
+# Modelo de datos y gobierno de información
+
+## Modelo de datos propuesto (dominio mina)
+
+A partir de las estructuras ya presentes de forma implícita en los libros analizados (particularmente la hoja oculta ACM de Resumen Turno, que ya replica un patrón de "una fila por transacción"), se propone el siguiente modelo relacional simplificado como base del dominio operativo de mina:
+
+| Tabla | Tipo | Contenido |
+|---|---|---|
+| `dim_equipo` | Dimensión | Catálogo único de equipos: familia, subfamilia, capacidad nominal |
+| `dim_causa_demora` | Dimensión | Catálogo único de causas de demora (91 códigos), tipo y responsable ("padrino") |
+| `dim_ubicacion` | Dimensión | Niveles, frentes y zonas de la mina |
+| `dim_contratista` | Dimensión | Contratistas y flota asociada |
+| `dim_fecha` | Dimensión | Calendario operativo (fecha, turno, día, mes, año) |
+| `fact_tiempo_equipo` | Hecho | Horas por equipo, turno y código de causa |
+| `fact_disponibilidad` | Hecho | Horas operación/standby/mantenimiento, Disp% y Util% por equipo y turno |
+| `fact_avance` | Hecho | Metros de avance real vs. plan por equipo y turno |
+| `fact_acarreo` | Hecho | Viajes, tonelaje, origen-destino y contratista por camión y turno |
+| `audit_carga` | Auditoría | Timestamp, usuario, archivo fuente, registros procesados, errores |
+| `audit_cambios` | Auditoría | Tabla, campo, valor anterior, valor nuevo, usuario, fecha |
+
+: Modelo de datos propuesto — dominio mina {#tbl-modelo-datos}
+
+Los dominios de **geología** (leyes, humedad) y **planta** (molienda, humedad al turno) se incorporarán como dominios adicionales una vez confirmada su fuente oficial (probablemente Acquire y la base de datos de planta), replicando el mismo principio de separar dimensiones de hechos y evitar catálogos duplicados manualmente entre archivos.
+
+## Gobierno de datos — fase inicial
+
+Se propone un gobierno **ligero**, aplicable desde la primera fase, sin burocracia enterprise:
+
+| Elemento | Descripción |
+|---|---|
+| Catálogo de reportes | Lista viva de reportes en alcance, con dueño y estado |
+| Catálogo de KPIs | Fórmula única por KPI, resolviendo inconsistencias detectadas (ej. Disponibilidad) |
+| Diccionario de datos | Campo, tipo, fuente, regla de validación y dueño por dato reportado |
+| Matriz fuente-reporte | Qué libro/sistema alimenta cada reporte |
+| Registro de cargas y bitácora de cambios | Trazabilidad mínima de quién cargó qué y cuándo |
+| Responsables de negocio y técnicos | Un dueño de dominio por área (mina, mantenimiento, geología, planta) |
+| Periodicidad de actualización | Definida por reporte, según turno, día o cierre de mes |
+| Validaciones mínimas de calidad | Unicidad (sin duplicar turno/área/fecha), completitud de campos obligatorios, rangos físicamente posibles, integridad referencial contra catálogos maestros |
+
+: Elementos de gobierno de datos — fase inicial {#tbl-gobierno}
+
+---
+
+# Metodología de trabajo
+
+## Enfoque metodológico
+
+La ejecución del contrato paraguas sigue un enfoque **iterativo y gobernado por backlog**, no un ciclo tradicional de cascada de alcance fijo. Cada fase entrega valor validado antes de avanzar a la siguiente, y las seis fases descritas a continuación se ejecutan de forma secuencial y comprimida para el alcance inicial (seis reportes base, meta de 4 meses) pero de forma **cíclica** para el resto del contrato: cada nuevo reporte o mejora incorporado a partir del mes 5 recorre el mismo ciclo abreviado (levantamiento → diseño → construcción → validación), priorizado en el comité mensual.
+
+La compresión a 4 meses se logra ejecutando las Fases 2 y 3 **en paralelo** (diseño UX/UI y arquitectura de datos no dependen una de la otra) y manteniendo el resto de las fases secuenciales pero con alcance acotado a los seis reportes ya identificados documentalmente. Esta compresión depende de que el cliente confirme accesos y permisos desde la Semana 1 (Anexo C); es un objetivo alcanzable, no un plazo garantizado de forma incondicional.
+
+Este enfoque permite:
+
+- Validar con usuarios clave antes de comprometer desarrollo (reduce retrabajo).
+- Corregir hallazgos de calidad de datos (Anexo A) antes de automatizarlos, evitando construir sobre datos no confiables.
+- Ajustar la dedicación del equipo por fase, según la carga real de trabajo.
+- Incorporar nuevos requerimientos sin necesidad de renegociar el contrato, mediante el modelo de backlog descrito en "Modelo operativo del contrato".
+
+## Fase 0 — Ideación y alineamiento
+
+**Duración estimada:** Semana 1 (Mes 1) — condicionada a accesos y licencias disponibles desde el kickoff.
+
+**Objetivo:** confirmar requerimientos, alcance inicial (incluyendo la validación de geología y planta), criterios de éxito y restricciones del cliente.
+
+**Entregables:** documento de ideación, mapa de reportes, matriz de fuentes, matriz de usuarios, matriz de brechas, priorización de reportes, backlog inicial.
+
+## Fase 1 — Levantamiento funcional
+
+**Duración estimada:** Semanas 2 a 4 (Mes 1).
+
+**Objetivo:** entender cada reporte y convertirlo en especificación funcional, corrigiendo los hallazgos de integridad de datos del Anexo A antes de automatizar sobre ellos.
+
+**Entregables:** ficha funcional por reporte, reglas de negocio, KPIs homologados, frecuencia, usuarios, criterios de aceptación.
+
+## Fase 2 — Diseño UX/UI y estándar visual
+
+**Duración estimada:** Semanas 5 a 6 (Mes 2) — en paralelo con la Fase 3.
+
+**Objetivo:** definir la identidad de reportabilidad de Cozamin.
+
+**Entregables:** estándar visual Power BI, wireframes, navegación, lineamientos gráficos, plantilla base.
+
+## Fase 3 — Arquitectura y modelo de datos
+
+**Duración estimada:** Semanas 5 a 8 (Mes 2) — en paralelo con la Fase 2.
+
+**Objetivo:** implementar la estructura base de datos y el flujo de información.
+
+**Entregables:** arquitectura validada, modelo de datos (Zona Silver), repositorio SharePoint, base SQL si aplica, flujos de carga, reglas de validación.
+
+## Fase 4 — Desarrollo de reportes
+
+**Duración estimada:** Semanas 9 a 12 (Mes 3).
+
+**Objetivo:** construir los dashboards Power BI de los reportes priorizados.
+
+**Entregables:** dashboards por reporte, modelo semántico, medidas DAX, documentación técnica.
+
+## Fase 5 — Validación y puesta en marcha
+
+**Duración estimada:** Semanas 13 a 16 (Mes 4) — cierre de los seis reportes base.
+
+**Objetivo:** validar con usuarios clave y cerrar la versión productiva.
+
+**Entregables:** actas de validación, correcciones, publicación, capacitación, manual de usuario.
+
+## Fase 6 — Soporte y evolución
+
+**Duración estimada:** Meses 5 a 12.
+
+**Objetivo:** operar el contrato paraguas durante el resto del año contractual.
+
+**Entregables:** soporte mensual, backlog evolutivo, mejoras priorizadas, nuevos reportes, optimización de modelos, documentación actualizada.
+
+---
+
+# Equipo de trabajo propuesto
+
+## Roles y perfiles profesionales
+
+| Rol | Responsabilidad principal | Perfil / experiencia mínima | Dedicación sugerida |
+|---|---|---|---|
+| Líder técnico / arquitecto de soluciones | Define arquitectura, decisiones técnicas y control de calidad del contrato | 3+ años en soluciones BI Microsoft; conocimiento de Power Platform y Azure | Parcial |
+| Analista funcional minero | Levanta requerimientos, procesos, KPIs y reglas de negocio por dominio | Experiencia en minería o procesos industriales; capacidad de entrevistar usuarios y traducir necesidades operativas | Parcial / intensivo al inicio |
+| Especialista UX/UI BI | Define estándar visual y experiencia de usuario de los dashboards | Diseño UX aplicado a BI; manejo de Power BI o herramientas de prototipado | Parcial |
+| Especialista Power BI | Desarrolla dashboards, modelo semántico y medidas | Nivel intermedio-avanzado en DAX, Power Query y Power BI Service | Según demanda |
+| Ingeniero de datos | Implementa integración, limpieza y estructuración de datos | SQL/Python + Power Query; experiencia en pipelines ETL (Power Automate o Azure Data Factory) | Según demanda |
+| DBA / especialista SQL | Diseña base de datos, vistas, control de acceso y performance | SQL Server o Azure SQL; diseño relacional | Parcial |
+| Especialista Power Platform | Desarrolla flujos Power Automate y aplicaciones Power Apps | Power Automate y Power Apps nivel intermedio; conectores estándar y premium | Según demanda |
+| Especialista de negocio minero (SME) | Valida lógica operacional y consistencia de indicadores | Ingeniero de minas o profesional con experiencia underground | Parcial |
+| PM / coordinador del contrato | Controla planificación, backlog, reuniones, entregables y avance | Experiencia en coordinación de proyectos de TI/BI; gestión de backlog y stakeholders | Parcial |
+| Responsable de seguridad / TI (cliente) | Configura Entra ID, accesos, gateway y soporte de infraestructura | Administrador M365/Azure del lado del cliente; contraparte técnica, no perfil de ASTAY | Según necesidad |
+| Soporte técnico | Atiende incidencias, ajustes y continuidad operativa | Analista BI junior con conocimiento operacional de mina | Bolsa mensual |
+
+: Equipo de trabajo propuesto — roles y perfiles {#tbl-equipo}
+
+La composición podrá ajustarse según la carga mensual, el backlog aprobado y la complejidad de las fuentes activas en cada momento del contrato: mayor dedicación de Ingeniero de Datos y DBA durante la Fase 3, mayor dedicación de Especialista Power BI durante la Fase 4, y activación de Especialista Power Platform cuando se confirme la necesidad de Power Apps.
+
+## Participación del equipo a lo largo del proyecto
+
+El equipo no se moviliza completo desde el día uno: cada perfil se incorpora y ajusta su dedicación según la fase en curso, siguiendo las siete fases descritas en "Metodología de trabajo". La siguiente matriz resume el nivel de participación esperado por rol y por fase.
+
+| Rol | F0 Ideación | F1 Levantamiento | F2 UX/UI | F3 Arquitectura y datos | F4 Desarrollo | F5 Validación | F6 Soporte y evolución |
+|---|---|---|---|---|---|---|---|
+| Líder técnico / arquitecto | Alta | Media | Baja | Alta | Media | Media | Baja |
+| Analista funcional minero | Alta | Alta | Media | Baja | Baja | Alta | Media |
+| Especialista UX/UI BI | — | Baja | Alta | Baja | Media | Baja | — |
+| Especialista Power BI | — | — | Baja | Baja | Alta | Media | Media |
+| Ingeniero de datos | — | Media | — | Alta | Media | Baja | Media |
+| DBA / especialista SQL | — | — | — | Alta | Media | Baja | Baja |
+| Especialista Power Platform | — | — | — | Media | Media | Baja | Media |
+| Especialista de negocio minero (SME) | Media | Alta | Baja | — | Baja | Alta | Media |
+| PM / coordinador del contrato | Alta | Media | Media | Media | Media | Alta | Alta |
+| Responsable de seguridad / TI (cliente) | Media | Baja | — | Alta | Baja | Baja | Media |
+| Soporte técnico | — | — | — | — | Baja | Baja | Alta |
+
+: Participación del equipo por fase del proyecto {#tbl-participacion}
+
+### Cómo participa cada perfil a lo largo del contrato
+
+- **Líder técnico / arquitecto** — protagonista en la Fase 0 (define el árbol de decisión Quick Win vs. Escalable) y en la Fase 3 (valida la arquitectura y el modelo de datos antes de construir). En las fases de desarrollo y soporte pasa a un rol de control de calidad y desbloqueo de decisiones técnicas, sin ejecutar el desarrollo día a día.
+- **Analista funcional minero** — es el perfil más activo en el arranque: conduce las entrevistas de la Fase 0 y redacta las fichas funcionales de la Fase 1 (reglas de negocio, KPIs, fuentes). Vuelve a tener protagonismo en la Fase 5, validando junto al SME que cada dashboard refleja correctamente la operación antes de publicarlo. Durante la Fase 6 mantiene una dedicación media para levantar nuevos reportes que ingresen al backlog.
+- **Especialista UX/UI BI** — se concentra casi por completo en la Fase 2, definiendo el estándar visual único de reportabilidad. Reaparece con dedicación media en la Fase 4 para asegurar que los dashboards construidos respeten ese estándar, y no participa en fases de arquitectura de datos ni de soporte.
+- **Especialista Power BI** — no participa en las fases 0 y 1 (no hay nada que construir aún); se incorpora en la Fase 2 apoyando la prototipación visual y alcanza su mayor dedicación en la Fase 4, construyendo los dashboards y el modelo semántico. Durante la Fase 6 mantiene dedicación media para nuevos reportes y ajustes evolutivos.
+- **Ingeniero de datos** — se incorpora en la Fase 1 para apoyar la auditoría de los hallazgos de integridad de datos del Anexo A (vínculos rotos, fórmulas `#REF!`), y alcanza su mayor dedicación en la Fase 3, construyendo los flujos de carga hacia la zona Silver. En la Fase 6 su participación se mantiene media, sosteniendo los pipelines en producción y ampliándolos a nuevas fuentes.
+- **DBA / especialista SQL** — participa exclusivamente a partir de la Fase 3, diseñando el esquema de base de datos, y mantiene dedicación media en la Fase 4 para ajustes de performance. En fases de soporte su participación es baja, salvo incidentes de base de datos.
+- **Especialista Power Platform** — se activa desde la Fase 3 si se confirma la necesidad de Power Automate Premium o Power Apps, con dedicación media durante el desarrollo y la evolución del contrato (Fase 6), cuando se prioricen nuevas automatizaciones.
+- **Especialista de negocio minero (SME)** — participa desde la Fase 0 validando el contexto operacional, con mayor intensidad en la Fase 1 (validando reglas de negocio y KPIs) y en la Fase 5 (aceptación funcional de cada reporte antes de su puesta en marcha). Es el filtro que asegura que los indicadores construidos sean operacionalmente correctos, no solo técnicamente correctos.
+- **PM / coordinador del contrato** — mantiene una presencia constante durante todo el contrato, con picos de dedicación en la Fase 0 (planificación inicial) y en las Fases 5-6 (gestión de backlog, comité mensual y seguimiento de horas), que es donde se concentra la gestión operativa del modelo de contrato paraguas.
+- **Responsable de seguridad / TI (cliente)** — es la contraparte del cliente, no un recurso de ASTAY. Su participación es crítica en la Fase 0 (validación de licencias y restricciones) y en la Fase 3 (configuración de accesos, grupos de Entra ID y gateway), con presencia puntual el resto del contrato ante solicitudes de acceso.
+- **Soporte técnico** — no participa en la construcción inicial; se incorpora hacia el final de la Fase 4 para familiarizarse con la solución antes de asumir la operación, y concentra su dedicación en la Fase 6, atendiendo incidencias y ajustes menores mediante la bolsa de horas de soporte mensual.
+
+---
+
+# Roles y responsabilidades
+
+La ejecución del contrato distingue tres niveles de responsabilidad:
+
+- **ASTAY** — responsable de la definición técnica, desarrollo, documentación, control de calidad y soporte, dentro de la bolsa de horas y el backlog priorizado acordado mensualmente.
+- **Cliente (Cozamin/Capstone)** — responsable de proveer accesos, licencias, usuarios clave para validación, definición de responsables por fuente de datos y aprobación de entregables por reporte.
+- **Comité conjunto** — responsable de la priorización mensual del backlog, revisión de avance y aprobación de cambios de alcance mayores.
+
+Cada dominio de datos (mina, mantenimiento, geología, planta) debe contar con un **dueño de negocio** designado por el cliente y un **responsable técnico** designado por ASTAY, según el modelo de gobierno descrito en la sección anterior.
+
+---
+
+# Matriz de permisos y seguridad
+
+Se aplica el principio de **mínimo privilegio**, asignando accesos mediante grupos de Microsoft Entra ID en lugar de permisos individuales directos, y separando ambientes (desarrollo / validación / producción) a partir de la Fase 3.
+
+| Componente | Usuarios finales (mina, mantenimiento, geología, planta) | Desarrolladores (equipo ASTAY) | Administradores |
+|---|---|---|---|
+| SharePoint — biblioteca de fuentes | Lectura / carga de archivos (Contributor) | Lectura, escritura y gestión de versiones (Owner) | Control total (Site Admin) — TI del cliente |
+| SharePoint — repositorio gobernado | Solo lectura | Contribuir y crear versiones | Site Collection Admin — TI del cliente |
+| Power BI Workspace | Viewer — solo visualiza reportes publicados | Contributor — publica y actualiza reportes | Admin — gestiona el workspace |
+| Power BI Dataset / modelo semántico | Read, con seguridad de fila (RLS) por área | Build — crea reportes derivados del modelo | Admin — gestiona permisos del dataset |
+| SQL Server / Azure SQL | Sin acceso directo | `db_datareader` en el esquema correspondiente | `db_owner` — solo DBA |
+| Power Apps | Usuario de la app, si aplica | Maker — crea y mantiene la app | Environment Admin |
+| Power Automate | Sin acceso a flujos | Flow Maker | Environment Admin |
+| Microsoft Entra ID | Usuario estándar | Sin rol de directorio | Administrador de identidad — TI del cliente |
+
+: Matriz de permisos por componente {#tbl-permisos}
+
+## Seguridad a nivel de fila (RLS)
+
+Cada usuario final ve únicamente los datos de su área mediante una tabla de seguridad (`UserPrincipalName` → `Área` → `Nivel de acceso`) y una regla DAX del tipo `[UserPrincipalName] = USERPRINCIPALNAME() OR [Nivel_Acceso] = "TODOS"`, de forma que gerencia visualice el consolidado y cada jefatura de área visualice únicamente su dominio (mina, mantenimiento, geología o planta).
+
+## Principios de seguridad aplicados
+
+- Nunca se asignan permisos individuales directamente; siempre mediante grupos de Entra ID.
+- Separación de ambientes desde la Fase 3 (desarrollo / validación / producción).
+- Habilitación de MFA para todos los usuarios con acceso a datos operacionales.
+- Todo flujo de Power Automate debe tener un dueño y una cuenta de servicio de respaldo, para evitar flujos huérfanos.
+- Ningún dataset de Power BI se publica de forma pública ("Publish to web" deshabilitado a nivel de tenant).
+
+---
+
+# Modelo operativo del contrato
+
+El contrato paraguas de 12 meses opera bajo el siguiente esquema:
+
+- **Kickoff** formal al inicio del contrato, con validación de alcance y accesos.
+- **Planificación y priorización mensual** del backlog junto al cliente.
+- **Ejecución por órdenes de trabajo o paquetes**, dentro de la bolsa de horas contratada.
+- **Reuniones operativas semanales o quincenales** de seguimiento técnico.
+- **Comité mensual** de revisión de avance, horas consumidas y backlog.
+- **Entregas parciales** con validación por módulo o sprint y actas de conformidad.
+- **Gestión de nuevas solicitudes:** cualquier requerimiento fuera de los seis reportes iniciales se incorpora al backlog, sujeto a disponibilidad de horas y validación técnica/comercial — sin renegociar el contrato.
+- **Control de cambios:** todo cambio a plantillas Excel, modelos Power BI o reglas de validación pasa por aprobación del dueño del dominio correspondiente y se registra en un log de cambios.
+
+---
+
+# Entregables
+
+## Entregables iniciales
+
+Documento de ideación · documento de arquitectura · matriz de fuentes · matriz de permisos · matriz de reportes (Anexo A) · diccionario de datos · catálogo de KPIs · estándar UX/UI de reportabilidad · backlog priorizado · diseño funcional de los seis reportes.
+
+## Entregables de implementación
+
+Dashboards Power BI · modelo semántico · flujos Power Automate · base SQL o modelo estructurado (si aplica) · repositorio SharePoint ordenado · bitácora de cargas · documentación técnica · manual de usuario final · actas de validación.
+
+## Entregables recurrentes (durante el contrato)
+
+Reporte mensual de avance · registro de incidencias · registro de mejoras · backlog actualizado · documentación actualizada · soporte funcional/técnico · recomendaciones de evolución.
+
+---
+
+# Supuestos y dependencias
+
+## Supuestos
+
+- El cliente confirmará el alcance final de los seis (o cuatro-cinco) reportes priorizados durante la Fase 0.
+- El cliente cuenta o podrá habilitar las licencias Microsoft necesarias (Power BI Pro como mínimo).
+- El cliente facilitará usuarios clave para validación funcional por cada dominio (mina, mantenimiento, geología, planta).
+- El cliente habilitará accesos de lectura a SharePoint, Power BI, y a MySandvik/Acquire/Arena según se confirme en Fase 0.
+- Las fuentes iniciales estarán mayormente en Excel; el nivel de automatización dependerá de su calidad y disponibilidad.
+- Los hallazgos de integridad de datos del Anexo A se corrigen como parte de la Fase 1 y no se heredan al modelo automatizado.
+- ASTAY propondrá una arquitectura base escalable, no una solución integral enterprise desde el inicio.
+- ASTAY no modificará sistemas fuente del cliente sin aprobación formal.
+- Los tiempos del contrato dependerán de la entrega oportuna de datos, accesos y licencias por parte del cliente.
+
+## Dependencias del cliente
+
+Accesos · permisos · licencias · infraestructura · validación de usuarios clave · disponibilidad de datos · aprobaciones de TI · ventanas de trabajo · seguridad corporativa · definición de responsables por fuente de información.
+
+---
+
+# Exclusiones
+
+Quedan fuera de alcance del contrato base, salvo contratación específica adicional:
+
+- Reemplazo integral de sistemas existentes (MySandvik, Fractall One, Acquire, Arena).
+- Integraciones con sistemas no identificados en este documento.
+- Analítica avanzada, machine learning o modelos predictivos.
+- Desarrollo de un data warehouse enterprise completo.
+- Gestión del cambio organizacional integral.
+- Soporte 24/7.
+- Administración de licencias Microsoft del cliente.
+- Adquisición de infraestructura.
+- Corrección de datos históricos no entregados por el cliente.
+- Modificación de sistemas origen sin aprobación formal.
+- Integraciones OT complejas.
+- Ciberseguridad avanzada o hardening corporativo.
+- Desarrollo de aplicaciones transaccionales complejas.
+
+---
+
+# Criterios de aceptación
+
+- Reporte validado funcionalmente por el usuario clave del área correspondiente.
+- KPI con fórmula única documentada (resolviendo inconsistencias como la de Disponibilidad).
+- Fuente identificada y trazable hasta el dato origen.
+- Dashboard publicado en el workspace de Power BI acordado.
+- Frecuencia de actualización definida y en operación.
+- Accesos configurados según rol, mediante grupos de Entra ID.
+- Documentación técnica y manual de usuario entregados.
+- Acta de conformidad firmada por reporte.
+- Incidencias críticas cerradas antes del cierre de fase.
+- Capacitación realizada con los usuarios clave del dominio.
+
+---
+
+# Cronograma referencial
+
+## Meta de la primera etapa: seis reportes base en 4 meses
+
+Se establece como **objetivo alcanzable** la publicación y validación de los seis reportes base dentro de los **primeros 4 meses** del contrato, comprimiendo las fases 0 a 5 de la metodología frente al esquema de 6 meses considerado inicialmente. Esta meta está **condicionada a que los accesos, permisos y licencias descritos en el Anexo C estén disponibles desde la Semana 1** del contrato (SharePoint, workspace de Power BI, grupos de Entra ID, acceso a los seis archivos Excel y a los usuarios clave de cada dominio). Si alguna de estas condiciones se retrasa, el plazo se ajusta proporcionalmente sin afectar el resto del backlog del contrato paraguas.
+
+| Periodo | Foco | Actividades principales |
+|---|---|---|
+| **Mes 1** | Ideación, arquitectura y levantamiento funcional | Kickoff con validación inmediata de accesos y licencias; confirmación del alcance de los seis reportes; fichas funcionales y KPIs homologados; arquitectura base validada; backlog inicial priorizado |
+| **Mes 2** | Diseño UX/UI y arquitectura de datos (en paralelo) | Estándar visual y wireframes; repositorio SharePoint estructurado; modelo de datos de la zona Silver; corrección de los hallazgos críticos de integridad de datos (Anexo A) |
+| **Mes 3** | Desarrollo de los seis dashboards | Construcción de los seis reportes en Power BI; modelo semántico único; medidas DAX homologadas; primeras automatizaciones con Power Automate |
+| **Mes 4** | Validación y puesta en marcha | Validación funcional por dominio con usuarios clave; actas de conformidad; documentación técnica; capacitación; publicación productiva de los seis reportes |
+| **Meses 5 a 12** | Soporte y evolución | Nuevos reportes (geología/planta si se confirma alcance); mejoras; migración progresiva hacia SQL Server/Azure SQL; gobierno de datos estructurado; soporte mensual; roadmap del siguiente año |
+
+: Cronograma referencial — meta de 4 meses para los seis reportes base {#tbl-cronograma}
+
+El detalle mensual de la primera etapa y el roadmap trimestral de soporte y evolución se presentan en el **Anexo B**.
+
+---
+
+# Modelo de seguimiento y control
+
+- **Comité mensual** — revisión de avance, backlog, horas consumidas vs. disponibles y riesgos activos.
+- **Reunión operativa semanal o quincenal** — seguimiento técnico de las órdenes de trabajo en curso.
+- **Matriz RACI** — por fase y por dominio de datos, alineada a los roles descritos en la sección "Roles y responsabilidades".
+- **Backlog priorizado** — vivo, gestionado conjuntamente con el cliente.
+- **Registro de cambios** — toda modificación a plantillas, modelos o reglas de validación.
+- **Registro de riesgos** — actualizado en cada comité mensual.
+- **Actas de validación** — por reporte y por hito de fase.
+- **Indicadores de avance** — horas consumidas, horas disponibles, entregables aprobados vs. planificados.
+
+---
+
+# Riesgos y mitigaciones
+
+| Riesgo | Impacto | Mitigación |
+|---|---|---|
+| Retraso en la entrega de accesos, permisos o licencias (SharePoint, Power BI, Entra ID) | Alto | La meta de 4 meses para los seis reportes base queda condicionada a su disponibilidad desde la Semana 1 (Anexo C); un retraso recalcula el plazo proporcionalmente, sin afectar el resto del backlog |
+| Vínculos externos rotos o mal dirigidos entre libros Excel (ej. Productividad apuntando a mayo) | Alto | Corrección obligatoria en Fase 1 antes de conectar a Power BI |
+| Fórmulas `#REF!` no resueltas en Resumen Turno y Tiempos | Alto | Auditoría de fórmulas como parte del levantamiento funcional |
+| Definición de KPI inconsistente entre libros (Disponibilidad) | Alto | Homologar fórmula única en el modelo semántico Power BI |
+| Alcance de geología/planta no confirmado dentro de los seis libros base | Alto | Validar en Fase 0 la fuente real (Acquire, base de datos de planta) e incorporarla al backlog si corresponde |
+| Licencias Microsoft no confirmadas | Alto | Validar en Fase 0 antes de comprometer arquitectura final |
+| Objetivo del proyecto aún no completamente definido | Alto | Fase 0 de descubrimiento funcional antes de comprometer entregables finales |
+| Captura incompleta de datos (Acarreo sin registros desde el día 20 de junio) | Medio | No usar como fuente de cierre mensual hasta cerrar la brecha de captura |
+| Dependencia de archivos Excel en el mediano plazo | Medio/Alto | Definir gobierno mínimo, plantillas y evolucionar hacia SharePoint/SQL gobernado (Anexo B) |
+| Cambios de alcance frecuentes | Medio | Gestión mediante backlog priorizado y control de cambios |
+| Automatizaciones complejas no dimensionadas | Medio | Separar quick wins de arquitectura objetivo; automatización progresiva |
+| Falta de documentación formal del cliente sobre procesos | Alto | Incluir levantamiento funcional como entregable clave de Fase 0-1 |
+| Gestión del cambio organizacional no presupuestada | Medio | Dejar fuera de alcance base; ofrecer como opcional comercial |
+
+: Riesgos y mitigaciones {#tbl-riesgos}
+
+---
+
+# Condiciones técnicas para la ejecución
+
+- Acceso a Power BI y definición del mecanismo de publicación (workspace por área).
+- SharePoint habilitado, con carpetas estructuradas y control de versiones activo.
+- Acceso a los seis archivos Excel base y a usuarios clave por cada dominio.
+- Definición formal de responsables por fuente de datos.
+- SQL Server / Azure SQL disponible cuando se implemente la base estructurada.
+- Gateway on-premises si existen fuentes locales fuera de SharePoint (por ejemplo, Arena o SQL local).
+- Acceso de solo lectura a MySandvik, Fractall One y Acquire, sujeto a validación de alcance.
+- Permisos de lectura a las fuentes confirmadas en Fase 0.
+- Validación de seguridad y política de datos en la nube del cliente.
+- Canal formal de comunicación y aprobación con el cliente.
+
+---
+
+# Anexos
+
+- **Anexo A** — Matriz funcional de los seis reportes base y riesgos de integridad de datos.
+- **Anexo B** — Roadmap referencial de 12 meses por trimestre.
+- **Anexo C** — Checklist de información, accesos y decisiones a validar con el cliente.

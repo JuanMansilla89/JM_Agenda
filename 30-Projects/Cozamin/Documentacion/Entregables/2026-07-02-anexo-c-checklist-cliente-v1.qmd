@@ -1,0 +1,65 @@
+---
+title: "Anexo C — Checklist de Información, Accesos y Decisiones a Validar con el Cliente"
+subtitle: "Propuesta Técnica Contrato Paraguas — Mina Cozamin (Capstone)"
+author: "ASTAY Systems"
+date: "2026-07-02"
+format:
+  docx:
+    reference-doc: "../../../../_templates/custom-reference.docx"
+    toc: false
+    number-sections: false
+lang: es
+---
+Este checklist debe completarse durante el kickoff y la Fase 0 (Ideación y Alineamiento) del contrato paraguas. Su objetivo es cerrar las brechas de información necesarias para comprometer arquitectura, cronograma y equipo definitivos.
+
+## C.1 Licencias y tecnología
+
+- [ ] ¿Qué plan de Microsoft 365 tiene actualmente Cozamin/Capstone? (Business Basic / E3 / E5 / otro)
+- [ ] ¿Cuántos usuarios necesitarán ver reportes de Power BI? ¿Cuántos publicarán/crearán?
+- [ ] ¿Se cuenta con licencias Power BI Pro o Premium Per User ya asignadas?
+- [ ] ¿Existe suscripción activa de Azure y presupuesto para servicios cloud adicionales?
+- [ ] ¿Microsoft Teams está activo como canal de comunicación operativa?
+
+## C.2 Infraestructura y datos
+
+- [ ] ¿Los seis archivos Excel base están en equipos locales, servidor de red, SharePoint u OneDrive?
+- [ ] ¿MySandvik, Fractall One y Acquire permiten acceso de lectura vía API o exportación programada?
+- [ ] ¿Arena (base de datos de geología) puede integrarse con SQL Server, o requiere una capa intermedia?
+- [ ] ¿Existe servidor on-premise disponible para SQL Server o el Data Gateway?
+- [ ] ¿Cuál es la calidad y velocidad de la conectividad a internet en la mina (subterráneo)?
+- [ ] ¿Los datos operacionales pueden almacenarse en la nube del tenant Microsoft 365 de Capstone?
+
+## C.3 Procesos y organización
+
+- [ ] ¿Quién es el responsable actual de cada uno de los reportes base (mina, mantenimiento, acarreo, geología, planta)?
+- [ ] ¿Con qué frecuencia se actualiza cada reporte hoy (turno, diario, semanal, mensual)?
+- [ ] ¿Existe un proceso de validación o aprobación de datos antes de reportar?
+- [ ] ¿Cuenta el equipo del cliente con algún analista de datos o BI interno?
+- [ ] ¿Quién será el sponsor del proyecto dentro de Cozamin/Capstone (nivel gerencial)?
+- [ ] ¿Se confirma el número final de reportes de la primera etapa (4, 5 o 6) y la inclusión de geología/planta?
+
+## C.4 Seguridad y gobernanza
+
+- [ ] ¿Existe una política de TI que restrinja el uso de servicios cloud o almacenamiento fuera de la red corporativa?
+- [ ] ¿Se requiere control de acceso por área o nivel jerárquico (cada jefatura ve solo su dominio)?
+- [ ] ¿Hay datos regulados o sensibles (nómina, costos) que deban excluirse del alcance de reportabilidad?
+- [ ] ¿Quién administra Microsoft Entra ID / Active Directory en Capstone?
+- [ ] ¿Se requiere cumplimiento con normas locales de protección de datos en México?
+
+## C.5 Documentos y accesos a solicitar antes del kickoff
+
+- [ ] Versión más reciente de los seis archivos Excel base.
+- [ ] Descripción de cada reporte: propósito, audiencia, frecuencia, campos principales.
+- [ ] Organigrama del área operacional (Mina, Mantenimiento, Geología, Planta, Gerencia).
+- [ ] Lista de usuarios que accederán a los reportes (nombre, área, rol, correo corporativo).
+- [ ] Acceso de lectura al tenant de Microsoft 365, solo para auditar licencias y configuraciones.
+- [ ] Descripción de infraestructura TI: servidores, conectividad, VPN, sistemas existentes (Arena, MySandvik, Fractall One, Acquire).
+
+## C.6 Decisiones de negocio a confirmar
+
+- [ ] Presupuesto disponible para licencias adicionales (Power BI Pro, Azure, Power Automate Premium).
+- [ ] Confirmación del sponsor ejecutivo y su nivel de autorización.
+- [ ] Definición de los KPIs más críticos que deben aparecer en cada dashboard.
+- [ ] Plazo esperado para los primeros quick wins.
+- [ ] Restricciones contractuales o de TI que puedan afectar el uso de la nube Microsoft.
+- [ ] Mecanismo de aprobación de horas dentro del contrato paraguas (bolsa de horas, órdenes de trabajo).
