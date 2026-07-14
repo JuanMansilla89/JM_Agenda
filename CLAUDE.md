@@ -63,6 +63,8 @@ Always use this format when creating tasks:
 | `Project Note.md` | When starting a new project | `30-Projects/<ProjectName>/` |
 | `Quick Capture.md` | Fast capture anytime | `00-Inbox/` |
 | `Quarto-Word.qmd` | Technical reports, proposals, scope docs for Word export | `30-Projects/<ProjectName>/` |
+| `Costeo-Propuesta.md` | Costeo de Hora-Hombre y cálculo de inversión, modelo Excel (perfil × mes) | `30-Projects/<ProjectName>/Documentacion/Entregables/` |
+| `Plan-Actividades.md` | Costeo de Hora-Hombre por área/actividad/perfil, modelo markdown automatizado | `30-Projects/<ProjectName>/Documentacion/Entregables/` |
 | `Doc-Reunion.md` | Meeting transcription / notes | `30-Projects/<ProjectName>/Documentacion/Reuniones/` |
 | `Doc-Comunicacion.md` | Email, WhatsApp, Teams message capture | `30-Projects/<ProjectName>/Documentacion/Comunicaciones/` |
 | `Doc-Referencia.md` | External document, standard, web reference | `30-Projects/<ProjectName>/Documentacion/Referencias/` |
@@ -84,6 +86,36 @@ When creating a Quarto document for a project:
 When asked to write a technical report, proposal, or scope document:
 - Create a `.qmd` file (not `.md`) in the relevant project folder
 - Use the Quarto-Word template as base
+
+---
+
+## Costeo de propuestas económicas
+
+Plantilla maestra: `50-Resources/Costeo/Propuesta-Economica_Template.xlsx`
+Template de creación (Templater): `_templates/Costeo-Propuesta.md`
+
+Estructura del Excel:
+- Hoja `costos` — tarifario maestro (Profesional | USD/HH). Única fuente de tarifas, compartida entre proyectos; mantener actualizada aquí, no en cada copia del template.
+- Hoja `Propuesta Modelo` — carga de HH por perfil y mes (columnas E–H = HH por persona; K/M–P calculan el total del equipo, Cantidad incluida). El costo por hora se trae automáticamente vía `VLOOKUP` a la hoja `costos`.
+- Hoja `Resumen Mensual` — consolidado por mes calculado automáticamente a partir de `Propuesta Modelo`: **N° Personas, Horas, Costo Horario Promedio, Costo Mano de Obra y Costo Total con Overhead** (indirectos 10% + administrativos 10% sobre mano de obra, utilidad 10% sobre ese subtotal — factor 1.32x), por Mes 1–4 y una fila `TOTAL PROYECTO`. N° Personas es headcount con horas>0 ese mes (no acumulable); el total usa el pico mensual.
+
+El flujo se gestiona desde Obsidian, no copiando el archivo manualmente:
+1. Dentro de `30-Projects/<Project>/Documentacion/Entregables/` (o el sub-proyecto correspondiente), crear una nueva nota desde el template `Costeo-Propuesta` (Templater), nombrándola con la convención `YYYY-MM-DD-costeo-vN`.
+2. El template copia automáticamente `Propuesta-Economica_Template.xlsx` a esa misma carpeta con el mismo nombre (`YYYY-MM-DD-costeo-vN.xlsx`) y lo enlaza en la nota — no se sobreescribe si ya existe un archivo con ese nombre.
+3. Completar Cantidad y HH mensuales por perfil en la hoja `Propuesta Modelo` del `.xlsx` generado. Si aparece un perfil nuevo, agregarlo primero en la hoja `costos` con su tarifa.
+4. Copiar el consolidado de la hoja `Resumen Mensual` a la tabla "Consolidado mensual" de la nota, y transcribir el total del proyecto a la sección `Inversión` del `.qmd` de la propuesta técnico-económica (`Quarto-Word.qmd`).
+
+### Alternativa: costeo por área/actividad (markdown automatizado)
+
+Cuando el costeo necesita desglosarse por área y actividad (no solo por perfil y mes), usar el flujo basado en markdown en vez del Excel:
+
+- Tarifario maestro: `50-Resources/Costeo/tarifario-perfiles.md` (Perfil | USD/HH) — misma fuente única de tarifas, en markdown.
+- Librería de cálculo compartida: `50-Resources/Costeo/costeo_lib.py` — replica la misma cascada del Excel (indirectos 10% + administrativos 10% sobre el subtotal de mano de obra, utilidad 10% sobre ese subtotal ya con indirectos/admin — factor final 1.32x).
+
+Flujo:
+1. Dentro de `Documentacion/Entregables/` del proyecto, crear una nota desde el template `Plan-Actividades` (Templater) y completar la tabla: Área | Actividad | Perfil | Horas/semana | Semanas.
+2. Para un resumen rápido en markdown: `python 50-Resources/Costeo/generar_resumen_costeo.py <ruta-al-plan.md>` — imprime totales por área, actividad, perfil y la cascada de costos con el total final.
+3. Para la propuesta final en Word: copiar `_templates/Quarto-Costeo-Actividades.qmd` al proyecto, ajustar `RUTA_LIB`/`RUTA_TARIFARIO`/`RUTA_PLAN` según la profundidad del archivo, y renderizar con `quarto render archivo.qmd --to docx`.
 - Sections: Resumen Ejecutivo → Contexto → Análisis → Conclusiones → Apéndice
 
 ---

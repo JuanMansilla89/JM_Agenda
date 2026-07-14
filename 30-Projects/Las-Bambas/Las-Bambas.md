@@ -17,7 +17,7 @@ onedrive: ""
 |-------------|--------|-------------|-------|
 | Modelamiento de Pila | 🔄 Seguimiento comercial | Respuesta cliente — Frank Echegaray | 2026-06-25 |
 | Reportabilidad | 🔄 Seguimiento comercial | Respuesta cliente — comercial | 2026-06-25 |
-| Predicción de Mineral | 🔄 Seguimiento propuesta | Respuesta cliente — Mario Rojas | 2026-07-05 |
+| Predicción de Mineral | ✅ Propuesta técnico-económica lista (USD 21,120) | Enviar a Mario Rojas | 2026-07-16 |
 
 ## Objetivo
 
@@ -29,7 +29,7 @@ Desarrollo de dos soluciones técnicas para la operación minera Las Bambas: (1)
 |-------------|------|------------------|
 | Modelamiento de Pila | [[Modelamiento-Pila]] | `Modelamiento-Pila/Documentacion/Entregables/2026-05-18-propuesta-tecnica-v1.qmd` |
 | Reportabilidad y Dashboards | [[Reportabilidad]] | `Reportabilidad/Documentacion/Entregables/Sistema de reportabilidad - MMG Las Bambas.qmd` |
-| Predicción de Mineral | [[Prediccion-de-mineral]] | *(pendiente)* |
+| Predicción de Mineral | [[Prediccion-de-mineral]] | `Prediccion-de-mineral/Documentacion/Entregables/2026-07-14-propuesta-tecnica-v1.qmd` |
 
 ## Tareas activas (nivel proyecto)
 

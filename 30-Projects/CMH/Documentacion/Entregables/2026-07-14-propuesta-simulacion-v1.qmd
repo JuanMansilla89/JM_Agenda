@@ -1,0 +1,116 @@
+---
+title: "Propuesta Técnico-Económica (SIMULACIÓN)"
+subtitle: "Nexo 360 Operation + Mantenimiento 360 — Consorcio Minero Horizonte (CMH), Unidad Parcoy"
+author: "ASTAY Systems"
+date: "2026-07-14"
+format:
+  docx:
+    reference-doc: "../../../../_templates/custom-reference.docx"
+    toc: true
+    toc-depth: 2
+    number-sections: true
+lang: es
+---
+
+::: {.callout-warning}
+**Documento de simulación.** Este archivo valida de punta a punta el flujo Excel → Resumen Mensual → propuesta Word con datos de ejemplo. El equipo, cronograma y montos son ficticios — **no representa una propuesta real enviada a CMH** ni sustituye el levantamiento técnico pendiente (ver [[analisis-implicancias-tecnicas-ref]] y [[2026-07-26-guia-levantamiento-tecnico-v1]]).
+:::
+
+# Resumen Ejecutivo
+
+> ASTAY propone el diseño, desarrollo e implementación de **Nexo 360 Operation** (planificación integrada y control de guardia, lógica SIC) junto con el módulo **Mantenimiento 360** (disponibilidad y gestión de flota) para la unidad Parcoy de Consorcio Minero Horizonte (CMH), conforme al alcance funcional descrito en el requerimiento recibido del cliente. Esta simulación estima una primera etapa de **4 meses**, con un equipo de 7 perfiles y una inversión total de **USD 74,976.00** (todo costo).
+
+---
+
+# Antecedentes y Contexto
+
+CMH se encuentra en un proceso de transformación digital en su unidad subterránea Parcoy y ha definido dos núcleos funcionales obligatorios: **Bloque A — Nexo 360 Operation** (gestión de planes, maestro de labores, motor de asignación, órdenes de trabajo, seguimiento intraturno y cierre de guardia) y **Bloque B — Mantenimiento 360** (maestro de equipos, disponibilidad dinámica, planes de mantenimiento y ubicación de equipos), integrados entre sí. El detalle completo del requerimiento se documenta en [[nexo360-mantenimiento360-requerimientos-ref]].
+
+Existen definiciones técnicas críticas aún pendientes de confirmar con CMH (versión de SAP, estándar TTD-ES-001, peor caso de desconexión offline, alcance exacto del motor de asignación) — ver [[analisis-implicancias-tecnicas-ref]]. Esta simulación asume un alcance de referencia para efectos de validar el modelo de costeo, no una estimación final.
+
+---
+
+# Objetivo del Proyecto
+
+Implementar una primera etapa funcional de Nexo 360 Operation y Mantenimiento 360 para la unidad Parcoy, con arquitectura preparada para operación offline (Store & Forward), integración con SAP PM/MM y SSO corporativo (Microsoft Entra ID), conforme al estándar de seguridad TTD-ES-001 de CMH.
+
+---
+
+# Equipo de Trabajo
+
+| Perfil | Rol en el proyecto | Cantidad |
+|---|---|---|
+| Líder del Proyecto | Coordinación general, seguimiento con CMH, control de alcance y entregables | 1 |
+| Ingeniero de Datos | Modelo de datos de labores/equipos, diseño de integración SAP PM/MM | 1 |
+| Desarrollador Backend | Motor de asignación, órdenes de trabajo, disponibilidad de equipos, lógica offline | 2 |
+| Desarrollador Frontend | Aplicación web/móvil para campo y centro de control | 1 |
+| Diseñador UX/UI | Experiencia de usuario en campo (offline-first) y sala de control (COM) | 1 |
+| QA / Tester | Pruebas funcionales e integración, validación de sincronización offline | 1 |
+| Documentador / Soporte / Capacitación | Documentación técnica y capacitación a usuarios finales | 1 |
+
+---
+
+# Cronograma Referencial — 4 Meses
+
+| Mes | Foco principal |
+|---|---|
+| Mes 1 | Arranque: diseño de integración SAP, modelo de datos, definición UX inicial |
+| Mes 2 | Desarrollo core: motor de asignación, disponibilidad de equipos, frontend |
+| Mes 3 | Desarrollo e integración: pico de equipo, QA funcional en paralelo |
+| Mes 4 | Cierre: pruebas, documentación, capacitación y estabilización |
+
+---
+
+# Estimación de Recursos — Carga de Hora-Hombre
+
+Carga de HH por mes según el modelo de costeo (`50-Resources/Costeo/Propuesta-Economica_Template.xlsx`, hoja "Resumen Mensual"):
+
+| Mes | N° Personas | Horas | Costo Horario Promedio (USD/HH) | Costo Mano de Obra (USD) |
+|---|---|---|---|---|
+| Mes 1 | 3 | 240 | 23.83 | 5,720.00 |
+| Mes 2 | 7 | 680 | 23.82 | 16,200.00 |
+| Mes 3 | 8 | 760 | 23.11 | 17,560.00 |
+| Mes 4 | 7 | 760 | 22.79 | 17,320.00 |
+| **TOTAL** | **8 (pico)** | **2,440** | **23.28** | **56,800.00** |
+
+---
+
+# Inversión
+
+| Concepto | USD |
+|---|---|
+| Subtotal mano de obra (2,440 HH) | 56,800.00 |
+| Costos indirectos (10%) | 5,680.00 |
+| Gastos administrativos (10%) | 5,680.00 |
+| Utilidad (10%) | 6,816.00 |
+| **Inversión total** | **74,976.00** |
+
+## Condiciones comerciales
+
+- **Moneda:** USD, sin impuestos.
+- **Modalidad:** Precio fijo.
+- **Forma de pago:** 50% al inicio / 50% contra entrega de la primera etapa.
+- **Vigencia de esta propuesta:** 30 días calendario desde la fecha de emisión.
+- **Idioma de entregables:** Español.
+
+---
+
+# Riesgos
+
+| Riesgo | Probabilidad | Impacto | Mitigación |
+|---|---|---|---|
+| Alcance final depende de definiciones técnicas aún abiertas (SAP, TTD-ES-001, offline) | Alta | Alto | Confirmar en reunión técnica antes de convertir esta simulación en propuesta real |
+| Ramp-up de equipo concentrado en meses 2-3 (pico de 8 personas) | Media | Medio | Confirmar disponibilidad de perfiles con antelación al inicio |
+
+---
+
+# Próximos Pasos
+
+1. Completar el levantamiento técnico pendiente (ver [[2026-07-26-guia-levantamiento-tecnico-v1]]).
+2. Reemplazar los supuestos de esta simulación por el alcance y dedicación reales acordados con CMH.
+3. Recalcular el costeo en `50-Resources/Costeo/Propuesta-Economica_Template.xlsx` con los datos validados.
+4. Emitir la propuesta técnico-económica definitiva.
+
+---
+
+*Documento de simulación — ASTAY Systems, 2026-07-14. No enviar a CMH.*

@@ -1,0 +1,280 @@
+---
+title: "Propuesta Técnica — Ore Projector: Proyección de Clasificación Mineral por Banco"
+subtitle: "Sistema de Visualización y Proyección de Modelo de Bloques — Las Bambas"
+author: "ASTAY Systems"
+date: "2026-07-14"
+format:
+  docx:
+    reference-doc: "../../../../../_templates/custom-reference.docx"
+    toc: true
+    toc-depth: 2
+    number-sections: true
+lang: es
+---
+
+# Resumen Ejecutivo
+
+La presente propuesta técnica describe la finalización e implementación productiva de **Ore Projector**, un sistema de visualización 3D y proyección de clasificación mineral/desmonte para el modelo de bloques de Las Bambas.
+
+A diferencia de un desarrollo desde cero, esta propuesta parte de una base ya validada: ASTAY construyó un **frontend funcional completo** (visor 3D, flujo de trabajo guiado, edición y exportación) y lo demostró en sitio a Mario Rojas el 26 de junio de 2026. En paralelo, el equipo de ASTAY realizó un **análisis exploratorio exhaustivo** sobre datos reales de Las Bambas (sondajes de producción y diamantina, geoquímica, análisis espacial) y validó un primer enfoque de proyección de ley de cobre entre bancos mediante vecino más cercano (nearest neighbor) espacial.
+
+Lo que falta para llevar Ore Projector de demo a herramienta operativa es: (1) el **backend y la API** que transformen los datos reales de Las Bambas al contrato de datos ya definido, (2) la **validación formal del algoritmo de proyección** con el equipo de geología de Las Bambas, y (3) la resolución de un conjunto acotado de **definiciones pendientes** (cutoff de ley, bancos fuente por campaña, capas del DXF, relación grilla-sondajes).
+
+Esta propuesta cubre esas tres brechas en un horizonte de **8 semanas**, con un equipo de 5 perfiles, entregando el sistema integrado a datos reales y desplegado para uso operativo de los equipos de geología y planificación de mina.
+
+---
+
+# 1. Contexto y Antecedentes
+
+## 1.1 Necesidad identificada
+
+En la operación de Las Bambas, la clasificación mineral/desmonte se sustenta en datos reales (sondajes de voladura, BH) únicamente en el banco activo de la campaña. Los bancos inferiores, sin datos propios todavía, se estiman hoy de forma manual o mediante criterio experto, sin una herramienta que visualice, proyecte y deje trazabilidad de esas estimaciones.
+
+Esto genera tres problemas concretos:
+
+- **Sin visualización integrada** del modelo de bloques, los sondajes y los polígonos de contorno mineral/desmonte en un mismo espacio 3D.
+- **Sin método sistemático de proyección** hacia bancos inferiores — la estimación depende del criterio individual del geólogo de turno, sin registro de cómo se llegó a esa clasificación.
+- **Sin trazabilidad de cambios** cuando la clasificación proyectada se ajusta manualmente a medida que llega nueva información.
+
+## 1.2 Trabajo ya realizado por ASTAY
+
+### Frontend — Ore Projector (demo completado)
+
+ASTAY desarrolló un visor 3D completo con el siguiente flujo de trabajo:
+
+```
+Modelo de bloques → Sondajes prod. → Sondajes diamantina
+     → Polígonos de contorno → Histórico → Proyección → Edición → Exportar
+```
+
+El sistema soporta 4 bancos de profundidad, donde el banco con datos reales alimenta la proyección hacia los bancos inferiores, con clasificación `mineral` / `desmonte` / `sin clasificar` y edición manual con registro de auditoría (`ChangeRecord`). Fue demostrado en sitio a Mario Rojas el 26 de junio de 2026.
+
+### Análisis exploratorio sobre datos reales de Las Bambas
+
+En paralelo, ASTAY ejecutó seis notebooks de análisis sobre el dataset demo de Las Bambas (18,604 sondajes BH, más diamantina):
+
+| Notebook | Contenido |
+|---|---|
+| `00_setup` | Carga y vista general de datasets, nulos por columna, bancos disponibles |
+| `01_eda_bh` | Distribución espacial, de leyes y litología de sondajes de producción por banco |
+| `02_eda_drill` | Caracterización de sondajes de diamantina: perfiles de profundidad, ley CU, litología |
+| `03_espacial` | Grilla de mallas por banco, mapas de calor de ley CU, carga de área de proyección DXF |
+| `04_geoquimica` | Correlación entre elementos (CU, AU, MO, AG, FE, S, PB, ZN), distribución de CU por zona mineralizada, comparación BH vs. diamantina |
+| `05_proyeccion` | Exploración del método de proyección de clasificación entre bancos |
+
+**Hallazgo clave — identificación de banco fuente:** el análisis de cobertura de datos (`03_espacial`, `05_proyeccion`) muestra que el banco con mayor cobertura de ensayes de CU no es necesariamente el primero de la secuencia — en el dataset demo, el banco 4465 tiene 94.4% de cobertura, superior a los bancos 4450 (89.2%) y 4480 (91.1%). El sistema debe identificar el banco fuente por cobertura real de datos, no por posición fija.
+
+**Enfoque de proyección validado (primera versión):** vecino más cercano (nearest neighbor) espacial sobre coordenadas Este/Norte, usando `scipy.spatial.cKDTree`, proyectando ley CU y zona mineralizada (`MINZONE`) desde el banco fuente hacia los bancos objetivo. Con un cutoff de referencia de CU = 0.20%, el método produjo clasificaciones de mineral/desmonte coherentes con la distribución espacial observada (ej. 57.2% mineral en banco 4480 sobre 10,674 bloques proyectados).
+
+Este resultado confirma la **viabilidad técnica del enfoque**, pero corresponde a una primera exploración sobre datos demo — no ha sido validado contra la interpretación geológica del equipo de Las Bambas ni contrastado con métodos alternativos (ej. IDW, kriging con variografía).
+
+## 1.3 Brecha entre demo y sistema operativo
+
+| Componente | Estado |
+|---|---|
+| Frontend (visor 3D, flujo de trabajo, edición, exportación) | ✅ Construido y demostrado |
+| Metodología de identificación de banco fuente | ✅ Explorada y validada sobre datos demo |
+| Algoritmo de proyección (NN espacial) | ✅ Primera versión validada sobre datos demo |
+| Backend / API que sirva los 4 inputs desde datos reales | ⏳ Pendiente |
+| Transformación de datos reales de Las Bambas al contrato de datos | ⏳ Pendiente |
+| Validación del algoritmo de proyección con geología de Las Bambas | ⏳ Pendiente |
+| Definiciones operacionales pendientes (cutoff, banco fuente por campaña, capas DXF) | ⏳ Pendiente |
+| Despliegue e integración con datos productivos | ⏳ Pendiente |
+
+---
+
+# 2. Objetivo del Proyecto
+
+Llevar Ore Projector de demo funcional a **herramienta operativa** para los equipos de geología y planificación de mina de Las Bambas, integrada a datos reales, con un método de proyección validado formalmente y desplegada para uso productivo.
+
+## 2.1 Objetivos específicos
+
+1. Construir el backend y la API que transformen los datos reales de Las Bambas (sondajes BH, diamantina, DXF de áreas de proyección) a los 4 inputs definidos en el contrato de datos.
+2. Formalizar y validar con el equipo de geología de Las Bambas el algoritmo de identificación de banco fuente y el método de proyección de clasificación.
+3. Resolver las definiciones operacionales pendientes: cutoff de ley por campaña, criterio de banco fuente, capas del DXF que distinguen mineral/desmonte, relación entre la grilla de bloques y la grilla de sondajes.
+4. Integrar el frontend ya construido con el backend real, sin rediseño de la experiencia de usuario ya validada en el demo.
+5. Desplegar el sistema para uso operativo, con capacitación al equipo de geología y planificación.
+
+---
+
+# 3. Alcance Técnico
+
+## 3.1 Backend y transformación de datos
+
+Se construirá el pipeline de transformación descrito en el contrato de datos (`Documentacion/Codigo/contrato-datos-inputs.md`), que convierte las fuentes reales de Las Bambas en los 4 inputs del sistema:
+
+| Input | Fuente real | Transformación |
+|---|---|---|
+| Modelo de bloques | `Data_BH/collar.csv` + `assay.csv` + `litho.csv` | Normalización de coordenadas, agregación por bloque, clasificación por cutoff |
+| Sondajes de producción | `Data_BH/collar.csv` + `assay.csv` | 1 fila = 1 pozo (BH de intervalo único) |
+| Sondajes de diamantina | `Data_drill/collar.csv` + `assay.csv` | Desnormalizado: 1 fila = 1 intervalo (from–to) |
+| Polígonos de contorno | `area_proyeccion.dxf` | Extracción de entidades `LWPOLYLINE`/`POLYLINE` con atributos `kind` y `banco` |
+
+Incluye la normalización de coordenadas UTM → escena (origen configurable por proyecto) ya especificada en el contrato de datos.
+
+## 3.2 Algoritmo de proyección
+
+1. **Identificación de banco fuente**: por cobertura real de ensayes (% de sondajes con dato de ley), no por posición fija en la secuencia — según metodología validada en `05_proyeccion`.
+2. **Proyección espacial**: método de vecino más cercano (NN) como línea base, con evaluación de métodos alternativos (IDW, kriging simple) si la validación con geología lo justifica.
+3. **Clasificación por cutoff**: parametrizable por campaña, no hardcodeado — resuelve el pendiente de "cutoff de CU para clasificación" identificado en el proyecto.
+4. **Validación con geología de Las Bambas**: sesión de trabajo para contrastar la clasificación proyectada contra la interpretación geológica y ajustar el método si es necesario.
+
+## 3.3 Integración frontend-backend
+
+El frontend Ore Projector ya construido (`Documentacion/Codigo/Ore_Projector/`) se conecta al backend real reemplazando los datos mockeados de los 4 inputs. No se contempla rediseño de UX — el flujo de trabajo, componentes y tipos de dominio (`Block`, `Drillhole`, `BoundaryPoly`, `ChangeRecord`) ya están validados en el demo.
+
+## 3.4 No incluye
+
+- Rediseño de la experiencia de usuario o del flujo de trabajo del visor 3D (ya validado en el demo)
+- Modelamiento geoestadístico avanzado (kriging con variografía completa, simulación condicional) — se evalúa como extensión futura si la validación con geología lo requiere
+- Integración con sistemas de planificación minera de terceros (ej. software de diseño de mina)
+- Captura o levantamiento de nuevos datos de sondaje — el sistema consume los datos que Las Bambas ya genera
+
+---
+
+# 4. Arquitectura Tecnológica
+
+## 4.1 Componentes ya construidos
+
+| Componente | Tecnología |
+|---|---|
+| Framework UI | React 18 + TypeScript (Vite, shadcn/ui, Tailwind CSS) |
+| Visualización 3D | React Three Fiber + Three.js |
+| Gestión de estado | `useProjectStore` (hook custom) |
+| Gráficos / analytics | Recharts |
+| Formularios | React Hook Form + Zod |
+| Build / test | Vite + Vitest + Playwright |
+
+## 4.2 Componentes a construir en esta propuesta
+
+| Componente | Tecnología propuesta | Función |
+|---|---|---|
+| API de datos | Python (FastAPI) | Sirve los 4 inputs transformados al frontend |
+| Pipeline de transformación | Python (Pandas, `ezdxf` para DXF) | Convierte fuentes reales al contrato de datos |
+| Motor de proyección | Python (SciPy — `cKDTree`; evaluación de `pykrige` si aplica) | Identificación de banco fuente + proyección de clasificación |
+| Persistencia | Base de datos a definir con TI de Las Bambas (PostgreSQL recomendado) | Historial de proyectos, clasificaciones y auditoría de cambios |
+
+## 4.3 Diagrama de arquitectura
+
+```
+┌────────────────────────────────────────────┐
+│  Fuentes reales Las Bambas                  │
+│  Data_BH (collar/assay/litho)               │
+│  Data_drill (collar/assay)                  │
+│  area_proyeccion.dxf                        │
+└─────────────────────┬────────────────────────┘
+                      │
+┌─────────────────────▼────────────────────────┐
+│  Pipeline de transformación (Python)          │
+│  Normalización UTM → escena                   │
+│  Identificación banco fuente (cobertura)      │
+│  Motor de proyección (NN / IDW evaluado)      │
+└─────────────────────┬────────────────────────┘
+                      │
+┌─────────────────────▼────────────────────────┐
+│  API REST (FastAPI)                           │
+│  4 inputs del contrato de datos               │
+│  Persistencia de proyecto (PostgreSQL)        │
+└─────────────────────┬────────────────────────┘
+                      │
+┌─────────────────────▼────────────────────────┐
+│  Ore Projector (frontend ya construido)       │
+│  React + Three.js — visor 3D operacional      │
+└────────────────────────────────────────────────┘
+```
+
+---
+
+# 5. Insumos Requeridos de Las Bambas
+
+Antes o durante el inicio del proyecto, Las Bambas debe proveer/confirmar:
+
+| Insumo | Detalle |
+|---|---|
+| Acceso a datos reales | Modelo de bloques, sondajes BH y diamantina de la unidad, con la misma estructura de campos que el dataset demo |
+| Cutoff de CU vigente | Por campaña/unidad, para la clasificación mineral/desmonte |
+| Criterio de banco fuente | Confirmación de que se identifica por cobertura de datos (no posición fija), o criterio alternativo del equipo de geología |
+| Capas del DXF | Nombres de layer que distinguen mineral vs. desmonte en `area_proyeccion.dxf` |
+| Relación grilla-sondajes | Confirmar si la grilla de bloques es la misma grilla de los BH o una grilla independiente |
+| Disponibilidad de geología | Sesión de validación del algoritmo de proyección con el equipo de geología de Las Bambas |
+
+---
+
+# 6. Equipo de Trabajo
+
+| Perfil | Rol en el proyecto | Dedicación |
+|---|---|:---:|
+| Project Manager | Coordinación, seguimiento con Mario Rojas, control de alcance | 25% |
+| Ingeniero de Datos | Pipeline de transformación, contrato de datos, calidad de datos | 80% |
+| Data Scientist / Geólogo de datos | Algoritmo de proyección, validación con geología, cutoff | 60% |
+| Desarrollador Backend | API REST, persistencia, integración con frontend | 80% |
+| Desarrollador Frontend | Ajustes de integración del Ore Projector ya construido a datos reales | 40% |
+
+---
+
+# 7. Cronograma Referencial — 8 Semanas
+
+| N° | Actividad | Semanas |
+|---|---|---|
+| 1 | Discovery final: confirmar insumos pendientes con Las Bambas (cutoff, banco fuente, capas DXF, grilla) | 1–2 |
+| 2 | Desarrollo pipeline de transformación de datos reales | 2–4 |
+| 3 | Desarrollo API REST y persistencia | 3–5 |
+| 4 | Formalización del algoritmo de proyección (banco fuente + NN/IDW) | 2–5 |
+| 5 | Sesión de validación con geología de Las Bambas | 5–6 |
+| 6 | Integración frontend-backend con datos reales | 5–7 |
+| 7 | Pruebas de integración y ajustes | 7 |
+| 8 | Despliegue y capacitación a equipos de geología y planificación | 8 |
+
+## Hitos
+
+| Hito | Semana | Criterio de aceptación |
+|---|:---:|---|
+| H1 — Discovery completado | 2 | Insumos pendientes confirmados por Las Bambas |
+| H2 — Backend funcional | 5 | API sirviendo los 4 inputs desde datos reales |
+| H3 — Algoritmo validado | 6 | Proyección revisada y aprobada por geología de Las Bambas |
+| H4 — Sistema integrado | 7 | Ore Projector operando end-to-end con datos reales |
+| H5 — Sistema en producción | 8 | Desplegado, equipo capacitado |
+
+---
+
+# 8. Entregables
+
+| N° | Entregable | Formato |
+|---|---|---|
+| E01 | Informe de Discovery con insumos confirmados | PDF |
+| E02 | Pipeline de transformación de datos (código) | Repositorio Git |
+| E03 | API REST documentada (OpenAPI/Swagger) | HTML/PDF |
+| E04 | Informe de validación del algoritmo de proyección con geología | PDF |
+| E05 | Ore Projector integrado a datos reales, desplegado | Sistema en producción |
+| E06 | Manual de usuario y de administración | PDF |
+
+---
+
+# 9. Riesgos y Mitigaciones
+
+| Riesgo | Probabilidad | Impacto | Mitigación |
+|---|:---:|:---:|---|
+| Datos reales de Las Bambas no calzan exactamente con el esquema del dataset demo | Media | Alto | Validar estructura real en Discovery antes de construir el pipeline definitivo |
+| Método de proyección NN insuficiente frente al criterio geológico real | Media | Alto | Sesión de validación temprana (H3); evaluar IDW/kriging como alternativa si NN no es suficiente |
+| Definiciones pendientes (cutoff, banco fuente, capas DXF) no se resuelven a tiempo | Media | Alto | Bloquear como condición de entrada a Discovery; escalar a Mario Rojas si hay demora |
+| Performance del visor 3D con volumen real de datos (miles de bloques) | Media | Alto | Benchmark con datos reales apenas estén disponibles; considerar instanced meshes si es necesario |
+
+---
+
+# 10. Recomendaciones
+
+1. **Adelantar la sesión de validación con geología.** El algoritmo de proyección (NN espacial) está validado técnicamente sobre datos demo, pero no ha sido revisado por el equipo de geología de Las Bambas. Priorizar esta sesión temprano en el proyecto reduce el riesgo de rediseñar el motor de proyección a mitad de camino.
+2. **No usar la posición del banco como criterio de banco fuente.** El análisis de cobertura mostró que el banco con mejor cobertura de datos no es necesariamente el primero de la secuencia — el sistema debe calcular esto dinámicamente por campaña.
+3. **Evaluar métodos de proyección alternativos solo si la validación con geología lo justifica.** NN es simple, rápido y ya validado; no invertir en kriging/geoestadística avanzada sin evidencia de que NN es insuficiente para el caso de Las Bambas.
+
+---
+
+# Referencias
+
+- Análisis interno ASTAY: notebooks `00_setup` a `05_proyeccion` (`Analisis/` de este sub-proyecto)
+- [[contrato-datos-inputs|Contrato de Datos — Ore Projector]]
+
+---
+
+*Propuesta preparada por ASTAY Systems — 2026-07-14*
+*Versión 1.0*

@@ -1,0 +1,129 @@
+---
+title: "Propuesta Económica"
+subtitle: "Nombre del Proyecto — Cliente"
+author: "ASTAY Systems"
+date: "YYYY-MM-DD"
+format:
+  docx:
+    reference-doc: "../../../../_templates/custom-reference.docx"
+    toc: true
+    toc-depth: 2
+    number-sections: true
+lang: es
+---
+
+<!--
+CÓMO USAR ESTA PLANTILLA
+========================
+1. Copia este archivo a Documentacion/Entregables/ del proyecto correspondiente.
+2. Crea el plan de actividades: nueva nota desde el template `Plan-Actividades`
+   (Templater) en el mismo folder, y complétalo con Área | Actividad | Perfil |
+   Horas/semana | Semanas.
+3. Ajusta RUTA_LIB, RUTA_TARIFARIO y RUTA_PLAN en el bloque Python de abajo
+   según la profundidad real del archivo.
+4. Renderiza: quarto render "archivo.qmd" --to docx
+
+reference-doc / RUTA_LIB / RUTA_TARIFARIO según profundidad del archivo:
+  30-Projects/<Proyecto>/Documentacion/Entregables/                     → "../../../../..."
+  30-Projects/<Cliente>/<SubProyecto>/Documentacion/Entregables/        → "../../../../../..."
+-->
+
+```{python}
+#| echo: false
+import sys
+import pandas as pd
+
+PROYECTO = "CMH — Nexo 360 Operation + Mantenimiento 360"
+RUTA_LIB = "../../../../50-Resources/Costeo"
+RUTA_TARIFARIO = "../../../../50-Resources/Costeo/tarifario-perfiles.md"
+RUTA_PLAN = "plan-actividades-v1.md"
+PCT_INDIRECTOS = 0.10
+PCT_ADMIN = 0.10
+PCT_UTILIDAD = 0.10
+
+sys.path.insert(0, RUTA_LIB)
+from costeo_lib import cargar_tarifario, cargar_plan, calcular_costos, df_to_md
+
+tarifario = cargar_tarifario(RUTA_TARIFARIO)
+plan = cargar_plan(RUTA_PLAN)
+r = calcular_costos(plan, tarifario, PCT_INDIRECTOS, PCT_ADMIN, PCT_UTILIDAD)
+```
+
+::: {.callout-warning}
+Si esta advertencia aparece en el documento renderizado, hay perfiles del plan sin tarifa cargada en el tarifario — su costo se calcula como vacío/NaN. Revisar antes de enviar al cliente.
+:::
+
+# Resumen Ejecutivo
+
+> Esta propuesta económica presenta el costo total de `{python} PROYECTO`, calculado a partir del plan de actividades (`{python} RUTA_PLAN`) y el tarifario vigente de ASTAY.
+
+---
+
+# Plan de Actividades y Carga de Hora-Hombre
+
+```{python}
+#| echo: false
+#| tbl-cap: "Totales por área"
+r["por_area"]
+```
+
+```{python}
+#| echo: false
+#| tbl-cap: "Totales por actividad"
+r["por_actividad"]
+```
+
+```{python}
+#| echo: false
+#| tbl-cap: "Totales por perfil"
+r["por_perfil"]
+```
+
+**Total general:** `{python} f"{r['hh_total']:,.0f} HH"`
+
+---
+
+# Inversión
+
+```{python}
+#| echo: false
+#| output: asis
+
+tabla = pd.DataFrame([
+    ["Subtotal mano de obra", r["subtotal_mano_obra"]],
+    [f"Costos indirectos ({PCT_INDIRECTOS:.0%})", r["indirectos"]],
+    [f"Gastos administrativos ({PCT_ADMIN:.0%})", r["administrativos"]],
+    [f"Utilidad ({PCT_UTILIDAD:.0%})", r["utilidad"]],
+], columns=["Concepto", "USD"])
+tabla["USD"] = tabla["USD"].map(lambda x: f"{x:,.2f}")
+print(df_to_md(tabla))
+print(f"\n**Inversión total: {r['total']:,.2f} USD**\n")
+```
+
+---
+
+# Condiciones Comerciales
+
+- **Moneda:** USD, sin impuestos.
+- **Forma de pago:** [definir — ej. 50% al inicio / 50% contra entrega, o hitos de entrega].
+- **Vigencia de esta propuesta:** 30 días calendario desde la fecha de emisión.
+- **Idioma de entregables:** Español.
+
+---
+
+# Supuestos de la Estimación
+
+1. La dedicación y tarifas reflejan el plan de actividades y el tarifario vigente a la fecha de esta propuesta.
+2. Cambios de alcance, perfiles adicionales o actividades no contempladas en `{python} RUTA_PLAN` requieren una nueva estimación.
+3. Los montos son referenciales hasta la validación final de alcance y firma de contrato.
+
+---
+
+# Apéndice {.appendix}
+
+## A. Fuente de datos de esta estimación
+
+| Archivo | Contenido |
+|---|---|
+| `50-Resources/Costeo/tarifario-perfiles.md` | Tarifario vigente de ASTAY por perfil (fuente única, compartida entre proyectos) |
+| `plan-actividades-v1.md` (en este mismo folder) | Plan de actividades de este proyecto: área, actividad, perfil, horas/semana, semanas |

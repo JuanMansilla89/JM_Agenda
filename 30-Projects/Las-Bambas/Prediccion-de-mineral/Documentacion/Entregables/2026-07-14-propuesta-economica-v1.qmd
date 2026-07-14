@@ -1,0 +1,83 @@
+---
+title: "Propuesta Económica — Ore Projector"
+subtitle: "Sistema de Visualización y Proyección de Modelo de Bloques — Las Bambas"
+author: "ASTAY Systems"
+date: "2026-07-14"
+format:
+  docx:
+    reference-doc: "../../../../../_templates/custom-reference.docx"
+    toc: false
+    number-sections: true
+lang: es
+---
+
+# Resumen Ejecutivo
+
+> Esta propuesta económica complementa la [[2026-07-14-propuesta-tecnica-v1|Propuesta Técnica — Ore Projector]] entregada a Las Bambas, y presenta la inversión requerida para llevar el sistema de demo a herramienta operativa integrada a datos reales. El proyecto se ejecuta en **8 semanas** con un equipo de 5 perfiles, por una inversión total de **USD 21,120.00** (todo costo).
+
+---
+
+# Alcance Considerado
+
+La inversión cubre las actividades descritas en la propuesta técnica: pipeline de transformación de datos reales, API y persistencia, formalización y validación del algoritmo de proyección con geología de Las Bambas, integración del frontend Ore Projector (ya construido) a datos reales, y despliegue con capacitación. El detalle de alcance, arquitectura, cronograma y entregables se encuentra en la propuesta técnica de referencia.
+
+---
+
+# Equipo y Carga de Hora-Hombre
+
+Carga de HH por mes, calculada con `50-Resources/Costeo/Propuesta-Economica_Template.xlsx` (hoja "Resumen Mensual") a partir de la dedicación de cada perfil descrita en la propuesta técnica:
+
+| Perfil | Dedicación | Rol |
+|---|:---:|---|
+| Líder del Proyecto | 25% | Coordinación general, seguimiento con Mario Rojas |
+| Ingeniero de Datos | 80% | Pipeline de transformación de datos reales |
+| Desarrollador Backend | 80% | API REST y persistencia |
+| Científico de Datos / Modelador de Reglas | 60% | Algoritmo de proyección y validación con geología |
+| Desarrollador Frontend | 40% | Integración del Ore Projector a datos reales |
+
+| Mes | N° Personas | Horas | Costo Horario Promedio (USD/HH) | Costo Mano de Obra (USD) |
+|---|---|---|---|---|
+| Mes 1 (Semanas 1–4) | 4 | 300 | 26.73 | 8,020.00 |
+| Mes 2 (Semanas 5–8) | 5 | 308 | 25.91 | 7,980.00 |
+| **TOTAL** | **5 (pico)** | **608** | **26.32** | **16,000.00** |
+
+---
+
+# Inversión
+
+| Concepto | USD |
+|---|---|
+| Subtotal mano de obra (608 HH) | 16,000.00 |
+| Costos indirectos (10%) | 1,600.00 |
+| Gastos administrativos (10%) | 1,600.00 |
+| Utilidad (10%) | 1,920.00 |
+| **Inversión total** | **21,120.00** |
+
+## Condiciones comerciales
+
+- **Moneda:** USD, sin impuestos.
+- **Modalidad:** Precio fijo.
+- **Forma de pago:** 50% al inicio / 50% contra despliegue del sistema (Hito H5).
+- **Vigencia de esta propuesta:** 30 días calendario desde la fecha de emisión.
+- **Idioma de entregables:** Español.
+
+---
+
+# Supuestos
+
+1. Las Bambas provee acceso a los datos reales (modelo de bloques, sondajes BH y diamantina) con estructura equivalente al dataset demo ya analizado por ASTAY.
+2. Las definiciones pendientes (cutoff de CU, criterio de banco fuente, capas del DXF) se confirman durante el Discovery (Semanas 1–2), sin bloquear el inicio del desarrollo.
+3. El equipo de geología de Las Bambas está disponible para la sesión de validación del algoritmo de proyección (Hito H3, Semana 6).
+4. Cambios de alcance respecto a lo descrito en la propuesta técnica requieren una nueva estimación.
+
+---
+
+# Recursos y Referencias
+
+- Propuesta técnica: [[2026-07-14-propuesta-tecnica-v1]]
+- Costeo detallado: [[2026-07-14-costeo-v1]]
+
+---
+
+*Propuesta preparada por ASTAY Systems — 2026-07-14*
+*Versión 1.0*

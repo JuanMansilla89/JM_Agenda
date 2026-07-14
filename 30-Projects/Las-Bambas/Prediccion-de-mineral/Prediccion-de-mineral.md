@@ -20,8 +20,8 @@ repo: ""
 | Frontend — visor 3D (Ore Projector) | ✅ Demo realizado — código en `Documentacion/Codigo/Ore_Projector/` |
 | Demo a Mario Rojas — presentación en sitio | ✅ Realizado 2026-06-26 |
 | Seguimiento propuesta técnico-económica | 🔺 En curso — contacto: Mario Rojas |
-| Propuesta técnica | ⏳ En elaboración |
-| Propuesta económica | ⏳ En elaboración |
+| Propuesta técnica | ✅ Elaborada (14/07/2026) — [[2026-07-14-propuesta-tecnica-v1]] |
+| Propuesta económica | ✅ Elaborada (14/07/2026) — [[2026-07-14-propuesta-economica-v1]] — USD 21,120.00 |
 | Integración con datos reales de Las Bambas | ⏳ Pendiente |
 | Backend / API de datos | ⏳ Pendiente |
 | Repositorio externo (repo:) | ⏳ Pendiente — pegar URL en frontmatter |
@@ -32,11 +32,9 @@ Herramienta de visualización y proyección de clasificación de mineral para el
 
 ## Tareas activas
 
-- [ ] Hacer seguimiento propuesta técnico-económica con Mario Rojas 📅 2026-07-05 🔺 #lasbambas
-- [ ] Redactar propuesta técnica del sistema completo 📅 2026-07-11 ⏫ #lasbambas
-- [ ] Elaborar propuesta económica 📅 2026-07-11 ⏫ #lasbambas
-- [ ] Definir fuentes de datos reales: modelo de bloques + sondajes Las Bambas 📅 2026-07-11 🔼 #lasbambas
-- [ ] Registrar URL del repositorio en frontmatter `repo:` 📅 2026-07-11 🔼 #lasbambas
+- [ ] Enviar propuesta técnico-económica completa a Mario Rojas 📅 2026-07-16 🔺 #lasbambas
+- [ ] Definir fuentes de datos reales: modelo de bloques + sondajes Las Bambas 📅 2026-07-21 🔼 #lasbambas
+- [ ] Registrar URL del repositorio en frontmatter `repo:` 📅 2026-07-21 🔼 #lasbambas
 
 ## Tareas completadas
 
@@ -44,6 +42,8 @@ Herramienta de visualización y proyección de clasificación de mineral para el
 - [x] Cargar código frontend Ore Projector en vault ✅ 2026-05-28 #lasbambas
 - [x] Preparar y ensayar demo Ore Projector ✅ 2026-06-25 #lasbambas
 - [x] Demo a Mario Rojas — presentación Ore Projector en sitio ✅ 2026-06-26 #lasbambas
+- [x] Redactar propuesta técnica del sistema completo ✅ 2026-07-14 #lasbambas
+- [x] Elaborar propuesta económica ✅ 2026-07-14 #lasbambas
 
 ## Arquitectura del frontend — Ore Projector
 
@@ -97,6 +97,8 @@ Definidos en `src/types/mining.ts`:
 |-------|----------|---------------|--------|
 | 2026-05-28 | Sub-proyecto con `Documentacion/Codigo/` para trazabilidad técnica | Proyecto incluye código frontend — arquitectura y decisiones técnicas deben vivir en el vault | #decision |
 | 2026-05-28 | Frontend primero (Ore Projector) con datos mockeados | Validar UX y flujo de trabajo antes de conectar a datos reales de Las Bambas | #decision |
+| 2026-07-14 | Banco fuente se identifica por cobertura real de datos, no por posición fija en la secuencia | El análisis exploratorio (`05_proyeccion`) mostró que el banco con mejor cobertura de CU no es el primero de la secuencia | #decision |
+| 2026-07-14 | Proyección: nearest neighbor (NN) espacial como línea base, validado sobre datos demo; evaluar IDW/kriging solo si geología de Las Bambas lo requiere | Evita sobre-invertir en geoestadística avanzada sin evidencia de que NN es insuficiente | #decision |
 
 ## Riesgos
 
