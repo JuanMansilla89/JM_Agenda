@@ -1,0 +1,43 @@
+---
+title: "Consultas Técnicas"
+subtitle: "Nexo 360 Operation + Mantenimiento 360 — Consorcio Minero Horizonte (CMH), Unidad Parcoy"
+author: "ASTAY Systems"
+date: "2026-07-14"
+format:
+  docx:
+    reference-doc: "../../../../_templates/custom-reference.docx"
+    toc: false
+    number-sections: true
+lang: es
+---
+
+# Resumen Ejecutivo
+
+> Sobre la base del documento de requerimientos recibido de CMH, se listan las consultas técnicas puntuales aún abiertas, necesarias para dimensionar la propuesta de alto nivel.
+
+# Consultas
+
+## Integración SAP (PM/MM)
+
+1. ¿Versión de SAP en uso — ECC o S/4HANA?
+2. ¿Qué transacciones/objetos de PM y MM entran en el alcance (avisos, órdenes de mantenimiento, backlog de repuestos)?
+3. ¿Mecanismo de integración definido por TI de CMH: archivos planos, tablas de staging, o API REST?
+
+## Seguridad y estándar TTD-ES-001
+
+4. ¿Pueden compartir el documento completo del estándar TTD-ES-001?
+5. ¿El SSO con Entra ID debe federar también a los contratistas (~5 empresas principales), o solo a personal CMH?
+
+## Capacidad offline
+
+6. ¿Duración típica y peor caso de desconexión en interior mina?
+7. ¿Política esperada ante conflicto de datos al sincronizar (last-write-wins, merge manual, u otra)?
+
+## Motor de asignación (Bloque A)
+
+8. ¿Se espera un motor basado en reglas explícitas, o algún grado de optimización automática?
+9. ¿Es viable un MVP con disponibilidad de equipos ingresada manualmente en una primera fase, antes de integrar Mantenimiento 360 en tiempo real?
+
+## Datos e histórico
+
+10. ¿Tiempo de retención requerido para el histórico de guardias? ¿Existe SLA de disponibilidad definido?

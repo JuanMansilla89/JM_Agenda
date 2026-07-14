@@ -1,0 +1,44 @@
+---
+title: "15 Preguntas Clave para Definir el Proyecto"
+subtitle: "Nexo 360 Operation + Mantenimiento 360 — Consorcio Minero Horizonte (CMH), Unidad Parcoy"
+author: "ASTAY Systems"
+date: "2026-07-26"
+format:
+  docx:
+    reference-doc: "../../../../_templates/custom-reference.docx"
+    toc: false
+    number-sections: true
+lang: es
+---
+
+# Resumen Ejecutivo
+
+> De las preguntas técnicas planteadas, estas 15 son las que condicionan de forma más directa la arquitectura, el esfuerzo y el costo del proyecto. Sin respuesta a estas, la propuesta de alto nivel debe presentarse necesariamente con escenarios (mínimo/máximo) en lugar de una estimación única.
+
+# Preguntas Clave
+
+1. **Integración Bloque A / Bloque B:** ¿debe operar en tiempo real, bajo demanda o por sincronización programada, y qué bloque es dueño de cada dato? — Define la arquitectura de integración entre ambos núcleos.
+
+2. **Versión de SAP (ECC o S/4HANA) y mecanismo de integración** (archivos planos, staging o API REST) para los módulos PM/MM. — Cambia radicalmente el esfuerzo y la tecnología de integración.
+
+3. **Estándar TTD-ES-001 completo.** — Puede introducir requisitos de seguridad (pentesting, cifrado, retención) no contemplados aún en el alcance. Es necesario que sea compartido para la estimación de la propuesta económica.
+
+4. **Operación offline:** ¿cuánto tiempo debe funcionar el dispositivo sin conectividad y cómo se ==resuelven conflictos de sincronización==? — Es el requerimiento técnicamente más exigente del proyecto.
+
+5. **Motor de asignación:** ¿reglas explícitas o algún grado de optimización automática? — Determina si es un CRUD con reglas o un problema de optimización con restricciones.
+
+6. **Flujo campo ↔ centro de control:** ¿los usuarios móviles solo registran eventos o también pueden modificar información ya enviada, y existe un flujo de aprobación antes de considerarla definitiva? — Define el modelo transaccional completo.
+
+7. **Registro visual (fotos/videos) en el Bloque A:** ¿es obligatorio para cerrar una actividad, y qué volumen se estima por turno? — Afecta directamente el diseño de almacenamiento y el costo de infraestructura.
+
+8. **Reportería:** ¿se desarrolla dentro de la aplicación o se apoya en Power BI/Fabric, y el cliente ya cuenta con esas licencias? — Cambia el alcance de desarrollo y el modelo de costos.
+
+9. **Estrategia tecnológica:** ¿el cliente está abierto a componentes de la suite Microsoft (Power Platform, Azure) o exige desarrollo 100% a medida? — Es la decisión que más condiciona la arquitectura general de la solución.
+
+10. **Modelo de despliegue:** ¿Azure, on-premise o híbrido, y existe ya una suscripción de Azure activa? — Define el modelo de infraestructura y quién la administra. Ademas, Se contara por parte del cliente con los ambientes de desarrollo, QA y Pre-Producción para el desarrollo? 
+
+11. **Sistemas existentes a integrar:** ¿cuáles, con qué mecanismo, y permiten lectura y escritura? — Sin esto no puede dimensionarse el esfuerzo de integración más allá de SAP.
+
+12. **Alcance del MVP o primera fase:** ¿qué funcionalidades son críticas para la primera versión operativa y cuál es la fecha objetivo? — Determina el cronograma y el criterio de aceptación de la fase inicial.
+
+13. **Modelo de soporte post-implementación:** ¿el proveedor administra infraestructura y aplicación, o el cliente espera transferir progresivamente el mantenimiento a su equipo interno?

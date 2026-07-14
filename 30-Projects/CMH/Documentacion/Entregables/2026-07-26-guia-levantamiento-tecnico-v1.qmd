@@ -1,0 +1,213 @@
+---
+title: "Guía de Levantamiento Técnico y Funcional"
+subtitle: "Nexo 360 Operation + Mantenimiento 360 — Consorcio Minero Horizonte (CMH), Unidad Parcoy"
+author: "ASTAY Systems"
+date: "2026-07-26"
+format:
+  docx:
+    reference-doc: "../../../../_templates/custom-reference.docx"
+    toc: true
+    toc-depth: 2
+    number-sections: true
+lang: es
+---
+
+# Resumen Ejecutivo
+
+> Esta guía estructura el levantamiento técnico y funcional del proyecto **Nexo 360 Operation + Mantenimiento 360** para la unidad Parcoy de CMH. A diferencia del documento de consultas técnicas iniciales (de alto nivel), esta guía cubre los 13 ejes que, según buenas prácticas de definición de proyectos de software a medida, deben quedar resueltos antes de comprometer una propuesta y un cronograma: proceso as-is, usuarios y gobierno, datos, reglas de negocio, integraciones, infraestructura, seguridad, conectividad, reportería, soporte, criterios de éxito y restricciones contractuales. Estructura la reunión técnica de levantamiento, no la reemplaza.
+
+---
+
+# 1. Contexto y Objetivo
+
+CMH definió el alcance funcional de Nexo 360 Operation (Bloque A) y Mantenimiento 360 (Bloque B) en el documento de requerimientos recibido el 26/07/2026 (ver [[nexo360-mantenimiento360-requerimientos-ref]]). Ese documento fija **qué** debe hacer el sistema; esta guía busca levantar el **cómo** — el detalle operativo, de datos y de arquitectura necesario para dimensionar correctamente el esfuerzo, el riesgo y el cronograma.
+
+## 1.1 Alcance de este documento
+
+**Incluye:** preguntas y temas a resolver en la reunión técnica y en talleres de seguimiento, organizados por eje temático, con la justificación de por qué cada uno afecta el dimensionamiento del proyecto.
+
+**No incluye:** estimación de esfuerzo, arquitectura de solución, ni propuesta comercial — estos se elaboran *después* de completar el levantamiento.
+
+## 1.2 Audiencia
+
+Equipo técnico y de negocio de CMH (TI, mantenimiento, planificación mina, seguridad de la información) y equipo técnico de ASTAY. Sirve como agenda de trabajo para una o más sesiones de levantamiento, no como cuestionario de respuesta única por correo.
+
+---
+
+# 2. Metodología de levantamiento
+
+Se recomienda no resolver los 13 ejes en una sola reunión. Buena práctica: separar por bloque funcional y por dominio técnico, con los responsables correctos de CMH convocados en cada sesión.
+
+| Sesión propuesta | Ejes cubiertos | Participantes CMH sugeridos |
+|---|---|---|
+| 1. Proceso operativo | §3.1, §3.2, §3.3 | Jefe de guardia, supervisores de zona, mantenimiento mina |
+| 2. Datos y reglas de negocio | §3.4, §3.5 | Planificación, mantenimiento, TI |
+| 3. Arquitectura e integraciones | §3.6, §3.7 | TI / arquitectura, equipo SAP |
+| 4. Seguridad y conectividad | §3.8, §3.9 | Seguridad de la información, infraestructura/redes |
+| 5. Gestión y cierre | §3.10, §3.11, §3.12, §3.13 | TI Business Partner, patrocinador del proyecto |
+
+---
+
+# 3. Ejes de levantamiento
+
+## 3.1 Proceso operativo actual (as-is) — Bloque A
+
+| Tema a levantar | Por qué importa |
+|---|---|
+| Flujo actual completo del cambio de guardia, paso a paso, con tiempos | Sin el as-is no se puede validar que el diseño del motor de asignación y del cierre de guardia cubra la realidad operativa |
+| Formatos y medios actuales (papel, Excel, radio, pizarras) | Define el esfuerzo de migración de datos y de capacitación al usuario final |
+| Puntos de dolor y cuellos de botella actuales identificados por CMH | Prioriza qué funcionalidades deben madurar primero en el MVP |
+| Excepciones frecuentes al flujo estándar (turnos especiales, paradas, emergencias) | Un diseño que solo cubre el caso feliz falla en producción en minería subterránea |
+
+## 3.2 Proceso operativo actual (as-is) — Bloque B
+
+| Tema a levantar | Por qué importa |
+|---|---|
+| Proceso actual de registro de disponibilidad de equipos (manual, sistema propio, Excel) | Define la brecha real a cerrar en Mantenimiento 360 |
+| Proceso actual de programación preventiva/correctiva y gestión de backlog de repuestos | Afecta si se requiere migrar históricos y catálogos existentes |
+| Relación actual con contratistas de flota (~5 empresas) para reporte de estado de equipos | Define si la captura de disponibilidad es propia, delegada o híbrida |
+
+## 3.3 Usuarios, roles y gobierno
+
+| Tema a levantar | Por qué importa |
+|---|---|
+| Matriz completa de roles y permisos esperados (jefe de guardia, supervisor, control, mantenimiento, contratista, auditoría) | Base del modelo RBAC exigido por TTD-ES-001 |
+| Diferenciación de acceso/datos por contratista | Puede requerir segregación lógica de datos, no solo de permisos |
+| Propietario funcional del dato en cada bloque (quién valida qué información) | Necesario para diseñar flujos de aprobación y trazabilidad |
+
+## 3.4 Datos maestros y modelo de datos
+
+| Tema a levantar | Por qué importa |
+|---|---|
+| Maestro de labores/frentes: estructura, jerarquía, cómo se actualiza hoy | Es la entidad central del Bloque A; su calidad determina la del motor de asignación |
+| Maestro de equipos y flota: atributos actuales, sistema de origen (si existe) | Define si hay migración desde un sistema legado o carga inicial manual |
+| Catálogo de habilidades/competencias del personal | Insumo directo del motor de asignación (compatibilidad técnica) |
+| Volumen y frecuencia de actualización de cada maestro | Afecta el diseño de import masivo (Excel/CSV) declarado como requisito |
+
+## 3.5 Reglas de negocio y lógica de asignación
+
+| Tema a levantar | Por qué importa |
+|---|---|
+| ¿El motor de asignación debe ser determinístico (reglas explícitas) o de optimización (minimizar tiempos muertos, maximizar cumplimiento)? | Determina si el desarrollo es un motor de reglas o un problema de optimización con restricciones — impacto directo en esfuerzo |
+| Prioridades de asignación cuando compiten dos labores por el mismo recurso | Regla de negocio crítica sin la cual el motor no puede diseñarse |
+| Reglas de seguridad que bloquean una asignación (ej. competencia vencida, equipo no habilitado) | Debe modelarse como restricción dura, no como alerta opcional |
+| Reglas de reprogramación en caliente durante el turno (quién puede reasignar y bajo qué condiciones) | Afecta el diseño de permisos y de trazabilidad de cambios |
+
+## 3.6 Integraciones (SAP PM/MM, Entra ID, otros sistemas)
+
+| Tema a levantar | Por qué importa |
+|---|---|
+| Versión de SAP (ECC vs. S/4HANA) | Cambia radicalmente el mecanismo de integración disponible |
+| Transacciones/objetos PM y MM en alcance (avisos, órdenes, backlog de repuestos) | Delimita el esfuerzo real de integración, más allá de la mención genérica "PM/MM" |
+| Mecanismo de integración decidido por TI de CMH (archivos planos, staging, API REST) | Define si se requiere middleware o basta con un job batch |
+| Otros sistemas de transformación digital de CMH con los que deba integrarse a futuro (mencionado en la reunión del 10/07) | Evita rediseñar la arquitectura de integración cuando aparezcan esos sistemas |
+| Requisitos de federación de identidad para contratistas en el SSO con Entra ID | Define si se necesita un IdP secundario o federación adicional |
+
+## 3.7 Infraestructura, entornos y despliegue
+
+| Tema a levantar | Por qué importa |
+|---|---|
+| Ambiente de despliegue definitivo (nube privada, nube pública autorizada, on-premise) | Condiciona el stack tecnológico y los costos de operación |
+| Estándares de separación Dev/QA-UAT/Producción exigidos por CMH | Afecta el pipeline de CI/CD y los tiempos de entrega |
+| Ancho de banda y disponibilidad de red en salas de control (COM) vs. interior mina | Insumo directo para el diseño de la capa offline |
+
+## 3.8 Seguridad, cumplimiento y auditoría
+
+| Tema a levantar | Por qué importa |
+|---|---|
+| Documento completo del estándar TTD-ES-001 | Puede incluir requisitos no declarados aún (pentesting, SAST/DAST, cifrado, retención) que afectan costo y cronograma |
+| Nivel de detalle exigido en logs de auditoría transaccional | Afecta el diseño del modelo de datos y el volumen de almacenamiento |
+| Proceso de gestión de vulnerabilidades / pentesting exigido antes de pase a producción | Debe incorporarse como hito de cronograma, no como tarea final improvisada |
+
+## 3.9 Conectividad y operación offline
+
+| Tema a levantar | Por qué importa |
+|---|---|
+| Duración típica y peor caso de desconexión en interior mina | Determina cuánto debe retener el buffer local antes de forzar sincronización o alertar al usuario |
+| Política esperada ante conflicto de datos al sincronizar (last-write-wins, merge manual, otra) | Sin esta definición no puede diseñarse la lógica de resolución de conflictos |
+| Estado del proyecto de conectividad Wi-Fi de CMH (cronograma, cobertura esperada por zona) | Afecta cuánto puede aligerarse el diseño offline en fases futuras |
+| Dispositivos y navegadores objetivo en campo (gama de equipos, sistema operativo) | Afecta límites de almacenamiento local disponibles (ej. IndexedDB) |
+
+## 3.10 Reportes, KPIs y tableros de gestión
+
+| Tema a levantar | Por qué importa |
+|---|---|
+| KPIs específicos esperados por rol (cumplimiento de guardia, disponibilidad, backlog) | Evita diseñar un módulo de reportería genérico que no responda a la operación real |
+| Necesidad de impresión masiva de OTs por zona: volumen esperado y ventana de tiempo | Afecta si se requiere generación asíncrona de documentos y cola de impresión |
+| Necesidad de dashboards en tiempo real vs. consolidados por guardia/día | Afecta la arquitectura de datos (batch vs. streaming) |
+
+## 3.11 Soporte, mantenimiento y evolución
+
+| Tema a levantar | Por qué importa |
+|---|---|
+| Modelo de soporte esperado post-implementación (SLA, niveles de atención) | Debe cotizarse por separado de la implementación inicial |
+| Expectativa de evolución hacia otras unidades de CMH además de Parcoy | Afecta si la arquitectura debe diseñarse multi-tenant desde el inicio |
+| Equipo interno de CMH que dará mantenimiento o gobernanza al sistema a futuro | Define el alcance de transferencia de conocimiento y documentación técnica |
+
+## 3.12 Criterios de éxito y aceptación
+
+| Tema a levantar | Por qué importa |
+|---|---|
+| Definición de éxito del proyecto desde la óptica de CMH (no solo "sistema funcionando") | Evita ambigüedad en la aceptación final del entregable |
+| Criterios de aceptación por bloque (A y B) y por fase, si el proyecto se entrega por etapas | Necesario para estructurar hitos de pago y de aceptación contractual |
+
+## 3.13 Restricciones de proyecto
+
+| Tema a levantar | Por qué importa |
+|---|---|
+| Presupuesto de referencia o rango esperado por CMH | Sin este dato, la orden de magnitud puede quedar fuera de rango desde el inicio |
+| Fecha límite u horizonte esperado de implementación | Condiciona si el alcance completo (Bloque A + B) es viable en una sola fase |
+| Modalidad contractual esperada (customización vs. servicio especializado, según lo discutido el 10/07) | Afecta la estructura de la propuesta y el modelo de precios |
+
+---
+
+# 4. Conclusiones y Próximos Pasos
+
+1. El documento de requerimientos de CMH resuelve el **qué**, pero deja abiertos suficientes temas de **cómo** en integración, seguridad y conectividad como para no poder emitir una orden de magnitud confiable sin este levantamiento.
+2. Se recomienda ejecutar las sesiones de la sección 2 antes de preparar la propuesta de alto nivel, priorizando §3.6 (integraciones) y §3.9 (offline) por ser los ejes de mayor incertidumbre técnica.
+3. Los temas de §3.13 (restricciones de proyecto) deben resolverse en paralelo con el patrocinador de CMH, no solo con el equipo técnico.
+
+---
+
+# 5. Riesgos y Consideraciones
+
+| Riesgo | Probabilidad | Impacto | Mitigación |
+|---|---|---|---|
+| CMH no puede convocar a todos los responsables por eje en una sola ronda de reuniones | Media | Medio | Usar el esquema de sesiones por dominio (sección 2) en lugar de una reunión única |
+| Información de presupuesto o plazo no se comparte por política interna de CMH | Media | Alto | Preparar la orden de magnitud con escenarios (mínimo/máximo) ante la ausencia de este dato |
+| El estándar TTD-ES-001 introduce requisitos de seguridad no contemplados en la estimación inicial | Alta | Alto | Solicitarlo formalmente antes de comprometer una fecha de propuesta |
+
+---
+
+# Apéndice {.appendix}
+
+## A. Glosario
+
+| Término | Definición |
+|---|---|
+| SIC | Short Interval Control — control operacional por intervalos cortos dentro del turno |
+| OT | Orden de Trabajo |
+| SSOMA | Seguridad, Salud Ocupacional y Medio Ambiente |
+| PM/MM | Módulos de Plant Maintenance / Materials Management de SAP |
+| RBAC | Role-Based Access Control — control de acceso basado en roles |
+| Store & Forward | Patrón de almacenamiento local con sincronización diferida al recuperar conectividad |
+
+## B. Matriz RACI propuesta para el levantamiento
+
+| Actividad | ASTAY | CMH TI | CMH Negocio/Mina | CMH Seguridad Info. |
+|---|---|---|---|---|
+| Conducir sesiones de levantamiento | R | C | C | C |
+| Proveer detalle de proceso as-is | I | I | R | I |
+| Definir mecanismo de integración SAP | C | R | I | I |
+| Entregar estándar TTD-ES-001 | I | R | I | A |
+| Aprobar criterios de éxito y aceptación | C | I | A | I |
+
+R: Responsable · A: Aprueba · C: Consultado · I: Informado
+
+## C. Checklist de documentos a solicitar a CMH
+
+- [ ] Estándar TTD-ES-001 completo
+- [ ] Diagrama o descripción de arquitectura SAP actual (versión, módulos activos)
+- [ ] Catálogo actual de labores/frentes y de equipos, si existe en algún formato digital
+- [ ] Cronograma del proyecto de conectividad Wi-Fi en interior mina
+- [ ] Política de retención de datos / auditoría vigente en CMH, si existe una general más allá de TTD-ES-001

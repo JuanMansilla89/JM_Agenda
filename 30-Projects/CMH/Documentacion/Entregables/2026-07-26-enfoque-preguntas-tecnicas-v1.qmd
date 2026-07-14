@@ -1,0 +1,179 @@
+---
+title: "Enfoque del Proyecto y Preguntas Técnicas para Definición de Alcance"
+subtitle: "Nexo 360 Operation + Mantenimiento 360 — Consorcio Minero Horizonte (CMH), Unidad Parcoy"
+author: "ASTAY Systems"
+date: "2026-07-26"
+format:
+  docx:
+    reference-doc: "../../../../_templates/custom-reference.docx"
+    toc: true
+    toc-depth: 2
+    number-sections: true
+lang: es
+---
+
+# Resumen Ejecutivo
+
+> A partir del documento de requerimientos recibido de CMH, este documento profundiza en la integración entre el **Bloque A (Nexo 360 Operation)** y el **Bloque B (Mantenimiento 360)**, y plantea las preguntas técnicas necesarias para convertir el requerimiento funcional recibido en una propuesta técnica y económica. Incluye además una recomendación preliminar de arquitectura de solución, a validar una vez obtenidas las respuestas.
+
+---
+
+# Enfoque del Proyecto
+
+El cliente ya ha definido dos componentes funcionales: **Bloque A** y **Bloque B**. La propuesta deberá precisar cómo se integrarán ambos bloques, qué información intercambiarán y qué capacidades deberán desarrollarse para asegurar una operación continua entre campo, aplicación móvil y centro de control.
+
+El objetivo de las consultas es obtener la información necesaria para convertir el requerimiento funcional en una propuesta técnica y económica, definiendo:
+
+- alcance funcional;
+- flujos de información;
+- requerimientos de integración;
+- necesidades de visualización y evidencia;
+- arquitectura tecnológica;
+- modelo de despliegue;
+- uso de licencias;
+- estrategia de desarrollo;
+- fases de implementación;
+- criterios de soporte, mantenimiento y autonomía futura.
+
+---
+
+# Preguntas Propuestas
+
+## Alcance e interacción entre el Bloque A y el Bloque B
+
+1. ¿Cuál es la función específica de cada bloque dentro del proceso operativo?
+2. ¿Qué información debe intercambiarse entre el Bloque A y el Bloque B?
+3. ¿La integración entre ambos bloques debe operar en tiempo real, bajo demanda o mediante sincronizaciones programadas?
+4. ¿Cuál de los bloques será responsable de generar, modificar, validar y cerrar la información?
+5. ¿Existen reglas de negocio que definan qué información puede ser modificada desde cada bloque?
+6. ¿Se requiere trazabilidad completa de los cambios realizados entre ambos módulos, incluyendo usuario, fecha, hora y valor modificado?
+
+## Operación bidireccional entre campo y centro de control
+
+7. ¿La solución debe permitir comunicación bidireccional entre el usuario en campo y el centro de control?
+8. ¿Qué información debe enviarse desde el centro de control hacia los dispositivos móviles?
+9. ¿Qué información debe ser registrada y enviada desde campo hacia el centro de control?
+10. ¿Se requiere que el centro de control pueda devolver observaciones, asignaciones, aprobaciones o instrucciones al personal en campo?
+11. ¿Los usuarios móviles podrán modificar información previamente enviada o únicamente registrar nuevos eventos?
+12. ¿Se requiere algún flujo de aprobación, validación o cierre antes de considerar la información como definitiva?
+13. ¿La solución debe funcionar sin conexión a internet y sincronizar la información posteriormente?
+14. En caso de operación offline, ¿cuánto tiempo debe poder trabajar el dispositivo sin conectividad?
+15. ¿Cómo se deben resolver los conflictos cuando dos usuarios modifican la misma información?
+
+## Registros visuales y evidencias de campo
+
+16. En el Bloque A se menciona la necesidad de contar con un registro visual asociado al frente maestro y a las labores. ¿Qué tipo de registro visual se requiere?
+17. ¿Se deben capturar fotografías, videos, planos, croquis, imágenes georreferenciadas u otro tipo de archivo?
+18. ¿El registro visual será obligatorio para completar o cerrar una actividad?
+19. ¿Cuántos archivos visuales se estima registrar por actividad, labor o turno?
+20. ¿Se requiere almacenar información adicional asociada a la evidencia, como fecha, hora, ubicación, usuario, equipo o coordenadas?
+21. ¿Las fotografías o videos deberán capturarse directamente desde la aplicación o también podrán cargarse desde la galería del dispositivo?
+22. ¿Se requiere realizar anotaciones sobre las imágenes, como marcar zonas, agregar comentarios o dibujar observaciones?
+23. ¿Los registros visuales deberán ser visibles inmediatamente desde el centro de control?
+24. ¿Durante cuánto tiempo deberán conservarse estos archivos?
+25. ¿Existe alguna política interna respecto al tamaño, resolución o almacenamiento de fotografías y videos?
+
+## Reportabilidad y analítica
+
+26. ¿Qué reportes operativos, tácticos y gerenciales debe generar la solución?
+27. ¿El cliente cuenta actualmente con reportes, formatos de Excel, Power BI u otras referencias que deban ser replicadas o mejoradas?
+28. ¿Qué indicadores o KPI deben calcularse dentro de la solución?
+29. ¿Con qué frecuencia deben actualizarse los reportes: tiempo real, por turno, diariamente o bajo demanda?
+30. ¿Qué perfiles de usuario consumirán los reportes?
+31. ¿Se espera que los usuarios puedan crear o modificar sus propios reportes?
+32. ¿La reportabilidad deberá desarrollarse completamente dentro de la aplicación o puede implementarse utilizando herramientas como Power BI?
+33. ¿El cliente cuenta actualmente con licencias de Power BI, Microsoft Fabric, Power Apps o Power Automate?
+34. ¿La información debe poder exportarse a Excel, PDF, CSV u otros formatos?
+35. ¿Se requiere distribuir reportes automáticamente por correo, Teams u otro canal?
+
+## Estrategia tecnológica y uso de la suite Microsoft
+
+36. ¿El cliente busca una solución completamente desarrollada a medida o está abierto a utilizar componentes de la suite Microsoft?
+37. ¿Existe alguna restricción para utilizar Power BI, Power Apps, Power Automate, SharePoint, Dataverse o servicios de Azure?
+38. ¿La prioridad del cliente es reducir el costo inicial de desarrollo, reducir el costo total de propiedad o evitar dependencias de licenciamiento?
+39. ¿El cliente prefiere asumir un costo recurrente de licencias a cambio de reducir el esfuerzo de desarrollo y mantenimiento?
+40. ¿Existe una política corporativa que exija utilizar tecnologías o servicios previamente homologados?
+41. ¿El cliente espera que los usuarios de negocio puedan mantener formularios, flujos, reportes y configuraciones sin depender permanentemente del proveedor?
+42. ¿Se requiere que todo el código fuente y los componentes desarrollados sean entregados al cliente?
+43. ¿Qué nivel de autonomía espera tener el cliente para realizar modificaciones futuras?
+44. ¿El cliente cuenta con personal interno capacitado en Power Platform, Azure, desarrollo móvil o administración de bases de datos?
+
+## Arquitectura y modelo de despliegue
+
+45. ¿Dónde deberá hospedarse la solución?
+46. ¿La solución deberá desplegarse en Azure, en infraestructura on-premise o bajo un modelo híbrido?
+47. Cuando se indica que la solución debe operar dentro de la red interna, ¿esto implica un despliegue completamente on-premise o una arquitectura cloud con conectividad privada?
+48. ¿El cliente dispone actualmente de una suscripción de Azure?
+49. ¿Qué servicios de Azure están habilitados o autorizados para el proyecto?
+50. ¿Existe una arquitectura de referencia o lineamientos definidos por el equipo de infraestructura o ciberseguridad?
+51. ¿La aplicación móvil podrá conectarse directamente a servicios en Azure o deberá hacerlo a través de la red interna, VPN o algún gateway corporativo?
+52. ¿Los dispositivos móviles serán corporativos o personales?
+53. ¿Los dispositivos operarán dentro de cobertura Wi-Fi, red móvil, red privada o zonas sin conectividad?
+54. ¿Se requiere integrar la autenticación con Microsoft Entra ID?
+55. ¿Se necesita autenticación multifactor, control por roles o políticas específicas de acceso?
+56. ¿Existen restricciones para almacenar información, fotografías o videos en la nube?
+57. ¿Qué requerimientos existen respecto a disponibilidad, respaldo, recuperación ante desastres y continuidad operativa?
+58. ¿El cliente cuenta con ambientes separados de desarrollo, pruebas y producción?
+
+## Integraciones y fuentes de información
+
+59. ¿Con qué sistemas actuales deberá integrarse la solución?
+60. ¿Qué información se encuentra actualmente disponible en cada sistema?
+61. ¿Las integraciones se realizarán mediante API, bases de datos, archivos, servicios web o intercambio manual?
+62. ¿Existen APIs disponibles y documentadas?
+63. ¿Los sistemas actuales permiten escritura o únicamente lectura?
+64. ¿La nueva solución deberá actualizar información en los sistemas existentes?
+65. ¿Quién será responsable de proporcionar accesos, credenciales, documentación y soporte para las integraciones?
+66. ¿Existen ambientes de prueba o sandbox para validar las integraciones?
+67. ¿Qué volumen aproximado de transacciones, registros y archivos se espera procesar diariamente?
+
+## Usuarios, perfiles y seguridad
+
+68. ¿Cuántos usuarios utilizarán la solución?
+69. ¿Cuántos usuarios serán móviles y cuántos operarán desde el centro de control?
+70. ¿Qué perfiles o roles deben considerarse?
+71. ¿Qué permisos tendrá cada perfil?
+72. ¿Se requiere limitar la visualización de información por área, turno, operación, contrato o ubicación?
+73. ¿Se necesita registrar auditoría de accesos, consultas y modificaciones?
+74. ¿Existen requisitos corporativos de ciberseguridad que deban incluirse desde la propuesta?
+
+## Estrategia de implementación por fases
+
+75. ¿El cliente espera una implementación integral o está abierto a desarrollar la solución por fases?
+76. ¿Cuáles son las funcionalidades consideradas críticas para una primera versión operativa?
+77. ¿Qué funcionalidades pueden implementarse en fases posteriores?
+78. ¿Se requiere inicialmente un piloto, una prueba de concepto o un producto mínimo viable?
+79. ¿En qué área, operación o grupo de usuarios debería ejecutarse la primera implementación?
+80. ¿Cuáles serían los criterios de éxito para aprobar la primera fase?
+81. ¿Existe una fecha objetivo para iniciar la operación?
+82. ¿Hay hitos contractuales, operativos o presupuestales que condicionen el cronograma?
+
+## Soporte, mantenimiento y sostenibilidad
+
+83. ¿Qué modelo de soporte espera el cliente después de la implementación?
+84. ¿Qué horario y nivel de atención se requiere?
+85. ¿El cliente espera que el proveedor administre la infraestructura y la aplicación?
+86. ¿Qué componentes serán administrados por el equipo interno del cliente?
+87. ¿Se requiere capacitación para usuarios operativos, administradores y equipos técnicos?
+88. ¿Se necesita documentación funcional, técnica, de arquitectura y de operación?
+89. ¿Se requiere un periodo de acompañamiento o estabilización posterior a la puesta en producción?
+90. ¿El cliente espera transferir progresivamente el mantenimiento de la solución a su propio equipo?
+
+---
+
+# Recomendación Preliminar de Solución
+
+Se recomienda evaluar una arquitectura híbrida, separando los componentes core de los componentes de soporte:
+
+- El núcleo transaccional, las reglas críticas de negocio, las integraciones y la aplicación móvil deberían desarrollarse bajo una arquitectura controlada y escalable.
+- Los reportes, tableros, automatizaciones y formularios secundarios podrían apoyarse en herramientas de Microsoft, siempre que el licenciamiento y las políticas del cliente lo permitan.
+- La solución debería diseñarse para que el cliente pueda modificar reportes, indicadores y automatizaciones sin depender permanentemente del proveedor.
+- La implementación debería organizarse por fases, comenzando con las funcionalidades críticas de operación y postergando funcionalidades complementarias para etapas posteriores.
+
+Las respuestas a estas preguntas permitirán definir con mayor precisión el alcance, la arquitectura objetivo, el esfuerzo de desarrollo, las licencias requeridas, el cronograma y el presupuesto del proyecto.
+
+---
+
+# Referencias
+
+- Documento de requerimientos del cliente: [[nexo360-mantenimiento360-requerimientos-ref|Requerimientos Nexo 360 Operation + Mantenimiento 360]]
