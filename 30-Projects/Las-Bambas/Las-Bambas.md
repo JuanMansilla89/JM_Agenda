@@ -17,7 +17,7 @@ onedrive: ""
 |-------------|--------|-------------|-------|
 | Modelamiento de Pila | 🔄 Seguimiento comercial | Respuesta cliente — Frank Echegaray | 2026-06-25 |
 | Reportabilidad | 🔄 Seguimiento comercial | Respuesta cliente — comercial | 2026-06-25 |
-| Predicción de Mineral | ✅ Propuesta técnico-económica lista (USD 21,120) | Enviar a Mario Rojas | 2026-07-16 |
+| Predicción de Mineral | ✅ Propuesta técnico-económica lista (USD 48,913.92 · 3 meses) | Enviar a Mario Rojas | 2026-07-16 |
 
 ## Objetivo
 

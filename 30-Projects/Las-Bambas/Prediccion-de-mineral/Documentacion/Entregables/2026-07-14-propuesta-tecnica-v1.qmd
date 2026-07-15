@@ -20,7 +20,7 @@ A diferencia de un desarrollo desde cero, esta propuesta parte de una base ya va
 
 Lo que falta para llevar Ore Projector de demo a herramienta operativa es: (1) el **backend y la API** que transformen los datos reales de Las Bambas al contrato de datos ya definido, (2) la **validación formal del algoritmo de proyección** con el equipo de geología de Las Bambas, y (3) la resolución de un conjunto acotado de **definiciones pendientes** (cutoff de ley, bancos fuente por campaña, capas del DXF, relación grilla-sondajes).
 
-Esta propuesta cubre esas tres brechas en un horizonte de **8 semanas**, con un equipo de 5 perfiles, entregando el sistema integrado a datos reales y desplegado para uso operativo de los equipos de geología y planificación de mina.
+Esta propuesta cubre esas tres brechas en un horizonte de **3 meses (12 semanas)**, con un equipo de 5 perfiles, entregando el sistema integrado a datos reales y desplegado para uso operativo de los equipos de geología y planificación de mina.
 
 ---
 
@@ -202,38 +202,38 @@ Antes o durante el inicio del proyecto, Las Bambas debe proveer/confirmar:
 
 # 6. Equipo de Trabajo
 
-| Perfil | Rol en el proyecto | Dedicación |
-|---|---|:---:|
-| Project Manager | Coordinación, seguimiento con Mario Rojas, control de alcance | 25% |
-| Ingeniero de Datos | Pipeline de transformación, contrato de datos, calidad de datos | 80% |
-| Data Scientist / Geólogo de datos | Algoritmo de proyección, validación con geología, cutoff | 60% |
-| Desarrollador Backend | API REST, persistencia, integración con frontend | 80% |
-| Desarrollador Frontend | Ajustes de integración del Ore Projector ya construido a datos reales | 40% |
+| Perfil                            | Rol en el proyecto                                                    | Dedicación |
+| --------------------------------- | --------------------------------------------------------------------- | :--------: |
+| Project Manager                   | Coordinación, seguimiento con Mario Rojas, control de alcance         |    40%     |
+| Ingeniero de Datos                | Pipeline de transformación, contrato de datos, calidad de datos       |    40%     |
+| Data Scientist / Geólogo de datos | Algoritmo de proyección, validación con geología, cutoff              |    80%     |
+| Desarrollador Backend             | API REST, persistencia, integración con frontend                      |    80%     |
+| Desarrollador Frontend            | Ajustes de integración del Ore Projector ya construido a datos reales |    60%     |
 
 ---
 
-# 7. Cronograma Referencial — 8 Semanas
+# 7. Cronograma Referencial — 3 Meses (12 Semanas)
 
 | N° | Actividad | Semanas |
 |---|---|---|
 | 1 | Discovery final: confirmar insumos pendientes con Las Bambas (cutoff, banco fuente, capas DXF, grilla) | 1–2 |
-| 2 | Desarrollo pipeline de transformación de datos reales | 2–4 |
-| 3 | Desarrollo API REST y persistencia | 3–5 |
-| 4 | Formalización del algoritmo de proyección (banco fuente + NN/IDW) | 2–5 |
-| 5 | Sesión de validación con geología de Las Bambas | 5–6 |
-| 6 | Integración frontend-backend con datos reales | 5–7 |
-| 7 | Pruebas de integración y ajustes | 7 |
-| 8 | Despliegue y capacitación a equipos de geología y planificación | 8 |
+| 2 | Desarrollo pipeline de transformación de datos reales | 2–6 |
+| 3 | Desarrollo API REST y persistencia | 4–8 |
+| 4 | Formalización del algoritmo de proyección (banco fuente + NN/IDW) | 2–8 |
+| 5 | Sesión de validación con geología de Las Bambas | 8–9 |
+| 6 | Integración frontend-backend con datos reales | 8–11 |
+| 7 | Pruebas de integración y ajustes | 10–11 |
+| 8 | Despliegue y capacitación a equipos de geología y planificación | 12 |
 
 ## Hitos
 
 | Hito | Semana | Criterio de aceptación |
 |---|:---:|---|
 | H1 — Discovery completado | 2 | Insumos pendientes confirmados por Las Bambas |
-| H2 — Backend funcional | 5 | API sirviendo los 4 inputs desde datos reales |
-| H3 — Algoritmo validado | 6 | Proyección revisada y aprobada por geología de Las Bambas |
-| H4 — Sistema integrado | 7 | Ore Projector operando end-to-end con datos reales |
-| H5 — Sistema en producción | 8 | Desplegado, equipo capacitado |
+| H2 — Backend funcional | 8 | API sirviendo los 4 inputs desde datos reales |
+| H3 — Algoritmo validado | 9 | Proyección revisada y aprobada por geología de Las Bambas |
+| H4 — Sistema integrado | 11 | Ore Projector operando end-to-end con datos reales |
+| H5 — Sistema en producción | 12 | Desplegado, equipo capacitado |
 
 ---
 

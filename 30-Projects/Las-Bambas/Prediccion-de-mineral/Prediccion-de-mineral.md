@@ -21,7 +21,7 @@ repo: ""
 | Demo a Mario Rojas — presentación en sitio | ✅ Realizado 2026-06-26 |
 | Seguimiento propuesta técnico-económica | 🔺 En curso — contacto: Mario Rojas |
 | Propuesta técnica | ✅ Elaborada (14/07/2026) — [[2026-07-14-propuesta-tecnica-v1]] |
-| Propuesta económica | ✅ Elaborada (14/07/2026) — [[2026-07-14-propuesta-economica-v1]] — USD 21,120.00 |
+| Propuesta económica | ✅ Elaborada (14/07/2026) — [[2026-07-14-propuesta-economica-v1]] — USD 48,913.92 |
 | Integración con datos reales de Las Bambas | ⏳ Pendiente |
 | Backend / API de datos | ⏳ Pendiente |
 | Repositorio externo (repo:) | ⏳ Pendiente — pegar URL en frontmatter |
