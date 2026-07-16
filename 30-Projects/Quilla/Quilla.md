@@ -7,6 +7,10 @@ stakeholders: [Eduardo Sánchez, María Inés]
 start-date: 2026-06-26
 tags: [quilla]
 onedrive: ""
+lider_iniciativa: "William Carpio"
+horizonte: "este-trimestre"
+prioridad: "media"
+etiqueta: "C_propuesta"
 ---
 
 # Quilla — KIA Resources | Mina Chapi

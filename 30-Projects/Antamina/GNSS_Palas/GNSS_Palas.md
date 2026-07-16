@@ -8,6 +8,10 @@ stakeholders: [James, David Velazco, Metatec]
 start-date: 2026-06-02
 tags: [antamina, gnss]
 onedrive: ""
+lider_iniciativa: "Oswaldo Aspilcueta / Elio Rodríguez"
+horizonte: "este-trimestre"
+prioridad: "media"
+etiqueta: "C_propuesta"
 ---
 
 # GNSS_Palas — Antamina

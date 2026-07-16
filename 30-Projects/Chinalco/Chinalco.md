@@ -7,6 +7,10 @@ stakeholders: [Yuri Ramírez]
 start-date: 2026-06-05
 tags: [chinalco]
 onedrive: ""
+lider_iniciativa: "William Carpio"
+horizonte: "este-trimestre"
+prioridad: "media"
+etiqueta: "C_propuesta"
 ---
 
 # Chinalco

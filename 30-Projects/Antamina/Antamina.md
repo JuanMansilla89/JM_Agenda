@@ -7,6 +7,10 @@ stakeholders: [James, David Velazco]
 start-date: 2026-06-02
 tags: [antamina]
 onedrive: ""
+lider_iniciativa: "William Carpio"
+horizonte: "este-trimestre"
+prioridad: "media"
+etiqueta: "C_propuesta"
 ---
 
 # Antamina

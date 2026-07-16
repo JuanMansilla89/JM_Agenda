@@ -1,0 +1,42 @@
+---
+title: ASTAY — Portafolio de Iniciativas
+description: Timeline generado a partir de 40-Planning/00-Dashboard-Planning.md. Fechas de inicio = start-date real de cada proyecto (frontmatter). Fechas de fin = ilustrativas, derivadas del horizonte de planning al 2026-07-16 (próximas-2-semanas → 2026-07-30; este-trimestre → 2026-09-30) — NO son compromisos ni fechas de cierre reales.
+timezone: America/Lima
+---
+
+// Hitos del sistema de planning y de la plataforma DataTwin — fechas reales, no derivadas
+2026-06-19: Consolidación del organigrama Equipo-ASTAY #hito
+2026-07-14: Apertura de DataTwin en el vault #hito
+2026-07-16: Primera sesión de planning — resolución de líderes y decisión Gemelo Planta add-on #hito
+
+// Equipo: Customer Success & Operaciones — líder William Carpio
+// Concentra toda la cartera comercial en etapa de propuesta/prospecto + los 3 sub-proyectos técnicos de Las Bambas
+2026-05-18/2026-09-30: Las Bambas #customer_success #alta
+2026-05-18/2026-09-30: Reportabilidad — Las Bambas #customer_success #media
+2026-05-18/2026-09-30: Modelamiento de Pila — Las Bambas #customer_success #media
+2026-05-28/2026-09-30: Predicción de Mineral — Las Bambas (Ore Projector) #customer_success #media
+2026-05-18/2026-09-30: Goldfield #customer_success #media
+2026-05-18/2026-07-30: AA_Qvc #customer_success #alta
+2026-05-18/2026-09-30: Toquepala + Cuajone #customer_success #media
+2026-06-02/2026-09-30: Antamina #customer_success #media
+2026-06-05/2026-09-30: Chinalco #customer_success #media
+2026-06-28/2026-09-30: BHP_Aster — Escondida #customer_success #media
+2026-06-26/2026-09-30: Quilla — Mina Chapi #customer_success #media
+2026-07-01/2026-09-30: Cozamin #customer_success #media
+2026-07-12/2026-09-30: CMH #customer_success #media
+
+// Equipo: Ingeniería & Desarrollo — líderes Oswaldo Aspilcueta / Elio Rodríguez
+2026-07-14/2026-07-30: DataTwin (core) #ingenieria #alta
+2026-05-18/2026-09-30: MarCobre — BIM/Gemelo Digital MINSUR #ingenieria #media
+2026-06-02/2026-09-30: GNSS_Palas — Antamina #ingenieria #media
+
+// Equipo: Analítica, Data Science & Producto — líder Alí Meres
+2026-07-16/2026-07-30: Forecasting #analitica #alta
+2026-05-18/2026-07-30: MineStock — producto #analitica #alta
+2026-06-05/2026-09-30: MineStock-POC — Chinalco Toromocho #analitica #media
+
+// Equipo: BI / Data Platform & Servicios — líderes Erick Tocasca / Ignacio Uribe
+2026-07-16/2026-09-30: Gemelo Planta Quellaveco — add-on de DataTwin #bi_data_platform #media
+
+// Ciberseguridad — líder directo Juan Mansilla
+2026-07-14/2026-09-30: Plan de Ciberseguridad DataTwin (Anexo X, roles DevSecOps/vCISO) #ciberseguridad #media

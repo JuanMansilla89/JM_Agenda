@@ -8,6 +8,10 @@ stakeholders: [Yuri Ramírez]
 start-date: 2026-06-05
 tags: [chinalco, minestock, poc]
 onedrive: ""
+lider_iniciativa: "Alí Meres / Nataly Bejarano"
+horizonte: "este-trimestre"
+prioridad: "media"
+etiqueta: "C_propuesta"
 ---
 
 # MineStock POC — Chinalco

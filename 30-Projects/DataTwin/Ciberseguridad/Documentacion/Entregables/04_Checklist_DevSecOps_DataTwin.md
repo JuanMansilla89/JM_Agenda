@@ -2,8 +2,8 @@
 
 ## Repositorios y código
 
-- [ ] Repositorios privados y segregados por cliente.
-- [ ] MFA obligatorio para desarrolladores y administradores.
+- [x] Repositorios privados y segregados por cliente. ✅ 2026-07-14
+- [x] MFA obligatorio para desarrolladores y administradores. ✅ 2026-07-14
 - [ ] Branch protection y revisión obligatoria de pull requests.
 - [ ] Secret scanning sobre código e historial.
 - [ ] Prohibición de credenciales hard-coded.
@@ -14,9 +14,9 @@
 
 ## Ambientes
 
-- [ ] Desarrollo, QA y producción lógicamente separados.
-- [ ] Cuentas y secretos distintos por ambiente.
-- [ ] Producción en infraestructura del cliente.
+- [x] Desarrollo, QA y producción lógicamente separados. ✅ 2026-07-14
+- [x] Cuentas y secretos distintos por ambiente. ✅ 2026-07-14
+- [x] Producción en infraestructura del cliente. ✅ 2026-07-14
 - [ ] Sin pruebas destructivas en producción.
 - [ ] Sin datos productivos en desarrollo o QA; usar datos sintéticos.
 - [ ] Acceso remoto únicamente por VPN y MFA.
@@ -24,10 +24,10 @@
 
 ## Aplicación
 
-- [ ] Integración con AD/Entra ID del cliente.
-- [ ] HTTPS obligatorio y redirección HTTP→HTTPS.
-- [ ] TLS robusto y certificados válidos.
-- [ ] Cookies Secure, HttpOnly y SameSite.
+- [x] Integración con AD/Entra ID del cliente. ✅ 2026-07-14
+- [x] HTTPS obligatorio y redirección HTTP→HTTPS. ✅ 2026-07-14
+- [x] TLS robusto y certificados válidos. ✅ 2026-07-14
+- [x] Cookies Secure, HttpOnly y SameSite. ✅ 2026-07-14
 - [ ] Expiración de sesión por 30 minutos de inactividad.
 - [ ] RBAC y mínimo privilegio.
 - [ ] Validación de entradas y prevención de inyección/XSS/CSRF/IDOR.

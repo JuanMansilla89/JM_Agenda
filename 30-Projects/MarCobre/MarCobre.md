@@ -7,6 +7,10 @@ stakeholders: [Jaime]
 start-date: 2026-05-18
 tags: [marcobre]
 onedrive: ""
+lider_iniciativa: "Oswaldo Aspilcueta"
+horizonte: "este-trimestre"
+prioridad: "media"
+etiqueta: "C_propuesta"
 ---
 
 # MarCobre — Propuesta BIM/Gemelo Digital MINSUR

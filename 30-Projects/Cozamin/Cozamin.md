@@ -7,6 +7,10 @@ stakeholders: [Frank Echegaray]
 start-date: 2026-07-01
 tags: [cozamin]
 onedrive: ""
+lider_iniciativa: "William Carpio"
+horizonte: "este-trimestre"
+prioridad: "media"
+etiqueta: "C_propuesta"
 ---
 
 # Cozamin

@@ -7,6 +7,10 @@ stakeholders: []
 start-date: 2026-05-18
 tags: [toquepala]
 onedrive: ""
+lider_iniciativa: "William Carpio"
+horizonte: "este-trimestre"
+prioridad: "media"
+etiqueta: "C_propuesta"
 ---
 
 # Toquepala + Cuajone

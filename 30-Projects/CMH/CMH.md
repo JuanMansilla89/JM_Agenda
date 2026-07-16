@@ -7,6 +7,10 @@ stakeholders: [Luis Chang, Sergio Cisneros]
 start-date: 2026-07-12
 tags: [cmh]
 onedrive: ""
+lider_iniciativa: "William Carpio"
+horizonte: "este-trimestre"
+prioridad: "media"
+etiqueta: "C_propuesta"
 ---
 
 # CMH

@@ -9,6 +9,10 @@ start-date: 2026-05-28
 tags: [lasbambas, prediccion-mineral]
 onedrive: ""
 repo: ""
+lider_iniciativa: "William Carpio"
+horizonte: "este-trimestre"
+prioridad: "media"
+etiqueta: "C_propuesta"
 ---
 
 # Predicción de Mineral — Las Bambas

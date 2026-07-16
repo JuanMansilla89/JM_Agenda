@@ -8,6 +8,10 @@ start-date: 2026-07-14
 tags: [datatwin]
 onedrive: ""
 repo: ""
+lider_iniciativa: "Oswaldo Aspilcueta / Elio Rodríguez"
+horizonte: "proximas-2-semanas"
+prioridad: "alta"
+etiqueta: "En Curso"
 ---
 
 # DataTwin
@@ -18,6 +22,7 @@ repo: ""
 |---------|--------|
 | Apertura del apartado DataTwin en el vault | ✅ Realizada (14/07/2026) |
 | Plan de Ciberseguridad | 🔺 Iniciando — ver [[Ciberseguridad]] |
+| Gemelo Planta Quellaveco (add-on BI/reportabilidad) | ⏳ Objetivo específico por definir con Erick/Ignacio — ver [[Gemelo-Planta-Quellaveco]] |
 | Arquitectura general de la plataforma (documentación) | ⏳ Pendiente |
 | Integración con GIS/PostGIS block models | ⏳ Pendiente — ver [[GIS-BlockModel]] |
 | Integración con GPS Flink pipeline | ⏳ Pendiente — ver [[GPS-Pipeline]] |
@@ -45,6 +50,7 @@ Consolidar la documentación, arquitectura y decisiones de **DataTwin**, la plat
 | Fecha | Decisión | Justificación | Estado |
 |-------|----------|---------------|--------|
 | 2026-07-14 | Ciberseguridad se estructura como sub-proyecto de DataTwin, no como carpeta de referencias suelta | Se espera que genere múltiples entregables propios (assessment, políticas, controles) en el tiempo | #decision |
+| 2026-07-16 | Gemelo Planta Quellaveco es un add-on de DataTwin, no una iniciativa independiente | Confirmado por Juan Mansilla en el primer planning — ejecutado por Erick/Ignacio (BI) como complemento al core liderado por Oswaldo/Elio | #decision |
 
 ## Riesgos
 
@@ -91,6 +97,7 @@ SORT file.mtime DESC
 ## Recursos y referencias
 
 - Sub-proyectos relacionados dentro de DataTwin: [[Ciberseguridad]]
+- Add-on de DataTwin (planning): [[Gemelo-Planta-Quellaveco]]
 - Proyectos técnicos relacionados (top-level, no sub-proyectos): [[GIS-BlockModel]], [[GPS-Pipeline]]
 
 ---

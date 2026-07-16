@@ -13,7 +13,7 @@ WHERE file.name = dateformat(date(today), "yyyy-MM-dd")
 LIMIT 1
 ```
 
-→ [[<% tp.date.now("YYYY-MM-DD") %>]] · [[40-Areas/ToDo-Central|📋 ToDo Central]] · [[20-Weekly/<% tp.date.now("YYYY-[W]WW") %>|🗓️ Weekly Review <% tp.date.now("YYYY-[W]WW") %>]]
+→ [[<% tp.date.now("YYYY-MM-DD") %>]] · [[40-Areas/ToDo-Central|📋 ToDo Central]] · [[20-Weekly/<% tp.date.now("YYYY-[W]WW") %>|🗓️ Weekly Review <% tp.date.now("YYYY-[W]WW") %>]] · [[40-Planning/00-Dashboard-Planning|📊 Dashboard Planning]]
 
 ---
 
@@ -59,7 +59,13 @@ LIMIT 5
 
 ```dataview
 TASK
-WHERE !completed AND (due = date(today) OR tags contains "#hoy" OR priority = "highest" OR priority = "high")
+WHERE !completed
+AND (
+  due = date(today)
+  OR contains(tags, "#hoy")
+  OR priority = "highest"
+  OR priority = "high"
+)
 SORT priority DESC, due ASC
 LIMIT 10
 ```

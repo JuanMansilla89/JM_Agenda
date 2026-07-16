@@ -7,6 +7,10 @@ stakeholders: [Milagros, Carlos, Alí]
 start-date: 2026-05-18
 tags: [minestock]
 onedrive: ""
+lider_iniciativa: "Alí Meres"
+horizonte: "proximas-2-semanas"
+prioridad: "alta"
+etiqueta: "En Curso"
 ---
 
 # MineStock

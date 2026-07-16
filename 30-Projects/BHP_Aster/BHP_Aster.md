@@ -7,6 +7,10 @@ stakeholders: [Deivi Ramos]
 start-date: 2026-06-28
 tags: [bhp-aster]
 onedrive: ""
+lider_iniciativa: "William Carpio"
+horizonte: "este-trimestre"
+prioridad: "media"
+etiqueta: "C_propuesta"
 ---
 
 # BHP_Aster — Escondida | BHP

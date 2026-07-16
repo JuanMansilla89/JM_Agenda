@@ -8,6 +8,10 @@ stakeholders: [William]
 start-date: 2026-05-18
 tags: [lasbambas, modelamiento-pila, gis]
 onedrive: ""
+lider_iniciativa: "William Carpio"
+horizonte: "este-trimestre"
+prioridad: "media"
+etiqueta: "C_propuesta"
 ---
 
 # Modelamiento de Pila — Las Bambas

@@ -18,11 +18,11 @@ ASTAY cuenta con una base de cumplimiento relevante: SGSI certificado, segregaci
 
 - Sponsor C-Level: CTO o Gerencia General.
 - Responsable formal del SGSI / Information Security Officer.
-- Coordinador DevSecOps.
+- Coordinador ==DevSecOps==. (**Postergar**) -- *Personas*
 - Representante de Infraestructura y Soporte.
 - Representante de RR. HH. y Legal/Contratos.
-- Proveedor externo de vCISO fraccional, si no existe capacidad interna suficiente.
-- Proveedor independiente para pentest anual y activación postincidente.
+- Proveedor externo de ==vCISO== fraccional, si no existe capacidad interna suficiente. (**Es un servicio**)
+- Proveedor independiente para pentest anual y activación postincidente. ("**Servicio anual**")
 
 ## Decisiones requeridas por la dirección
 

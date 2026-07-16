@@ -7,6 +7,10 @@ stakeholders: [William]
 start-date: 2026-05-18
 tags: [lasbambas]
 onedrive: ""
+lider_iniciativa: "William Carpio"
+horizonte: "proximas-2-semanas"
+prioridad: "alta"
+etiqueta: "En Curso"
 ---
 
 # Las Bambas
