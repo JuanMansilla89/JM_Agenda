@@ -1,20 +1,19 @@
 [
   "obsidian-excalidraw-plugin",
-  "templater-obsidian",
+  "obsidian-advanced-slides",
   "dataview",
-  "obsidian-tasks-plugin",
-  "calendar",
   "obsidian-git",
   "obsidian-kanban",
-  "homepage",
-  "obsidian-advanced-slides",
-  "obsidian-day-planner",
-  "file-tree-alternative",
-  "qmd-as-md-obsidian",
-  "mathlive",
-  "numerals",
-  "obsidian-latex-suite",
   "editing-toolbar",
+<<<<<<< Updated upstream
   "markwhen",
+=======
+  "file-tree-alternative",
+  "oz-image-plugin",
+  "vscode-editor",
+  "qmd-as-md-obsidian",
+  "obsidian-latex-suite",
+  "marp-slides",
+>>>>>>> Stashed changes
   "editor-width-slider"
 ]

@@ -1,5 +1,9 @@
 {
   "sliderPercentage": "20",
   "sliderPercentageDefault": "20",
+<<<<<<< Updated upstream
   "sliderWidth": "350"
+=======
+  "sliderWidth": "250"
+>>>>>>> Stashed changes
 }
