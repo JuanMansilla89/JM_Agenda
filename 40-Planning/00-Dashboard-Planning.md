@@ -1,6 +1,6 @@
 ---
 tipo: dashboard-planning
-ultima_revision: 2026-07-16
+ultima_revision: 2026-07-17
 ---
 
 # 📊 Dashboard Planning — ASTAY
@@ -121,6 +121,7 @@ GROUP BY horizonte
 4. **Skalydra no está instalado** en este vault — el dashboard corre hoy sobre Dataview; cuando se instale Skalydra, estas mismas propiedades YAML deberían ser consumibles sin cambios.
 5. Riesgo de continuidad de **Forecasting** (salida próxima de Gustavo Lozano) sigue sin backup owner definido.
 6. **Etiqueta de salud agregada 2026-07-16** (`C_propuesta`/`C_detenido`/`C_Cancelado` para comercial, `En Curso`/`En Peligro`/`Detenido`/`Replanteamiento`/`OK`/`Cancelado` para desarrollo) a las 21 iniciativas, derivada de su `stage` actual — ningún proyecto quedó en `En Peligro`, `Detenido`, `Replanteamiento` ni `Cancelado` todavía porque no había evidencia de eso en el vault; validar y actualizar manualmente conforme cambie la realidad de cada uno.
+7. **Nueva dependencia cruzada detectada 2026-07-17** (ver [[03-Sesiones-Planning/2026-07-17-planning]]): [[Forecasting]] consume fuentes de Mine Metrics/DataTwin nunca mapeadas formalmente — riesgo de datos de mala calidad sin detectar. Se agregó al alcance del mapeo de [[Gobierno-Datos]] (nuevo sub-proyecto de [[DataTwin]]); pendiente confirmar con Alí Meres si requiere acción coordinada entre Analítica/DS y Ingeniería.
 
 ---
 

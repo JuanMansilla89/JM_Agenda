@@ -23,7 +23,8 @@ etiqueta: "En Curso"
 | Apertura del apartado DataTwin en el vault | ✅ Realizada (14/07/2026) |
 | Plan de Ciberseguridad | 🔺 Iniciando — ver [[Ciberseguridad]] |
 | Gemelo Planta Quellaveco (add-on BI/reportabilidad) | ⏳ Objetivo específico por definir con Erick/Ignacio — ver [[Gemelo-Planta-Quellaveco]] |
-| Arquitectura general de la plataforma (documentación) | ⏳ Pendiente |
+| Arquitectura general de la plataforma (documentación) | 🔺 En curso como sub-proyecto — ver [[Gobierno-Datos]] |
+| Gobierno de Datos (mapeo de flujos + arquitectura en capas, multi-fuente) | 🔺 Iniciando — ver [[Gobierno-Datos]] |
 | Integración con GIS/PostGIS block models | ⏳ Pendiente — ver [[GIS-BlockModel]] |
 | Integración con GPS Flink pipeline | ⏳ Pendiente — ver [[GPS-Pipeline]] |
 
@@ -36,6 +37,7 @@ Consolidar la documentación, arquitectura y decisiones de **DataTwin**, la plat
 | Sub-proyecto | Nota | Estado |
 |-------------|------|--------|
 | Ciberseguridad | [[Ciberseguridad]] | 🔺 Iniciando |
+| Gobierno de Datos | [[Gobierno-Datos]] | 🔺 Iniciando — mapeo de flujos + arquitectura en capas, multi-fuente |
 
 ## Tareas activas
 
@@ -51,6 +53,7 @@ Consolidar la documentación, arquitectura y decisiones de **DataTwin**, la plat
 |-------|----------|---------------|--------|
 | 2026-07-14 | Ciberseguridad se estructura como sub-proyecto de DataTwin, no como carpeta de referencias suelta | Se espera que genere múltiples entregables propios (assessment, políticas, controles) en el tiempo | #decision |
 | 2026-07-16 | Gemelo Planta Quellaveco es un add-on de DataTwin, no una iniciativa independiente | Confirmado por Juan Mansilla en el primer planning — ejecutado por Erick/Ignacio (BI) como complemento al core liderado por Oswaldo/Elio | #decision |
+| 2026-07-17 | Gobierno de Datos se abre como sub-proyecto propio de DataTwin (mapeo de flujos + arquitectura en capas, multi-fuente) | Reunión de revisión de arquitectura con Elio/Wilber/Pablo/José — genera entregables propios (mapeo completo, cronograma, ADRs de arquitectura) independientes del resto de la plataforma | #decision |
 
 ## Riesgos
 
@@ -96,9 +99,9 @@ SORT file.mtime DESC
 
 ## Recursos y referencias
 
-- Sub-proyectos relacionados dentro de DataTwin: [[Ciberseguridad]]
+- Sub-proyectos relacionados dentro de DataTwin: [[Ciberseguridad]], [[Gobierno-Datos]]
 - Add-on de DataTwin (planning): [[Gemelo-Planta-Quellaveco]]
 - Proyectos técnicos relacionados (top-level, no sub-proyectos): [[GIS-BlockModel]], [[GPS-Pipeline]]
 
 ---
-*Última actualización: 2026-07-14*
+*Última actualización: 2026-07-17*
