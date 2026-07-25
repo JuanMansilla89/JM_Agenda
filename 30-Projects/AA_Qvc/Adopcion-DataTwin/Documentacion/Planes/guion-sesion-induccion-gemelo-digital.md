@@ -70,11 +70,7 @@ considerando que la solución está dentro de su infraestructura.
 - ¿Requieres una segunda sesión contigo o con tu equipo?
 
 # 9. Manejo de solicitudes
-Respuesta estándar: Gracias por la observación. Voy a registrarla y
-canalizarla con los responsables correspondientes para su evaluación. La
-solicitud será revisada por el equipo de Customer Success y por los
-responsables del cliente. Posteriormente se comunicará la factibilidad,
-prioridad y siguientes pasos.
+Respuesta estándar: Gracias por la observación. Voy a registrarla y canalizarla con los responsables correspondientes para su evaluación. La solicitud será revisada por el equipo de Customer Success y por los responsables del cliente. Posteriormente se comunicará la factibilidad, prioridad y siguientes pasos.
 
 Evitar comprometer fechas, desarrollos o cambios de alcance. No decir:
 “lo vamos a desarrollar”, “estará listo esta semana” o “eso se puede

@@ -4,8 +4,7 @@
 
 ## Diapositiva 1
 
-- Gemelo
-- Digital
+- Gemelo Digital
 - Sesión de primer ingreso
 - Objetivo
 - Validar tu primer acceso, revisar la navegación base y compartir la guía rápida de uso.
@@ -20,20 +19,25 @@
 
 - Acceso y recomendaciones
 - Condiciones mínimas para una experiencia estable durante el primer uso.
-- URL oficial
-- [pegar URL oficial del Gemelo Digital]
-- Recomendaciones de uso
-- 1. Conexión estable a internet.
-2. Utilizar Google Chrome.
-3. Acceso seguro administrado por IM.
-4. Reportar incidencias por canal de soporte.
-- Mensaje clave
-- El Gemelo Digital está desplegado y operativo. Las solicitudes adicionales se registran y se canalizan con Customer Success y los responsables del cliente.
+- URL oficial: [[https://gemelodigitalqvc.anglo.local/in/home](https://gemelodigitalqvc.anglo.local/in/home)]
+- Recomendaciones de uso:
+	1. Conexión estable a internet.
+	2. Utilizar Google Chrome.
+	3. Acceso seguro administrado por IM.
+- Reportar incidencias por canal de soporte.
+	1. Teams:
+		1. William Carpio
+		2. Jhon Ramos
+		3. Edgar Mamani
+- ASTAY | Soporte Gemelo Digital 12x7
+
+Notas:
+Mensaje clave
+> El Gemelo Digital está desplegado y operativo. Las solicitudes adicionales se registran y se canalizan con Customer Success y los responsables del cliente.
 - No comprometer alcance ni fechas
 - Registrar observaciones
 - Canalizar requerimientos
-- ASTAY | Soporte Gemelo Digital 12x7
-- 2
+
 
 ## Diapositiva 3
 
@@ -55,4 +59,3 @@
 - Criterio de éxito
 - El usuario incorpora el Gemelo Digital dentro de una tarea operativa: reparto de guardia, coordinación con contratistas, revisión de riesgos o seguimiento de condiciones de mina.
 - ASTAY | Soporte Gemelo Digital 12x7
-- 3
