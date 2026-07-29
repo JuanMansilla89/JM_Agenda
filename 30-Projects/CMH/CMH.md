@@ -36,6 +36,7 @@ Diseñar, desarrollar e implementar para **Consorcio Minero Horizonte (CMH)**, u
 - [ ] Solicitar a CMH el documento completo del estándar TTD-ES-001 📅 2026-08-04 ⏫ #cmh
 - [ ] Coordinar fecha de reunión técnica de levantamiento con áreas de negocio/tecnología de CMH 📅 2026-08-04 🔼 #cmh #blocked
 - [ ] Preparar propuesta de alto nivel / orden de magnitud (Bloque A + Bloque B) 📅 2026-08-11 🔺 #cmh
+- [ ] Definir cuánto tiempo de soporte incluir en la propuesta 📅 2026-08-11 🔼 #cmh
 
 ## Tareas completadas
 

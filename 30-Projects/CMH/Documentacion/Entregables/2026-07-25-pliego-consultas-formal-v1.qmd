@@ -1,0 +1,140 @@
+---
+title: "Pliego de Consultas"
+subtitle: "Nexo 360 Operation + Mantenimiento 360 — Consorcio Minero Horizonte (CMH), Unidad Parcoy"
+author: "ASTAY Systems"
+date: "2026-07-27"
+format:
+  docx:
+    reference-doc: "../../../../_templates/custom-reference.docx"
+    toc: true
+    toc-depth: 2
+    number-sections: true
+lang: es
+---
+# Presentación
+
+En el marco del proceso de licitación para el diseño, desarrollo, implementación, capacitación y soporte de "Nexo 360 Operation" y del módulo "Mantenimiento 360" (TDR-N360-OP-01), y conforme a lo indicado en la sesión de presentación general del 22 de julio de 2026, ASTAY Systems remite el presente pliego de consultas técnicas, administrativas y legales.
+
+Las respuestas a estas consultas son necesarias para dimensionar con precisión la propuesta técnica y la propuesta económica, evitando supuestos que puedan afectar la comparabilidad de la oferta o generar ajustes de alcance durante la ejecución del proyecto.
+
+# Consultas Técnicas
+
+## Integración SAP (PM/MM)
+
+1. ¿Qué versión de SAP se encuentra en uso — ECC o S/4HANA? Ademas de especificar si es on-premise o cloud la versión que disponen.
+2. ¿Qué transacciones u objetos específicos de PM y MM entran en el alcance del proyecto (avisos, órdenes de mantenimiento, backlog de repuestos, maestro de equipos)?
+3. ¿Existe una definición preliminar del mecanismo de integración esperado (archivos planos, tablas de staging o API REST), aunque no sea definitiva?
+4. ¿El desarrollo del conector o adaptador del lado SAP estará a cargo de CMH, o se espera que el proveedor lo construya sobre un acceso que CMH habilite?
+5. ¿Se dispondrá de un ambiente SAP de pruebas (sandbox/QA) para las pruebas de integración durante el proyecto?
+6. Para esta primera fase, ¿se espera sincronización en tiempo real o por lotes (batch) con SAP?
+
+## Seguridad y Cumplimiento (Estándar TTD-ES-001)
+
+7. Agradeceremos compartir el documento completo del estándar TTD-ES-001, referenciado en el TDR como base de la matriz de cumplimiento a entregar en la propuesta técnica.
+8. ¿El SSO con Microsoft Entra ID debe federar también a los contratistas principales, o únicamente al personal de CMH?
+9. En caso de que los contratistas no se federen vía Entra ID, ¿qué mecanismo de autenticación y/o MFA se exige para esas cuentas?
+10. ¿Qué plataforma de SIEM/SOC utiliza CMH, y en qué formato se espera recibir los registros de auditoría?
+11. El TDR hace referencia a la ejecución de pruebas de penetración (pentest) sobre la plataforma. ¿Podrían precisar el nivel y tipo de pentest exigido (interno o externo, alcance, frecuencia) y si existe un proveedor o estándar homologado por CMH para esta prueba?
+
+## Conectividad y Operación Offline
+
+12. ¿Cuál es la duración típica y el peor caso de desconexión en interior mina que debe soportar la aplicación de campo?
+13. Ante un conflicto de datos al sincronizar (por ejemplo, dos ediciones del mismo registro), ¿qué política es la esperada: prevalece el último cambio, resolución manual, u otra?
+14. ¿Podrían precisar el cronograma y la cobertura esperada por zona del proyecto de conectividad Wi-Fi en interior mina?
+15. ¿Qué dispositivos (marca/modelo) y sistema operativo se utilizarán para la aplicación de campo?
+16. ¿La aplicación de campo debe desarrollarse como aplicación nativa (Android/iOS) o es aceptable una aplicación web responsiva? Ambos enfoques implican esfuerzos de desarrollo y mantenimiento distintos.
+17. ¿Qué navegadores y versiones mínimas debe soportar la plataforma web?
+
+## Motor de Asignación y Reglas de Negocio
+
+18. El TDR hace referencia a un motor de asignación con capacidad de "recomendación". ¿Podrían precisar el alcance esperado de esta funcionalidad — sugerencias basadas en reglas explícitas, un asistente interactivo (tipo notificación/chat), o un motor de optimización automática más complejo? El nivel de sofisticación esperado incide directamente en el esfuerzo de desarrollo.
+19. ¿Es viable iniciar con disponibilidad de equipos ingresada manualmente, antes de integrar Mantenimiento 360 en tiempo real?
+20. ¿Cuáles son las reglas de prioridad cuando compiten dos labores por el mismo recurso (persona o equipo)?
+21. ¿Qué reglas de seguridad deben bloquear una asignación (por ejemplo, competencia vencida, equipo no habilitado, documentación vencida de contratista)?
+
+## Datos Maestros e Histórico
+
+22. ¿Qué tiempo de retención se requiere para el histórico de guardias? ¿Existe un SLA de disponibilidad ya definido?
+23. ¿Cuál es el volumen y la frecuencia de actualización esperados para cada maestro (personal, equipos, frentes, cuadrillas)?
+24. El proyecto solo gestionará y almacenará información actual, creada a partir de su implementación mas no la historización de estes, por favor confirmar. De historizar, Cuanto tiempo es necesario realizarlo?
+25. ¿Existe ya una estructura o jerarquía documentada del maestro de labores/frentes y del maestro de equipos, o se levantará por primera vez durante el proyecto?
+
+## Integraciones con Sistemas Complementarios
+
+26. ¿Podrían precisar el alcance funcional del sistema interno referido como "SCOM", los datos que expone y el mecanismo de integración disponible (API, base de datos, archivos)?
+27. ¿Qué versión de Deswik se utiliza y qué tipo de integración se espera con Nexo 360 Operation?
+28. ¿Cuál es el alcance y cronograma del proyecto de control de campamentos, y debe considerarse como fuente de datos desde la primera fase del proyecto?
+29. Respecto a la solución de control de fatiga/sueño mencionada en la sesión del 22 de julio: ¿podrían confirmar su nombre, si ya se encuentra contratada con un tercero, y el tipo de integración esperada con Nexo 360?
+30. Sobre el proyecto de tracking de personas y equipos en proceso de licitación: ¿su cronograma requiere considerar su interfaz desde el diseño inicial, o basta con la preparación arquitectónica prevista en el TDR (N360-19)?
+
+## Infraestructura y Modelo de Despliegue
+
+31. En la sesión del 22 de julio se indicó que CMH proveería los ambientes de infraestructura. Agradeceremos la confirmación formal de este punto, precisando la modalidad prevista (nube privada, nube pública autorizada u on-premise).
+32. En caso de que CMH provea la infraestructura, ¿en qué formato se espera recibir los prerequisitos técnicos del proveedor?
+33. ¿Existe ya una cuenta o suscripción cloud corporativa donde deba desplegarse la solución, o dicha decisión se encuentra pendiente?
+34. Una vez entregada la plataforma, ¿se espera que ASTAY continúe operando, monitoreando y dando mantenimiento a la solución en producción de forma continua (modalidad de servicio), o la responsabilidad de operación pasa íntegramente a CMH tras el traspaso? Esta definición incide directamente en el modelo comercial de la propuesta.
+35. El ambiente de producción donde vivirá la plataforma, ¿será provisto y administrado por CMH, o se espera que ASTAY lo administre?
+36. En caso de traspaso de la plataforma y su código fuente al equipo técnico de CMH, ¿qué duración y horas-hombre estima CMH necesarias para dicho traspaso de conocimiento?
+
+## Material de Referencia Existente
+
+37. Dado que no se cuenta con mockups, ¿podrían indicar un número aproximado de reportes, pantallas o interfaces esperadas para la plataforma, a fin de dimensionar adecuadamente el esfuerzo de desarrollo?
+
+
+# Consultas Administrativas
+
+## Recursos, Dedicación y Gobernanza del Proyecto
+
+1. ¿Se espera dedicación a tiempo completo o parcial del equipo propuesto, por perfil?
+2. ¿Qué disponibilidad de la contraparte de CMH (COM, Planeamiento, Mantenimiento, SSOMA, TI) puede comprometerse durante la etapa de levantamiento?
+3. ¿Quién será la contraparte única de decisión de CMH durante la ejecución del proyecto?
+
+## Costeo, Facturación y Modelo de Soporte
+
+4. ¿La propuesta económica debe incluir impuestos, o se indican de forma separada?
+5. Se solicita la confirmación formal de quién asume los costos de visitas a la unidad minera (viáticos, movilización), dado que en la sesión del 22 de julio se mencionó que CMH los asumiría, mientras que el TDR (numeral 12.2 y Anexo B, ítem H) solicita cotizarlos por separado.
+6. ¿El modelo de soporte posterior a la puesta en marcha (mesa de ayuda, bolsa de horas, SLA) se licita junto con el desarrollo, o se cotiza y contrata de manera independiente una vez finalizada la implementación?
+7. ¿Existe una definición o borrador de los criterios de aceptación y de los entregables mínimos esperados por hito o sprint, más allá de lo indicado de manera general en el TDR, a fin de evitar ambigüedad al momento de validar cada entrega?
+
+## Gestión del Cambio y Capacitación
+
+8. ¿CMH cuenta con un equipo interno de gestión del cambio con el cual coordinar, o se espera que el proveedor lidere íntegramente este componente?
+9. ¿Qué modalidad se espera para las capacitaciones — presencial en Parcoy, remota, o mixta?
+
+# Consultas Legales
+
+## Propiedad Intelectual y Componentes de Terceros
+
+1. El TDR establece que el software y su código fuente serán propiedad de CMH. ¿Se reconoce la exclusión estándar de propiedad sobre componentes de terceros bajo licencia propia (librerías open source, frameworks), los cuales se declararán en el inventario de dependencias pero continuarán bajo sus licencias originales?
+2. Para la aplicación de campo, en caso de utilizar componentes nativos de plataformas móviles, ¿existe alguna restricción particular de CMH sobre distribución (tienda pública, distribución corporativa interna/MDM)?
+
+## Confidencialidad y Tratamiento de Datos
+
+3. ¿Se suscribirá un acuerdo de confidencialidad (NDA) previo al inicio de la etapa de levantamiento, dado el acceso a información operacional y datos de personal?
+4. ¿Existe alguna exigencia sobre la ubicación geográfica de los datos que deba considerarse en la elección del proveedor cloud?
+5. ¿CMH cuenta con un procedimiento formal para la entrega y salida de datos al término del contrato, o este se definirá específicamente para el presente proyecto?
+
+## Modalidad Contractual, Garantías y Penalidades
+
+6. Respecto a la modalidad "llave en mano" indicada en el TDR, ¿se contratará bajo precio fijo, tiempo y materiales, o un modelo mixto por hitos?
+7. ¿Sería posible recibir un borrador de las cláusulas de penalidad contractual con anticipación a la presentación de la propuesta final, a fin de poder evaluarlas oportunamente?
+8. La garantía mínima de seis meses indicada en el TDR, ¿se computa desde el piloto (mes 6) o desde la implementación total (mes 8)?
+9. ¿Qué tratamiento contractual se prevé para la responsabilidad del proveedor en caso de que una integración se vea afectada por causas atribuibles a sistemas de terceros aún en definición por parte de CMH (por ejemplo, el sistema de control de fatiga, el proyecto de tracking o el de control de campamentos)?
+
+## Cumplimiento Normativo y Seguridad en Faena
+
+10. Para las visitas a la unidad minera, ¿existe un procedimiento u onboarding documentado de inducción, seguros, exámenes médicos y EPP que puedan compartir con anticipación?
+11. Dado que la solución trata datos personales de trabajadores propios y de contratistas, ¿qué requisitos específicos de protección de datos personales aplican al tratamiento de esta información por parte del proveedor?
+
+## Subcontratación y Seguros
+
+12. ¿Se permite subcontratar perfiles específicos (por ejemplo, el especialista en integración SAP PM/MM), o se exige que el equipo completo sea personal directo del proveedor?
+13. ¿CMH exige alguna póliza de responsabilidad civil o seguro específico para el proveedor durante la ejecución del contrato?
+
+# Cierre
+
+Quedamos atentos a sus comentarios dentro del plazo establecido para el presente pliego de consultas. La disponibilidad de estas respuestas nos permitirá presentar una propuesta técnica y económica ajustada a las condiciones reales del proyecto, minimizando la necesidad de ajustes de alcance en etapas posteriores.
+
+Quedamos a su disposición para cualquier aclaración adicional que se requiera.
+
+**ASTAY Systems**

@@ -5,7 +5,6 @@ proyecto: CMH
 fuente: ASTAY Systems
 tags: [cmh]
 ---
-
 # Definición de Alcance y Requisitos Técnicos
 ### Nexo 360 Operation + Mantenimiento 360 — Consorcio Minero Horizonte (CMH), Unidad Parcoy
 
@@ -19,6 +18,8 @@ tags: [cmh]
 
 Con base en el documento de requerimientos recibido, este documento consolida las preguntas y temas necesarios para terminar de definir el alcance y los requisitos técnicos del proyecto, de cara a la reunión técnica de levantamiento. Estructura la conversación en tres partes:
 
+> **Actualizado 2026-07-25** con hallazgos de la reunión de overview de licitación del 22-jul-2026 (ver análisis completo en `Documentacion/Reuniones/2026-07-22-analisis-reunion-licitacion.md`). Las preguntas ya respondidas (total o parcialmente) quedan marcadas como tal; se agregó una sección 0 con contexto nuevo aportado por el cliente que no estaba en el TDR original.
+
 1. **Antecedentes y estado de avance** — para entender qué tan avanzada está la definición interna de cada módulo y qué material ya existe.
 2. **Preguntas técnicas prioritarias** — decisiones puntuales que condicionan directamente el diseño de la solución.
 3. **Ejes de levantamiento funcional y técnico** — el detalle necesario, organizado por dominio, para dimensionar correctamente el proyecto.
@@ -27,6 +28,26 @@ No es necesario responder todo por escrito antes de la reunión: sirve como agen
 
 ---
 
+## 0. Contexto nuevo aportado en la reunión del 22-jul-2026 (no incluido en el TDR)
+
+- **Escala corporativa:** CMH tiene 4 unidades en Perú (Trujillo, Puno, Cerro de Pasco) + 1 en Colombia, 90% subterráneas. Parcoy es el caso base; la solución debe ser replicable a las demás unidades.
+- **Mina:** ~45 años de operación, ~25 km de recorrido interior mina hacia las 3 zonas.
+- **Proyecto de conectividad interior mina:** inicia el mes siguiente a la reunión (≈agosto 2026), en paralelo al proyecto Nexo 360.
+- **Proyecto paralelo de tracking de personas/equipos:** ya está en proceso de licitación separado (no solo "fuera de alcance salvo interfaces", como dice el TDR — ya hay un proceso activo).
+- **Proyecto paralelo "control de campamentos":** dará información de asistencia/disponibilidad de personal (hoy 100% manual), sin fecha de entrega garantizada.
+- **Solución de "control de sueño"/antifatiga** mencionada por el cliente — no está en el TDR. Pendiente aclarar si es sistema externo a integrar o desarrollo esperado dentro de Nexo 360. *(Nombre incierto en la transcripción — verificar directamente con el cliente.)*
+- **Sistemas adyacentes mencionados:** "SCOM" (sistema in-house de labores diarias/reales) y un sistema in-house de datos de personal propio/contratista, como posibles fuentes de integración además de Deswik y SAP.
+- **Mantenimiento en SAP:** CMH aclaró que "no hace uso 100% del módulo de mantenimiento dentro de SAP" — matiza el alcance real de la integración SAP-Mantenimiento 360.
+- **Dispositivos en campo:** se mencionó el uso de tablets (no celulares) para jefes de sección/guardia, junto con impresión obligatoria de OT.
+- **Proceso de evaluación:** confirmado en dos etapas — filtro previo con todas las propuestas → finalistas con levantamiento más detallado → visita a mina para decisión final. Participan al menos 4 proveedores (ASTAY, BT System Chile, Altamira Technology, Grupo Edín/BIM).
+
+### ⚠️ Puntos a confirmar por escrito (contradicen el TDR, dichos verbalmente en sesión de overview)
+
+- **Viáticos/visitas a mina:** el cliente indicó que "los gastos de subidas son con respecto a CMH" — contradice TDR §12.2 y Anexo B (ítem H), que piden cotizarlos por separado.
+- **Infraestructura/ambientes:** el cliente indicó que CMH "tiene que proveer los ambientes" — en tensión con TDR Anexo B (ítem G, "cotizar si aplica").
+
+Ambos puntos deben incluirse explícitamente en el pliego de consultas para obtener confirmación formal antes de armar la propuesta económica.
+
 ## 1. Antecedentes y estado de avance
 
 ### 1.1 Material de referencia existente
@@ -34,7 +55,7 @@ No es necesario responder todo por escrito antes de la reunión: sirve como agen
 - ¿Existe un documento de alcance o especificación más detallada, del cual el requerimiento recibido sea un resumen?
 - ¿Hay mockups, wireframes o prototipos — aunque sean internos o de baja fidelidad — de alguno de los dos bloques?
 - ¿CMH evaluó o descartó alguna solución de mercado antes de optar por desarrollo a medida? ¿Qué brecha encontraron?
-- ¿Existe ya un mapa del proceso actual (as-is) de cambio de guardia y de mantenimiento, o se levantaría por primera vez en la reunión técnica?
+- ~~¿Existe ya un mapa del proceso actual (as-is) de cambio de guardia y de mantenimiento, o se levantaría por primera vez en la reunión técnica?~~ **Respondida (implícita, 22-jul):** no existe AS-IS formal; el cliente confirmó que el levantamiento in situ es la etapa inicial pendiente.
 - ¿Hay benchmarks, informes o visitas a otras operaciones que hayan influido en la definición de este alcance?
 
 ### 1.2 Estado de avance por módulo
@@ -66,8 +87,8 @@ Para cada funcionalidad, nos ayudaría saber si está en fase de **idea**, ya **
 
 - ¿Hace cuánto tiempo viene trabajándose esta definición dentro de CMH?
 - ¿Qué área lideró la redacción del documento de requerimientos (TI, mantenimiento, planificación mina, u otra)?
-- ¿Existe actualmente un equipo interno (propio o de otro proveedor) desarrollando o habiendo desarrollado algo de esto?
-- ¿"Nexo 360 Operation" y "Mantenimiento 360" corresponden a una iniciativa o producto ya existente en CMH, o son los nombres definidos para este proyecto?
+- ~~¿Existe actualmente un equipo interno (propio o de otro proveedor) desarrollando o habiendo desarrollado algo de esto?~~ **Parcialmente respondida (22-jul):** no hay desarrollo interno del sistema Nexo 360 en sí; solo sistemas adyacentes (Deswik, SCOM, sistema in-house de personal) que alimentarán al nuevo sistema.
+- ~~¿"Nexo 360 Operation" y "Mantenimiento 360" corresponden a una iniciativa o producto ya existente en CMH, o son los nombres definidos para este proyecto?~~ **Respondida (22-jul):** son nombres acuñados para este proyecto por la Gerencia de Operaciones.
 
 ---
 
@@ -77,7 +98,7 @@ Para cada funcionalidad, nos ayudaría saber si está en fase de **idea**, ya **
 
 - ¿Versión de SAP en uso — ECC o S/4HANA?
 - ¿Qué transacciones/objetos de PM y MM entran en el alcance (avisos, órdenes de mantenimiento, backlog de repuestos)?
-- ¿Mecanismo de integración definido por TI de CMH: archivos planos, tablas de staging, o API REST?
+- ¿Mecanismo de integración definido por TI de CMH: archivos planos, tablas de staging, o API REST? **Parcialmente respondida (22-jul):** el cliente se inclina verbalmente por un "punto de importación de archivos", pero reitera que no está definido; sigue abierta en el detalle técnico. Otros proveedores (Grupo Edín/BIM) señalaron que esta indefinición dificulta estimar el esfuerzo.
 
 ### Seguridad y estándar TTD-ES-001
 
@@ -147,8 +168,9 @@ Presupuesto de referencia o rango esperado, fecha límite u horizonte esperado d
 
 ## Próximos pasos
 
-1. Coordinar la(s) sesión(es) de reunión técnica, idealmente separadas por dominio (proceso operativo, datos y reglas de negocio, arquitectura e integraciones, seguridad y conectividad, gestión y cierre) para convocar a los responsables correctos en cada una.
-2. ASTAY preparará la propuesta de alto nivel / orden de magnitud una vez completado este levantamiento.
+1. Enviar el pliego de consultas formal a CMH (Jocelyn Pérez) antes del 2026-07-27, con las preguntas de este documento que siguen abiertas, incluyendo la confirmación por escrito de los dos puntos que contradicen el TDR (viáticos e infraestructura, ver sección 0).
+2. Coordinar la(s) sesión(es) de reunión técnica, idealmente separadas por dominio (proceso operativo, datos y reglas de negocio, arquitectura e integraciones, seguridad y conectividad, gestión y cierre) para convocar a los responsables correctos en cada una.
+3. ASTAY preparará la propuesta de alto nivel / orden de magnitud una vez completado este levantamiento.
 
 ---
 

@@ -1,6 +1,5 @@
 project:
   type: default
-  output-dir: _output
 
 # ---------------------------------------------------------------------------
 # Defaults aplicados a TODOS los .qmd del vault.
