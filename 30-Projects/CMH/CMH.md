@@ -112,5 +112,23 @@ SORT file.mtime DESC
 - Marco metodológico: [[short-interval-control-ref|Short Interval Control en minería]] (Commit Works / GMG / ABB)
 - Benchmark de mercado — commit.works en Volcan/Animón (mina subterránea UG): [[volcan-estado-futuro-cambio-guardia-ref|Estado futuro cambio de guardia]] · [[volcan-reporte-fin-turno-ref|Reporte fin de turno]] · [[catalogo-tareas-equipos-ref|Catálogo de tareas por equipo]] · [[reporte-cumplimiento-disparos-ref|Cumplimiento de disparos]] · [[reporte-shotcrete-ref|Reporte de shotcrete]] · [[commitworks-plataforma-ref|Capturas de la plataforma]]
 
+**Diseño de proceso (`Documentacion/Referencias/Design Process/`)**
+- 9 diagramas Mermaid de procesos mineros unitarios (perforación, voladura, carguío, acarreo, sostenimiento, ventilación, drenaje, energía, cierre de frente) con nomenclatura PETAR/IPERC: [[Flujo de procesos mineros]]
+- Detalle ampliado de esos 9 procesos — roles, permisos normativos (DS 024-2016-EM) y puntos de control: [[Procesos Mineros UG]]
+- Deep research de mercado — proceso de planificación y control de guardia (Nexo 360): [[deep-research-nexo360-proceso-ref]]
+- Deep research de mercado — disponibilidad y mantenimiento de flota (Mantenimiento 360): [[disponibilidad-flota-minera]] · [[Proceso de gestión de disponibilidad y mantenimiento de flota minera subterránea  benchmark y diseño de  fuente de verdad]]
+- 6 diagramas Mermaid del proceso de disponibilidad/mantenimiento (transición de estado, ciclo de OT, backlog, integración MM, contratistas, ubicación, interfaz hacia Nexo 360): [[flujos-mantenimiento-flota-minera]]
+
+**Prompts de construcción de prototipo (Lovable)**
+- Prompt maestro — app de terreno tablet-first (Nexo 360 Operation + Mantenimiento 360): [[04AUG26 UX Tablet]]
+- Prompt maestro — plataforma web de gestión desktop-first (Nexo 360 Operation + Mantenimiento 360): [[04AUG26 UX Web Gestion]]
+
+**Deep Research ASTAY — prompts y resultados (proceso y benchmark de mercado, minería subterránea)**
+- Prompts 1 y 2 (Nexo 360 / Mantenimiento 360, por separado): [[2026-08-03-prompts-deep-research-nexo360-mantenimiento360]]
+- Prompt 3 (acoplamiento operación-mantenimiento, ejecutar después de los dos anteriores): [[2026-08-04-prompt-deep-research-integrado-operaciones-mantenimiento]]
+- Resultado — proceso de planificación y control de guardia (Nexo 360): [[deep-research-nexo360-proceso-ref]]
+- Resultado — disponibilidad y mantenimiento de flota (Mantenimiento 360): [[deep-research-mantenimiento360-proceso-ref]]
+- Resultado — acoplamiento disponibilidad-planificación (Mantenimiento 360 ↔ Nexo 360): [[deep-research-acoplamiento-operacion-mantenimiento-ref]]
+
 ---
-*Última actualización: 2026-07-26*
+*Última actualización: 2026-08-04*
